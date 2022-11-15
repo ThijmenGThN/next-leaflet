@@ -4,4 +4,4 @@
 > ### Templates
 > Name | Tech | Features
 > -|-|-
-> [leaflet](https://github.com/ThijmenGThN/bundles/tree/main/leaflet) | NextJS | Tailwind<br/>Directus<br/>React-Icons
+> [next-leaflet](https://github.com/ThijmenGThN/bundles/tree/main/next-leaflet) | NextJS | Tailwind<br/>Directus<br/>React-Icons
