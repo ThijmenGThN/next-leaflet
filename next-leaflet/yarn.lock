@@ -17,10 +17,10 @@
   dependencies:
     regenerator-runtime "^0.13.10"
 
-"@directus/sdk@^10.1.5":
-  version "10.1.5"
-  resolved "https://registry.yarnpkg.com/@directus/sdk/-/sdk-10.1.5.tgz#069473ed9db855b34038cc6d630d36dd94cc3819"
-  integrity sha512-/q+Cm8NQjkJV7xIk3UJjUAFmE1ZJ1KnF2uyV2+AnmYinj75Y/aHnU7td6n74pBKBMwRPJPBIidksiWUiH20EHw==
+"@directus/sdk@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@directus/sdk/-/sdk-10.2.0.tgz#421d499f5ec557f370aefbb955596e252e01f61f"
+  integrity sha512-q+b26PWd0PlFpy/ZvXaixAHAf1Y99aRyHZ1PYGIBeYkEQ04jfyNVs9Eh3sMWU8FLGzOqM6JUc2fYfQ69lhRg7g==
   dependencies:
     axios "^0.27.2"
 
