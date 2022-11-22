@@ -33,7 +33,7 @@ export default function Index() {
               <li key={key} className={"flex gap-3 " + (key < features.length - 1 && "border-b-2")}>
                 <div className={"h-2 p-2 my-4 rounded-full aspect-square " + (feature.color)} />
                 <p className='my-3 grow'>{feature.name}</p>
-                <a href={feature.link} target="_blank" className="p-1.5 my-2 border-2 rounded border-neutral-100 hover:border-neutral-200 hover:bg-white">
+                <a href={feature.link} rel="noreferrer" target="_blank" className="p-1.5 my-2 border-2 rounded border-neutral-100 hover:border-neutral-200 hover:bg-white">
                   <FiExternalLink />
                 </a>
               </li>
