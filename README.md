@@ -1,7 +1,7 @@
 > ## Bundles
 > A complete list of prebuild tech stack templates.
 
-> ## Standards
+> ### Standards
 > All projects are equipped with Docker.
 
 > ### Templates
