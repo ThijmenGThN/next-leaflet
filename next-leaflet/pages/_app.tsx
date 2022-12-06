@@ -7,7 +7,7 @@ import '/source/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  pageProps.API = new Directus(process.env.DIRECTUS_ENDPOINT || "http://127.0.0.1:8055")
+  pageProps.API = new Directus("http://127.0.0.1:8055")
 
   return (
     <>
