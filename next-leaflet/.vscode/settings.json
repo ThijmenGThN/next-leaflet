@@ -1,6 +1,5 @@
 {
     "files.exclude": {
-        "docker-compose.yml": true,
         "postcss.config.js": true,
         ".eslintrc.json": true,
         "next.config.js": true,
