@@ -14,7 +14,7 @@ const content = [{
     link: "https://react-icons.github.io/react-icons"
 }]
 
-export default function Features({ API }) {
+export default function Features() {
 
     return (
         <div className="flex flex-col gap-1 mx-5 mt-10">
@@ -22,7 +22,7 @@ export default function Features({ API }) {
             <ul className="px-4 border-2 rounded-lg bg-neutral-100">
                 {
                     content.map((feature, key) => (
-                        <li key={key} className={"flex gap-3 " + (key < features.length - 1 && "border-b-2")}>
+                        <li key={key} className={"flex gap-3 " + (key < content.length - 1 && "border-b-2")}>
                             <div className={"h-2 p-2 my-4 rounded-full aspect-square " + (feature.color)} />
                             <p className='my-3 grow'>{feature.name}</p>
                             <a href={feature.link} rel="noreferrer" target="_blank" className="p-1.5 my-2 border-2 rounded border-neutral-100 hover:border-neutral-200 hover:bg-white">
