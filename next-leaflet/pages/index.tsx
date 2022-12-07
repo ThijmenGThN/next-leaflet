@@ -1,6 +1,7 @@
-import Features from '/source/components/Features'
+import Features from '@/components/Features'
 
-export default function Index({ API }) {
+export default function Index({ API }: { API: any }) {
+
   return (
     <div className="container mx-auto">
       <div className="flex justify-center gap-3 mt-5 font-bold">
