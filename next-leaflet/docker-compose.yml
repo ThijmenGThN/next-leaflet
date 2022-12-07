@@ -1,26 +1,29 @@
-
-# To run the server in development comment
-#   out the "app" service in its entirety.
-
+version: "3"
 services:
-  app:
-    build: .
-    restart: unless-stopped
-    ports:
-      - 3000:3000
+
+  # v -- Uncomment these lines to deploy the app.
+  # app:
+  #   restart: unless-stopped
+  #   ports:
+  #     - 3000:3000
+  #   build: ./
+  #   environment:
+        # v -- Directus (server) endpoint url.
+  #     API_URL: "http://localhost:8055"
+
+  # v -- Directus | Prepaired for development, changes needed for production.
   server:
     image: directus/directus
     restart: unless-stopped
     environment:
-      PUBLIC_URL: "http://localhost:3000"
-
+      CORS_ENABLED: "true"
+      # v -- Secrets should be updated when going into production.
       KEY: "255d861b-b5b5-5996-9aa3-922530ec40b1"
       SECRET: "6116487b-cda1-52c2-5ea1-c8022c45e263"
-
+      # v -- Intitial authorization credentials.
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "admin"
-
-      CORS_ENABLED: true
+      # v -- Specify cors origin, should be "http://localhost:3000" for development.
       CORS_ORIGIN: "http://localhost:3000"
     volumes:
       - ./server/uploads:/directus/uploads
