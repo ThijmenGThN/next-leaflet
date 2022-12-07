@@ -1,6 +1,8 @@
 import Features from '@/components/Features'
 
-export default function Index({ API }: { API: any }) {
+import Directus from '@/types/Directus'
+
+export default function Index({ API }: { API: Directus }) {
 
   return (
     <div className="container mx-auto">
