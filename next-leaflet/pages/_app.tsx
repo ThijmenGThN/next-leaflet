@@ -2,9 +2,9 @@ import Head from 'next/head'
 import getConfig from 'next/config'
 import { Directus } from '@directus/sdk'
 
-import type { AppProps } from 'next/app'
-
 import '/source/styles/globals.css'
+
+import type { AppProps } from 'next/app'
 
 const { publicRuntimeConfig: config } = getConfig()
 
