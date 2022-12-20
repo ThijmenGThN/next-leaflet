@@ -10,7 +10,7 @@ const { publicRuntimeConfig: config } = getConfig()
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  pageProps.API = new Directus(config.API_URL ? config.API_URL : 'http://localhost:8055')
+  pageProps.API = new Directus(config.CORS_ENDPOINT ? config.CORS_ENDPOINT : 'http://localhost:8055')
 
   return (
     <>

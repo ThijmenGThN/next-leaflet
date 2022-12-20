@@ -1,33 +1,48 @@
 version: "3"
 services:
 
-  # v -- Uncomment these lines to deploy the app.
-  # app:
-  #   restart: unless-stopped
-  #   ports:
-  #     - 3000:3000
-  #   build: ./
-  #   environment:
-        # v -- Directus (server) endpoint url.
-  #     API_URL: "http://localhost:8055"
+  # v -- NextJS | Frontend framework based on react.
+  app:
+    ports: [3000:3000]
 
-  # v -- Directus | Prepaired for development, changes needed for production.
-  server:
-    image: directus/directus
+    image: node:lts-alpine
     restart: unless-stopped
+    working_dir: /usr/app
+    env_file: .env
+    volumes: [.:/usr/app]
+    command: ["yarn", "$STATE"]
+
+  # v -- Directus | Backend CMS solution, accessible by API.
+  server:
+    ports: [8055:8055]
+
+    image: directus/directus:latest
+    restart: unless-stopped
+    networks: [server]
+    env_file: .env
     environment:
       CORS_ENABLED: "true"
-      # v -- Secrets should be updated when going into production.
-      KEY: "255d861b-b5b5-5996-9aa3-922530ec40b1"
-      SECRET: "6116487b-cda1-52c2-5ea1-c8022c45e263"
-      # v -- Intitial authorization credentials.
-      ADMIN_EMAIL: "admin@example.com"
-      ADMIN_PASSWORD: "admin"
-      # v -- Specify cors origin, should be "http://localhost:3000" for development.
-      CORS_ORIGIN: "http://localhost:3000"
+      PUBLIC_URL: $CORS_ORIGIN
+      DB_CLIENT: "pg"
+      DB_HOST: "database"
+      DB_PORT: "5432"
+      DB_DATABASE: "postgres"
+      DB_USER: "postgres"
+      DB_PASSWORD: $SECRET
     volumes:
-      - ./server/uploads:/directus/uploads
-      - ./server/extensions:/directus/extensions
-      - ./server/database:/directus/database
-    ports:
-      - 8055:8055
+      - ./source/shared/uploads:/directus/uploads
+      - ./source/extensions:/directus/extensions
+
+  # v -- Postgres | Data storage as required by Directus.
+  database:
+    image: postgis/postgis:latest
+    restart: unless-stopped
+    depends_on: [server]
+    networks: [server]
+    env_file: .env
+    environment:
+      POSTGRES_PASSWORD: $SECRET
+    volumes: [./source/shared/database:/var/lib/postgresql/data]
+
+networks:
+  server:
