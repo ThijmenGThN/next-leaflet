@@ -1,18 +1,18 @@
 version: "3"
 services:
 
-  # v -- NextJS | Frontend framework based on react.
-  app:
-    ports: [3000:3000]
+  # v -- NextJS | Frontend, should be uncommented when deploying.
+  # app:
+  #   ports: [3000:3000]
 
-    image: node:lts-alpine
-    restart: unless-stopped
-    working_dir: /usr/app
-    env_file: .env
-    volumes: [.:/usr/app]
-    command: ["yarn", "$STATE"]
+  #   image: node:lts-alpine
+  #   restart: unless-stopped
+  #   working_dir: /usr/app
+  #   env_file: .env
+  #   volumes: [.:/usr/app]
+  #   command: ["yarn", "$STATE"]
 
-  # v -- Directus | Backend CMS solution, accessible by API.
+  # v -- Directus | Backend CMS solution, accessible via API.
   server:
     ports: [8055:8055]
 
