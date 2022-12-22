@@ -10,7 +10,7 @@ services:
   #   working_dir: /usr/app
   #   env_file: .env
   #   volumes: [.:/usr/app]
-  #   command: ["yarn", "$STATE"]
+  #   command: ["yarn", "ci"]
 
   # v -- Directus | Backend CMS solution, accessible via API.
   server:
