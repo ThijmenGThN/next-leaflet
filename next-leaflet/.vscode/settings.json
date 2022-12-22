@@ -8,6 +8,7 @@
         "next-env.d.ts": true,
         "node_modules": true,
         "yarn.lock": true,
-        ".next": true
+        ".next": true,
+        "**/.keep": true
     }
 }
