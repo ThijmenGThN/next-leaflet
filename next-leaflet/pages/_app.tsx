@@ -2,7 +2,7 @@ import Head from 'next/head'
 import getConfig from 'next/config'
 import { Directus } from '@directus/sdk'
 
-import '/source/styles/globals.css'
+import '@/styles/globals.css'
 
 import type { AppProps } from 'next/app'
 
