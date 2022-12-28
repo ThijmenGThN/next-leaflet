@@ -23,13 +23,15 @@ services:
     env_file: .env
     environment:
       CORS_ENABLED: "true"
-      PUBLIC_URL: $CORS_ORIGIN
+      PUBLIC_URL: $CORS_ENDPOINT
       DB_CLIENT: "pg"
       DB_HOST: "database"
       DB_PORT: "5432"
       DB_DATABASE: "postgres"
       DB_USER: "postgres"
       DB_PASSWORD: $SECRET
+      EMAIL_TRANSPORT: smtp
+      EMAIL_SMTP_PORT: 587
     volumes:
       - ./source/shared/uploads:/directus/uploads
       - ./source/extensions:/directus/extensions
