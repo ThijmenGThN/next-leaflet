@@ -1,4 +1,4 @@
-import Features from 'source/components/Features'
+import Features from '@/components/Features'
 
 import Directus from '@/types/Directus'
 
