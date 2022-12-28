@@ -14,5 +14,4 @@ next-env.d.ts
 
 # Temp
 node_modules
-yarn-debug.log*
-yarn-error.log*
+yarn*
