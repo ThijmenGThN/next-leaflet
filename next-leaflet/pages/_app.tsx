@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>App</title>
+        <title>Leaflet</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
