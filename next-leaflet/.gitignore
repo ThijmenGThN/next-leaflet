@@ -2,17 +2,13 @@
 # App
 .next
 
-# Server
+# Endpoint
 source/shared
 
-# ENV
+# Generalized
 .env*
-
-# TS
 *.tsbuildinfo
 next-env.d.ts
-
-# Temp
 node_modules
 yarn*
 cypress/**/screenshots
