@@ -3,7 +3,7 @@ services:
 
   # v -- NextJS | Frontend, react based compiled webapp.
   app:
-    ports: [3000:3000]
+    ports: [$APP_PORT:3000]
 
     image: node:lts-alpine
     restart: unless-stopped
@@ -14,12 +14,12 @@ services:
     profiles: ["prod"]
 
   # v -- Directus | Backend CMS solution, accessible via API.
-  server:
-    ports: [8055:8055]
+  endpoint:
+    ports: [$ENDPOINT_PORT:8055]
 
     image: directus/directus:latest
     restart: unless-stopped
-    networks: [server]
+    networks: [endpoint]
     env_file: .env
     environment:
       CORS_ENABLED: "true"
@@ -40,12 +40,12 @@ services:
   database:
     image: postgis/postgis:latest
     restart: unless-stopped
-    depends_on: [server]
-    networks: [server]
+    depends_on: [endpoint]
+    networks: [endpoint]
     env_file: .env
     environment:
       POSTGRES_PASSWORD: $SECRET
     volumes: [./source/shared/database:/var/lib/postgresql/data]
 
 networks:
-  server:
+  endpoint:
