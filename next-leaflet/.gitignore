@@ -1,14 +1,14 @@
 
 # App
-.next
+/.next
 
 # Endpoint
-source/shared
+/data
 
 # Generalized
-.env*
-*.tsbuildinfo
-next-env.d.ts
-node_modules
-yarn*
-cypress/**/screenshots
+**/cypress/**/screenshots
+/*.tsbuildinfo
+/next-env.d.ts
+/node_modules
+/.env*
+/yarn*
