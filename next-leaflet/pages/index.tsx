@@ -1,6 +1,6 @@
-import Features from '@/components/Features'
+import type Directus from '@/types/Directus'
 
-import Directus from '@/types/Directus'
+import Features from '@/components/Features'
 
 export default function Index({ API }: { API: Directus }) {
 
