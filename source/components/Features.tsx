@@ -33,9 +33,11 @@ export default function Features() {
                         ))
                     }
                 </ul>
+
+                <p className='text-xs italic my-2 ml-2'>and a lot more to come..</p>
             </div>
 
-            <a className='text-blue-500 mx-auto font-semibold' target="_blank" rel="norefferer" href="https://github.com/ThijmenGThN/bundles">ThijmenGThN/bundles (next-leaflet)</a>
+            <a className='text-blue-500 mx-auto font-semibold' target="_blank" rel="norefferer" href="https://github.com/ThijmenGThN/next-leaflet">ThijmenGThN/next-leaflet</a>
         </div>
     )
 }
