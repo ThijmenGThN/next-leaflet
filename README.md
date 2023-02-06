@@ -1,14 +1,17 @@
-> ## Bundles
-> A complete list of prebuild tech stack templates.
 
-> ### Standards
-> All projects are equipped with Docker.
+# Next - Leaflet
+### An optimized tech stack for efficiency.
 
-> ### Templates
-> Name | Tech | Code | Features
-> -|-|-|-
-> [next-leaflet](https://github.com/ThijmenGThN/bundles/tree/main/next-leaflet) | NextJS | TypeScript | Tailwind<br/>Directus<br/>React-Icons
-
-> ### Preview
-> ![preview](https://i.imgur.com/EACOzIx.png)
-> Screenshot of [next-leaflet](https://github.com/ThijmenGThN/bundles/tree/main/next-leaflet).
+> This project was initially built to serve as an easy to deploy template, it has grown beyond that. 
+>
+> Here's a quick rundown of what's inside.
+>
+> **NextJS** offers a fast and seamless user experience, while **Directus** provides an easy-to-use admin dashboard for efficient database management. 
+>
+> By integrating **Tailwind CSS** into **NextJS**, we eliminate the need for constant file switching and ensure streamlined styling. 
+>
+> Test driven development is a must these days, so for that reason we've implemented **Cypress** natively within the tech stack.
+>
+> Many Quality-of-Life features have been implemented as well, this includes **Module path aliases** and the ability to use your own themes with **Tailwind**.
+> 
+> This results in a more efficient and beginner-friendly development environment.
