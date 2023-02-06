@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: any) {
   return (
     <>
       <Head>
-        <title>Leaflet</title>
+        <title>Next - Leaflet</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
