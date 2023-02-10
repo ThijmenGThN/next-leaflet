@@ -1,3 +1,4 @@
+name: validate
 
 # ----- Rename "leaflet" to a valid branch -----
 on:

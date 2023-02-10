@@ -1,3 +1,4 @@
+name: deploy
 
 # ----- Rename "leaflet" to a valid branch -----
 on:
@@ -20,9 +21,9 @@ jobs:
             mkdir /root /root/env /root/env/${{ github.event.repository.name }}
             cd ~/env/${{ github.event.repository.name }}
 
-            git clone ${{github.repository}} .
+            git clone https://github.com/${{github.repository}} .
             git pull
 
-            echo ${{ secrets.DEPLOY_ENV }} > .env
+            echo '${{ secrets.DEPLOY_ENV }}' > .env
             
             docker-compose down ; docker-compose up -d
