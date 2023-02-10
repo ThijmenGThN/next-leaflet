@@ -1,5 +1,14 @@
 
-# Next - Leaflet
+<div align="center">
+    <h1>Next - Leaflet</h1>
+    <img 
+        src="https://files.thijmenheuvelink.nl/api/public/dl/UlBssZyM"
+        style="border-radius: 0.5rem"
+        height="256"
+        width="auto"
+    />
+</div>
+
 ### An optimized tech stack for efficiency.
 
 > This project was initially built to serve as an easy to deploy template, it has grown beyond that. 
