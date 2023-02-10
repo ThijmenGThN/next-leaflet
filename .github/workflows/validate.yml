@@ -1,8 +1,8 @@
 
-# ----- Uncomment to enable this workflow -----
-# on:
-#   pull_request:
-#     branches: main
+# ----- Rename "leaflet" to a valid branch -----
+on:
+  pull_request:
+    branches: leaflet
 
 jobs:
   validate:

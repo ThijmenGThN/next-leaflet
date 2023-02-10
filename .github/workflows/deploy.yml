@@ -1,13 +1,15 @@
 
-# ----- Uncomment to enable this workflow -----
-# on:
-#   push:
-#     branches: main
+# ----- Rename "leaflet" to a valid branch -----
+on:
+  push:
+    branches: leaflet
 
 jobs:
   deploy:
     runs-on: self-hosted
     steps:
+      # ----- Ensure all environment vars are configured -----
+      #          DEPLOY_ (KEY, HOST, USER, PORT, ENV)
       - uses: appleboy/ssh-action@master
         with:
           key:      ${{ secrets.DEPLOY_KEY }} 
