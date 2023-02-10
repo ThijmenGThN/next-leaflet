@@ -3,7 +3,6 @@
     <h1>Next - Leaflet</h1>
     <img 
         src="https://files.thijmenheuvelink.nl/api/public/dl/UlBssZyM"
-        style="border-radius: 0.5rem"
         height="256"
         width="auto"
     />
