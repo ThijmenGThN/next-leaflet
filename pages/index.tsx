@@ -1,8 +1,9 @@
-import type Directus from '@/types/Directus'
+import Directus from '@/resources/lib/directus'
 
 import Features from '@/components/Features'
+import { useEffect } from 'react'
 
-export default function Index({ API }: { API: Directus }) {
+export default function Index() {
 
   return (
     <div className="container mx-auto">
