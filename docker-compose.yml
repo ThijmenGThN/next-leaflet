@@ -30,8 +30,6 @@ services:
       DB_DATABASE: "postgres"
       DB_USER: "postgres"
       DB_PASSWORD: $SECRET
-      EMAIL_TRANSPORT: smtp
-      EMAIL_SMTP_PORT: 587
     volumes:
       - ./data/uploads:/directus/uploads
       - ./source/extensions:/directus/extensions
