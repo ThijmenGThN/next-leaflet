@@ -1,5 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json("Pong!")
+import Directus from '@/resources/lib/directus'
+
+export default async function API(req: NextApiRequest, res: NextApiResponse) {
+
+  const SDK = await Directus({ useAdmin: true })
+
+  res.status(200).json('Pong!')
+
 }
