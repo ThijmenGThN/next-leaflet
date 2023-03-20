@@ -1,21 +1,16 @@
-import Directus from '@/resources/lib/directus'
 
 import Features from '@/components/Features'
-import { useEffect } from 'react'
 
-export default function Index() {
-
+export default function Page() {
   return (
     <div className="container mx-auto">
-      <div className="flex justify-center gap-3 mt-5 font-bold">
-        <p className="mt-1.5">NextJS</p>
+      <div className='mx-8 flex flex-col gap-10 items-center'>
+        <a className='text-white py-2 px-8 rounded border-b-primary-active border-b-4 bg-primary font-semibold text-2xl mt-14' target="_blank" rel="norefferer" href="https://github.com/ThijmenGThN/next-leaflet">next-leaflet</a>
 
-        <span className="pt-2 pb-1 pl-3 pr-1 text-white bg-blue-500 rounded">
-          TS
-        </span>
+        <div className='w-full max-w-[512px]'>
+          <Features />
+        </div>
       </div>
-
-      <Features />
     </div>
   )
 }
