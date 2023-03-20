@@ -2,7 +2,7 @@
 <div align="center">
     <h1>Next - Leaflet</h1>
     <img 
-        src="https://files.thijmenheuvelink.nl/api/public/dl/UlBssZyM"
+        src="source/tests/cypress/screenshots/Preview.png"
         height="256"
         width="auto"
     />
