@@ -17,7 +17,7 @@ interface Options {
 export default async function (options?: Options) {
 
     // Construct Directus client
-    const SDK = new Directus(
+    const SDK = new Directus<any>(
         CORS_ENDPOINT
             ? CORS_ENDPOINT
             : 'http://localhost:8055'
