@@ -14,20 +14,18 @@ interface Options {
     }
 }
 
-export default function (options?: Options) {
-    new Promise(async (res, rej) => {
+export default async function (options?: Options) {
 
-        // Construct Directus client
-        const SDK = new Directus<any>(
-            CORS_ENDPOINT
-                ? CORS_ENDPOINT
-                : 'http://localhost:8055'
-        )
+    // Construct Directus client
+    const SDK = new Directus<any>(
+        CORS_ENDPOINT
+            ? CORS_ENDPOINT
+            : 'http://localhost:8055'
+    )
 
-        if (options?.useAdmin) await SDK.auth.static(STATIC_TOKEN)
-        else if (options?.auth) await SDK.auth.login(options.auth)
+    if (options?.useAdmin) await SDK.auth.static(STATIC_TOKEN)
+    else if (options?.auth) await SDK.auth.login(options.auth)
 
-        res(SDK)
-    })
+    return SDK
 }
 
