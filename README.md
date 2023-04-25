@@ -30,6 +30,7 @@
     - [Tailwind](https://tailwindcss.com)
 - [Directus](https://directus.io)
     - [Postgis](https://postgis.net)
+- [Cypress](https://cypress.io)
 
 ## Getting Started
 
