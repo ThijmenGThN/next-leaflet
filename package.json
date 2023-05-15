@@ -1,32 +1,29 @@
 {
-  "name": "leaflet",
+  "name": "next-leaflet",
   "version": "0.1.0",
   "private": true,
+  "author": "ThijmenGThN <mail@thijmenheuvelink.nl>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noemit && next lint",
-    "ci": "yarn && yarn build && yarn start",
-    "test": "./node_modules/.bin/cypress open --project source/tests"
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "13.0.3",
+    "next": "13.4.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.8.4"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.25",
-    "@directus/sdk": "^10.3.1",
-    "@types/react-dom": "18.0.8",
-    "eslint-config-next": "13.0.3",
-    "autoprefixer": "^10.4.13",
-    "tailwindcss": "^3.2.4",
-    "react-icons": "^4.6.0",
-    "cypress": "^12.2.0",
-    "postcss": "^8.4.19",
-    "eslint": "8.27.0"
+    "@types/node": "20.1.4",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "autoprefixer": "10.4.14",
+    "directus": "^10.1.0",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.2",
+    "postcss": "8.4.23",
+    "tailwindcss": "3.3.2",
+    "typescript": "^5.0.4"
   }
 }

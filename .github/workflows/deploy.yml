@@ -11,6 +11,10 @@ jobs:
     steps:
       # ----- Ensure all environment vars are configured -----
       #          DEPLOY_ (KEY, HOST, USER, PORT, ENV)
+      # KEY: Private (passwordless) ssh key.
+      # HOST: Public IP or Local (etc: 192.168.1.100).
+      # PORT: Usually 22 for SSH.
+      # ENV: A copy of sample.env.
       - uses: appleboy/ssh-action@master
         with:
           key:      ${{ secrets.DEPLOY_KEY }} 
@@ -18,7 +22,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           port:     ${{ secrets.DEPLOY_PORT }}
           script: |
-            mkdir /root /root/env /root/env/${{ github.event.repository.name }}
+            mkdir ~/env ~/env/${{ github.event.repository.name }}
             cd ~/env/${{ github.event.repository.name }}
 
             git clone https://github.com/${{github.repository}} .

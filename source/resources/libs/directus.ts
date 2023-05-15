@@ -1,4 +1,3 @@
-
 import getConfig from "next/config"
 import { Directus } from "@directus/sdk"
 
@@ -28,4 +27,3 @@ export default async function (options?: Options) {
 
     return SDK
 }
-

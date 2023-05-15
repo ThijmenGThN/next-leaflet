@@ -20,8 +20,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/pages/*": [
-        "pages/*"
+      "@/app/*": [
+        "app/*"
       ],
       "@/public/*": [
         "public/*"
@@ -32,18 +32,30 @@
       "@/resources/*": [
         "source/resources/*"
       ],
+      "@/libs/*": [
+        "source/resources/libs/*"
+      ],
+      "@/assets/*": [
+        "source/resources/assets/*"
+      ],
       "@/styles/*": [
-        "source/styles/*"
+        "source/resources/styles/*"
       ],
       "@/types/*": [
         "source/types/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
