@@ -77,7 +77,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                     </div>
                                 </Transition.Child>
                                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary px-6 pb-2">
+                                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                                     <div className="flex h-16 shrink-0 items-center">
                                         <Image
                                             className="h-8 w-auto"
@@ -95,9 +95,9 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                                 href={item.href}
                                                                 className={classNames(
                                                                     item.href == usePathname()
-                                                                        ? 'bg-gray-50 text-primary'
-                                                                        : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                                        ? 'bg-gray-50 text-primary border-gray-200'
+                                                                        : 'text-gray-700 border-transparent hover:text-primary hover:bg-gray-100',
+                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold border-2'
                                                                 )}
                                                             >
                                                                 <item.icon
@@ -112,6 +112,18 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                         </li>
                                                     ))}
                                                 </ul>
+                                            </li>
+                                            <li className="mt-auto">
+                                                <Link
+                                                    href="/logout"
+                                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-100 hover:text-primary"
+                                                >
+                                                    <ArrowLeftOnRectangleIcon
+                                                        className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
+                                                        aria-hidden="true"
+                                                    />
+                                                    Logout
+                                                </Link>
                                             </li>
                                         </ul>
                                     </nav>
@@ -143,9 +155,9 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                 href={item.href}
                                                 className={classNames(
                                                     item.href == usePathname()
-                                                        ? 'bg-gray-50 text-primary'
-                                                        : 'text-gray-700 hover:text-primary hover:bg-gray-100',
-                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                        ? 'bg-gray-50 text-primary border-gray-200'
+                                                        : 'text-gray-700 border-transparent hover:text-primary hover:bg-gray-100',
+                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold border-2'
                                                 )}
                                             >
                                                 <item.icon
@@ -183,16 +195,9 @@ export default function Component({ children }: { children: React.ReactNode }) {
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
-                <Link href="/dash/profile">
-                    <img
-                        className="h-8 w-8 rounded-full bg-gray-50"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                    />
-                </Link>
             </div>
 
-            <main className="py-10 lg:pl-72">
+            <main className="py-10 lg:pl-72 min-h-screen bg-gray-100">
                 <div className="px-4 sm:px-6 lg:px-8">{children}</div>
             </main>
         </main>

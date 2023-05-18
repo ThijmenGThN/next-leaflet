@@ -10,5 +10,8 @@ module.exports = {
         "primary-darker": "#0c797d"
       }
     }
-  }
+  },
+  plugins: [
+    require('@tailwindcss/forms')
+  ]
 }
