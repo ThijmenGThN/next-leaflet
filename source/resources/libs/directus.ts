@@ -1,7 +1,5 @@
 import { Directus } from "@directus/sdk"
 
-let { CORS_ENDPOINT, STATIC_TOKEN } = process.env
-
 interface iOptions {
     useAdmin?: boolean
     auth?: {
@@ -12,15 +10,11 @@ interface iOptions {
 
 export default async function (options?: iOptions) {
 
-    // -- VALIDATE: If unset, override with the default
-    CORS_ENDPOINT = CORS_ENDPOINT ? CORS_ENDPOINT : 'http://localhost:8055'
-    STATIC_TOKEN = STATIC_TOKEN ? STATIC_TOKEN : ''
-
     // -- BUILD: Construct Directus client
-    const SDK = new Directus<any>(CORS_ENDPOINT)
+    const SDK = new Directus<any>(process.env.NEXT_PUBLIC_ENDPOINT ?? '')
 
     // -- SETTINGS: Will attempt login based on set option
-    if (options?.useAdmin) await SDK.auth.static(STATIC_TOKEN)
+    if (options?.useAdmin && process.env.STATIC_TOKEN) await SDK.auth.static(process.env.STATIC_TOKEN)
     else if (options?.auth) await SDK.auth.login(options.auth)
 
     return SDK

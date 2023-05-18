@@ -10,8 +10,8 @@ export const metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html className='h-full'>
-            <body className='h-full'>
+        <html className='min-h-screen'>
+            <body className='min-h-screen'>
                 {children}
             </body>
         </html>

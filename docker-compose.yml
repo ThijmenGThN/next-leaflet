@@ -23,7 +23,7 @@ services:
     env_file: .env
     environment:
       CORS_ENABLED: "true"
-      PUBLIC_URL: $CORS_ENDPOINT
+      PUBLIC_URL: $NEXT_PUBLIC_ENDPOINT
       DB_CLIENT: "pg"
       DB_HOST: "database"
       DB_PORT: "5432"
