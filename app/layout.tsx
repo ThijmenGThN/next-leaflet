@@ -4,7 +4,7 @@ export const metadata = {
   title: 'next-leaflet',
   description: 'An optimized tech stack for efficiency.',
   icons: {
-    icon: '/public/favicon.ico'
+    icon: '/favicon.ico'
   }
 }
 
