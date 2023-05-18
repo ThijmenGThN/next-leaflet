@@ -1,11 +1,8 @@
-import getConfig from "next/config"
 import { Directus } from "@directus/sdk"
 
-const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
-const { CORS_ENDPOINT } = publicRuntimeConfig
-const { STATIC_TOKEN } = serverRuntimeConfig
+let { CORS_ENDPOINT, STATIC_TOKEN } = process.env
 
-interface Options {
+interface iOptions {
     useAdmin?: boolean
     auth?: {
         email: string
@@ -13,15 +10,16 @@ interface Options {
     }
 }
 
-export default async function (options?: Options) {
+export default async function (options?: iOptions) {
 
-    // Construct Directus client
-    const SDK = new Directus<any>(
-        CORS_ENDPOINT
-            ? CORS_ENDPOINT
-            : 'http://localhost:8055'
-    )
+    // -- VALIDATE: If unset, override with the default
+    CORS_ENDPOINT = CORS_ENDPOINT ? CORS_ENDPOINT : 'http://localhost:8055'
+    STATIC_TOKEN = STATIC_TOKEN ? STATIC_TOKEN : ''
 
+    // -- BUILD: Construct Directus client
+    const SDK = new Directus<any>(CORS_ENDPOINT)
+
+    // -- SETTINGS: Will attempt login based on set option
     if (options?.useAdmin) await SDK.auth.static(STATIC_TOKEN)
     else if (options?.auth) await SDK.auth.login(options.auth)
 

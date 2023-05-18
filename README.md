@@ -1,10 +1,3 @@
-
-# WIP: Use branch next-pages for now.
-> Chores
-> - Fix favicon.
-> - Populate site.
-> - Add default login system.
-
 ### An optimized tech stack for efficiency.
 
 > Here's a quick rundown of what's inside.
