@@ -77,14 +77,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                     </div>
                                 </Transition.Child>
                                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
-                                    <div className="flex h-16 shrink-0 items-center">
-                                        <Image
-                                            className="h-8 w-auto"
-                                            src={aLogo}
-                                            alt="Logo"
-                                        />
-                                    </div>
+                                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 my-6">
                                     <nav className="flex flex-1 flex-col">
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                             <li>
@@ -194,7 +187,11 @@ export default function Component({ children }: { children: React.ReactNode }) {
                 <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
-                <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
+                <Image
+                    className="h-6 w-auto"
+                    src={aLogo}
+                    alt="Logo"
+                />
             </div>
 
             <main className="py-10 lg:pl-72 min-h-screen bg-gray-100">
