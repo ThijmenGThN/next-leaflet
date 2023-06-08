@@ -37,6 +37,9 @@
       "@/resources/*": [
         "source/resources/*"
       ],
+      "@/assets/*": [
+        "source/resources/assets/*"
+      ],
       "@/styles/*": [
         "source/resources/styles/*"
       ]

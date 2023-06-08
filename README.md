@@ -8,7 +8,7 @@
 
 ## Getting Started
 
-### -- Production: Deploy with Docker
+### ━━ Production: Deploy with Docker
 <details>
     <summary>How to: deploy the stack.</summary>
 
@@ -41,7 +41,7 @@ docker-compose up
 ```
 </details>
 
-### -- Development: Run it locally
+### ━━ Development: Run it locally
 <details>
     <summary>How to: Start constructing your app.</summary>
 
