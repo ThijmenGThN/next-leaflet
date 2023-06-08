@@ -11,6 +11,7 @@
         "debug.log": true,
         ".github": true,
         "yarn*": true,
-        ".next": true
+        ".next": true,
+        "data": true
     }
 }
