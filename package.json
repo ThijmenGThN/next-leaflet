@@ -2,7 +2,6 @@
   "name": "next-leaflet",
   "version": "0.1.0",
   "private": true,
-  "author": "ThijmenGThN <mail@thijmenheuvelink.nl>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,24 +10,17 @@
     "ci": "yarn ; next build ; next start"
   },
   "dependencies": {
-    "next": "13.4.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "@directus/sdk": "^10.3.3",
-    "@headlessui/react": "^1.7.14",
-    "@heroicons/react": "^2.0.18",
-    "@tailwindcss/forms": "^0.5.3",
-    "@types/node": "20.1.4",
-    "@types/react": "18.2.6",
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.9",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
-    "directus": "^10.1.0",
-    "eslint": "8.40.0",
-    "eslint-config-next": "13.4.2",
-    "postcss": "8.4.23",
+    "eslint": "8.42.0",
+    "eslint-config-next": "13.4.4",
+    "next": "13.4.4",
+    "postcss": "8.4.24",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
-    "typescript": "^5.0.4"
+    "typescript": "5.1.3"
   }
 }
