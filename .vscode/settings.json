@@ -8,6 +8,7 @@
         "tsconfig.json": true,
         "node_modules": true,
         "**/.gitkeep": true,
+        "debug.log": true,
         ".github": true,
         "yarn*": true,
         ".next": true

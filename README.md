@@ -4,11 +4,12 @@
 
 ### What's inside?
 - [NextJS](https://nextjs.org)
+- [Prisma](https://www.prisma.io)
 - [Tailwind](https://tailwindcss.com)
 
 ## Getting Started
 
-### ━━ Production: Deploy with Docker
+### ━ Production: Deploy with Docker
 <details>
     <summary>How to: deploy the stack.</summary>
 
@@ -41,7 +42,7 @@ docker-compose up
 ```
 </details>
 
-### ━━ Development: Run it locally
+### ━ Development: Run it locally
 <details>
     <summary>How to: Start constructing your app.</summary>
 

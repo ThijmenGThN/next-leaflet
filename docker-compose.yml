@@ -17,5 +17,7 @@ services:
   database:
     image: postgis/postgis:latest
     restart: unless-stopped
+    ports: [$DB_PORT:5432]
     volumes: [./data/database:/var/lib/postgresql/data]
-    environment: [POSTGRES_PASSWORD: $APP_SECRET]
+    environment: 
+      POSTGRES_PASSWORD: $DB_PASS
