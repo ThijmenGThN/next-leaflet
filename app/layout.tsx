@@ -1,5 +1,7 @@
 import { Inter } from 'next/font/google'
 
+import Providers from '@/components/logic/Providers'
+
 import '@/styles/globals.css'
 
 export const metadata = {
@@ -13,7 +15,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body className={Font.className}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   )
