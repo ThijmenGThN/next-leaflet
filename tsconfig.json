@@ -40,6 +40,9 @@
       "@/assets/*": [
         "source/resources/assets/*"
       ],
+      "@/libs/*": [
+        "source/resources/libs/*"
+      ],
       "@/styles/*": [
         "source/resources/styles/*"
       ]
