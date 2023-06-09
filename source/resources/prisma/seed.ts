@@ -7,7 +7,7 @@ async function main() {
     await prisma.user.create({
         data: {
             email: 'admin@leaflet.app',
-            password: await bcrypt.hash('alpine', 10)
+            password: await bcrypt.hash('admin', 10)
         }
     })
 }
