@@ -1,7 +1,5 @@
 import { Inter } from 'next/font/google'
 
-import Providers from '@/components/logic/Providers'
-
 import '@/styles/globals.css'
 
 export const metadata = {
@@ -13,11 +11,9 @@ export const metadata = {
 const Font = Inter({ subsets: ['latin'] })
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
-      <body className={Font.className}>
-        <Providers>
-          {children}
-        </Providers>
+    <html className={Font.className}>
+      <body>
+        {children}
       </body>
     </html>
   )
