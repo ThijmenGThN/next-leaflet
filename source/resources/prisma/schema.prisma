@@ -12,9 +12,9 @@ model User {
   email    String @unique
   password String
 
-  firstName String
-  lastName  String
+  first_name String
+  last_name  String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }

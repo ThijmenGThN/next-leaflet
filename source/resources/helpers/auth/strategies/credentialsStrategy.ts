@@ -8,7 +8,7 @@ const validatePassword = (inputPassword: string, userPassword: string) => inputP
 passport.use(new Strategy(
     async function (email, password, done) {
         const user = await prisma.user.findFirst({ where: { email } })
-
+        console.log(user)
         if (!user) return done('Unable to find user.')
 
         if (!validatePassword(password, user.password)) return done('Invalid user credentials.')
