@@ -37,6 +37,9 @@
       "@/resources/*": [
         "source/resources/*"
       ],
+      "@/helpers/*": [
+        "source/resources/helpers/*"
+      ],
       "@/assets/*": [
         "source/resources/assets/*"
       ],
