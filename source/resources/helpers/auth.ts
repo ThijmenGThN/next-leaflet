@@ -1,51 +1,89 @@
 import bcrypt from 'bcrypt'
-
+import jwt from 'jsonwebtoken'
 import prisma from "@/helpers/prisma"
 
-interface iProfile {
+interface iUser {
     email: string
+    password: string
     first_name?: string
     last_name?: string
 }
 
-export async function login(email: string, password: string) {
+const createToken = (email: string, hash: string) => {
 
-    // -- FETCH: Get target from database.
-    const user = await prisma.user.findFirst({ where: { email } })
-
-    // -- CHECK: Does the user exist?
-    if (!user) return 'Unable to find user.'
-
-    // -- VALIDATE: Does the password hash from the database match with the plain text password?
-    const valid = await bcrypt.compare(password, user.password)
-
-    // -- RESOLVE: Passwords matched, return user profile.
-    if (valid) return { email: user.email }
-
-    // -- FALLBACK: Checks did not succeed.
-    return 'Unable to authenticate.'
-}
-
-export async function register(profile: iProfile, password: string) {
-
-    // -- ENCRYPT: Converts plain text password to a hash.
-    const hash = bcrypt.hashSync(password, 12)
-
-    // -- INJECT: Insert new user into database.
     try {
-        const user = await prisma.user.create({
-            data: {
-                password: hash,
-                ...profile
-            }
-        })
+        if (
+            !process.env.JWT_SECRET ||
+            !process.env.JWT_EXPIRY
+        ) throw new Error('An error has occurred: JWT env variables have not been set.')
 
-        return { email: user.email }
+        return jwt.sign({
+            email, hash,
+            exp: Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_EXPIRY, 12)
+        }, process.env.JWT_SECRET)
     }
 
     catch (error) {
         console.error(error)
-        return 'Unable to register user due to an internal error.'
+        throw new Error(`An error has occurred: ${error}.`)
+    }
+}
+
+export async function login(email: string, password: string) {
+
+    try {
+
+        // -- FETCH: Obtain user by email from database.
+        const user = await prisma.user.findFirst({ where: { email } })
+        if (!user) throw new Error('Unable to find user.')
+
+        const { password: hash, ...profile } = user
+
+        if (await bcrypt.compare(password, hash)) return {
+            profile,
+            jwt: createToken(email, hash)
+        }
+
     }
 
+    catch (error) {
+        console.error(error)
+        throw new Error(`An error has occurred: ${error}.`)
+    }
+}
+
+export async function register(user: iUser) {
+
+    try {
+        // -- CREATE: Insert new user into database.
+        const { password, ...profile } = await prisma.user.create({
+            data: {
+                ...user,
+                password: bcrypt.hashSync(user.password, 12)
+            }
+        })
+
+        return { profile, jwt: createToken(user.email, password) }
+    }
+
+    catch (error) {
+        console.error(error)
+        throw new Error(`An error has occurred: ${error}.`)
+    }
+}
+
+export async function profile() {
+
+    try {
+        // -- FETCH: Obtain user by email from database.
+        const user = await prisma.user.findFirst({ where: { email: 'thijmen@heuve.link' } })
+        if (!user) throw new Error('Unable to find user.')
+
+        return user
+    }
+
+    catch (error) {
+        console.error(error)
+        throw new Error(`An error has occurred: ${error}.`)
+    }
 }

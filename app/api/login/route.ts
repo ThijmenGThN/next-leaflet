@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-
+import { cookies } from 'next/headers'
 import { login } from '@/helpers/auth'
 
 export async function POST(req: Request) {
@@ -13,6 +13,13 @@ export async function POST(req: Request) {
 
         // -- AUTH: Attempt to authenticate with supplied email and password.
         const user = await login(email, password)
+
+        if (!user) throw new Error("Unable to find user.")
+
+        cookies().set({
+            name: 'accessToken',
+            value: user.jwt,
+        })
 
         return NextResponse.json(user, { status: 200 })
     }
