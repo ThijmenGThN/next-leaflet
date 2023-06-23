@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { login } from '@/helpers/auth'
+import { register } from '@/helpers/auth'
 
 export async function POST(req: Request) {
 
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
         const [email, password] = decoded.split(':')
 
         // -- AUTH: Attempt to authenticate with supplied email and password.
-        const user = await login(email, password)
+        const user = await register({ email }, password)
 
         return NextResponse.json(user, { status: 200 })
     }
