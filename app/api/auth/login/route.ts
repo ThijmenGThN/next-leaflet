@@ -1,31 +1,31 @@
 import passport from 'passport';
 import { NextResponse } from 'next/server';
+import passportConfig from '@/helpers/auth/strategies/credentialsStrategy';
 
-import '@/helpers/auth/strategies/credentialsStrategy';
+passportConfig(passport);
 
 export async function POST(request: Request) {
-    try {
-        // -- OBTAIN: Converts base64 auth string to email and password.
-        const auth = request.headers.get('Authorization')?.replace(/^Basic\s+/i, '');
-        const [email, password] = Buffer.from(auth ?? '', 'base64').toString().split(':');
+  try {
+    return new Promise((resolve, reject) => {
+      passport.authenticate("basic", { session: false }, async (err: Error, user: unknown, info: unknown) => {
+        console.log(user)
+        if (err) {
+          console.error(err);
+          reject(new Error('Authentication error'));
+        }
+        if (!user) {
+          console.error(info);
+          reject(new Error('Invalid user credentialsssss'));
+        }
 
-        return new Promise((resolve, reject) => {
-            passport.authenticate('local', { session: false }, (err: Error, user: unknown, info: unknown) => {
-                if (err) {
-                    console.error(err);
-                    return reject(new Error('Authentication error'));
-                }
-                if (!user) {
-                    console.error(info);
-                    return reject(new Error('Invalid user credentials'));
-                }
-
-                // Succesvolle authenticatie
-                resolve(NextResponse.json({ message: 'Successfully authenticated.', user }));
-            })(request, null, reject);
-        });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ message: `Error: ${error}`, status: 500 });
-    }
+        // Succesvolle authenticatie
+        resolve(
+          NextResponse.json({ message: 'Successfully authenticated.', user }, { status: 200 })
+        );
+      })(request, {}, reject);
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: `Error: ${error}`, status: 500 });
+  }
 }

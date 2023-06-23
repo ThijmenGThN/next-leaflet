@@ -1,18 +1,33 @@
-import { Strategy } from "passport-local"
-import passport from "passport"
+import { BasicStrategy } from "passport-http";
+import prisma from "@/libs/prisma";
 
-import prisma from '@/libs/prisma'
+const validatePassword = (inputPassword: string, userPassword: string) =>
+  true;
 
-const validatePassword = (inputPassword: string, userPassword: string) => inputPassword == userPassword ? true : false
+const passportConfig = (passport: any) => {
+  passport.use(
+    new BasicStrategy(async (username, password, done) => {
+      try {
+        const user = await prisma.user.findFirst({
+          where: { email: username },
+        });
 
-passport.use(new Strategy(
-    async function (email, password, done) {
-        const user = await prisma.user.findFirst({ where: { email } })
-        console.log(user)
-        if (!user) return done('Unable to find user.')
+        if (!user) {
+          return done("Invalid user credentials");
+        }
 
-        if (!validatePassword(password, user.password)) return done('Invalid user credentials.')
+        const isValidPassword = validatePassword(password, user.password);
 
-        return done('Unable to authenticate.')
-    }
-))
+        if (!isValidPassword) {
+          return done("Invalid user credentials");
+        }
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    })
+  );
+};
+
+export default passportConfig;

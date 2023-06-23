@@ -22,6 +22,7 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "next": "13.4.4",
+    "passport-http": "^0.3.0",
     "postcss": "8.4.24",
     "prisma": "^4.15.0",
     "react": "18.2.0",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@types/passport": "^1.0.12",
+    "@types/passport-http": "^0.3.9",
     "@types/passport-local": "^1.0.35",
     "jsonwebtoken": "^9.0.0",
     "passport": "^0.6.0",
