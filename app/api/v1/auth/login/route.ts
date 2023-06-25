@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     }
 
     catch (error: any) {
-        console.error(error)
+        !error.xerr && console.error(error)
         return NextResponse.json(
             error.xerr
                 ? error.xerr
