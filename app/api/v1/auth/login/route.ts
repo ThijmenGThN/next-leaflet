@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
 import { setTimeout } from "timers/promises"
 
@@ -17,8 +18,9 @@ export async function POST(req: Request) {
         if (!password || password == '') throw { xerr: 'A password must be provided.', status: 400 }
 
         const user = await prisma.user.findFirst({ where: { email } })
+        if (!user) throw { xerr: 'A user with this email address does not exist.', status: 400 }
 
-        if (!user) throw { xerr: 'Unable to login, try again later.', status: 400 }
+        if (!bcrypt.compareSync(password, user.password)) throw { xerr: 'The provided credentials are invalid.', status: 400 }
 
         return NextResponse.json(
             {

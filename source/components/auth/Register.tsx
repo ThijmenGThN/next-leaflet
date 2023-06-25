@@ -37,7 +37,7 @@ export default function Component() {
     return (
         <div className="space-y-6" onKeyDown={({ key }) => key == 'Enter' && login()}>
             <div className="flex flex-col gap-2">
-                <label className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                <div className="flex justify-between"><label className="block text-sm font-medium leading-6 text-gray-900">First name</label><span className="text-sm leading-6 text-gray-500">Optional</span></div>
                 <input className="block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6"
                     autoFocus
                     type='text'
@@ -46,7 +46,7 @@ export default function Component() {
             </div>
 
             <div className="flex flex-col gap-2">
-                <label className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                <div className="flex justify-between"><label className="block text-sm font-medium leading-6 text-gray-900">Last name</label><span className="text-sm leading-6 text-gray-500">Optional</span></div>
                 <input className="block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6"
                     autoFocus
                     type='text'

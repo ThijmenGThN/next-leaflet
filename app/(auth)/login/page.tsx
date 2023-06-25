@@ -20,7 +20,7 @@ export default function Page() {
                     </Link>
 
                     <Link href="/register" className="text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark">
-                        Register <span aria-hidden="true">&rarr;</span>
+                        Register
                     </Link>
                 </div>
             </div>

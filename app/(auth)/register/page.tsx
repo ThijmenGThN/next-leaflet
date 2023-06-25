@@ -20,7 +20,7 @@ export default function Page() {
                     </Link>
 
                     <Link href="/login" className="text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark">
-                        Login <span aria-hidden="true">&rarr;</span>
+                        Login
                     </Link>
                 </div>
             </div>
