@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         if (!email || email == '') throw { xerr: 'An email address must be provided.', status: 400 }
         if (!password || password == '') throw { xerr: 'A password must be provided.', status: 400 }
 
-        if (await prisma.user.findFirst({ where: { email } })) throw { xerr: 'A user with this email address already exists.', status: 400 }
+        if (await prisma.user.findFirst({ where: { email } })) throw { xerr: 'A user with this email address already exists.', status: 403 }
 
         const { first_name, last_name } = await req.json()
 

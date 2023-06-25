@@ -18,9 +18,9 @@ export async function POST(req: Request) {
         if (!password || password == '') throw { xerr: 'A password must be provided.', status: 400 }
 
         const user = await prisma.user.findFirst({ where: { email } })
-        if (!user) throw { xerr: 'A user with this email address does not exist.', status: 400 }
+        if (!user) throw { xerr: 'A user with this email address does not exist.', status: 404 }
 
-        if (!bcrypt.compareSync(password, user.password)) throw { xerr: 'The provided credentials are invalid.', status: 400 }
+        if (!bcrypt.compareSync(password, user.password)) throw { xerr: 'The provided credentials are invalid.', status: 403 }
 
         return NextResponse.json(
             {
