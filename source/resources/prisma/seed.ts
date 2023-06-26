@@ -1,17 +1,19 @@
-const bcrypt = require("bcrypt")
-const { PrismaClient } = require('@prisma/client')
+// ----- Example Seed -----
 
-const prisma = new PrismaClient()
+// const bcrypt = require("bcrypt")
+// const { PrismaClient } = require('@prisma/client')
 
-async function main() {
-    await prisma.user.create({
-        data: {
-            email: 'admin@leaflet.app',
-            password: await bcrypt.hash('admin', 12)
-        }
-    })
-}
+// const prisma = new PrismaClient()
 
-main()
-    .then(async () => await prisma.$disconnect())
-    .catch(async (e) => await prisma.$disconnect())
+// async function main() {
+//     await prisma.user.create({
+//         data: {
+//             email: 'admin@leaflet.app',
+//             password: await bcrypt.hash('admin', 12)
+//         }
+//     })
+// }
+
+// main()
+//     .then(async () => await prisma.$disconnect())
+//     .catch(async (e) => await prisma.$disconnect())
