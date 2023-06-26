@@ -1,5 +1,6 @@
 import { jwtVerify } from 'jose'
 import { NextResponse } from 'next/server'
+import { setTimeout } from "timers/promises"
 
 import type { NextRequest } from 'next/server'
 
@@ -10,9 +11,7 @@ export async function middleware(req: NextRequest) {
 
     try {
 
-        if (match('/login') || match('/register')) {
-            response.cookies.delete('sessionToken')
-        }
+        if (match('/login') || match('/register')) response.cookies.delete('sessionToken')
 
         if (match('/dash')) {
             const { value: sessionToken } = req.cookies.get('sessionToken') ?? { value: '' }
