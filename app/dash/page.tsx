@@ -1,16 +1,16 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 import { profile } from '@/helpers/user'
 
 import type { iUser } from '@/types/globals'
-import { useEffect, useState } from 'react'
 
 export default function Page() {
 	const [user, setUser] = useState<iUser>()
 
 	useEffect(() => {
-		profile()
-			.then(data => setUser(data))
+		profile().then(data => setUser(data))
 	}, [user])
 
 	return (
