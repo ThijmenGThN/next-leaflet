@@ -1,9 +1,24 @@
 import { jwtVerify } from 'jose'
 import { NextResponse } from 'next/server'
-import { setTimeout } from "timers/promises"
 
 import type { NextRequest } from 'next/server'
 
+// ----- JWT Validator -----
+async function verifySession(token: string) {
+
+    try {
+        if (!process.env.JWT_SECRET) throw 'Something went wrong, try again later.'
+
+        const secret = new TextEncoder()
+            .encode(process.env.JWT_SECRET)
+
+        return await jwtVerify(token, secret)
+    }
+
+    catch (error) { throw 'Unable to validate session.' }
+}
+
+// ----- Route Middleware -----
 export async function middleware(req: NextRequest) {
 
     const response = NextResponse.next()
@@ -27,18 +42,4 @@ export async function middleware(req: NextRequest) {
     }
 
     return response
-}
-
-async function verifySession(token: string) {
-
-    try {
-        if (!process.env.JWT_SECRET) throw 'Something went wrong, try again later.'
-
-        const secret = new TextEncoder()
-            .encode(process.env.JWT_SECRET)
-
-        return await jwtVerify(token, secret)
-    }
-
-    catch (error) { throw 'Unable to validate session.' }
 }

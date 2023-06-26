@@ -46,6 +46,9 @@
       "@/libs/*": [
         "source/resources/libs/*"
       ],
+      "@/locale/*": [
+        "source/resources/locale/*"
+      ],
       "@/styles/*": [
         "source/resources/styles/*"
       ],

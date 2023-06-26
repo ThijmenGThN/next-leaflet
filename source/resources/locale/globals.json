@@ -1,0 +1,33 @@
+{
+    "backHome": "Back to home",
+    "learnMore": "Learn more",
+    "exceptions": {
+        "system": "Something went wrong, try again later.",
+        "notFound": "Sorry, we couldn't find the page you're looking for."
+    },
+    "form": {
+        "optional": "Optional",
+        "email": "Email address",
+        "password": "Password",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "auth": {
+            "login": "Sign in",
+            "register": "Sign up"
+        }
+    },
+    "auth": {
+        "accountLogin": "Sign in to your account",
+        "accountRegister": "Sign up for an account",
+        "login": "Login",
+        "register": "Register",
+        "exceptions": {
+            "sessionExpired": "Session has expired, authentication required.",
+            "unknownUser": "A user with this email address does not exist.",
+            "occupiedUser": "A user with this email address already exists.",
+            "invalidCredentials": "The provided credentials are invalid.",
+            "missingEmail": "An email address must be provided.",
+            "missingPassword": "A password must be provided."
+        }
+    }
+}

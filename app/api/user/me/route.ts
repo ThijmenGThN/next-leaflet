@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server'
 
 import prisma from '@/libs/prisma'
 
+import locale from '@/locale/globals.json'
+
 export async function GET(req: Request) {
 
     try {
@@ -12,10 +14,10 @@ export async function GET(req: Request) {
 
         const payload: any = jwt.decode(sessionToken)
 
-        if (!payload?.email) throw { xerr: 'Session has expired, authentication required.', status: 401 }
+        if (!payload?.email) throw { xerr: locale.auth.exceptions.sessionExpired, status: 401 }
 
         const user = await prisma.user.findFirst({ where: { email: payload.email } })
-        if (!user) throw { xerr: 'A user with this email address does not exist.', status: 404 }
+        if (!user) throw { xerr: locale.auth.exceptions.unknownUser, status: 404 }
 
         return NextResponse.json(
             {
@@ -32,7 +34,7 @@ export async function GET(req: Request) {
         return NextResponse.json(
             error.xerr
                 ? error.xerr
-                : 'Something went wrong, try again later.',
+                : locale.exceptions.system,
             { status: error.status ?? 500 }
         )
     }

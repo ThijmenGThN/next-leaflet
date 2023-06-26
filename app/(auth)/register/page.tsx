@@ -6,6 +6,8 @@ import Register from "@/components/user/Register"
 import aLogo from '@/assets/branding/logo.webp'
 import aSplash from "@/assets/pages/auth/splash.webp"
 
+import locale from '@/locale/globals.json'
+
 export default function Page() {
     return (
         <Container>
@@ -16,11 +18,11 @@ export default function Page() {
 
                 <div className='mt-5 flex justify-between'>
                     <Link href="/" className="text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark">
-                        <span aria-hidden="true">&larr;</span> Back to home
+                        <span aria-hidden="true">&larr;</span> {locale.backHome}
                     </Link>
 
                     <Link href="/login" className="text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark">
-                        Login
+                        {locale.auth.login}
                     </Link>
                 </div>
             </div>
@@ -58,7 +60,7 @@ function FormHead() {
                 />
             </Link>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                Sign up for an account
+                {locale.auth.accountRegister}
             </h2>
         </div>
     )

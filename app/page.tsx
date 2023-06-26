@@ -3,6 +3,8 @@ import Image from 'next/image'
 
 import aLogo from '@/assets/branding/logo.webp'
 
+import locale from '@/locale/globals.json'
+
 export default function Page() {
   return (
     <div className="bg-white min-h-screen overflow-hidden">
@@ -25,7 +27,7 @@ export default function Page() {
                 Dashboard
               </Link>
               <a href="https://github.com/ThijmenGThN/next-leaflet" target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
+                {locale.learnMore} <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -50,7 +52,7 @@ function Header() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
+            {locale.form.auth.login} <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </div>

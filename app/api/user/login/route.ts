@@ -5,6 +5,8 @@ import { setTimeout } from "timers/promises"
 
 import prisma from '@/libs/prisma'
 
+import locale from '@/locale/globals.json'
+
 export async function POST(req: Request) {
 
     await setTimeout(500)
@@ -14,13 +16,13 @@ export async function POST(req: Request) {
         const decoded = Buffer.from(encoded, 'base64').toString()
         const [email, password] = decoded.split(':')
 
-        if (!email || email == '') throw { xerr: 'An email address must be provided.', status: 400 }
-        if (!password || password == '') throw { xerr: 'A password must be provided.', status: 400 }
+        if (!email || email == '') throw { xerr: locale.auth.exceptions.missingEmail, status: 400 }
+        if (!password || password == '') throw { xerr: locale.auth.exceptions.missingPassword, status: 400 }
 
         const user = await prisma.user.findFirst({ where: { email } })
-        if (!user) throw { xerr: 'A user with this email address does not exist.', status: 404 }
+        if (!user) throw { xerr: locale.auth.exceptions.unknownUser, status: 404 }
 
-        if (!bcrypt.compareSync(password, user.password)) throw { xerr: 'The provided credentials are invalid.', status: 403 }
+        if (!bcrypt.compareSync(password, user.password)) throw { xerr: locale.auth.exceptions.invalidCredentials, status: 403 }
 
         const response = NextResponse.json(
             {
@@ -45,7 +47,7 @@ export async function POST(req: Request) {
         return NextResponse.json(
             error.xerr
                 ? error.xerr
-                : 'Something went wrong, try again later.',
+                : locale.exceptions.system,
             { status: error.status ?? 500 }
         )
     }
