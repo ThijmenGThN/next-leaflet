@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
-import * as user from '@/resources/helpers/user'
+import * as user from '@/resources/helpers/client/user'
 
 import locale from '@/locale/globals.json'
 
@@ -13,9 +13,6 @@ export default function Component() {
 	const [email, setEmail] = useState<string>()
 	const [password, setPassword] = useState<string>()
 
-	const [first_name, setFirstName] = useState<string>()
-	const [last_name, setLastName] = useState<string>()
-
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [errorMessage, setErrorMessage] = useState<string | undefined>()
 
@@ -23,7 +20,7 @@ export default function Component() {
 		setIsLoading(true)
 
 		try {
-			await user.register({ email, password, first_name, last_name })
+			await user.login({ email, password })
 			router.push('/dash')
 		} catch (error) {
 			setErrorMessage('' + error)
@@ -34,32 +31,6 @@ export default function Component() {
 
 	return (
 		<div className='space-y-6' onKeyDown={({ key }) => key == 'Enter' && login()}>
-			<div className='flex flex-col gap-2'>
-				<div className='flex justify-between'>
-					<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.firstName}</label>
-					<span className='text-sm leading-6 text-gray-500'>{locale.form.optional}</span>
-				</div>
-				<input
-					className='block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6'
-					autoFocus
-					type='text'
-					onChange={({ target: { value } }) => setFirstName(value)}
-				/>
-			</div>
-
-			<div className='flex flex-col gap-2'>
-				<div className='flex justify-between'>
-					<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.lastName}</label>
-					<span className='text-sm leading-6 text-gray-500'>{locale.form.optional}</span>
-				</div>
-				<input
-					className='block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6'
-					autoFocus
-					type='text'
-					onChange={({ target: { value } }) => setLastName(value)}
-				/>
-			</div>
-
 			<div className='flex flex-col gap-2'>
 				<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.email}</label>
 				<input

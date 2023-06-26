@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
-import prisma from '@/libs/prisma'
+import prisma from '@/resources/helpers/server/prisma'
 
 import locale from '@/locale/globals.json'
 

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
 import { setTimeout } from 'timers/promises'
 
-import prisma from '@/libs/prisma'
+import prisma from '@/resources/helpers/server/prisma'
 
 import locale from '@/locale/globals.json'
 

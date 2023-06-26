@@ -27,7 +27,6 @@
 			"@/resources/*": ["source/resources/*"],
 			"@/helpers/*": ["source/resources/helpers/*"],
 			"@/assets/*": ["source/resources/assets/*"],
-			"@/libs/*": ["source/resources/libs/*"],
 			"@/locale/*": ["source/resources/locale/*"],
 			"@/styles/*": ["source/resources/styles/*"],
 			"@/types/*": ["source/resources/types/*"]
