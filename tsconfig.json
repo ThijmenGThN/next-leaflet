@@ -1,69 +1,38 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "baseUrl": ".",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/app/*": [
-        "app/*"
-      ],
-      "@/public/*": [
-        "public/*"
-      ],
-      "@/components/*": [
-        "source/components/*"
-      ],
-      "@/resources/*": [
-        "source/resources/*"
-      ],
-      "@/helpers/*": [
-        "source/resources/helpers/*"
-      ],
-      "@/assets/*": [
-        "source/resources/assets/*"
-      ],
-      "@/libs/*": [
-        "source/resources/libs/*"
-      ],
-      "@/locale/*": [
-        "source/resources/locale/*"
-      ],
-      "@/styles/*": [
-        "source/resources/styles/*"
-      ],
-      "@/types/*": [
-        "source/resources/types/*"
-      ]
-    }
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"baseUrl": ".",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"paths": {
+			"@/app/*": ["app/*"],
+			"@/public/*": ["public/*"],
+			"@/components/*": ["source/components/*"],
+			"@/resources/*": ["source/resources/*"],
+			"@/helpers/*": ["source/resources/helpers/*"],
+			"@/assets/*": ["source/resources/assets/*"],
+			"@/libs/*": ["source/resources/libs/*"],
+			"@/locale/*": ["source/resources/locale/*"],
+			"@/styles/*": ["source/resources/styles/*"],
+			"@/types/*": ["source/resources/types/*"]
+		}
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+	"exclude": ["node_modules"]
 }

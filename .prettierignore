@@ -1,0 +1,14 @@
+node_modules
+
+/build
+/public/build
+.env
+.next
+.github
+.vscode
+docker-compose.yml
+
+/cypress/screenshots
+/cypress/videos
+
+/app/styles/tailwind.css
