@@ -5,7 +5,7 @@ import aLogo from '@/assets/branding/logo.webp'
 
 export default function Page() {
   return (
-    <main className="bg-white h-screen overflow-hidden">
+    <div className="bg-white min-h-screen overflow-hidden">
       <Header />
 
       <Container>
@@ -31,7 +31,7 @@ export default function Page() {
           </div>
         </div>
       </Container>
-    </main>
+    </div>
   )
 }
 

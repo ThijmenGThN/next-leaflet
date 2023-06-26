@@ -1,20 +1,29 @@
 import Link from "next/link"
 import Image from 'next/image'
 
-import Register from "@/components/auth/Register"
-
 import aLogo from '@/assets/branding/logo.webp'
-import aSplash from "@/assets/pages/auth/splash.webp"
+import aNotFound from "@/assets/pages/not-found.webp"
 
 export default function Page() {
     return (
         <Container>
-            <FormHead />
+            <Link href='/'>
+                <Image
+                    priority
+                    className="h-10 w-auto"
+                    src={aLogo}
+                    alt="Logo"
+                />
+            </Link>
 
-            <div className="mt-10">
-                <Register />
+            <div className="mt-20">
+                <p className="text-base font-semibold leading-8 text-theme-primary">404</p>
+                <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Page not found</h1>
+                <p className="mt-6 text-base leading-7 text-gray-600">
+                    Sorry, we couldn’t find the page you’re looking for.
+                </p>
 
-                <div className='mt-5 flex justify-between'>
+                <div className='mt-10 flex justify-between'>
                     <Link href="/" className="text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark">
                         <span aria-hidden="true">&larr;</span> Back to home
                     </Link>
@@ -39,27 +48,9 @@ function Container({ children }: { children: React.ReactNode }) {
             <Image
                 priority
                 className="absolute inset-0 h-full w-full object-cover"
-                src={aSplash}
+                src={aNotFound}
                 alt=""
             />
         </div>
     </div>
-}
-
-function FormHead() {
-    return (
-        <div>
-            <Link href='/'>
-                <Image
-                    priority
-                    className="h-10 w-auto"
-                    src={aLogo}
-                    alt="Logo"
-                />
-            </Link>
-            <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                Sign up for an account
-            </h2>
-        </div>
-    )
 }

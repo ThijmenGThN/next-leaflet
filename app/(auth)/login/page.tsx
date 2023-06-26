@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Login from "@/components/auth/Login"
 
 import aLogo from '@/assets/branding/logo.webp'
-import aSplash from "@/assets/splash.webp"
+import aSplash from "@/assets/pages/auth/splash.webp"
 
 export default function Page() {
     return (
@@ -49,12 +49,14 @@ function Container({ children }: { children: React.ReactNode }) {
 function FormHead() {
     return (
         <div>
-            <Image
-                priority
-                className="h-10 w-auto"
-                src={aLogo}
-                alt="Logo"
-            />
+            <Link href='/'>
+                <Image
+                    priority
+                    className="h-10 w-auto"
+                    src={aLogo}
+                    alt="Logo"
+                />
+            </Link>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Sign in to your account
             </h2>
