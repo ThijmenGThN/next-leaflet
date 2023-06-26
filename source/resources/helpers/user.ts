@@ -32,9 +32,9 @@ export async function register(user: iUser) {
 	}
 }
 
-export async function me() {
+export async function profile() {
 	try {
-		return (await axios.get('/api/user/me')).data
+		return (await axios.get('/api/user/profile')).data
 	} catch ({ response: { data: error } }: any) {
 		throw error
 	}

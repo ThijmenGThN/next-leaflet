@@ -1,24 +1,23 @@
 'use client'
 
-import * as user from '@/helpers/user'
+import { profile } from '@/helpers/user'
 
 import type { iUser } from '@/types/globals'
 import { useEffect, useState } from 'react'
 
 export default function Page() {
-	const [me, setMe] = useState<iUser>()
+	const [user, setUser] = useState<iUser>()
 
 	useEffect(() => {
-		user.me()
-			.then((data) => setMe(data))
-			.catch((error) => console.error(error))
-	}, [me])
+		profile()
+			.then(data => setUser(data))
+	}, [user])
 
 	return (
 		<div className='bg-gray-50 p-10 min-h-screen'>
 			<div className='overflow-hidden rounded-lg bg-white shadow'>
 				<div className='px-4 py-5 sm:p-6'>
-					<pre>{JSON.stringify(me)}</pre>
+					<pre>{JSON.stringify(user)}</pre>
 				</div>
 			</div>
 		</div>

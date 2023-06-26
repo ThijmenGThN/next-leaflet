@@ -1,17 +1,17 @@
 {
-    "files.exclude": {
-        "docker-compose.yml": true,
-        "postcss.config.js": true,
-        ".eslintrc.json": true,
-        "next.config.js": true,
-        "next-env.d.ts": true,
-        "tsconfig.json": true,
-        "node_modules": true,
-        "**/.gitkeep": true,
-        "debug.log": true,
-        ".github": true,
-        "yarn*": true,
-        ".next": true,
-        "data": true
-    }
+	"files.exclude": {
+		"docker-compose.yml": true,
+		"postcss.config.js": true,
+		".eslintrc.json": true,
+		"next.config.js": true,
+		"next-env.d.ts": true,
+		"tsconfig.json": true,
+		"node_modules": true,
+		"**/.gitkeep": true,
+		"debug.log": true,
+		".github": true,
+		"yarn*": true,
+		".next": true,
+		"data": true
+	}
 }
