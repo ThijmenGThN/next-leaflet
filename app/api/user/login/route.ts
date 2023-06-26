@@ -22,22 +22,22 @@ export async function POST(req: Request) {
 
         if (!bcrypt.compareSync(password, user.password)) throw { xerr: 'The provided credentials are invalid.', status: 403 }
 
-        return NextResponse.json(
+        const response = NextResponse.json(
             {
-                profile: {
-                    email: user.email,
-                    first_name: user.first_name,
-                    last_name: user.last_name
-                },
-                session: {
-                    token: jwt.sign({
-                        email: user.email,
-                        hashPass: user.password,
-                        expiresIn: process.env.JWT_EXPIRY ?? '45m'
-                    }, process.env.JWT_SECRET ?? '7200')
-                }
+                email: user.email,
+                first_name: user.first_name,
+                last_name: user.last_name
             },
-            { status: 200 })
+            { status: 200 }
+        )
+
+        response.cookies.set('sessionToken', jwt.sign({
+            email: user.email,
+            hashPass: user.password,
+            expiresIn: process.env.JWT_EXPIRY ?? '45m'
+        }, process.env.JWT_SECRET ?? '7200'))
+
+        return response
     }
 
     catch (error: any) {

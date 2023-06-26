@@ -1,10 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 import * as auth from '@/helpers/auth'
 
 export default function Component() {
+    const router = useRouter()
+
     const [email, setEmail] = useState<string>()
     const [password, setPassword] = useState<string>()
 
@@ -18,15 +21,8 @@ export default function Component() {
         setIsLoading(true)
 
         try {
-            const state = await auth.register({
-                email, password, profile: {
-                    first_name,
-                    last_name
-                }
-            })
-            setErrorMessage(undefined)
-
-            console.log(state)
+            await auth.register({ email, password, first_name, last_name })
+            router.push('/dash')
         }
 
         catch (error) { setErrorMessage('' + error) }

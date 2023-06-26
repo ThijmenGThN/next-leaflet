@@ -22,6 +22,7 @@
     "bcrypt": "^5.1.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
+    "jose": "^4.14.4",
     "jsonwebtoken": "^9.0.0",
     "next": "^13.4.7",
     "passport-http": "^0.3.0",
