@@ -39,3 +39,10 @@ export async function register(user: iUser) {
 
     catch ({ response: { data: error } }: any) { throw error }
 }
+
+export async function me() {
+
+    try { return (await axios.get('/api/user/me')).data }
+
+    catch ({ response: { data: error } }: any) { throw error }
+}
