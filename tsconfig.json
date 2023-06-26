@@ -48,6 +48,9 @@
       ],
       "@/styles/*": [
         "source/resources/styles/*"
+      ],
+      "@/types/*": [
+        "source/resources/types/*"
       ]
     }
   },

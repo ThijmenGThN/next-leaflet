@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from 'next/image'
 
-import Register from "@/components/auth/Register"
+import Register from "@/components/user/Register"
 
 import aLogo from '@/assets/branding/logo.webp'
 import aSplash from "@/assets/pages/auth/splash.webp"

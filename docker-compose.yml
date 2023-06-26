@@ -5,7 +5,7 @@ services:
   app:
     image: node:lts-alpine
     restart: unless-stopped
-    command: ["yarn", "ci"]
+    command: ["yarn", "deploy"]
     ports: [$APP_PORT:3000]
     depends_on: [database]
     working_dir: /usr/app
@@ -17,7 +17,7 @@ services:
   database:
     image: postgis/postgis:latest
     restart: unless-stopped
-    ports: [$DB_PORT:5432]
-    volumes: [./data/database:/var/lib/postgresql/data]
+    ports: [$DATABASE_PORT:5432]
+    volumes: [./data:/var/lib/postgresql/data]
     environment: 
-      POSTGRES_PASSWORD: $DB_PASS
+      POSTGRES_PASSWORD: $DATABASE_PASS

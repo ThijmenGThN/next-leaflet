@@ -1,12 +1,6 @@
 import axios from 'axios'
 
-interface iUser {
-    email?: string
-    password?: string
-
-    first_name?: string
-    last_name?: string
-}
+import type { iUser } from '@/types/globals'
 
 export async function login(user: iUser) {
 
