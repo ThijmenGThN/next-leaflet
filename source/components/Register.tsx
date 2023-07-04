@@ -3,9 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import * as user from '@/resources/helpers/client/user'
-
-import locale from '@/locale/globals.json'
+import * as user from '@/helpers/client/user'
 
 export default function Component() {
 	const router = useRouter()
@@ -36,8 +34,8 @@ export default function Component() {
 		<div className='space-y-6' onKeyDown={({ key }) => key == 'Enter' && login()}>
 			<div className='flex flex-col gap-2'>
 				<div className='flex justify-between'>
-					<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.firstName}</label>
-					<span className='text-sm leading-6 text-gray-500'>{locale.form.optional}</span>
+					<label className='block text-sm font-medium leading-6 text-gray-900'>First name</label>
+					<span className='text-sm leading-6 text-gray-500'>Optional</span>
 				</div>
 				<input
 					className='block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6'
@@ -49,8 +47,8 @@ export default function Component() {
 
 			<div className='flex flex-col gap-2'>
 				<div className='flex justify-between'>
-					<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.lastName}</label>
-					<span className='text-sm leading-6 text-gray-500'>{locale.form.optional}</span>
+					<label className='block text-sm font-medium leading-6 text-gray-900'>Last name</label>
+					<span className='text-sm leading-6 text-gray-500'>Optional</span>
 				</div>
 				<input
 					className='block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6'
@@ -61,7 +59,7 @@ export default function Component() {
 			</div>
 
 			<div className='flex flex-col gap-2'>
-				<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.email}</label>
+				<label className='block text-sm font-medium leading-6 text-gray-900'>Email address</label>
 				<input
 					className='block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6'
 					autoFocus
@@ -72,7 +70,7 @@ export default function Component() {
 			</div>
 
 			<div className='flex flex-col gap-2'>
-				<label className='block text-sm font-medium leading-6 text-gray-900'>{locale.form.password}</label>
+				<label className='block text-sm font-medium leading-6 text-gray-900'>Password</label>
 				<input
 					className='block w-full rounded-md p-2 shadow-sm border border-gray-300 placeholder:text-gray-400 focus:border-2 focus:border-theme-primary sm:text-sm sm:leading-6'
 					type='password'
@@ -99,7 +97,7 @@ export default function Component() {
 						clipRule='evenodd'
 					/>
 				</svg>
-				<p>{locale.form.auth.login}</p>
+				<p>Sign in</p>
 			</button>
 		</div>
 	)

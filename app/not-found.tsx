@@ -1,10 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import aLogo from '@/assets/branding/logo.webp'
-import aNotFound from '@/assets/pages/not-found.webp'
-
-import locale from '@/locale/globals.json'
+import aLogo from '@/assets/logo.webp'
+import aNotFound from '@/assets/not-found.webp'
 
 export default function Page() {
 	return (
@@ -16,21 +14,21 @@ export default function Page() {
 			<div className='mt-20'>
 				<p className='text-base font-semibold leading-8 text-theme-primary'>404</p>
 				<h1 className='mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl'>Page not found</h1>
-				<p className='mt-6 text-base leading-7 text-gray-600'>{locale.exceptions.notFound}.</p>
+				<p className='mt-6 text-base leading-7 text-gray-600'>Sorry, we couldn't find the page you're looking for.</p>
 
 				<div className='mt-10 flex justify-between'>
 					<Link
 						href='/'
 						className='text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark'
 					>
-						<span aria-hidden='true'>&larr;</span> {locale.backHome}
+						<span aria-hidden='true'>&larr;</span> Back to home
 					</Link>
 
 					<Link
 						href='/login'
 						className='text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark'
 					>
-						{locale.auth.login}
+						Login
 					</Link>
 				</div>
 			</div>

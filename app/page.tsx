@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import aLogo from '@/assets/branding/logo.webp'
-
-import locale from '@/locale/globals.json'
+import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
 	return (
@@ -27,7 +25,7 @@ export default function Page() {
 								target='_blank'
 								className='text-sm font-semibold leading-6 text-gray-900'
 							>
-								{locale.learnMore} <span aria-hidden='true'>→</span>
+								Learn more <span aria-hidden='true'>→</span>
 							</a>
 						</div>
 					</div>
@@ -48,7 +46,7 @@ function Header() {
 				</div>
 				<div className='hidden lg:flex lg:flex-1 lg:justify-end'>
 					<Link href='/login' className='text-sm font-semibold leading-6 text-gray-900'>
-						{locale.form.auth.login} <span aria-hidden='true'>&rarr;</span>
+					Sign in <span aria-hidden='true'>&rarr;</span>
 					</Link>
 				</div>
 			</div>

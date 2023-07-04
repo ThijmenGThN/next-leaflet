@@ -1,4 +1,4 @@
-import { currentProfile } from '@/resources/helpers/server/user'
+import { currentProfile } from '@/helpers/server/user'
 
 import type { iUser } from '@/types/globals'
 

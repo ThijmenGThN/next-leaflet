@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
-import prisma from '@/resources/helpers/server/prisma'
+import prisma from '@/helpers/server/prisma'
 
-import locale from '@/locale/globals.json'
+import locale from '@/locale/api.json'
 
 export async function GET(req: Request) {
 	try {
@@ -12,10 +12,10 @@ export async function GET(req: Request) {
 
 		const payload: any = jwt.decode(sessionToken)
 
-		if (!payload?.email) throw { xerr: locale.auth.exceptions.sessionExpired, status: 401 }
+		if (!payload?.email) throw { xerr: locale.error.general, status: 401 }
 
 		const user = await prisma.user.findFirst({ where: { email: payload.email } })
-		if (!user) throw { xerr: locale.auth.exceptions.unknownUser, status: 404 }
+		if (!user) throw { xerr: locale.unknown.user, status: 404 }
 
 		return NextResponse.json(
 			{
@@ -27,6 +27,6 @@ export async function GET(req: Request) {
 		)
 	} catch (error: any) {
 		!error.xerr && console.error(error)
-		return NextResponse.json(error.xerr ? error.xerr : locale.exceptions.system, { status: error.status ?? 500 })
+		return NextResponse.json(error.xerr ? error.xerr : locale.error.general, { status: error.status ?? 500 })
 	}
 }

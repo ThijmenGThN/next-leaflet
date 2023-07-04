@@ -1,12 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import Login from '@/components/forms/Login'
+import Login from '@/components/Login'
 
-import aLogo from '@/assets/branding/logo.webp'
-import aSplash from '@/assets/pages/auth/splash.webp'
-
-import locale from '@/locale/globals.json'
+import aLogo from '@/assets/logo.webp'
+import aSplash from '@/assets/splash.webp'
 
 export default function Page() {
 	return (
@@ -21,14 +19,14 @@ export default function Page() {
 						href='/'
 						className='text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark'
 					>
-						<span aria-hidden='true'>&larr;</span> {locale.backHome}
+						<span aria-hidden='true'>&larr;</span> Back to home
 					</Link>
 
 					<Link
 						href='/register'
 						className='text-sm font-semibold leading-7 text-theme-primary hover:text-theme-primary-dark'
 					>
-						{locale.auth.register}
+						Register
 					</Link>
 				</div>
 			</div>
@@ -56,7 +54,7 @@ function FormHead() {
 				<Image priority className='h-10 w-auto' src={aLogo} alt='Logo' />
 			</Link>
 			<h2 className='mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900'>
-				{locale.auth.accountLogin}
+				Sign in to your account
 			</h2>
 		</div>
 	)

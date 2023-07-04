@@ -1,0 +1,19 @@
+{
+    "missing": {
+        "email": "An email address must be provided.",
+        "password": "A password must be provided."
+    },
+    "unknown": {
+        "user": "A user with this email address does not exist."
+    },
+    "invalid": {
+        "credentials": "The provided credentials are invalid.",
+        "session": "Session has expired, authentication required."
+    },
+    "exists": {
+        "user": "A user with this email address already exists."
+    },
+    "error": {
+        "general": "Something went wrong, try again later."
+    }
+}
