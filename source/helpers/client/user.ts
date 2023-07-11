@@ -1,6 +1,6 @@
 import type { iUser } from '@/types/globals'
 
-export async function currentProfile() {
+export async function profile() {
 	try {
 		return (await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user/profile`, {
 			method: 'GET',
@@ -24,8 +24,8 @@ export async function login(user: iUser) {
 				'Content-Type': 'application/json'
 			}
 		})).json()
-	} catch ({ response: { data: error } }: any) {
-		throw error
+	} catch (error: any) {
+		console.log(error)
 	}
 }
 

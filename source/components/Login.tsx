@@ -21,6 +21,7 @@ export default function Component() {
 			await user.login({ email, password })
 			router.push('/dash')
 		} catch (error) {
+			console.log(error)
 			setErrorMessage('' + error)
 		}
 

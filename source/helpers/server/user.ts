@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-export async function currentProfile() {
+export async function profile() {
     try {
         const { value: sessionToken } = cookies().get('sessionToken') ?? { value: null }
 

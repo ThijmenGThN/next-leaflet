@@ -22,13 +22,22 @@ export async function middleware(req: NextRequest) {
 	const match = (url: string) => req.nextUrl.pathname.startsWith(url)
 
 	try {
-		if (match('/login') || match('/register')) response.cookies.delete('sessionToken')
 
+		if (match('/logout')) {
+			response.cookies.delete('sessionToken')
+			return NextResponse.redirect(new URL('/login', req.url))
+		}
+
+		// User is already logged in.
+		if (match('/login') || match('/register')) return NextResponse.redirect(new URL('/dash', req.url))
+
+		// Protected route.
 		if (match('/dash')) {
 			const { value: sessionToken } = req.cookies.get('sessionToken') ?? { value: '' }
 
 			if (!(await verifySession(sessionToken))) throw 'Session has expired, authentication required.'
 		}
+
 	} catch (error) {
 		console.error(error)
 		return NextResponse.redirect(new URL('/login', req.url))

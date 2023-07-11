@@ -12,7 +12,9 @@ const Font = Inter({ subsets: ['latin'] })
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html className={Font.className}>
-			<body>{children}</body>
+			<body className='flex min-h-screen'>
+				{children}
+			</body>
 		</html>
 	)
 }
