@@ -17,6 +17,7 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
+      "@/auth/*": ["app/api/auth/[...nextauth]/*"],
       "@/styles/*": ["src/styles/*"],
     }
   },

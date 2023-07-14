@@ -4,6 +4,8 @@
         ".eslintrc.json": true,
         "next-env.d.ts": true,
         "node_modules": true,
-        "yarn.lock": true,
+        "yarn*": true,
+        ".next": true,
+        "data": true,
     }
 }
