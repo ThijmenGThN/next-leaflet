@@ -1,10 +1,11 @@
 import bcrypt from 'bcrypt'
-import CredentialsProvider from 'next-auth/providers/credentials'
+
+import Credentials from 'next-auth/providers/credentials'
 
 import prisma from '@/prisma/client'
 
 export default [
-    CredentialsProvider({
+    Credentials({
         name: "Credentials",
         credentials: {
             email: { label: "E-mail", type: "text" },
