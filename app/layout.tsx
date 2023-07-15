@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 const inter = Inter({ subsets: ['latin'] })
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="h-full">
+      <body className={inter.className + ' h-full'}>
         {children}
       </body>
     </html>

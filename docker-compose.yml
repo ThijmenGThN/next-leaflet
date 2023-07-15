@@ -15,9 +15,10 @@ services:
 
   # ┏━ MySQL | An SQL based database.
   database:
-    image: mysql:latest
+    image: postgres:latest
     restart: unless-stopped
-    ports: [$DATABASE_PORT:3306]
-    volumes: [./data:/var/lib/mysql]
+    ports: [$DATABASE_PORT:5432]
+    volumes: [./data:/var/lib/postgresql/data]
     environment:
-      MYSQL_ROOT_PASSWORD: $DATABASE_PASS
+      POSTGRES_PASSWORD: $DATABASE_PASS
+      

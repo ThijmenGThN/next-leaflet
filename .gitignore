@@ -3,10 +3,8 @@
 
 *.pem
 *.tsbuildinfo
+*.log*
 .env*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 .DS_Store
 next-env.d.ts

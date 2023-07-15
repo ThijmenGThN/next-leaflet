@@ -18,7 +18,11 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/auth/*": ["app/api/auth/[...nextauth]/*"],
+      "@/components/*": ["src/components/*"],
       "@/styles/*": ["src/styles/*"],
+      "@/assets/*": ["src/assets/*"],
+      "@/prisma/*": ["src/prisma/*"],
+      "@/types/*": ["src/types/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
