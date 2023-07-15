@@ -1,8 +1,10 @@
 import { Inter } from 'next/font/google'
 
-import type { Metadata } from 'next'
+import Session from '@/helpers/auth/Session'
 
 import '@/styles/globals.css'
+
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'next-leaflet',
@@ -14,7 +16,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full">
       <body className={inter.className + ' h-full'}>
-        {children}
+        <Session>
+          {children}
+        </Session>
       </body>
     </html>
   )

@@ -4,9 +4,9 @@ import type { NextAuthOptions } from 'next-auth'
 
 const options: NextAuthOptions = {
     providers,
-    // pages: {
-    //
-    // }
+    pages: {
+        signIn: '/login'
+    }
 }
 
 export default options
