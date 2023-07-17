@@ -26,7 +26,7 @@ export default async function Page() {
                 <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
                     <Credentials />
 
-                    {providers.length > 0 && <OAuth providers={providers} />}
+                    {Object.keys(providers) && <OAuth providers={providers} />}
                 </div>
             </div>
         </div>

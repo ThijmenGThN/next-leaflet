@@ -2,11 +2,13 @@
 
 import { signIn } from "next-auth/react"
 
+const callbackUrl = '/dashboard'
+
 export default function OAuth({ providers }: any) {
 
     return (
-        <div>
-            <div className="relative mt-10">
+        <>
+            <div className="relative mt-5">
                 <div className="absolute inset-0 flex items-center" aria-hidden="true">
                     <div className="w-full border-t border-gray-200" />
                 </div>
@@ -20,7 +22,7 @@ export default function OAuth({ providers }: any) {
                     Object.keys(providers).map((key: string, index: number) => (
                         <li key={index}>
                             <button className="flex w-full items-center justify-center gap-3 rounded-md bg-black px-3 py-1.5 text-white"
-                                onClick={() => signIn(providers[key].id)}
+                                onClick={() => signIn(providers[key].id, { callbackUrl })}
                             >
                                 <span className="text-sm font-semibold leading-6">{providers[key].name}</span>
                             </button>
@@ -28,6 +30,6 @@ export default function OAuth({ providers }: any) {
                     ))
                 }
             </ul>
-        </div>
+        </>
     )
 }
