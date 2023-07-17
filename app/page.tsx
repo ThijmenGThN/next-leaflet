@@ -10,11 +10,13 @@ export default function Page() {
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
-                        <Image
-                            className="h-8 w-auto"
-                            src={aLogo}
-                            alt=""
-                        />
+                        <Link href="/">
+                            <Image
+                                className="h-8 w-auto"
+                                src={aLogo}
+                                alt=""
+                            />
+                        </Link>
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
                         <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet/issues" className="text-sm font-semibold leading-6 text-gray-900">

@@ -9,11 +9,9 @@ async function main() {
         where: { email: 'admin@leaflet.app' },
         update: {},
         create: {
+            name: 'Developer Account',
             email: 'admin@leaflet.app',
             password: await bcrypt.hash('admin', 12),
-
-            first_name: 'Developer',
-            last_name: 'Account'
         }
     })
 
