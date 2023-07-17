@@ -10,7 +10,10 @@ async function main() {
         update: {},
         create: {
             email: 'admin@leaflet.app',
-            password: await bcrypt.hash('admin', 12)
+            password: await bcrypt.hash('admin', 12),
+
+            first_name: 'Developer',
+            last_name: 'Account'
         }
     })
 

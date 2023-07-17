@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import Credentials from 'next-auth/providers/credentials'
 
 import prisma from '@/prisma/client'
+import { isErrored } from 'stream'
 
 export default [
     Credentials({
@@ -20,7 +21,10 @@ export default [
 
             if (!await bcrypt.compare(credentials.password, user.password)) throw 'Invalid credentials.'
 
-            return user
+            return {
+                ...user,
+                name: user.first_name + " " + user.last_name
+            }
         }
     })
 ]
