@@ -96,6 +96,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                                         <li key={index}>
                                                             <Link
                                                                 href={item.href}
+                                                                onClick={() => setSidebarOpen(false)}
                                                                 className={classNames(
                                                                     item.href == pathname
                                                                         ? 'bg-gray-50 text-primary'
@@ -119,6 +120,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                             <li className="mt-auto">
                                                 <Link
                                                     href="/dashboard/support"
+                                                    onClick={() => setSidebarOpen(false)}
                                                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
                                                 >
                                                     <LifebuoyIcon
