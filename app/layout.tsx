@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 
-import Session from '@/helpers/auth/Session'
+import Session from '@/components/Session'
 
 import '@/styles/globals.css'
 

@@ -1,16 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getProviders } from 'next-auth/react'
 
+import Credentials from '@/components/auth/Credentials'
 import OAuth from '@/components/auth/OAuth'
 
 import aLogo from '@/assets/logo.webp'
-import Login from '@/components/auth/credentials/Login'
 
 export default async function Page() {
-    const { credentials, ...providers }: any = await getProviders()
-
-    const hasOAuth = Object.keys(providers).length > 0
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -27,11 +23,11 @@ export default async function Page() {
                 </h2>
             </div>
 
-            <div className="relative mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+            <div className="relative my-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                    <Login />
+                    <Credentials />
 
-                    {hasOAuth && <OAuth providers={providers} />}
+                    <OAuth />
                 </div>
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">

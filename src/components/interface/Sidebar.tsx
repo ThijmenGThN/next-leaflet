@@ -7,6 +7,12 @@ import { useSession } from 'next-auth/react'
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
+import gravatar from '@/helpers/gravatar'
+import { classNames } from "@/helpers/tailwind"
+
+import aLogo from '@/assets/logo.webp'
+import Dropdown from '@/components/interface/Dropdown'
+
 import {
     Bars3Icon,
     BellIcon,
@@ -15,14 +21,8 @@ import {
     XMarkIcon,
     ComputerDesktopIcon,
     ServerStackIcon,
-    LifebuoyIcon
+    UserIcon
 } from '@heroicons/react/24/outline'
-
-import gravatar from '@/helpers/user/gravatar'
-import { classNames } from "@/helpers/tailwind"
-
-import aLogo from '@/assets/logo.webp'
-import Dropdown from '@/components/Dropdown'
 
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Squares2X2Icon },
@@ -119,15 +119,15 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                             </li>
                                             <li className="mt-auto">
                                                 <Link
-                                                    href="/dashboard/support"
+                                                    href="/dashboard/account"
                                                     onClick={() => setSidebarOpen(false)}
                                                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
                                                 >
-                                                    <LifebuoyIcon
+                                                    <UserIcon
                                                         className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
                                                         aria-hidden="true"
                                                     />
-                                                    Support
+                                                    Account
                                                 </Link>
                                             </li>
                                         </ul>
@@ -180,14 +180,14 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                             </li>
                             <li className="mt-auto">
                                 <Link
-                                    href="/dashboard/support"
+                                    href="/dashboard/account"
                                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
                                 >
-                                    <LifebuoyIcon
+                                    <UserIcon
                                         className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
                                         aria-hidden="true"
                                     />
-                                    Support
+                                    Account
                                 </Link>
                             </li>
                         </ul>

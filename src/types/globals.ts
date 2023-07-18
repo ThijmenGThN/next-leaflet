@@ -1,5 +1,7 @@
 
-export interface iExample {
+export interface iUser {
     name: string
-    active: boolean
+    email: string
+    password: string
 }
+

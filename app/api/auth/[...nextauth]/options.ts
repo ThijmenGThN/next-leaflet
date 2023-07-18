@@ -5,7 +5,8 @@ import type { NextAuthOptions } from 'next-auth'
 const options: NextAuthOptions = {
     providers,
     pages: {
-        signIn: '/login'
+        signIn: '/login',
+        error: '/login'
     }
 }
 
