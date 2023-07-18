@@ -4,8 +4,8 @@ import { useState, useTransition } from "react"
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import { isEmail } from '@/helpers/validation'
-import * as userActions from '@/helpers/actions/user'
 import { signIn } from "next-auth/react"
+import * as actions from "./actions"
 
 const callbackUrl = '/dashboard'
 
@@ -34,7 +34,7 @@ export default function Register() {
         if (password.length > 128) return setAuthError('The provided password can only have up-to 128 characters.')
 
         startTransition(async () => {
-            await userActions.create({ name, email, password })
+            await actions.register({ name, email, password })
 
             signIn('credentials', { email, password, callbackUrl })
         })
