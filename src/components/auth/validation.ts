@@ -10,10 +10,10 @@ export const registration = z.object({
         .email('This email address is not valid.'),
     password: z.string()
         .min(8, { message: 'This password is too short.' })
-        .max(32, { message: 'This password is too long.' }),
+        .max(128, { message: 'This password is too long.' }),
     repeatPassword: z.string()
         .min(8, { message: 'This password is too short.' })
-        .max(32, { message: 'Password is too long.' })
+        .max(128, { message: 'Password is too long.' })
 })
     .refine(({ password, repeatPassword }) => password == repeatPassword, {
         message: 'The passwords do not match.',
