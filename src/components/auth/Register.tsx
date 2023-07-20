@@ -22,10 +22,11 @@ export default function Register() {
     })
 
     const onSubmit = ({ name, email, password }: any) => {
-        startTransition(async () => {
-            await actions.register({ name, email, password })
-            signIn('credentials', { email, password, callbackUrl })
-        })
+        console.log('bruh')
+        //  startTransition(async () => {
+        // await actions.register({ name, email, password })
+        // signIn('credentials', { email, password, callbackUrl })
+        //  })
     }
 
     return (
