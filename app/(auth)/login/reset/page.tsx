@@ -2,31 +2,35 @@
 
 import Link from "next/link"
 import Image from 'next/image'
-import { useState, useTransition } from "react"
+import { z } from 'zod'
+import { useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import * as validate from './validation'
-import * as actions from "./actions"
+import * as actions from "@/functions/auth/actions"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import aLogo from '@/assets/logo.webp'
 
-const callbackUrl = '/dashboard'
+const vForm = z.object({
+    email: z.string()
+        .min(2, { message: 'This email address is too short.' })
+        .max(64, { message: 'This email address is too long.' })
+        .email('This email address is not valid.')
+})
 
 export default function Reset() {
     const [isPending, startTransition] = useTransition()
 
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(validate.email)
+        resolver: zodResolver(vForm)
     })
 
-    const onSubmit = (data: any) => {
-        console.log(data)
+    const onSubmit = ({ email }: { email?: string }) => {
 
         startTransition(async () => {
-
+            if (email) actions.reset(email)
         })
     }
 

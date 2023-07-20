@@ -1,16 +1,36 @@
 "use client"
 
+import { z } from 'zod'
 import { signIn } from "next-auth/react"
 import { useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import * as validate from './validation'
-import * as actions from "./actions"
+import * as actions from "@/functions/auth/actions"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 const callbackUrl = '/dashboard'
+
+const vForm = z.object({
+    name: z.string()
+        .min(2, { message: 'This name is too short.' })
+        .max(32, { message: 'This name is too long.' }),
+    email: z.string()
+        .min(2, { message: 'This email address is too short.' })
+        .max(64, { message: 'This email address is too long.' })
+        .email('This email address is not valid.'),
+    password: z.string()
+        .min(8, { message: 'This password is too short.' })
+        .max(128, { message: 'This password is too long.' }),
+    repeatPassword: z.string()
+        .min(8, { message: 'This password is too short.' })
+        .max(128, { message: 'Password is too long.' })
+})
+    .refine(({ password, repeatPassword }) => password == repeatPassword, {
+        message: 'The passwords do not match.',
+        path: ['repeatPassword']
+    })
 
 export default function Register() {
     const [isPending, startTransition] = useTransition()
@@ -18,7 +38,7 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(validate.register.form)
+        resolver: zodResolver(vForm)
     })
 
     const onSubmit = ({ repeatPassword, ...user }: any) => {

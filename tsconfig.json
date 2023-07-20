@@ -19,7 +19,9 @@
     "paths": {
       "@/auth/*": ["app/api/auth/[...nextauth]/*"],
       "@/components/*": ["src/components/*"],
+      "@/functions/*": ["src/functions/*"],
       "@/helpers/*": ["src/helpers/*"],
+      "@/emails/*": ["src/emails/*"],
       "@/styles/*": ["src/styles/*"],
       "@/assets/*": ["src/assets/*"],
       "@/prisma/*": ["src/prisma/*"],
