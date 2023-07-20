@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
+
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 const callbackUrl = '/dashboard'
@@ -62,7 +63,7 @@ export default function Credentials() {
                             />
                             {params.has('error') && <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"><ExclamationCircleIcon className="h-5 w-5 text-red-500" /></div>}
                         </div>
-                        {params.has('error') && <p className="mt-2 text-sm text-red-600">Unable to sign in, try again later.</p>}
+                        {params.has('error') && <p className="mt-2 text-sm text-red-600">Invalid credentials, try again later.</p>}
                     </div>
 
                     <div className="flex items-center mt-5">
@@ -93,7 +94,7 @@ export default function Credentials() {
 
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
-                    <Link href="/forgot" className="font-semibold text-primary hover:text-primary-dark">
+                    <Link href="/login/reset" className="font-semibold text-primary hover:text-primary-dark">
                         Forgot password?
                     </Link>
                 </div>

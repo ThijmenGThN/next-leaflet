@@ -81,13 +81,13 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                 </Transition.Child>
                                 {/* Sidebar component, swap this element with another sidebar if you like */}
                                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                                    <div className="flex h-12 shrink-0 mt-5 items-center">
+                                    <Link href='/' className="flex h-12 shrink-0 mt-5 items-center">
                                         <Image
                                             className="h-8 w-auto"
                                             src={aLogo}
                                             alt=""
                                         />
-                                    </div>
+                                    </Link>
                                     <nav className="flex flex-1 flex-col">
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                             <li>
@@ -117,19 +117,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                                     ))}
                                                 </ul>
                                             </li>
-                                            <li className="mt-auto">
-                                                <Link
-                                                    href="/dashboard/account"
-                                                    onClick={() => setSidebarOpen(false)}
-                                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
-                                                >
-                                                    <UserIcon
-                                                        className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
-                                                        aria-hidden="true"
-                                                    />
-                                                    Account
-                                                </Link>
-                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -143,13 +130,13 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-                    <div className="flex h-12 shrink-0 mt-5 items-center">
+                    <Link href='/' className="flex h-12 shrink-0 mt-5 items-center">
                         <Image
                             className="h-8 w-auto"
                             src={aLogo}
                             alt=""
                         />
-                    </div>
+                    </Link>
                     <nav className="flex flex-1 flex-col">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                             <li>
@@ -177,18 +164,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                         </li>
                                     ))}
                                 </ul>
-                            </li>
-                            <li className="mt-auto">
-                                <Link
-                                    href="/dashboard/account"
-                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary"
-                                >
-                                    <UserIcon
-                                        className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
-                                        aria-hidden="true"
-                                    />
-                                    Account
-                                </Link>
                             </li>
                         </ul>
                     </nav>

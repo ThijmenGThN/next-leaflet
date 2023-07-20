@@ -6,6 +6,7 @@ const options: NextAuthOptions = {
     providers,
     pages: {
         signIn: '/login',
+        signOut: '/login',
         error: '/login'
     }
 }
