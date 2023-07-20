@@ -18,15 +18,14 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(validate.registration)
+        resolver: zodResolver(validate.register.form)
     })
 
-    const onSubmit = ({ name, email, password }: any) => {
-        console.log('bruh')
-        //  startTransition(async () => {
-        // await actions.register({ name, email, password })
-        // signIn('credentials', { email, password, callbackUrl })
-        //  })
+    const onSubmit = ({ repeatPassword, ...user }: any) => {
+        startTransition(async () => {
+            await actions.register(user)
+            signIn('credentials', { ...user, callbackUrl })
+        })
     }
 
     return (
