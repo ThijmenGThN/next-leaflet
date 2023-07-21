@@ -10,9 +10,9 @@ import React, { useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import * as actions from "@/helpers/auth/actions"
-
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+
+import * as actions from "@/helpers/auth/actions"
 
 import aLogo from '@/assets/logo.webp'
 
@@ -21,30 +21,21 @@ const callbackUrl = '/dashboard'
 const vForm = z.object({
     password: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' }),
     repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'Password is too long.' })
-})
-    .refine(({ password, repeatPassword }) => password == repeatPassword, {
-        message: 'The passwords do not match.',
-        path: ['repeatPassword']
-    })
+}).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
 
 export default function ResetToken({ params: { token } }: { params: { token: string } }) {
     const [isPending, startTransition] = useTransition()
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(vForm)
-    })
-
-    const onSubmit = ({ password }: any) => {
-
+    const onSubmit = ({ password }: any) =>
         startTransition(async () => {
             await actions.resetUpdate({ password, token })
 
             const { email }: any = jwt.decode(token)
             signIn('credentials', { email, password, callbackUrl })
         })
-    }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

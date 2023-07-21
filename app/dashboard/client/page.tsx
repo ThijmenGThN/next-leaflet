@@ -1,11 +1,9 @@
 "use client"
 
-import EmailClient from '@/emails/client'
-
-import { useSession } from 'next-auth/react'
+// import { useSession } from 'next-auth/react'
 
 export default function Page() {
-    const { data: session, status } = useSession()
+    // const { data: session, status } = useSession()
 
     return (
         <div className="overflow-hidden rounded-lg bg-white shadow">

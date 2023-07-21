@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import OAuth from '@/components/auth/OAuth'
+import Register from '@/components/auth/Register'
 
 import aLogo from '@/assets/logo.webp'
-import Register from '@/components/auth/Register'
 
 export default async function Page() {
 

@@ -7,10 +7,10 @@ import { useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+
 import gravatar from "@/helpers/gravatar"
 import * as actions from "@/helpers/auth/actions"
-
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import aLogo from '@/assets/logo.webp'
 
@@ -20,16 +20,12 @@ const vForm = z.object({
 
 export default function Reset() {
     const [isPending, startTransition] = useTransition()
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
     const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(vForm)
-    })
-
-    const onSubmit = ({ email }: { email?: string }) => {
-
+    const onSubmit = ({ email }: { email?: string }) =>
         startTransition(async () => {
             if (!email) return
 
@@ -38,7 +34,6 @@ export default function Reset() {
             setFormEmail(email)
             setHasBeenSent(true)
         })
-    }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

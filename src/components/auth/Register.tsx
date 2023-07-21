@@ -10,38 +10,29 @@ import * as actions from "@/helpers/auth/actions"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-const callbackUrl = '/dashboard'
-
 const vForm = z.object({
     name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' }),
     email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
     password: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' }),
     repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'Password is too long.' })
-})
-    .refine(({ password, repeatPassword }) => password == repeatPassword, {
-        message: 'The passwords do not match.',
-        path: ['repeatPassword']
-    })
+}).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
+
+const callbackUrl = '/dashboard'
 
 export default function Register() {
     const [isPending, startTransition] = useTransition()
+    const { register, handleSubmit, formState: { errors } } = useForm({resolver: zodResolver(vForm)})
 
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(vForm)
-    })
-
-    const onSubmit = ({ repeatPassword, ...user }: any) => {
+    const onSubmit = ({ repeatPassword, ...user }: any) =>
         startTransition(async () => {
             await actions.register(user)
             signIn('credentials', { ...user, callbackUrl })
         })
-    }
 
     return (
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">Name</label>
                 <div className="relative mt-2 rounded-md shadow-sm">

@@ -15,7 +15,6 @@ const vOptions = z.object({
 })
 
 export default async function Email(Component: ReactElement, options: iOptions) {
-
     if (
         !process.env.EMAIL_FROM ||
         !process.env.EMAIL_HOST ||
@@ -34,10 +33,9 @@ export default async function Email(Component: ReactElement, options: iOptions) 
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         }
+    }).sendMail({
+        ...options,
+        from: process.env.EMAIL_FROM,
+        html: render(Component)
     })
-        .sendMail({
-            ...options,
-            from: process.env.EMAIL_FROM,
-            html: render(Component)
-        })
 }
