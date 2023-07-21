@@ -1,7 +1,6 @@
 "use client"
 
 import EmailClient from '@/emails/client'
-import TestEmail from '@/emails/Test'
 
 import { useSession } from 'next-auth/react'
 
