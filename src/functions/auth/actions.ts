@@ -22,12 +22,16 @@ const vUser = z.object({
         .max(128, { message: 'This password is too long.' })
 })
 
-import TestEmail from '@/emails/Test'
+import eReset from '@/emails/Reset'
 
 export async function reset(email: string) {
     try {
         Email(
-            TestEmail(),
+            eReset({
+                email,
+                link: 'https://vlab.heuve.link/login/reset',
+                assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
+            }),
             {
                 to: email,
                 subject: 'Reset your password'
