@@ -6,8 +6,10 @@ export default async function Page() {
     const session = await getServerSession(options)
 
     return (
-        <>
-            Server-side
-        </>
+        <div className="overflow-hidden rounded-lg bg-white shadow">
+            <div className="px-4 py-5 sm:p-6">
+                Server-side
+            </div>
+        </div>
     )
 }

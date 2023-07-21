@@ -8,12 +8,15 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
+  id   String @id @default(cuid())
+  name String
 
-  name     String
-  email    String @unique
-  password String
+  email          String  @unique
+  emailConfirmed Boolean @default(false)
 
-  created_on DateTime @default(now())
-  updated_on DateTime @updatedAt
+  password           String
+  passwordResetToken String?
+
+  createdOn DateTime @default(now())
+  updatedOn DateTime @updatedAt
 }

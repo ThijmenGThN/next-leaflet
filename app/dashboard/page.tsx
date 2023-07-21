@@ -1,10 +1,15 @@
-"use client"
+import { getServerSession } from "next-auth"
 
-export default function Page() {
+import options from "@/auth/options"
+
+export default async function Page() {
+    const session = await getServerSession(options)
 
     return (
-        <>
-            Dashboard
-        </>
+        <div className="overflow-hidden rounded-lg bg-white shadow">
+            <div className="px-4 py-5 sm:p-6">
+                Dashboard
+            </div>
+        </div>
     )
 }

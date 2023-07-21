@@ -33,7 +33,7 @@ export default function Reset() {
         startTransition(async () => {
             if (!email) return
 
-            await actions.reset(email)
+            await actions.resetRequest(email)
 
             setFormEmail(email)
             setHasBeenSent(true)
@@ -60,14 +60,15 @@ export default function Reset() {
                     {
                         hasBeenSent
                             ? (
-                                <div className="flex flex-col items-center justify-center gap-y-8">
+                                <div className="flex flex-col items-center justify-center gap-y-4">
                                     <img
                                         className="h-16 w-16 rounded-full bg-gray-50 border"
                                         src={gravatar(formEmail ?? '')}
                                         alt=""
                                     />
+                                    <p className="truncate text-sm font-medium text-gray-900">{formEmail}</p>
 
-                                    <p className="truncate text-sm text-center font-medium text-gray-900">We have sent you an email to reset your password.</p>
+                                    <p className="truncate text-sm mt-4 text-center font-medium text-gray-900">We have sent you an email to reset your password.</p>
                                 </div>
                             )
                             : (

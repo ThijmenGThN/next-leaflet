@@ -9,6 +9,8 @@ export default async function Page() {
         <div className="overflow-hidden rounded-lg bg-white shadow">
             <div className="px-4 py-5 sm:p-6">
                 Account
+
+                <pre>{JSON.stringify(session?.user)}</pre>
             </div>
         </div>
     )
