@@ -41,7 +41,7 @@ export default function Email(props: iProps) {
                 <Head />
                 <Body className='flex flex-col bg-gray-50 font-sans'>
 
-                    <Header title="Email template" logo={props.assets.logo} />
+                    <Header title="Email template" logo={props.assets?.logo} />
 
                     <Container className="relative items-center bg-white px-6 py-12 rounded-lg shadow dark:bg-black">
 

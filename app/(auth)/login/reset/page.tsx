@@ -7,21 +7,21 @@ import { useState, useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import * as actions from "@/functions/auth/actions"
+import gravatar from "@/helpers/gravatar"
+import * as actions from "@/helpers/auth/actions"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import aLogo from '@/assets/logo.webp'
 
 const vForm = z.object({
-    email: z.string()
-        .min(2, { message: 'This email address is too short.' })
-        .max(64, { message: 'This email address is too long.' })
-        .email('This email address is not valid.')
+    email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.')
 })
 
 export default function Reset() {
     const [isPending, startTransition] = useTransition()
+
+    const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -34,6 +34,8 @@ export default function Reset() {
             if (!email) return
 
             await actions.reset(email)
+
+            setFormEmail(email)
             setHasBeenSent(true)
         })
     }
@@ -58,9 +60,15 @@ export default function Reset() {
                     {
                         hasBeenSent
                             ? (
-                                <p className="text-center">
-                                    Email has been sent.
-                                </p>
+                                <div className="flex flex-col items-center justify-center gap-y-8">
+                                    <img
+                                        className="h-16 w-16 rounded-full bg-gray-50 border"
+                                        src={gravatar(formEmail ?? '')}
+                                        alt=""
+                                    />
+
+                                    <p className="truncate text-sm text-center font-medium text-gray-900">We have sent you an email to reset your password.</p>
+                                </div>
                             )
                             : (
                                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -108,7 +116,7 @@ export default function Reset() {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← Sign in with a different account
+                        ← Sign in to your account
                     </Link>
                 </div>
             </div>

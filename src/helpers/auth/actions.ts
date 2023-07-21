@@ -9,20 +9,13 @@ import Email from '@/emails/client'
 
 import type { iUser } from "@/types/globals"
 
-const vUser = z.object({
-    name: z.string()
-        .min(2, { message: 'This name is too short.' })
-        .max(32, { message: 'This name is too long.' }),
-    email: z.string()
-        .min(2, { message: 'This email address is too short.' })
-        .max(64, { message: 'This email address is too long.' })
-        .email('This email address is not valid.'),
-    password: z.string()
-        .min(8, { message: 'This password is too short.' })
-        .max(128, { message: 'This password is too long.' })
-})
-
 import eReset from '@/emails/Reset'
+
+const vUser = z.object({
+    name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' }),
+    email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
+    password: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' })
+})
 
 export async function reset(email: string) {
     try {
@@ -38,7 +31,7 @@ export async function reset(email: string) {
             }
         )
     }
-    catch (error) { }
+    catch (error) { console.log(error) }
 }
 
 export async function register(user: iUser) {

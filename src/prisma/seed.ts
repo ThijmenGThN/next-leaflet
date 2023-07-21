@@ -5,15 +5,15 @@ const prisma = new PrismaClient()
 
 async function main() {
 
-    await prisma.user.upsert({
-        where: { email: 'admin@leaflet.app' },
-        update: {},
-        create: {
-            name: 'Developer Account',
-            email: 'admin@leaflet.app',
-            password: await bcrypt.hash('admin', 12),
-        }
-    })
+    // await prisma.user.upsert({
+    //     where: { email: 'admin@leaflet.app' },
+    //     update: {},
+    //     create: {
+    //         name: 'Developer Account',
+    //         email: 'admin@leaflet.app',
+    //         password: await bcrypt.hash('admin', 12),
+    //     }
+    // })
 
 }
 
