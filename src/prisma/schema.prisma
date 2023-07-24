@@ -11,10 +11,10 @@ model User {
   id   String @id @default(cuid())
   name String
 
-  email          String  @unique
-  emailConfirmed Boolean @default(false)
+  email             String  @unique
+  emailConfirmToken String?
 
-  password           String
+  password           String?
   passwordResetToken String?
 
   createdOn DateTime @default(now())

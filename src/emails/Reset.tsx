@@ -52,7 +52,7 @@ export default function Email(props: iProps) {
                             className="mx-auto h-16 w-16 rounded-full bg-gray-50 border"
                             src={gravatar(props.email ?? '')}
                         />
-                        <Text className="truncate text-center w-full text-sm font-medium text-gray-900">{props.email ?? 'Invalid User'}</Text>
+                        <Text className="truncate text-center w-full text-sm font-medium text-gray-900">{props.email ?? 'Unknown User'}</Text>
 
                         <Section>
                             <Text className="text-sm text-center font-medium text-gray-500">By continuing, you will be prompted to update your password.</Text>
