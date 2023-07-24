@@ -21,4 +21,3 @@ services:
     volumes: [./data:/var/lib/postgresql/data]
     environment:
       POSTGRES_PASSWORD: $DATABASE_PASS
-      
