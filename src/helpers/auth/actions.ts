@@ -28,7 +28,7 @@ export async function resetRequest(email: string) {
     try {
         if (!process.env.NEXTAUTH_SECRET || !process.env.NEXTAUTH_URL) throw new Error('Missing NEXTAUTH environment variables.')
 
-        const { token: passwordResetToken }: any = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' })
+        const passwordResetToken = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' })
 
         await prisma.user.update({
             where: { email },
