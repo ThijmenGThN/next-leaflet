@@ -21,7 +21,7 @@ const callbackUrl = '/dashboard'
 
 export default function Register() {
     const [isPending, startTransition] = useTransition()
-    const { register, handleSubmit, formState: { errors } } = useForm({resolver: zodResolver(vForm)})
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
     const [showPassword, setShowPassword] = useState<boolean>(false)
 

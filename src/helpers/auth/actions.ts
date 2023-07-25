@@ -81,10 +81,13 @@ export async function resetUpdate({ password, token }: { password: string, token
 
 export async function register(user: iUser) {
     try {
+        if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
+
         user = vUser.parse(user)
         await prisma.user.create({
             data: {
                 ...user,
+                emailVerifyToken: jwt.sign({ email: user.email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' }),
                 password: await bcrypt.hash(user.password, 12)
             }
         })
