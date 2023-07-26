@@ -45,7 +45,7 @@ export default function Email(props: iProps) {
                 <Head />
                 <Body className='flex flex-col bg-gray-50 font-sans'>
 
-                    <Header title="Confirm your new account" logo={props.assets?.logoUrl ?? ''} />
+                    <Header title="Complete your registration" logo={props.assets?.logoUrl ?? ''} />
 
                     <Container className="relative items-center bg-white px-6 py-12 rounded-lg shadow dark:bg-black">
                         <Img
@@ -55,7 +55,7 @@ export default function Email(props: iProps) {
                         <Text className="truncate text-center w-full text-sm font-medium text-gray-900">{props.email ?? 'Unknown User'}</Text>
 
                         <Section>
-                            <Text className="text-sm text-center font-medium text-gray-500">Complete the registration by confirming your account.</Text>
+                            <Text className="text-sm text-center font-medium text-gray-500">Provide additional details to finalize your registration.</Text>
 
                             <Link href={props.link} className="mt-10 flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark">
                                 Continue

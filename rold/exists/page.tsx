@@ -33,7 +33,7 @@ export default function Exists({ searchParams }: { searchParams: { email: string
                     />
                     <p className="truncate text-sm font-medium text-gray-900">{searchParams?.email}</p>
 
-                    <Link href="/login/reset" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    <Link href="/forgot" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                         Reset your password
                     </Link>
 

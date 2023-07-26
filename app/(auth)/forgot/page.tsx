@@ -11,6 +11,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import gravatar from "@/helpers/gravatar"
 import * as actions from "@/helpers/auth/actions"
+import OAuth from "@/components/auth/OAuth"
 
 import aLogo from '@/assets/logo.webp'
 
@@ -108,6 +109,8 @@ export default function Reset() {
                                 </form>
                             )
                     }
+
+                    <OAuth />
                 </div>
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">

@@ -9,6 +9,7 @@ import prisma from '@/prisma/client'
 import Email from '@/emails/client'
 
 import eReset from '@/emails/Reset'
+import eRegister from '@/emails/Register'
 
 interface iUser {
     name: string
@@ -38,7 +39,7 @@ export async function resetRequest(email: string) {
         await Email(
             eReset({
                 email,
-                link: process.env.NEXTAUTH_URL + '/login/reset/' + passwordResetToken,
+                link: process.env.NEXTAUTH_URL + '/forgot/' + passwordResetToken,
                 assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
             }),
             {
@@ -79,21 +80,41 @@ export async function resetUpdate({ password, token }: { password: string, token
     }
 }
 
-export async function register(user: iUser) {
-    try {
-        if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
+export async function register(email: string) {
+    if (
+        !process.env.NEXTAUTH_URL ||
+        !process.env.NEXTAUTH_SECRET
+    ) throw new Error('Missing NEXTAUTH environment variables.')
 
-        user = vUser.parse(user)
-        await prisma.user.create({
-            data: {
-                ...user,
-                emailVerifyToken: jwt.sign({ email: user.email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' }),
-                password: await bcrypt.hash(user.password, 12)
-            }
-        })
-    }
-    catch (error) {
-        console.log(error)
-        redirect('/register/exists?email=' + encodeURI(user.email))
-    }
+    const token = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '1d' })
+
+    await Email(
+        eRegister({
+            email,
+            link: process.env.NEXTAUTH_URL + '/register/' + token,
+            assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
+        }),
+        {
+            to: email,
+            subject: 'Complete your registration'
+        }
+    )
 }
+
+export async function createAccount({ name, email, password }: iUser) {
+    if (
+        !process.env.NEXTAUTH_URL ||
+        !process.env.NEXTAUTH_SECRET
+    ) throw new Error('Missing NEXTAUTH environment variables.')
+
+    vUser.parse({ name, email, password })
+
+    await prisma.user.create({
+        data: {
+            name, email,
+            password: await bcrypt.hash(password, 12)
+        }
+    })
+}
+
+

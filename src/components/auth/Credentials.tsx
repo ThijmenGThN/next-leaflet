@@ -3,24 +3,35 @@
 import Link from "next/link"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { useRouter } from "next/navigation"
 
 const callbackUrl = '/dashboard'
 
 export default function Credentials() {
-    const params = useSearchParams()
+    const router = useRouter()
 
     const [email, setEmail] = useState<string>()
     const [password, setPassword] = useState<string>()
 
+    const [errorMessage, setErrorMessage] = useState<string | undefined>()
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    function submit() {
+    async function submit() {
         setIsLoading(true)
-        signIn('credentials', { email, password, callbackUrl })
+
+        const { error }: any = await signIn('credentials', { email, password, redirect: false })
+
+        if (error) {
+            setErrorMessage('Invalid credentials, try again or reset it.')
+            setIsLoading(false)
+        }
+        else {
+            setErrorMessage(undefined)
+            router.push(callbackUrl)
+        }
     }
 
     return (
@@ -35,14 +46,21 @@ export default function Credentials() {
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <input className={
-                                params.has('error')
+                                errorMessage
                                     ? "block w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
                                     : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                             }
                                 type="email"
                                 onChange={({ target: { value } }) => setEmail(value)}
                             />
-                            {params.has('error') && <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"><ExclamationCircleIcon className="h-5 w-5 text-red-500" /></div>}
+
+                            {
+                                errorMessage && (
+                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
@@ -54,16 +72,24 @@ export default function Credentials() {
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
                             <input className={
-                                params.has('error')
+                                errorMessage
                                     ? "block w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
                                     : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                             }
                                 type={showPassword ? "text" : "password"}
                                 onChange={({ target: { value } }) => setPassword(value)}
                             />
-                            {params.has('error') && <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"><ExclamationCircleIcon className="h-5 w-5 text-red-500" /></div>}
+
+                            {
+                                errorMessage && (
+                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                                    </div>
+                                )
+                            }
                         </div>
-                        {params.has('error') && <p className="mt-2 text-sm text-red-600">{params.get('error')}, try again later.</p>}
+
+                        {errorMessage && <p className="mt-2 text-sm text-red-600">{errorMessage}</p>}
                     </div>
 
                     <div className="flex items-center mt-5">
@@ -94,7 +120,7 @@ export default function Credentials() {
 
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
-                    <Link href="/login/reset" className="font-semibold text-primary hover:text-primary-dark">
+                    <Link href="/forgot" className="font-semibold text-primary hover:text-primary-dark">
                         Forgot password?
                     </Link>
                 </div>

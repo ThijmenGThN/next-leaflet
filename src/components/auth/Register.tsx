@@ -12,23 +12,22 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 const vForm = z.object({
     name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' }),
-    email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
     password: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' }),
     repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'Password is too long.' })
 }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
 
 const callbackUrl = '/dashboard'
 
-export default function Register() {
+export default function Register({ email }: { email: string }) {
     const [isPending, startTransition] = useTransition()
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
-    const onSubmit = ({ repeatPassword, ...user }: any) =>
+    const onSubmit = ({ name, password }: any) =>
         startTransition(async () => {
-            await actions.register(user)
-            signIn('credentials', { ...user, callbackUrl })
+            await actions.createAccount({ name, email, password })
+            signIn('credentials', { email, password, callbackUrl })
         })
 
     return (
@@ -61,26 +60,12 @@ export default function Register() {
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                 <div className="relative mt-2 rounded-md shadow-sm">
-                    <input className={
-                        errors.email?.message
-                            ? "block w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
-                            : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-                    }
-                        {...register("email", { required: true })}
-                        type='email'
+                    <input
+                        value={email}
+                        disabled
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 sm:text-sm sm:leading-6"
                     />
-
-                    {errors.email?.message && (
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                            <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
-                        </div>
-                    )}
                 </div>
-                {errors.email?.message && (
-                    <p className="mt-2 text-sm text-red-600" id="email-error">
-                        {errors.email?.message.toString()}
-                    </p>
-                )}
             </div>
 
             <div>
