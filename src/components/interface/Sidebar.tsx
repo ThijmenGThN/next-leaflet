@@ -11,6 +11,7 @@ import gravatar from '@/helpers/gravatar'
 import { classNames } from "@/helpers/tailwind"
 
 import Dropdown from '@/components/interface/Dropdown'
+import Loading from '@/components/interface/Loading'
 
 import aLogo from '@/assets/logo.webp'
 
@@ -22,12 +23,15 @@ import {
     XMarkIcon,
     ComputerDesktopIcon,
     ServerStackIcon,
+    ShieldCheckIcon
 } from '@heroicons/react/24/outline'
 
+const homePath = "/dashboard"
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Squares2X2Icon },
     { name: 'Client-side', href: '/dashboard/client', icon: ComputerDesktopIcon },
-    { name: 'Server-side', href: '/dashboard/server', icon: ServerStackIcon }
+    { name: 'Server-side', href: '/dashboard/server', icon: ServerStackIcon },
+    { name: 'Role-based', href: '/dashboard/role', icon: ShieldCheckIcon }
 ]
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
@@ -83,7 +87,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                 </Transition.Child>
 
                                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                                    <Link href='/' className="flex h-12 shrink-0 mt-5 items-center">
+                                    <Link href={homePath} className="flex h-12 shrink-0 mt-5 items-center">
                                         <Image
                                             className="h-8 w-auto"
                                             src={aLogo}
@@ -136,7 +140,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
 
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-                    <Link href='/' className="flex h-12 shrink-0 mt-5 items-center">
+                    <Link href={homePath} className="flex h-12 shrink-0 mt-5 items-center">
                         <Image
                             className="h-8 w-auto"
                             src={aLogo}
@@ -225,7 +229,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                 <span className="sr-only">Open user menu</span>
                                 {
                                     status == 'loading'
-                                        ? (<div className='h-8 w-8 rounded-full bg-gray-200 animate-pulse' />)
+                                        ? <Loading type="avatar" />
                                         : (
                                             <img
                                                 className="h-8 w-8 rounded-full bg-gray-50"

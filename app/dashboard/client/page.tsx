@@ -1,16 +1,19 @@
 "use client"
 
-// import { useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 export default function Page() {
-    
-    // const { data: session, status } = useSession()
+
+    const { data: session, status } = useSession()
 
     return (
-        <div className="overflow-hidden rounded-lg bg-white shadow">
-            <div className="px-4 py-5 sm:p-6">
-                Client-side
-            </div>
+        <div className="overflow-hidden rounded-md bg-white shadow">
+            <ul role="list" className="divide-y divide-gray-200">
+                <li className="px-6 py-4">
+                    <p className="font-semibold">Session data fetched via a client component</p>
+                    <p className="m-2">Hi {session?.user.name}</p>
+                </li>
+            </ul>
         </div>
     )
 }
