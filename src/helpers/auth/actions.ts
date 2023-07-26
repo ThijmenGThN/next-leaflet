@@ -25,7 +25,7 @@ const vUser = z.object({
     password: vPassword
 })
 
-export async function resetRequest(email: string) {
+export async function reset(email: string) {
     try {
         if (!process.env.NEXTAUTH_SECRET || !process.env.NEXTAUTH_URL) throw new Error('Missing NEXTAUTH environment variables.')
 
@@ -54,7 +54,7 @@ export async function resetRequest(email: string) {
     }
 }
 
-export async function resetUpdate({ password, token }: { password: string, token: string }) {
+export async function updatePassword({ password, token }: { password: string, token: string }) {
     try {
         if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
@@ -85,6 +85,8 @@ export async function register(email: string) {
         !process.env.NEXTAUTH_URL ||
         !process.env.NEXTAUTH_SECRET
     ) throw new Error('Missing NEXTAUTH environment variables.')
+
+    if (await prisma.user.findUnique({ where: { email } })) return redirect('/register?occupied=' + email)
 
     const token = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '1d' })
 

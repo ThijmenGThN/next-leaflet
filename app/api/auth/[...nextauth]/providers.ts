@@ -18,7 +18,7 @@ export default [
             const user = await prisma.user.findUnique({ where: { email: credentials.email } })
 
             if (!user || !user.password) throw new Error('Invalid credentials')
-            if (!await bcrypt.compare(credentials.password, user.password)) throw 'Invalid credentials'
+            if (!await bcrypt.compare(credentials.password, user.password)) throw new Error('Invalid credentials')
 
             return user
         }

@@ -1,17 +1,18 @@
 "use client"
 
-import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import gravatar from '@/helpers/gravatar'
 import { classNames } from "@/helpers/tailwind"
 
-import aLogo from '@/assets/logo.webp'
 import Dropdown from '@/components/interface/Dropdown'
+
+import aLogo from '@/assets/logo.webp'
 
 import {
     Bars3Icon,
@@ -30,7 +31,9 @@ const navigation = [
 ]
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
+
     const pathname = usePathname()
+
     const { data: session, status } = useSession()
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -78,7 +81,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                         </button>
                                     </div>
                                 </Transition.Child>
-                                {/* Sidebar component, swap this element with another sidebar if you like */}
+
                                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                                     <Link href='/' className="flex h-12 shrink-0 mt-5 items-center">
                                         <Image
@@ -91,29 +94,35 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                             <li>
                                                 <ul role="list" className="-mx-2 space-y-1">
-                                                    {navigation.map((item, index) => (
-                                                        <li key={index}>
-                                                            <Link
-                                                                href={item.href}
-                                                                onClick={() => setSidebarOpen(false)}
-                                                                className={classNames(
-                                                                    item.href == pathname
-                                                                        ? 'bg-gray-50 text-primary'
-                                                                        : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                                                )}
-                                                            >
-                                                                <item.icon
-                                                                    className={classNames(
-                                                                        item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
-                                                                        'h-6 w-6 shrink-0'
-                                                                    )}
-                                                                    aria-hidden="true"
-                                                                />
-                                                                {item.name}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
+                                                    {
+                                                        navigation.map((item, index) =>
+                                                            <li key={index}>
+                                                                <Link
+                                                                    href={item.href}
+                                                                    onClick={() => setSidebarOpen(false)}
+                                                                    className={
+                                                                        classNames(
+                                                                            item.href == pathname
+                                                                                ? 'bg-gray-50 text-primary'
+                                                                                : 'text-gray-700 hover:text-primary hover:bg-gray-50',
+                                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <item.icon
+                                                                        className={
+                                                                            classNames(
+                                                                                item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                                'h-6 w-6 shrink-0'
+                                                                            )
+                                                                        }
+                                                                        aria-hidden="true"
+                                                                    />
+                                                                    {item.name}
+                                                                </Link>
+                                                            </li>
+                                                        )
+                                                    }
                                                 </ul>
                                             </li>
                                         </ul>
@@ -125,9 +134,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                 </Dialog>
             </Transition.Root>
 
-            {/* Static sidebar for desktop */}
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-                {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
                     <Link href='/' className="flex h-12 shrink-0 mt-5 items-center">
                         <Image
@@ -140,28 +147,34 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                             <li>
                                 <ul role="list" className="-mx-2 space-y-1">
-                                    {navigation.map((item, index) => (
-                                        <li key={index}>
-                                            <Link
-                                                href={item.href}
-                                                className={classNames(
-                                                    item.href == pathname
-                                                        ? 'bg-gray-50 text-primary'
-                                                        : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                                )}
-                                            >
-                                                <item.icon
-                                                    className={classNames(
-                                                        item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
-                                                        'h-6 w-6 shrink-0'
-                                                    )}
-                                                    aria-hidden="true"
-                                                />
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                    {
+                                        navigation.map((item, index) =>
+                                            <li key={index}>
+                                                <Link
+                                                    href={item.href}
+                                                    className={
+                                                        classNames(
+                                                            item.href == pathname
+                                                                ? 'bg-gray-50 text-primary'
+                                                                : 'text-gray-700 hover:text-primary hover:bg-gray-50',
+                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                        )
+                                                    }
+                                                >
+                                                    <item.icon
+                                                        className={
+                                                            classNames(
+                                                                item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                'h-6 w-6 shrink-0'
+                                                            )
+                                                        }
+                                                        aria-hidden="true"
+                                                    />
+                                                    {item.name}
+                                                </Link>
+                                            </li>
+                                        )
+                                    }
                                 </ul>
                             </li>
                         </ul>
@@ -176,7 +189,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
 
-                    {/* Separator */}
                     <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
 
                     <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
@@ -202,10 +214,8 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                 <BellIcon className="h-6 w-6" aria-hidden="true" />
                             </button>
 
-                            {/* Separator */}
                             <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200" aria-hidden="true" />
 
-                            {/* Profile dropdown */}
                             <Dropdown
                                 className="flex items-center"
                                 navigation={[

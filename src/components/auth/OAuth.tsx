@@ -1,15 +1,16 @@
 "use client"
 
-import { signIn, getProviders } from "next-auth/react"
 import { useEffect, useState } from "react"
+import { signIn, getProviders } from "next-auth/react"
 
 const callbackUrl = '/dashboard'
 
 export default function OAuth() {
+
     const [providers, setProviders] = useState<Array<any>>([])
 
     useEffect(() => {
-        getProviders().then(({ credentials, ...others }: any) => setProviders(Object.values(others)))
+        getProviders().then(({ credentials, ...OAuth }: any) => setProviders(Object.values(OAuth)))
     }, [])
 
     return providers.length > 0 && (
@@ -25,15 +26,15 @@ export default function OAuth() {
 
             <ul className="mt-6 grid grid-cols-2 gap-4">
                 {
-                    providers.map((provider: any) => (
+                    providers.map((provider: any) =>
                         <li key={provider.id}>
-                            <button className="flex w-full items-center justify-center gap-3 rounded-md bg-black px-3 py-1.5 text-white"
+                            <button className="flex w-full items-center justify-center gap-3 rounded-md bg-black hover:bg-zinc-900 px-3 py-1.5 text-white"
                                 onClick={() => signIn(provider.id, { callbackUrl })}
                             >
                                 <span className="text-sm font-semibold leading-6">{provider.name}</span>
                             </button>
                         </li>
-                    ))
+                    )
                 }
             </ul>
         </>

@@ -5,6 +5,8 @@ const prisma = new PrismaClient()
 
 async function main() {
 
+    // ----- Example ----
+    //
     // await prisma.user.upsert({
     //     where: { email: 'admin@leaflet.app' },
     //     update: {},

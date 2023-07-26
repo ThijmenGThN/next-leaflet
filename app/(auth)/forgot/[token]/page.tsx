@@ -3,21 +3,26 @@ import Image from 'next/image'
 import jwt from 'jsonwebtoken'
 
 import prisma from '@/prisma/client'
+import gravatar from '@/helpers/gravatar'
+
 import Reset from '@/components/auth/Reset'
 
 import aLogo from '@/assets/logo.webp'
-import gravatar from '@/helpers/gravatar'
 
 export default async function ResetToken({ params: { token } }: { params: { token: string } }) {
+
     let { email }: any = jwt.decode(token)
 
     try {
         if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
+
         jwt.verify(token, process.env.NEXTAUTH_SECRET)
+
         const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
+
         if (token != passwordResetToken) email = undefined
     }
-    catch (error) { email = undefined }
+    catch (_) { email = undefined }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

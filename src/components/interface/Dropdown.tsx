@@ -1,11 +1,11 @@
 "use client"
 
+import Link from 'next/link'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { signOut, useSession } from 'next-auth/react'
 
 import { classNames } from "@/helpers/tailwind"
-import Link from 'next/link'
 
 interface iProps {
     children: React.ReactNode
@@ -17,6 +17,7 @@ interface iProps {
 }
 
 export default function Dropdown(props: iProps) {
+
     const { data: session } = useSession()
 
     return (
@@ -41,36 +42,42 @@ export default function Dropdown(props: iProps) {
                     </div>
                     <div className="py-1">
                         {
-                            props.navigation.map((item, index) => (
+                            props.navigation.map((item, index) =>
                                 <Menu.Item key={index}>
-                                    {({ active }) => (
-                                        <Link
-                                            href={item.href}
-                                            className={classNames(
-                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                'block px-4 py-2 text-sm'
-                                            )}
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    )}
+                                    {
+                                        ({ active }) =>
+                                            <Link
+                                                href={item.href}
+                                                className={
+                                                    classNames(
+                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                        'block px-4 py-2 text-sm'
+                                                    )
+                                                }
+                                            >
+                                                {item.name}
+                                            </Link>
+                                    }
                                 </Menu.Item>
-                            ))
+                            )
                         }
                     </div>
                     <div className="py-1">
                         <Menu.Item>
-                            {({ active }) => (
-                                <button
-                                    onClick={() => signOut()}
-                                    className={classNames(
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                        'block w-full px-4 py-2 text-left text-sm'
-                                    )}
-                                >
-                                    Sign out
-                                </button>
-                            )}
+                            {
+                                ({ active }) =>
+                                    <button
+                                        onClick={() => signOut()}
+                                        className={
+                                            classNames(
+                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                'block w-full px-4 py-2 text-left text-sm'
+                                            )
+                                        }
+                                    >
+                                        Sign out
+                                    </button>
+                            }
                         </Menu.Item>
                     </div>
                 </Menu.Items>
