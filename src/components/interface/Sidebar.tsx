@@ -231,7 +231,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                     status == 'loading'
                                         ? <Loading type="avatar" />
                                         : (
-                                            <img
+                                            <Image
                                                 className="h-8 w-8 rounded-full bg-gray-50"
                                                 src={gravatar(session?.user?.email ?? '')}
                                                 alt=""

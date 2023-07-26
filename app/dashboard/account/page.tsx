@@ -1,6 +1,7 @@
 "use client"
 
 import { z } from 'zod'
+import Image from 'next/image'
 import { useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { useSession } from 'next-auth/react'
@@ -77,7 +78,7 @@ export default function Account() {
                             status == 'loading'
                                 ? <Loading type="avatar" override='h-12 w-12' />
                                 : (
-                                    <img
+                                    <Image
                                         className="h-12 w-12 rounded-full bg-gray-50"
                                         src={gravatar(session?.user?.email ?? '')}
                                         alt=""

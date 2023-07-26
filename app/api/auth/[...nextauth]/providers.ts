@@ -5,7 +5,7 @@ import Discord from 'next-auth/providers/discord'
 
 import prisma from '@/prisma/client'
 
-export default [
+const providers = [
     Credentials({
         name: "Credentials",
         credentials: {
@@ -28,3 +28,5 @@ export default [
         clientSecret: process.env.DISCORD_SECRET ?? '',
     })
 ]
+
+export default providers

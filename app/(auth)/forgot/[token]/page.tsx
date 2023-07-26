@@ -50,7 +50,7 @@ export default async function ResetToken({ params: { token } }: { params: { toke
                             ? (
                                 <>
                                     <div className="flex flex-col items-center justify-center gap-y-4">
-                                        <img
+                                        <Image
                                             className="h-16 w-16 rounded-full bg-gray-50 border"
                                             src={gravatar(email)}
                                             alt=""

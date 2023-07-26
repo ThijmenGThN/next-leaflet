@@ -61,7 +61,7 @@ export default function Page() {
                         hasBeenSent
                             ? (
                                 <div className="flex flex-col items-center justify-center gap-y-4">
-                                    <img
+                                    <Image
                                         className="h-16 w-16 rounded-full bg-gray-50 border"
                                         src={gravatar(formEmail ?? '')}
                                         alt=""
