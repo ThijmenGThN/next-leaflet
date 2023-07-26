@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import gravatar from '@/helpers/gravatar'
+import * as actions from '@/helpers/dashboard/actions'
 
 import Loading from '@/components/interface/Loading'
 
@@ -18,14 +19,15 @@ const vForm = z.object({
 
 export default function Account() {
 
-    const { data: session, status } = useSession()
+    const { data: session, status, update } = useSession()
     const [isPending, startTransition] = useTransition()
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
-    const onSubmit = ({ }: any) =>
+    const onSubmit = ({ name }: any) =>
         startTransition(async () => {
-
+            await actions.account({ name })
+            update({ name })
         })
 
     return (
