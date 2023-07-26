@@ -117,8 +117,6 @@ export default function Reset() {
                                 </form>
                             )
                     }
-
-                    <OAuth />
                 </div>
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">

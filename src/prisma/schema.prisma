@@ -7,11 +7,17 @@ datasource db {
   url      = env("PRISMA_CONNECTOR")
 }
 
-model User {
-  id   String @id @default(cuid())
-  name String
+enum Roles {
+  USER
+  ADMIN
+}
 
-  email            String  @unique
+model User {
+  id String @id @default(cuid())
+
+  name  String
+  email String @unique
+  role  Roles  @default(USER)
 
   password           String?
   passwordResetToken String?
