@@ -23,15 +23,17 @@ import {
     XMarkIcon,
     ComputerDesktopIcon,
     ServerStackIcon,
-    ShieldCheckIcon
+    ShieldCheckIcon,
+    KeyIcon
 } from '@heroicons/react/24/outline'
 
 const homePath = "/dashboard"
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Squares2X2Icon },
-    { name: 'Client-side', href: '/dashboard/client', icon: ComputerDesktopIcon },
-    { name: 'Server-side', href: '/dashboard/server', icon: ServerStackIcon },
-    { name: 'Role-based', href: '/dashboard/role', icon: ShieldCheckIcon }
+    { name: 'Via Client', href: '/dashboard/client', icon: ComputerDesktopIcon },
+    { name: 'On Server', href: '/dashboard/server', icon: ServerStackIcon },
+    { name: 'My Role', href: '/dashboard/role', icon: ShieldCheckIcon },
+    { name: 'API Tokens', href: '/dashboard/token', icon: KeyIcon }
 ]
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
