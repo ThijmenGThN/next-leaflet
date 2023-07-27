@@ -19,6 +19,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 # Build with
 
 - NextJS [(site)](https://nextjs.org)
+- NextAuth [(site)](https://next-auth.js.org/)
 - Prisma [(site)](https://www.prisma.io)
 - TailwindCSS [(site)](https://tailwindcss.com)
 
