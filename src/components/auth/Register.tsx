@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import * as actions from "@/helpers/auth/actions"
+import * as actions from "@/server/auth"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 

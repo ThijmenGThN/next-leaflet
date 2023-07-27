@@ -48,10 +48,7 @@ export async function reset(email: string) {
             }
         )
     }
-    catch (error) {
-        console.log(error)
-        redirect('/login')
-    }
+    catch (_) { redirect('/login') }
 }
 
 export async function updatePassword({ password, token }: { password: string, token: string }) {
@@ -74,10 +71,7 @@ export async function updatePassword({ password, token }: { password: string, to
             }
         })
     }
-    catch (error) {
-        console.log(error)
-        redirect('/login')
-    }
+    catch (_) { redirect('/login') }
 }
 
 export async function register(email: string) {
@@ -118,5 +112,3 @@ export async function createAccount({ name, email, password }: iUser) {
         }
     })
 }
-
-

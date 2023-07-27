@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 
 import gravatar from '@/helpers/gravatar'
-import * as actions from "@/helpers/auth/actions"
+import * as actions from "@/server/auth"
 
 import OAuth from '@/components/auth/OAuth'
 
