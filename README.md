@@ -5,8 +5,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 <b>Looking for the [(directus)](https://github.com/ThijmenGThN/next-directus) branch?</b>
 
-<!-- ![preview](https://i.imgur.com/phUOmgo.png) -->
-
+![preview](https://i.imgur.com/phUOmgo.png)
 
 # Getting started
 
