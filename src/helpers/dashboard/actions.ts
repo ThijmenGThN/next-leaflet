@@ -8,14 +8,10 @@ import options from "@/auth/options"
 export async function account({ name }: { name: string }) {
     const session = await getServerSession(options)
 
-    const email = session?.user.email
-
-    if (!email) throw new Error('Invalid session.')
+    if (!session || !session?.user.email) throw new Error('Invalid session.')
 
     await prisma.user.update({
-        where: { email },
-        data: {
-            name
-        }
+        where: { email: session?.user.email },
+        data: { name }
     })
 }

@@ -2,7 +2,7 @@ import prisma from '@/prisma/client'
 
 import providers from './providers'
 
-import type { Roles } from '@prisma/client'
+import type { Roles, User } from '@prisma/client'
 import type { NextAuthOptions } from 'next-auth'
 
 declare module 'next-auth/jwt' {
@@ -15,11 +15,7 @@ declare module 'next-auth/jwt' {
 
 declare module "next-auth" {
     interface Session {
-        user: {
-            name: string
-            email: string
-            role: Roles
-        }
+        user: User
     }
 }
 
@@ -27,21 +23,13 @@ const options: NextAuthOptions = {
     providers,
     callbacks: {
         async jwt({ token }) {
-            if (!token.email) return token
+            const { name, email, role } = await prisma.user.findUnique({ where: { email: token.email } }) as User
 
-            const dbUser = await prisma.user.findUnique({ where: { email: token.email } })
-            if (!dbUser) return token
-
-            return {
-                name: dbUser.name,
-                email: dbUser.email,
-                role: dbUser.role
-            }
+            return { name, email, role }
         },
         async session({ session, token }) {
-            if (!token) return session
-
-            session.user.role = token.role
+            token.name && (session.user.name = token.name)
+            token.role && (session.user.role = token.role)
 
             return session
         }

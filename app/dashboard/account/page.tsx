@@ -25,12 +25,11 @@ export default function Account() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
-    const onSubmit = ({ name }: any) => {
+    const onSubmit = async ({ name }: any) =>
         startTransition(async () => {
             await actions.account({ name })
             await update()
         })
-    }
 
     return (
         <form className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow" onSubmit={handleSubmit(onSubmit)}>
