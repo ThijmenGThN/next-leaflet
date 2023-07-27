@@ -63,7 +63,7 @@ docker-compose up -d
 
 ## Deployment
 
-To deploy next-leaflet we use docker by default, if you'd like to do it without docker following the <b>Development</b> procedure whilst changing step 1 to ` yarn deploy `.
+To deploy next-leaflet we use docker by default, if you'd like to do it without docker, follow the <b>Development</b> procedure whilst changing step 1 to ` yarn deploy `.
 
 > <b>Set the right variables.</b><br />
 > Ensure that ` COMPOSE_PROFILES ` has been set to ` prod ` in the environment file so docker knows to also deploy the ` app ` service alongside the ` database `.
@@ -79,7 +79,7 @@ docker-compose up -d
 ```
 
 > <b>next-leaflet should (after a while) go up on port ` 3000 `.</b><br />
-> Having trouble or is it simply not available, try and troubleshoot the container by logging out the console.
+> Display the console logs if the service is not going online. Do take note that the port might differ if adjusted in the environment file.
 > ```sh
 > docker-compose logs
 > ```
