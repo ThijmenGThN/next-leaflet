@@ -53,6 +53,8 @@ export default async function ResetToken({ params: { token } }: { params: { toke
                                         <Image
                                             className="h-16 w-16 rounded-full bg-gray-50 border"
                                             src={gravatar(email)}
+                                            width={80}
+                                            height={80}
                                             alt=""
                                         />
                                         <p className="truncate text-sm font-medium text-gray-900">{email}</p>

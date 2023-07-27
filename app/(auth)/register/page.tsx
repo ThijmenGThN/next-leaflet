@@ -64,6 +64,8 @@ export default function Page() {
                                     <Image
                                         className="h-16 w-16 rounded-full bg-gray-50 border"
                                         src={gravatar(formEmail ?? '')}
+                                        width={80}
+                                        height={80}
                                         alt=""
                                     />
                                     <p className="truncate text-sm font-medium text-gray-900">{formEmail}</p>

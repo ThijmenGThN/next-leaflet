@@ -234,6 +234,8 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                                             <Image
                                                 className="h-8 w-8 rounded-full bg-gray-50"
                                                 src={gravatar(session?.user?.email ?? '')}
+                                                width={80}
+                                                height={80}
                                                 alt=""
                                             />
                                         )

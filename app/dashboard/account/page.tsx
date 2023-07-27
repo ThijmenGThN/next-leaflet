@@ -82,8 +82,9 @@ export default function Account() {
                                     <Image
                                         className="h-12 w-12 rounded-full bg-gray-50"
                                         src={gravatar(session?.user?.email ?? '')}
+                                        width={80}
+                                        height={80}
                                         alt=""
-                                        fill
                                     />
                                 )
                         }
