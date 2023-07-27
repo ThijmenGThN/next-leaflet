@@ -34,7 +34,7 @@ cp sample.env .env
 nano .env
 ```
 
-3. Install the required dependencies, yarn is recommend but you can also use npm.
+3. Install the required dependencies, by default we do this with yarn.
 ```
 yarn install
 ```
@@ -59,4 +59,27 @@ docker-compose up -d
 > Apply prisma's schema to the database.
 > ```sh
 > npx prisma db push
+> ```
+
+## Deployment
+
+To deploy next-leaflet we use docker by default, if you'd like to do it without docker following the <b>Development</b> procedure whilst changing step 1 to ` yarn deploy `.
+
+> <b>Set the right variables.</b><br />
+> Ensure that ` COMPOSE_PROFILES ` has been set to ` prod ` in the environment file so docker knows to also deploy the ` app ` service alongside the ` database `.
+
+0. Pull down any existing services that might run in the background.
+```sh
+docker-compose down
+```
+
+1. Start next-leaflet in deployment-mode.
+```sh
+docker-compose up -d
+```
+
+> <b>next-leaflet should (after a while) go up on port ` 3000 `.</b><br />
+> Having trouble or is it simply not available, try and troubleshoot the container by logging out the console.
+> ```sh
+> docker-compose logs
 > ```
