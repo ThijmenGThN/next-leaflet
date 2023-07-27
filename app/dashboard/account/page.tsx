@@ -67,9 +67,17 @@ export default function Account() {
                             )
                         }
                     </div>
+
+                    {
+                        errors.name?.message && (
+                            <p className="mt-2 text-sm text-red-600" id="email-error">
+                                {errors.name?.message.toString()}
+                            </p>
+                        )
+                    }
                 </div>
 
-                <div className="col-span-full">
+                {/* <div className="col-span-full">
                     <label className="block text-sm font-medium leading-6 text-gray-900">
                         Avatar
                     </label>
@@ -94,7 +102,7 @@ export default function Account() {
                             Change
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="px-4 py-4 sm:px-6">
                 <div className='flex justify-end'>
