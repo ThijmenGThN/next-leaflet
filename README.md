@@ -7,13 +7,28 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 ![preview](https://i.imgur.com/uNKXhM7.png)
 
+# Features
+
+- User authorization [(nextauth)](https://next-auth.js.org/)
+    - Credentials
+    - OAuth2 [(providers)](https://next-auth.js.org/providers/)
+- Form validation [(zod)](https://zod.dev)
+- Emails [(react email)](https://react.email)
+- Server Actions
+
+# Build with
+
+- NextJS [(site)](https://nextjs.org)
+- Prisma [(site)](https://www.prisma.io)
+- TailwindCSS [(site)](https://tailwindcss.com)
+
 # Getting started
 
 ## Dependencies
 
-- NodeJS [(link)](https://nodejs.org) ` >16.8 `
-- Docker [(link)](https://docker.com/get-started/) ` >24 `
-- Docker Compose [(link)](https://docs.docker.com/compose/install) ` >1.28 `
+- NodeJS [(site)](https://nodejs.org) ` >16.8 `
+- Docker [(site)](https://docker.com/get-started/) ` >24 `
+- Docker Compose [(site)](https://docs.docker.com/compose/install) ` >1.28 `
 
 
 ## Setup
