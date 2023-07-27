@@ -25,11 +25,12 @@ export default function Account() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
-    const onSubmit = ({ name }: any) =>
+    const onSubmit = ({ name }: any) => {
         startTransition(async () => {
             await actions.account({ name })
-            update({ name })
+            await update()
         })
+    }
 
     return (
         <form className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow" onSubmit={handleSubmit(onSubmit)}>
@@ -82,6 +83,7 @@ export default function Account() {
                                         className="h-12 w-12 rounded-full bg-gray-50"
                                         src={gravatar(session?.user?.email ?? '')}
                                         alt=""
+                                        fill
                                     />
                                 )
                         }
