@@ -3,7 +3,7 @@ services:
 
   # ┏━ NextJS | A framework for the web.
   app:
-    image: node:lts-alpine
+    image: node:18-alpine
     restart: unless-stopped
     command: ["yarn", "deploy"]
     ports: [$APP_PORT:3000]
@@ -15,7 +15,7 @@ services:
 
   # ┏━ MySQL | An SQL based database.
   database:
-    image: postgres:latest
+    image: postgres:15
     restart: unless-stopped
     ports: [$DATABASE_PORT:5432]
     volumes: [./data:/var/lib/postgresql/data]

@@ -67,6 +67,8 @@ To deploy next-leaflet we use docker by default, if you'd like to do it without 
 
 > <b>Set the right variables.</b><br />
 > Ensure that ` COMPOSE_PROFILES ` has been set to ` prod ` in the environment file so docker knows to also deploy the ` app ` service alongside the ` database `.
+>
+> Also make sure that the ` PRISMA_CONNECTOR ` has been set right, the default "<b>localhost</b>" won't work in deployment, instead replace it with "<b>database</b>".
 
 0. Pull down any existing services that might run in the background.
 ```sh
