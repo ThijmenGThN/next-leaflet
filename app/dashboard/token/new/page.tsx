@@ -78,6 +78,7 @@ export default function Page() {
                                     }
                                         {...register("name", { required: true })}
                                         type='text'
+                                        autoFocus
                                     />
 
                                     {

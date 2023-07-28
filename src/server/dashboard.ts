@@ -2,6 +2,7 @@
 
 import z from 'zod'
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 import { getServerSession } from "next-auth"
 
 import prisma from '@/prisma/client'
@@ -27,18 +28,16 @@ export async function createToken({ name }: { name: string }) {
     if (!session) throw new Error('This session is invalid, it might have expired.')
     if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
-    if (await prisma.apiToken.count({ where: { owner: session.user.id } }) >= 2) throw new Error('You have reached the maximum amount of api tokens.')
+    if (await prisma.apiToken.count({ where: { owner: session.user.id } }) >= 25) throw new Error('You have reached the maximum limit for API tokens.')
+    if (await prisma.apiToken.findUnique({ where: { owner: session.user.id, name } })) throw new Error('An API token with the same name has already been generated.')
 
-    const token = jwt.sign({
-        name,
-        owner: session.user.email
-    }, process.env.NEXTAUTH_SECRET)
+    const token = jwt.sign({ name }, process.env.NEXTAUTH_SECRET)
 
     await prisma.apiToken.create({
         data: {
-            owner: session.user.id,
             name,
-            jwt: token
+            token: await bcrypt.hash(token, 12),
+            owner: session.user.id,
         }
     })
 

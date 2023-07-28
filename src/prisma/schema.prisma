@@ -30,11 +30,11 @@ model User {
 }
 
 model ApiToken {
-  id    String @id @default(cuid())
+  id    String @id @default(uuid())
   owner String
 
-  name String
-  jwt  String
+  name  String @unique
+  token String @unique
 
   createdOn DateTime @default(now())
   updatedOn DateTime @updatedAt
