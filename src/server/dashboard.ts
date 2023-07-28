@@ -28,16 +28,19 @@ export async function createToken({ name }: { name: string }) {
     if (!session) throw new Error('This session is invalid, it might have expired.')
     if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
-    if (await prisma.apiToken.count({ where: { owner: session.user.id } }) >= 25) throw new Error('You have reached the maximum limit for API tokens.')
     if (await prisma.apiToken.findUnique({ where: { owner: session.user.id, name } })) throw new Error('An API token with the same name has already been generated.')
+    if (await prisma.apiToken.count({ where: { owner: session.user.id } }) >= 25) throw new Error('You have reached the maximum limit for API tokens.')
 
-    const token = jwt.sign({ name }, process.env.NEXTAUTH_SECRET)
+    const createdOn = new Date()
+
+    const token = jwt.sign({ name, createdOn }, process.env.NEXTAUTH_SECRET, {})
 
     await prisma.apiToken.create({
         data: {
             name,
             token: await bcrypt.hash(token, 12),
             owner: session.user.id,
+            createdOn
         }
     })
 
