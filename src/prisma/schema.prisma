@@ -33,7 +33,7 @@ model ApiToken {
   id    String @id @default(uuid())
   owner String
 
-  name  String @unique
+  name  String
   token String @unique
 
   createdOn DateTime @default(now())
