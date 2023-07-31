@@ -2,6 +2,7 @@
 
 import z from 'zod'
 import jwt from 'jsonwebtoken'
+import crypto from "crypto"
 import bcrypt from 'bcrypt'
 import { getServerSession } from "next-auth"
 
@@ -28,21 +29,20 @@ export async function createToken({ name }: { name: string }) {
     if (!session) throw new Error('This session is invalid, it might have expired.')
     if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
-    if (await prisma.apiToken.findFirst({ where: { owner: session.user.email, name } })) throw new Error('An API token with the same name has already been generated.')
+    if (await prisma.apiToken.findFirst({ where: { name, owner: session.user.email } })) throw new Error('An API token with the same name has already been generated.')
     if (await prisma.apiToken.count({ where: { owner: session.user.email } }) >= 25) throw new Error('You have reached the maximum limit for API tokens.')
 
-    const token = jwt.sign({ name, owner: session.user.email }, process.env.NEXTAUTH_SECRET)
-    const tokenHash = await bcrypt.hash(token, 12)
+    const token = crypto.randomBytes(64).toString()
 
     await prisma.apiToken.create({
         data: {
             name,
-            token: tokenHash,
+            token: await bcrypt.hash(token, 12),
             owner: session.user.email
         }
     })
 
-    return token
+    return jwt.sign({ name, owner: session.user.email, token }, process.env.NEXTAUTH_SECRET)
 }
 
 export async function deleteToken({ id }: { id: string }) {

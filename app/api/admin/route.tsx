@@ -11,11 +11,11 @@ export async function GET(req: NextRequest) {
         const bearerToken = req.headers.get('authorization')?.split(' ')[1]
         if (!bearerToken) return NextResponse.json('An authorization bearer token is required.', { status: 400 })
 
-        const { name, owner }: any = jwt.verify(bearerToken, process.env.NEXTAUTH_SECRET)
+        const { name, owner, token }: any = jwt.verify(bearerToken, process.env.NEXTAUTH_SECRET)
 
-        const { token: apiToken } = await prisma.apiToken.findFirstOrThrow({ where: { name, owner } })
+        const { token: hashToken } = await prisma.apiToken.findFirstOrThrow({ where: { name, owner } })
 
-        if (!await bcrypt.compare(bearerToken, apiToken)) throw new Error("The provided API token does not match with our records.")
+        if (!await bcrypt.compare(token, hashToken )) throw new Error("The provided API token does not match with our records.")
     }
     catch (_) { return NextResponse.json('The authorization bearer token provided has expired.', { status: 401 }) }
 
