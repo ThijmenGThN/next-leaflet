@@ -13,7 +13,7 @@ export default async function Page() {
 
     const session = await getServerSession(options)
 
-    const tokens: Array<ApiToken> = await prisma.apiToken.findMany({ where: { owner: session?.user.id } })
+    const tokens: Array<ApiToken> = await prisma.apiToken.findMany({ where: { owner: session?.user.email } })
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">

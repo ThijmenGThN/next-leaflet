@@ -39,5 +39,5 @@ model ApiToken {
   createdOn DateTime @default(now())
   updatedOn DateTime @updatedAt
 
-  User User? @relation(fields: [owner], references: [id])
+  User User? @relation(fields: [owner], references: [email])
 }

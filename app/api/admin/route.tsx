@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
         const { name, owner }: any = jwt.verify(bearerToken, process.env.NEXTAUTH_SECRET)
 
-        const { token: apiToken } = await prisma.apiToken.findUniqueOrThrow({ where: { name, owner } })
+        const { token: apiToken } = await prisma.apiToken.findFirstOrThrow({ where: { name, owner } })
 
         if (!await bcrypt.compare(bearerToken, apiToken)) throw new Error("The provided API token does not match with our records.")
     }

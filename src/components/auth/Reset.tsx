@@ -14,8 +14,8 @@ import * as actions from "@/server/auth"
 const callbackUrl = '/dashboard'
 
 const vForm = z.object({
-    password: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' }),
-    repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'Password is too long.' })
+    password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
+    repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'Password is too long.' })
 }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
 
 export default function Reset({ token }: { token: string }) {

@@ -29,7 +29,6 @@ const options: NextAuthOptions = {
             return { id, name, email, role }
         },
         async session({ session, token }) {
-            token.id && (session.user.id = token.id)
             token.name && (session.user.name = token.name)
             token.role && (session.user.role = token.role)
 

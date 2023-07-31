@@ -12,7 +12,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 const vForm = z.object({
     email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
-    password: z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' }),
+    password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
 })
 
 const callbackUrl = '/dashboard'

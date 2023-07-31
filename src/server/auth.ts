@@ -17,7 +17,7 @@ interface iUser {
     password: string
 }
 
-const vPassword = z.string().min(8, { message: 'This password is too short.' }).max(128, { message: 'This password is too long.' })
+const vPassword = z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' })
 
 const vUser = z.object({
     name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' }),
