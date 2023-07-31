@@ -31,16 +31,14 @@ export async function createToken({ name }: { name: string }) {
     if (await prisma.apiToken.findUnique({ where: { owner: session.user.id, name } })) throw new Error('An API token with the same name has already been generated.')
     if (await prisma.apiToken.count({ where: { owner: session.user.id } }) >= 25) throw new Error('You have reached the maximum limit for API tokens.')
 
-    const createdOn = new Date()
-
-    const token = jwt.sign({ name, createdOn }, process.env.NEXTAUTH_SECRET, {})
+    const token = jwt.sign({ name, owner: session.user.id }, process.env.NEXTAUTH_SECRET)
+    const tokenHash = await bcrypt.hash(token, 12)
 
     await prisma.apiToken.create({
         data: {
             name,
-            token: await bcrypt.hash(token, 12),
-            owner: session.user.id,
-            createdOn
+            token: tokenHash,
+            owner: session.user.id
         }
     })
 
