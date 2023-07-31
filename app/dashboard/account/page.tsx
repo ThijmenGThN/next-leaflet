@@ -1,7 +1,6 @@
 "use client"
 
 import { z } from 'zod'
-import Image from 'next/image'
 import { useTransition } from "react"
 import { useForm } from 'react-hook-form'
 import { useSession } from 'next-auth/react'
@@ -9,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-import gravatar from '@/helpers/gravatar'
 import * as actions from '@/server/dashboard'
 
 import Loading from '@/components/interface/Loading'
@@ -27,7 +25,7 @@ export default function Account() {
 
     const onSubmit = async ({ name }: any) =>
         startTransition(async () => {
-            await actions.account({ name })
+            await actions.updateAccount({ name })
             await update()
         })
 
