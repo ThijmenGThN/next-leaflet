@@ -1,14 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
-
-export default function Error({ error, reset }: { error: Error, reset: () => void }) {
-
-    const [errorMessage, setErrorMessage] = useState<string>()
-
-    useEffect(() => {
-        setErrorMessage(error.message)
-    }, [error])
+export default function Error({ reset }: { reset: () => void }) {
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
@@ -20,11 +12,11 @@ export default function Error({ error, reset }: { error: Error, reset: () => voi
             </div>
 
             <div className="px-4 py-5 sm:px-6">
-                <p className="flex px-4 sm:px-6 items-center justify-center gap-x-6 py-10">
-                    {errorMessage}
+                <p className="flex px-4 sm:px-6 items-center justify-center gap-x-6 py-3">
+                    An API token with the same name has already been generated or you have reached the maximum limit for API tokens.
                 </p>
 
-                <div className="mt-6 flex items-center justify-end gap-x-6">
+                <div className="mt-3 flex items-center justify-end gap-x-6">
                     <button className="flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                         onClick={() => reset()}
                     >
