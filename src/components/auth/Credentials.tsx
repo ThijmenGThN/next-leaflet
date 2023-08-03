@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
@@ -20,8 +20,7 @@ const callbackUrl = '/dashboard'
 export default function Credentials() {
 
     const router = useRouter()
-    router.prefetch(callbackUrl)
-
+    
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
@@ -42,6 +41,10 @@ export default function Credentials() {
 
         setIsPending(false)
     }
+
+    useEffect(() => {
+        router.prefetch(callbackUrl)
+    }, [])
 
     return (
         <>
