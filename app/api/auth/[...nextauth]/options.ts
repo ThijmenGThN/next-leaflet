@@ -33,6 +33,21 @@ const options: NextAuthOptions = {
             token.role && (session.user.role = token.role)
 
             return session
+        },
+        async signIn({ user: { name, email } }) {
+
+            if (!name || !email) return false
+
+            await prisma.user.upsert({
+                where: { email },
+                update: {},
+                create: {
+                    name,
+                    email
+                }
+            })
+
+            return true
         }
     },
     pages: {
