@@ -20,7 +20,7 @@ const callbackUrl = '/dashboard'
 export default function Credentials() {
 
     const router = useRouter()
-    
+
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>()
@@ -44,7 +44,7 @@ export default function Credentials() {
 
     useEffect(() => {
         router.prefetch(callbackUrl)
-    }, [])
+    }, [router])
 
     return (
         <>
