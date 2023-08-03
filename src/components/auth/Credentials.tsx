@@ -20,6 +20,7 @@ const callbackUrl = '/dashboard'
 export default function Credentials() {
 
     const router = useRouter()
+    router.prefetch(callbackUrl)
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
@@ -32,14 +33,14 @@ export default function Credentials() {
 
         const { error }: any = await signIn('credentials', { email, password, redirect: false })
 
-        if (error) {
-            setErrorMessage('Invalid credentials, try again or reset your password.')
-            setIsPending(false)
-        }
+        if (error) setErrorMessage('Invalid credentials, try again or reset your password.')
         else {
             setErrorMessage(undefined)
+            router.refresh()
             router.push(callbackUrl)
         }
+
+        setIsPending(false)
     }
 
     return (
