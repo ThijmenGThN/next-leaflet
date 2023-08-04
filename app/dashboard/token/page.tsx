@@ -45,7 +45,6 @@ export default async function Page() {
                                             Created on {new Date(token.createdOn).toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}
                                         </p>
                                     </div>
-                                </div>
                                 <div className="flex flex-none items-center gap-x-4">
                                     <DeleteToken id={token.id} />
                                 </div>
