@@ -35,21 +35,20 @@ export default async function Page() {
                 <ul role="list" className="divide-y divide-gray-100">
                     {
                         tokens.length > 0 && tokens.map((token) =>
-                                <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
-                                    <div className="min-w-0">
-                                        <div className="flex items-start gap-x-3">
-                                            <p className="text-sm font-semibold leading-6 text-gray-900">{token.name}</p>
-                                        </div>
-                                        <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                                            <p className="whitespace-nowrap">
-                                                Created on {new Date(token.createdOn).toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-                                            </p>
-                                        </div>
+                            <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
+                                <div className="min-w-0">
+                                    <div className="flex items-start gap-x-3">
+                                        <p className="text-sm font-semibold leading-6 text-gray-900">{token.name}</p>
                                     </div>
-                                    <div className="flex flex-none items-center gap-x-4">
-                                        <DeleteToken id={token.id} />
+                                    <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                                        <p className="whitespace-nowrap">
+                                            Created on {new Date(token.createdOn).toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                                        </p>
                                     </div>
-                                </li>
+                                <div className="flex flex-none items-center gap-x-4">
+                                    <DeleteToken id={token.id} />
+                                </div>
+                            </li>
                     }
                 </ul>
             </div>
