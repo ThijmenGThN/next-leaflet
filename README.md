@@ -15,6 +15,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 - Form validation [(zod)](https://zod.dev)
 - Emails [(react email)](https://react.email)
 - Server Actions
+- Internationalization
 
 # Build with
 
@@ -22,6 +23,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 - NextAuth [(site)](https://next-auth.js.org/)
 - Prisma [(site)](https://www.prisma.io)
 - TailwindCSS [(site)](https://tailwindcss.com)
+- NextIntl [(site)](https://next-intl-docs.vercel.app)
 
 # Getting started
 
