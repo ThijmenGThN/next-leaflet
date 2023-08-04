@@ -1,9 +1,45 @@
+import { withAuth } from 'next-auth/middleware'
+import createIntlMiddleware from 'next-intl/middleware'
 
-export { default } from 'next-auth/middleware'
+import type { NextRequest } from 'next/server'
 
-// -- FIREWALL: The below matcher ensures the provided routes are protected.
+const locales = ['en', 'nl']
+const publicPages = [
+    '/',
+    '/login',
+    '/register',
+    '/forgot'
+]
+
+const intlMiddleware = createIntlMiddleware({
+    locales,
+    defaultLocale: 'en'
+})
+
+const authMiddleware = withAuth(
+    function onSuccess(req) {
+        return intlMiddleware(req)
+    },
+    {
+        callbacks: {
+            authorized: ({ token }) => token != null
+        },
+        pages: {
+            signIn: '/login'
+        }
+    }
+);
+
+export default function middleware(req: NextRequest) {
+    const publicPathnameRegex = RegExp(
+        `^(/(${locales.join('|')}))?(${publicPages.join('|')})?/?$`,
+        'i'
+    )
+    const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname)
+
+    return isPublicPage ? intlMiddleware(req) : (authMiddleware as any)(req)
+}
+
 export const config = {
-    matcher: [
-        '/dashboard/:path*'
-    ]
+    matcher: ['/((?!api|_next|.*\\..*).*)']
 }

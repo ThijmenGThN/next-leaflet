@@ -1,0 +1,46 @@
+{
+    "common": {
+        "report": "Meld een probleem",
+        "motto": "Een geoptimaliseerde tech stack voor efficiëntie",
+        "contribute": "Bijdragen",
+        "dashboard": "Dashboard",
+        "backToHome": "Terug naar homepage",
+        "continue": "Doorgaan"
+    },
+    "errors": {
+        "not-found": {
+            "title": "Pagina niet gevonden",
+            "description": "Sorry, we konden de pagina die je zoekt niet vinden."
+        }
+    },
+    "auth": {
+        "forgot": {
+            "reset": "Stel je wachtwoord opnieuw in",
+            "resetExpired": "De wachtwoordreset heeft de vervaldatum bereikt",
+            "update": "Update je wachtwoord",
+            "expired": "Wachtwoordreset is verlopen"
+        },
+        "login": {
+            "signin": "Meld je aan bij je account",
+            "different": "Meld je aan bij een ander account"
+        },
+        "register": {
+            "signup": "Registreer voor een nieuw account"
+        }
+    },
+    "form": {
+        "fields": {
+            "email": "E-mailadres"
+        },
+        "response": {
+            "reset": "We hebben je een e-mail gestuurd om je wachtwoord opnieuw in te stellen"
+        }
+    },
+    "validation": {
+        "email": {
+            "short": "Dit e-mailadres is te kort",
+            "long": "Dit e-mailadres is te lang",
+            "invalid": "Dit e-mailadres is niet geldig"
+        }
+    }
+}
