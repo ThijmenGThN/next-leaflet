@@ -34,8 +34,7 @@ export default async function Page() {
             <div className="space-y-6">
                 <ul role="list" className="divide-y divide-gray-100">
                     {
-                        tokens.length > 0
-                            ? tokens.map((token) =>
+                        tokens.length > 0 && tokens.map((token) =>
                                 <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
                                     <div className="min-w-0">
                                         <div className="flex items-start gap-x-3">
@@ -51,12 +50,6 @@ export default async function Page() {
                                         <DeleteToken id={token.id} />
                                     </div>
                                 </li>
-                            )
-                            : (
-                                <li className="flex px-4 sm:px-6 items-center justify-center gap-x-6 py-10">
-                                    You do not have any tokens.
-                                </li>
-                            )
                     }
                 </ul>
             </div>
