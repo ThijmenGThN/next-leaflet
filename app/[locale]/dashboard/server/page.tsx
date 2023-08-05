@@ -1,12 +1,14 @@
 import { useTranslations } from "next-intl"
-import { getServerSession } from "next-auth"
+import { Session, getServerSession } from "next-auth"
 
 import options from "@/auth/options"
 
-export default async function Page() {
-    const intl = useTranslations()
+export default async function Logic() {
+    return <Page session={await getServerSession(options)} />
+}
 
-    const session = await getServerSession(options)
+function Page({ session }: { session: Session | null }) {
+    const intl = useTranslations()
 
     return (
         <div className="overflow-hidden rounded-md bg-white shadow">

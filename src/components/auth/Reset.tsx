@@ -4,6 +4,7 @@ import { z } from 'zod'
 import jwt from 'jsonwebtoken'
 import { signIn } from "next-auth/react"
 import { useForm } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -13,14 +14,14 @@ import * as actions from "@/server/auth"
 
 const callbackUrl = '/dashboard'
 
-const vForm = z.object({
-    password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
-    repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'Password is too long.' })
-}).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
-
-export default function Reset({ token }: { token: string }) {
-
+export default function Component({ token }: { token: string }) {
+    const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
+
+    const vForm = z.object({
+        password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
+        repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'Password is too long.' })
+    }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 

@@ -2,24 +2,25 @@
 
 import { z } from "zod"
 import Link from "next/link"
-import { useEffect, useState } from "react"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-const vForm = z.object({
-    email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
-    password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
-})
-
 const callbackUrl = '/dashboard'
 
-export default function Credentials() {
-
+export default function Component() {
+    const intl = useTranslations()
     const router = useRouter()
+
+    const vForm = z.object({
+        email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
+        password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
+    })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 

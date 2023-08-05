@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { signIn } from "next-auth/react"
 import { useForm } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -10,17 +11,17 @@ import * as actions from "@/server/auth"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-const vForm = z.object({
-    name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' }),
-    password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
-    repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'Password is too long.' })
-}).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
-
 const callbackUrl = '/dashboard'
 
-export default function Register({ email }: { email: string }) {
-
+export default function Component({ email }: { email: string }) {
+    const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
+
+    const vForm = z.object({
+        name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' }),
+        password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
+        repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'Password is too long.' })
+    }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 

@@ -10,8 +10,7 @@ import Reset from '@/components/auth/Reset'
 
 import aLogo from '@/assets/logo.webp'
 
-export default async function ResetToken({ params: { token } }: { params: { token: string } }) {
-    const intl = useTranslations()
+export default async function Logic({ params: { token } }: { params: { token: string } }) {
 
     let { email }: any = jwt.decode(token)
 
@@ -22,9 +21,15 @@ export default async function ResetToken({ params: { token } }: { params: { toke
 
         const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
 
-        if (token != passwordResetToken) email = undefined
+        if (token != passwordResetToken) throw new Error('The provided token has expired.')
+
+        return <Page email={email} token={token} />
     }
-    catch (_) { email = undefined }
+    catch (_) { return <Page token={token} /> }
+}
+
+export function Page({ email, token }: { email?: string, token: string }) {
+    const intl = useTranslations()
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

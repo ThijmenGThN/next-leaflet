@@ -10,12 +10,16 @@ import DeleteToken from "@/components/dashboard/DeleteToken"
 
 import type { ApiToken } from "@prisma/client"
 
-export default async function Page() {
-    const intl = useTranslations()
-
+export default async function Logic() {
     const session = await getServerSession(options)
 
     const tokens: Array<ApiToken> = await prisma.apiToken.findMany({ where: { owner: session?.user.email } })
+
+    return <Page tokens={tokens} />
+}
+
+function Page({ tokens }: { tokens: Array<ApiToken> }) {
+    const intl = useTranslations()
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
@@ -37,23 +41,23 @@ export default async function Page() {
                 <ul role="list" className="divide-y divide-gray-100">
                     {
                         tokens.length > 0
-                            && tokens.map((token) =>
-                                <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
-                                    <div className="min-w-0">
-                                        <div className="flex items-start gap-x-3">
-                                            <p className="text-sm font-semibold leading-6 text-gray-900">{token.name}</p>
-                                        </div>
-                                        <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                                            <p className="whitespace-nowrap">
-                                                Created on {new Date(token.createdOn).toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-                                            </p>
-                                        </div>
+                        && tokens.map((token: ApiToken) =>
+                            <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
+                                <div className="min-w-0">
+                                    <div className="flex items-start gap-x-3">
+                                        <p className="text-sm font-semibold leading-6 text-gray-900">{token.name}</p>
                                     </div>
-                                    <div className="flex flex-none items-center gap-x-4">
-                                        <DeleteToken id={token.id} />
+                                    <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                                        <p className="whitespace-nowrap">
+                                            Created on {new Date(token.createdOn).toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                                        </p>
                                     </div>
-                                </li>
-                            )
+                                </div>
+                                <div className="flex flex-none items-center gap-x-4">
+                                    <DeleteToken id={token.id} />
+                                </div>
+                            </li>
+                        )
                     }
                 </ul>
             </div>
