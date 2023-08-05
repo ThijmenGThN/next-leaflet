@@ -6,6 +6,7 @@
         ".react-email": true,
         "node_modules": true,
         "debug.log": true,
+        "i18n.ts": true,
         "yarn*": true,
         ".next": true,
         "data": true,

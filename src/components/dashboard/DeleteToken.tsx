@@ -6,7 +6,7 @@ import { TrashIcon } from "@heroicons/react/24/outline"
 
 import * as actions from '@/server/dashboard'
 
-export default function DeleteToken({ id }: { id: string }) {
+export default function Component({ id }: { id: string }) {
     const router = useRouter()
 
     const [isPending, startTransition] = useTransition()

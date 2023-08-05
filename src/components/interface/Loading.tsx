@@ -1,7 +1,7 @@
 
 type iTypes = 'input' | 'avatar'
 
-export default function Loading({ type, override }: { type: iTypes, override?: string }) {
+export default function Component({ type, override }: { type: iTypes, override?: string }) {
 
     switch (type) {
         case 'input':

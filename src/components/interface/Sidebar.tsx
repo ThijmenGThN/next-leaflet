@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { useTranslations } from 'next-intl'
 
 import gravatar from '@/helpers/gravatar'
 import { classNames } from "@/helpers/tailwind"
@@ -36,8 +37,8 @@ const navigation = [
     { name: 'API Tokens', href: '/dashboard/token', icon: KeyIcon }
 ]
 
-export default function Sidebar({ children }: { children: React.ReactNode }) {
-
+export default function Component({ children }: { children: React.ReactNode }) {
+    const intl = useTranslations()
     const pathname = usePathname()
 
     const { data: session, status } = useSession()

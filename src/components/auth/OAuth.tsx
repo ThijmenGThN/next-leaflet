@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { signIn, getProviders } from "next-auth/react"
+import { useTranslations } from "next-intl"
 
 const callbackUrl = '/dashboard'
 
-export default function OAuth() {
+export default function Component() {
+    const intl = useTranslations()
 
     const [providers, setProviders] = useState<Array<any>>([])
 

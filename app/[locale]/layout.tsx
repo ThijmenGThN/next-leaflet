@@ -15,18 +15,21 @@ export const metadata: Metadata = {
 }
 
 const inter = Inter({ subsets: ['latin'] })
-export default async function Layout({ children, params: { locale } }: { children: React.ReactNode, params: any }) {
 
-    let messages
-    try { messages = (await import(`../../src/locales/messages/${locale}.json`)).default }
+export default async function Layout({ children, params: { locale } }: { children: React.ReactNode, params: any }) {
+    let locales
+
+    try {
+        locales = (await import(`../../src/locales/${locale}.json`)).default
+        if (locale !== (useLocale())) throw new Error('Attempt to use non-existent locale.')
+    }
     catch (_) { notFound() }
-    if (locale !== (useLocale())) notFound()
 
     return (
         <html lang="en" className="h-full">
             <body className={inter.className + ' h-full'}>
                 <Session>
-                    <NextIntlClientProvider locale={locale} messages={messages}>
+                    <NextIntlClientProvider locale={locale} messages={locales}>
                         {children}
                     </NextIntlClientProvider>
                 </Session>

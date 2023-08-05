@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl"
 
-export default async function Page() {
+export default function Page() {
     const intl = useTranslations()
 
     return (

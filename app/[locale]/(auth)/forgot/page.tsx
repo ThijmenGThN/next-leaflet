@@ -15,7 +15,7 @@ import * as actions from "@/server/auth"
 
 import aLogo from '@/assets/logo.webp'
 
-export default function Reset() {
+export default function Page() {
     const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
 

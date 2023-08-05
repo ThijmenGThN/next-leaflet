@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { signOut, useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import { classNames } from "@/helpers/tailwind"
 
@@ -16,8 +17,8 @@ interface iProps {
     }>
 }
 
-export default function Dropdown(props: iProps) {
-
+export default function Component(props: iProps) {
+    const intl = useTranslations()
     const { data: session } = useSession()
 
     return (
