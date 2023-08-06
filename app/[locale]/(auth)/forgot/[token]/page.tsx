@@ -28,7 +28,7 @@ export default async function Logic({ params: { token } }: { params: { token: st
     catch (_) { return <Page token={token} /> }
 }
 
-export function Page({ email, token }: { email?: string, token: string }) {
+function Page({ email, token }: { email?: string, token: string }) {
     const intl = useTranslations()
 
     return (
