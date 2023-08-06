@@ -13,7 +13,7 @@ import * as actions from '@/server/dashboard'
 
 import Loading from '@/components/interface/Loading'
 
-export default function Page() {
+export default function Account() {
     const intl = useTranslations()
     const { data: session, status, update } = useSession()
     const [isPending, startTransition] = useTransition()

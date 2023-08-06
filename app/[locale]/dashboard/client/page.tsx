@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
 
-export default function Page() {
+export default function Client() {
     const intl = useTranslations()
 
     const { data: session, status } = useSession()

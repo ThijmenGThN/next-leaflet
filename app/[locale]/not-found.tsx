@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import aLogo from '@/assets/logo.webp'
 
-export default function Page() {
+export default function NotFound() {
     const intl = useTranslations()
 
     return (

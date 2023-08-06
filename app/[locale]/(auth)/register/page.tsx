@@ -17,7 +17,7 @@ import OAuth from '@/components/auth/OAuth'
 
 import aLogo from '@/assets/logo.webp'
 
-export default function Page() {
+export default function Register() {
     const intl = useTranslations()
     const params = useSearchParams()
     const [isPending, startTransition] = useTransition()
