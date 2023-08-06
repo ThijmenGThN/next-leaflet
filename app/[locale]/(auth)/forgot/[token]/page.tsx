@@ -22,10 +22,10 @@ export default async function Logic({ params: { token } }: { params: { token: st
         const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
 
         if (token != passwordResetToken) throw new Error('The provided token has expired.')
-    }
-    catch (_) { email = null }
 
-    return <ForgotToken token={token} email={email} />
+        return <ForgotToken email={email} token={token} />
+    }
+    catch (_) { return <ForgotToken token={token} /> }
 }
 
 export function ForgotToken({ email, token }: { email?: string, token: string }) {
