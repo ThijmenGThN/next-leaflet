@@ -4,10 +4,10 @@ import { Session, getServerSession } from "next-auth"
 import options from "@/auth/options"
 
 export default async function Logic() {
-    return <Role session={await getServerSession(options)} />
+    return <Page session={await getServerSession(options)} />
 }
 
-function Role({ session }: { session: Session | null }) {
+function Page({ session }: { session: Session | null }) {
     const intl = useTranslations()
 
     return (

@@ -23,12 +23,12 @@ export default async function Logic({ params: { token } }: { params: { token: st
 
         if (token != passwordResetToken) throw new Error('The provided token has expired.')
 
-        return <ForgotToken email={email} token={token} />
+        return <Page email={email} token={token} />
     }
-    catch (_) { return <ForgotToken token={token} /> }
+    catch (_) { return <Page token={token} /> }
 }
 
-export function ForgotToken({ email, token }: { email?: string, token: string }) {
+export function Page({ email, token }: { email?: string, token: string }) {
     const intl = useTranslations()
 
     return (

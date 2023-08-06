@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl"
 
-export default function Dashboard() {
+export default function Page() {
     const intl = useTranslations('page.dashboard')
 
     return (

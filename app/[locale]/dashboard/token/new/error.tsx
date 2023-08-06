@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 
-export default function TokenError({ reset }: { reset: () => void }) {
+export default function Error({ reset }: { reset: () => void }) {
     const intl = useTranslations()
 
     return (

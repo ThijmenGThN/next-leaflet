@@ -14,10 +14,10 @@ export default async function Logic() {
 
     const tokens: Array<ApiToken> = await prisma.apiToken.findMany({ where: { owner: session?.user.email } })
 
-    return <Token tokens={tokens} />
+    return <Page tokens={tokens} />
 }
 
-function Token({ tokens }: { tokens: Array<ApiToken> }) {
+function Page({ tokens }: { tokens: Array<ApiToken> }) {
     const intl = useTranslations()
     const locale = useLocale()
 

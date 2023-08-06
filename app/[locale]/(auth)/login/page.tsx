@@ -7,7 +7,7 @@ import Credentials from '@/components/auth/Credentials'
 
 import aLogo from '@/assets/logo.webp'
 
-export default function Login() {
+export default function Page() {
     const intl = useTranslations()
 
     return (

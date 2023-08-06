@@ -9,7 +9,7 @@ import Register from '@/components/auth/Register'
 
 import aLogo from '@/assets/logo.webp'
 
-export default function RegisterToken({ params: { token } }: { params: { token: string } }) {
+export default function Page({ params: { token } }: { params: { token: string } }) {
     const intl = useTranslations()
 
     let { email }: any = jwt.decode(token)

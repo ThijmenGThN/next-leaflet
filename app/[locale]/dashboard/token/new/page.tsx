@@ -11,7 +11,7 @@ import * as actions from "@/server/dashboard"
 
 import { DocumentDuplicateIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-export default function TokenNew() {
+export default function Page() {
     const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
 
