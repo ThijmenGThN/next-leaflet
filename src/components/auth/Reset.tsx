@@ -19,9 +19,9 @@ export default function Component({ token }: { token: string }) {
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
-        repeatPassword: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'Password is too long.' })
-    }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: 'The passwords do not match.', path: ['repeatPassword'] })
+        password: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') }),
+        repeatPassword: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') })
+    }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: intl('form.validation.password.repeatNoMatch'), path: ['repeatPassword'] })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
@@ -39,7 +39,9 @@ export default function Component({ token }: { token: string }) {
     return (
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                    {intl('keyword.password')}
+                </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
                         errors.password?.message
@@ -69,7 +71,9 @@ export default function Component({ token }: { token: string }) {
             </div>
 
             <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">Repeat Password</label>
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                    {intl('component.auth.repeatPassword')}
+                </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
                         errors.repeatPassword?.message
@@ -106,7 +110,7 @@ export default function Component({ token }: { token: string }) {
                     type="checkbox"
                 />
                 <label htmlFor="showPassword" className="ml-3 block text-sm leading-6 text-gray-900 hover:cursor-pointer">
-                    Show password
+                    {intl('component.auth.showPassword')}
                 </label>
             </div>
 
@@ -121,7 +125,7 @@ export default function Component({ token }: { token: string }) {
                     )
                 }
 
-                Confirm
+                {intl('keyword.confirm')}
             </button>
         </form>
     )

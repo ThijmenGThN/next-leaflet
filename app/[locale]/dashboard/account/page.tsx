@@ -19,7 +19,7 @@ export default function Page() {
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        name: z.string().min(2, { message: 'This name is too short.' }).max(32, { message: 'This name is too long.' })
+        name: z.string().min(2, { message: intl('form.validation.name.short') }).max(32, { message: intl('form.validation.name.long') }),
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -33,14 +33,18 @@ export default function Page() {
     return (
         <form className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow" onSubmit={handleSubmit(onSubmit)}>
             <div className="px-4 py-5 sm:px-6">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                    {intl('keyword.profile')}
+                </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                    Information related to your account.
+                    {intl('page.dashboard.infoAboutAccount')}
                 </p>
             </div>
             <div className="space-y-6 px-4 py-5 sm:p-6">
                 <div>
-                    <label className="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                    <label className="block text-sm font-medium leading-6 text-gray-900">
+                        {intl('form.fields.name')}
+                    </label>
                     <div className="relative mt-2 rounded-md shadow-sm">
                         {
                             status == 'loading'
@@ -116,7 +120,7 @@ export default function Page() {
                             )
                         }
 
-                        Save
+                        {intl("form.actions.save")}
                     </button>
                 </div>
             </div>

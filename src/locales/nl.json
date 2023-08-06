@@ -1,3 +1,114 @@
 {
-    "example": "Voorbeeld"
+  "keyword": {
+    "continue": "Doorgaan",
+    "dashboard": "Dashboard",
+    "contribute": "Bijdragen",
+    "profile": "Profiel",
+    "confirm": "Bevestigen",
+    "createdOn": "Gemaakt op"
+  },
+  "page": {
+    "notFound": {
+      "title": "Pagina niet gevonden",
+      "description": "Sorry, we kunnen de pagina die je zoekt niet vinden"
+    },
+    "common": {
+      "reportIssue": "Een probleem melden",
+      "backToHome": "Terug naar de startpagina",
+      "motto": "Een geoptimaliseerde tech-stack voor efficiëntie"
+    },
+    "auth": {
+      "passwordResetExpired": "Wachtwoord opnieuw instellen is verlopen",
+      "updateYourPassword": "Werk je wachtwoord bij",
+      "resetYourPassword": "Stel je wachtwoord opnieuw in",
+      "signUpAccount": "Meld je aan voor een account",
+      "signUpNewAccount": "Meld je aan voor een nieuw account",
+      "signInYourAccount": "Meld je aan bij je account",
+      "signInDifferentAccount": "Log in op een ander account",
+      "completeRegistration": "Voltooi je registratie",
+      "registrationExpired": "Registratie is verlopen",
+      "registrationReachedExpiry": "De registratie heeft de vervaldatum bereikt",
+      "resetPassword": "Stel je wachtwoord opnieuw in",
+      "alreadyHaveAccount": "Heb je al een account?",
+      "emailCreateAccount": "We hebben je een e-mail gestuurd om een ​​account aan te maken",
+      "emailResetAccount": "We hebben je een e-mail gestuurd om je wachtwoord opnieuw in te stellen"
+    },
+    "dashboard": {
+      "adjustingItems": "Items in de zijbalk aanpassen",
+      "exampleHowToBuild": "Voorbeelden over het bouwen van bepaalde pagina's",
+      "infoAboutAccount": "Informatie met betrekking tot je account",
+      "sessionViaClient": "Sessiegegevens opgehaald via een clientcomponent",
+      "roleViaClient": "Je rol opgehaald via een clientcomponent",
+      "yourRole": "Jij hebt de rol {role}.",
+      "sessionOnServer": "Sessiegegevens verkregen binnen een servercomponent",
+      "token": {
+        "title": "API-tokens",
+        "description": "Privé-autorisatietokens om gegevens op te vragen bij ons eindpunt",
+        "error": "Er is al een API-token met dezelfde naam gegenereerd of je heeft de maximale limiet voor API-tokens bereikt",
+        "newToken": "Je nieuwe token",
+        "generateNewToken": "Genereer een nieuw token",
+        "keepSecure": "Zorg ervoor dat je dit token op een veilige locatie bewaart, want zodra je dit venster sluit, is het niet langer zichtbaar voor je",
+        "returnToOverview": "Terug naar overzicht",
+        "creationNotice": "Zodra een nieuwe token is gegenereerd, kunt je deze in het overzicht bekijken. ",
+        "generateToken": "Token genereren"
+      }
+    }
+  },
+  "component": {
+    "auth": {
+      "signIn": "Aanmelden",
+      "signUp": "Aanmelden",
+      "createAccount": "Account aanmaken",
+      "forgotPassword": "Wachtwoord vergeten?",
+      "showPassword": "Laat wachtwoord zien",
+      "repeatPassword": "Herhaal wachtwoord",
+      "signInFailed": "Ongeldige inloggegevens, probeer het opnieuw of stel je wachtwoord opnieuw in",
+      "continueWith": "Of ga verder met"
+    },
+    "interface": {
+      "dropdown": {
+        "signedInAs": "Aangemeld als",
+        "signOut": "Afmelden"
+      },
+      "navigation": {
+        "dashboard": "Dashboard",
+        "viaClient": "Via opdrachtgever",
+        "onServer": "Op server",
+        "myRole": "Mijn rol",
+        "apiTokens": "API-tokens"
+      }
+    }
+  },
+  "form": {
+    "fields": {
+      "name": "Naam",
+      "email": "E-mailadres",
+      "password": "Wachtwoord",
+      "repeatPassword": "Herhaal wachtwoord",
+      "tokenName": "Tokennaam"
+    },
+    "actions": {
+      "save": "Redden",
+      "copy": "Kopiëren",
+      "cancel": "Annuleren",
+      "tryAgain": "Probeer het nog eens"
+    },
+    "validation": {
+      "name": {
+        "short": "Deze naam is te kort",
+        "long": "Deze naam is te lang"
+      },
+      "email": {
+        "short": "Dit e-mailadres is te kort",
+        "long": "Dit e-mailadres is te lang",
+        "invalid": "Dit e-mailadres is niet geldig",
+        "taken": "Dit e-mailadres is al in gebruik"
+      },
+      "password": {
+        "short": "Dit wachtwoord is te kort",
+        "long": "Dit wachtwoord is te lang",
+        "repeatNoMatch": "de wachtwoorden komen niet overeen"
+      }
+    }
+  }
 }

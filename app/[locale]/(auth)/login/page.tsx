@@ -21,7 +21,7 @@ export default function Page() {
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Sign in to your account
+                    {intl("page.auth.signInYourAccount")}
                 </h2>
             </div>
 
@@ -34,7 +34,7 @@ export default function Page() {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/">
-                        ← Back to homepage
+                        ← {intl("page.common.backToHome")}
                     </Link>
                 </div>
             </div>

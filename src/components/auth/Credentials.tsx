@@ -18,8 +18,8 @@ export default function Component() {
     const router = useRouter()
 
     const vForm = z.object({
-        email: z.string().min(2, { message: 'This email address is too short.' }).max(64, { message: 'This email address is too long.' }).email('This email address is not valid.'),
-        password: z.string().min(8, { message: 'This password is too short.' }).max(64, { message: 'This password is too long.' }),
+        email: z.string().min(2, { message: intl('form.validation.email.short') }).max(64, { message: intl('form.validation.email.long') }).email(intl("form.validation.email.invalid")),
+        password: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') })
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -33,7 +33,7 @@ export default function Component() {
 
         const { error }: any = await signIn('credentials', { email, password, redirect: false })
 
-        if (error) setErrorMessage('Invalid credentials, try again or reset your password.')
+        if (error) setErrorMessage(intl('component.auth.signInFailed'))
         else {
             setErrorMessage(undefined)
             router.refresh()
@@ -52,7 +52,7 @@ export default function Component() {
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                        Email address
+                        {intl('form.fields.email')}
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -86,7 +86,7 @@ export default function Component() {
 
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                        Password
+                        {intl('form.fields.password')}
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -125,7 +125,7 @@ export default function Component() {
                             type="checkbox"
                         />
                         <label htmlFor="showPassword" className="ml-3 block text-sm leading-6 text-gray-900 hover:cursor-pointer">
-                            Show password
+                            {intl('component.auth.showPassword')}
                         </label>
                     </div>
                 </div>
@@ -141,19 +141,19 @@ export default function Component() {
                         )
                     }
 
-                    Sign in
+                    {intl('component.auth.signIn')}
                 </button>
             </form>
 
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
                     <Link href="/forgot" className="font-semibold text-primary hover:text-primary-dark">
-                        Forgot password?
+                        {intl('component.auth.forgotPassword')}
                     </Link>
                 </div>
                 <div className="text-sm leading-6">
                     <Link href="/register" className="font-semibold text-primary hover:text-primary-dark">
-                        Create an account
+                        {intl('component.auth.createAccount')}
                     </Link>
                 </div>
             </div>

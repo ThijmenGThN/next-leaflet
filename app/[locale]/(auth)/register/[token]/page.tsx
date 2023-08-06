@@ -34,8 +34,8 @@ export default function Page({ params: { token } }: { params: { token: string } 
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     {
                         email
-                            ? "Complete your registration"
-                            : "Registration has expired."
+                            ? intl('page.auth.completeRegistration')
+                            : intl('page.auth.registrationExpired')
                     }
                 </h2>
             </div>
@@ -62,10 +62,12 @@ export default function Page({ params: { token } }: { params: { token: string } 
                             )
                             : (
                                 <>
-                                    <p className="truncate text-sm font-medium text-gray-900">The registration has reached its expiration date.</p>
+                                    <p className="truncate text-sm font-medium text-gray-900">
+                                        {intl("page.auth.registrationReachedExpiry")}
+                                    </p>
 
                                     <Link href="/register" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                                        Sign up for a new account
+                                        {intl("page.auth.signUpNewAccount")}
                                     </Link>
                                 </>
                             )
@@ -74,7 +76,7 @@ export default function Page({ params: { token } }: { params: { token: string } 
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← Sign in to a different account
+                        ← {intl("page.auth.signInDifferentAccount")}
                     </Link>
                 </div>
             </div >

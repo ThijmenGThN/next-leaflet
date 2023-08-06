@@ -29,17 +29,18 @@ import {
 } from '@heroicons/react/24/outline'
 
 const homePath = "/dashboard"
-const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: Squares2X2Icon },
-    { name: 'Via Client', href: '/dashboard/client', icon: ComputerDesktopIcon },
-    { name: 'On Server', href: '/dashboard/server', icon: ServerStackIcon },
-    { name: 'My Role', href: '/dashboard/role', icon: ShieldCheckIcon },
-    { name: 'API Tokens', href: '/dashboard/token', icon: KeyIcon }
-]
 
 export default function Component({ children }: { children: React.ReactNode }) {
-    const intl = useTranslations()
+    const intl = useTranslations("component.interface.navigation")
     const pathname = usePathname()
+
+    const navigation = [
+        { name: intl("dashboard"), href: '/dashboard', icon: Squares2X2Icon },
+        { name: intl("viaClient"), href: '/dashboard/client', icon: ComputerDesktopIcon },
+        { name: intl("onServer"), href: '/dashboard/server', icon: ServerStackIcon },
+        { name: intl("myRole"), href: '/dashboard/role', icon: ShieldCheckIcon },
+        { name: intl("apiTokens"), href: '/dashboard/token', icon: KeyIcon }
+    ]
 
     const { data: session, status } = useSession()
 
@@ -83,7 +84,6 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                 >
                                     <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
                                         <button type="button" className="-m-2.5 p-2.5" onClick={() => setSidebarOpen(false)}>
-                                            <span className="sr-only">Close sidebar</span>
                                             <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                                         </button>
                                     </div>
@@ -109,7 +109,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                                     onClick={() => setSidebarOpen(false)}
                                                                     className={
                                                                         classNames(
-                                                                            item.href == pathname
+                                                                            pathname.endsWith(item.href)
                                                                                 ? 'bg-gray-50 text-primary'
                                                                                 : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -119,7 +119,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                                     <item.icon
                                                                         className={
                                                                             classNames(
-                                                                                item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                                pathname.endsWith(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
                                                                                 'h-6 w-6 shrink-0'
                                                                             )
                                                                         }
@@ -161,7 +161,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                     href={item.href}
                                                     className={
                                                         classNames(
-                                                            item.href == pathname
+                                                            pathname.endsWith(item.href)
                                                                 ? 'bg-gray-50 text-primary'
                                                                 : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -171,7 +171,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                                     <item.icon
                                                         className={
                                                             classNames(
-                                                                item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                pathname.endsWith(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
                                                                 'h-6 w-6 shrink-0'
                                                             )
                                                         }
@@ -192,7 +192,6 @@ export default function Component({ children }: { children: React.ReactNode }) {
             <div className="lg:pl-72">
                 <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                     <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
-                        <span className="sr-only">Open sidebar</span>
                         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
 
@@ -200,9 +199,6 @@ export default function Component({ children }: { children: React.ReactNode }) {
 
                     <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
                         <form className="relative flex flex-1" action="#" method="GET">
-                            <label htmlFor="search-field" className="sr-only">
-                                Search
-                            </label>
                             <MagnifyingGlassIcon
                                 className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
                                 aria-hidden="true"
@@ -217,7 +213,6 @@ export default function Component({ children }: { children: React.ReactNode }) {
                         </form>
                         <div className="flex items-center gap-x-4 lg:gap-x-6">
                             <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                                <span className="sr-only">View notifications</span>
                                 <BellIcon className="h-6 w-6" aria-hidden="true" />
                             </button>
 
@@ -229,7 +224,6 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                     { name: 'Account', href: '/dashboard/account' }
                                 ]}
                             >
-                                <span className="sr-only">Open user menu</span>
                                 {
                                     status == 'loading'
                                         ? <Loading type="avatar" />

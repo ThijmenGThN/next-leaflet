@@ -12,7 +12,9 @@ export default function Page() {
         <div className="overflow-hidden rounded-md bg-white shadow">
             <ul role="list" className="divide-y divide-gray-200">
                 <li className="px-6 py-4">
-                    <p className="font-semibold">Session data fetched via a client component</p>
+                    <p className="font-semibold">
+                        {intl('page.dashboard.sessionViaClient')}
+                    </p>
                     <p className="m-2">Hi {session?.user.name}</p>
                 </li>
             </ul>

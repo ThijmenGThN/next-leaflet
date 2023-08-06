@@ -1,6 +1,5 @@
-
 import Link from "next/link"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { getServerSession } from "next-auth"
 
 import options from "@/auth/options"
@@ -20,21 +19,24 @@ export default async function Logic() {
 
 function Page({ tokens }: { tokens: Array<ApiToken> }) {
     const intl = useTranslations()
+    const locale = useLocale()
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
             <div className="px-4 py-5 flex gap-y-4 items-left flex-col justify-between md:items-center md:flex-row sm:px-6">
                 <div>
-                    <h2 className="text-base font-semibold leading-7 text-gray-900">API Tokens</h2>
+                    <h2 className="text-base font-semibold leading-7 text-gray-900">
+                        {intl('page.dashboard.token.title')}
+                    </h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">
-                        Private authorization tokens to request data from our endpoint.
+                        {intl('page.dashboard.token.description')}
                     </p>
                 </div>
 
                 <Link className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     href="/dashboard/token/new"
                 >
-                    Generate new token
+                    {intl('page.dashboard.token.generateNewToken')}
                 </Link>
             </div>
             <div className="space-y-6">
@@ -49,7 +51,7 @@ function Page({ tokens }: { tokens: Array<ApiToken> }) {
                                     </div>
                                     <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
                                         <p className="whitespace-nowrap">
-                                            Created on {new Date(token.createdOn).toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                                            {intl('keyword.createdOn')} {new Date(token.createdOn).toLocaleString(locale, { month: "long", day: "numeric", year: "numeric" })}
                                         </p>
                                     </div>
                                 </div>

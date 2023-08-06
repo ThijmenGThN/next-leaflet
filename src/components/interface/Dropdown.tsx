@@ -18,7 +18,7 @@ interface iProps {
 }
 
 export default function Component(props: iProps) {
-    const intl = useTranslations()
+    const intl = useTranslations('component.interface.dropdown')
     const { data: session } = useSession()
 
     return (
@@ -38,8 +38,12 @@ export default function Component(props: iProps) {
             >
                 <Menu.Items className="absolute right-0 z-10 m-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="px-4 py-3">
-                        <p className="text-sm">Signed in as</p>
-                        <p className="truncate text-sm font-medium text-gray-900">{session?.user?.email}</p>
+                        <p className="text-sm">
+                            {intl("signedInAs")}
+                        </p>
+                        <p className="truncate text-sm font-medium text-gray-900">
+                            {session?.user?.email}
+                        </p>
                     </div>
                     <div className="py-1">
                         {
@@ -76,7 +80,7 @@ export default function Component(props: iProps) {
                                             )
                                         }
                                     >
-                                        Sign out
+                                        {intl('signOut')}
                                     </button>
                             }
                         </Menu.Item>

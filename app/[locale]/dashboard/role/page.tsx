@@ -14,8 +14,12 @@ function Page({ session }: { session: Session | null }) {
         <div className="overflow-hidden rounded-md bg-white shadow">
             <ul role="list" className="divide-y divide-gray-200">
                 <li className="px-6 py-4">
-                    <p className="font-semibold">Your role fetched via a client component</p>
-                    <p className="m-2">You have the {session?.user.role} role.</p>
+                    <p className="font-semibold">
+                        {intl('page.dashboard.roleViaClient')}
+                    </p>
+                    <p className="m-2">
+                        {intl('page.dashboard.yourRole', { role: session?.user.role })}
+                    </p>
                 </li>
             </ul>
         </div>
