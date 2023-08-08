@@ -130,7 +130,7 @@ export default function Component() {
                     </div>
                 </div>
 
-                <button className="flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                <button className="flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                     type="submit"
                 >
                     {
@@ -147,12 +147,12 @@ export default function Component() {
 
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
-                    <Link href="/forgot" className="font-semibold text-primary hover:text-primary-dark">
+                    <Link href="/forgot" className="font-semibold text-primary hover:text-primary-600">
                         {intl('component.auth.forgotPassword')}
                     </Link>
                 </div>
                 <div className="text-sm leading-6">
-                    <Link href="/register" className="font-semibold text-primary hover:text-primary-dark">
+                    <Link href="/register" className="font-semibold text-primary hover:text-primary-600">
                         {intl('component.auth.createAccount')}
                     </Link>
                 </div>

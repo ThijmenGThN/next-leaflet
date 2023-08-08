@@ -22,7 +22,7 @@ export default function Error({ reset }: { reset: () => void }) {
                 </p>
 
                 <div className="mt-3 flex items-center justify-end gap-x-6">
-                    <button className="flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    <button className="flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                         onClick={() => reset()}
                     >
                         {intl('form.actions.tryAgain')}

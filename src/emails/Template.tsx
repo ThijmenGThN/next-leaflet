@@ -31,7 +31,7 @@ export default function Email(props: iProps) {
                     extend: {
                         colors: {
                             "primary": '#11999e',
-                            "primary-dark": '#0e7d81'
+                            "primary-600": '#0e7d81'
                         }
                     }
                 }

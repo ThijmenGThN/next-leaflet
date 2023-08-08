@@ -76,7 +76,7 @@ function Page({ email, token }: { email?: string, token: string }) {
                                 <>
                                     <p className="truncate text-sm mt-4 text-center font-medium text-gray-900">The password reset has reached its expiration date.</p>
 
-                                    <Link href="/forgot" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                                    <Link href="/forgot" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                                         {intl('page.auth.resetYourPassword')}
                                     </Link>
 

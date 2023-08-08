@@ -52,7 +52,7 @@ export default function Page() {
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 href="/dashboard"
-                                className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 {intl('keyword.dashboard')}
                             </Link>

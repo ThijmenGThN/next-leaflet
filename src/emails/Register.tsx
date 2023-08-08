@@ -35,7 +35,7 @@ export default function Email(props: iProps) {
                     extend: {
                         colors: {
                             "primary": '#11999e',
-                            "primary-dark": '#0e7d81'
+                            "primary-600": '#0e7d81'
                         }
                     }
                 }
@@ -57,7 +57,7 @@ export default function Email(props: iProps) {
                         <Section>
                             <Text className="text-sm text-center font-medium text-gray-500">Provide additional details to finalize your registration.</Text>
 
-                            <Link href={props.link} className="mt-10 flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-dark">
+                            <Link href={props.link} className="mt-10 flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600">
                                 Continue
                             </Link>
                         </Section>
