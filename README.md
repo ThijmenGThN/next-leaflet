@@ -5,6 +5,10 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 <b>Looking for the [(directus)](https://github.com/ThijmenGThN/next-directus) branch?</b>
 
+<b>
+    For now; next-leaflet is deemed to be unstable, this'll change soon once some things are sorted out.
+</b>
+
 ![preview](https://i.imgur.com/uNKXhM7.png)
 
 # Features
