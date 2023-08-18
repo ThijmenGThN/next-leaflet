@@ -7,9 +7,9 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 ![preview](https://i.imgur.com/uNKXhM7.png)
 
-<b>
-    For now; next-leaflet is deemed to be unstable, this'll change soon once some things are sorted out.
-</b>
+<b>For now; next-leaflet is deemed to be stable, but usage in a production environment is not suggested.</b>
+
+<b>Use at your own discretion!</b>
 
 # Features
 
