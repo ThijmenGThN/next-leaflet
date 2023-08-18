@@ -107,3 +107,33 @@ docker-compose up -d
 > ```sh
 > docker-compose logs
 > ```
+
+### GitHub Actions
+
+Setting up CI/CD with next-leaflet is not only a breeze to setup but also very useful to eliminate deployment steps.
+
+<b>This setup will guide you to deploy your next-leaflet app on an ssh-accessible host.</b>
+
+#### Configure environment variables
+
+0. Requirements
+ - Ensure that you have access to an active GitHub Actions (runner).
+ - Install docker(-compose) on the server you'd like to deploy next-leaflet on.
+    - Docker [(site)](https://docker.com/get-started/) ` >24 `
+    - Docker Compose [(site)](https://docs.docker.com/compose/install) ` >1.28 `
+
+1. Within GitHub navigate to ` Settings > Secrets and variables > Actions `.
+
+2. Create the following repository secrets:
+
+Name|Expects|Description
+-|-|-
+SSH_KEY|Private Key|Generate a new ssh key without a password.
+SSH_HOST|IP Address|The address of your server with an Actions (runner) active.
+SSH_USER|Username|Host system user where next-leaflet should be deploy on.
+SSH_PORT|Port Number|This usually refers to the default ssh port 22.
+APP_ENV|Environment|A copy of .env.sample with adjusted values for deployment.
+
+3. Designate a trigger branch within the ` .github/deploy.yml ` file.
+
+> Any change pushed to the targeted branch should now trigger a request to deploy next-leaflet via docker-compose.
