@@ -40,7 +40,7 @@ export default function Component({ token }: { token: string }) {
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('keyword.password')}
+                    {intl('form.fields.password')}
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
