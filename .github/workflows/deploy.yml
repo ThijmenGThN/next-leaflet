@@ -18,7 +18,7 @@ jobs:
             mkdir ~/env ~/env/${{github.event.repository.name}}
             cd ~/env/${{github.event.repository.name}}
 
-            sudo git clone https://github.com/${{github.event.repository.name}} .
+            sudo git clone https://github.com/${{github.repository}} .
             sudo git pull
 
             echo '${{ secrets.APP_ENV }}' > .env
