@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
 import OAuth from '@/components/auth/OAuth'
 import Credentials from '@/components/auth/Credentials'
@@ -8,7 +7,6 @@ import Credentials from '@/components/auth/Credentials'
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
-    const intl = useTranslations()
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

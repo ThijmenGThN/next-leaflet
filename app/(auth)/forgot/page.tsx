@@ -4,7 +4,6 @@ import { z } from 'zod'
 import Link from "next/link"
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import { useTranslations } from 'next-intl'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -16,7 +15,6 @@ import * as actions from "@/server/auth"
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
-    const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({

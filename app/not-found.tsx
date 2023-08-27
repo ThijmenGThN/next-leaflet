@@ -1,11 +1,9 @@
 import Link from "next/link"
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
-    const intl = useTranslations()
 
     return (
         <div className="bg-white">
@@ -22,7 +20,7 @@ export default function Page() {
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
                         <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet/issues" className="text-sm font-semibold leading-6 text-gray-900">
-                            {intl('page.common.reportIssue')} <span aria-hidden="true">&rarr;</span>
+                            Report an issue <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>
                 </nav>
@@ -45,20 +43,20 @@ export default function Page() {
                     <div className="text-center">
                         <p className="text-base font-semibold text-primary">404</p>
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            {intl("page.notFound.title")}
+                            Page not found
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            {intl("page.notFound.description")}
+                            Sorry, we couldn't find the page you're looking for
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 href="/"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                {intl("page.common.backToHome")}
+                                Back to homepage
                             </Link>
                             <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet" className="text-sm font-semibold leading-6 text-gray-900">
-                                {intl("keyword.contribute")} <span aria-hidden="true">→</span>
+                                Contribute <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>

@@ -3,7 +3,6 @@
 import { z } from 'zod'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { useTranslations } from 'next-intl'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -12,11 +11,10 @@ import * as actions from "@/server/dashboard"
 import { DocumentDuplicateIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 export default function Page() {
-    const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        name: z.string().min(2, { message: intl('form.validation.name.short') }).max(32, { message: intl('form.validation.name.long') }),
+        name: z.string().min(2, { message: "This name is too short" }).max(32, { message: "This name is too long" }),
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -29,10 +27,10 @@ export default function Page() {
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
             <div className="px-4 py-5 sm:px-6">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
-                    {intl('page.dashboard.token.title')}
+                    API Tokens
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                    {intl('page.dashboard.token.description')}
+                    Private authorization tokens to request data from our endpoint
                 </p>
             </div>
 
@@ -41,7 +39,7 @@ export default function Page() {
                     ? (
                         <div className="px-4 py-5 sm:px-6">
                             <label className="block text-sm font-medium leading-6 text-gray-900">
-                                {intl('page.dashboard.token.newToken')}
+                                Your new token
                             </label>
                             <div className="mt-2 flex rounded-md shadow-sm">
                                 <p className="block w-full rounded-none truncate rounded-l-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-gray-50 sm:text-sm sm:leading-6">
@@ -51,12 +49,12 @@ export default function Page() {
                                     onClick={() => navigator.clipboard.writeText(token)}
                                 >
                                     <DocumentDuplicateIcon className="-ml-0.5 h-5 w-5 text-gray-400 group-focus:text-primary" />
-                                    {intl('form.actions.copy')}
+                                    Copy
                                 </button>
                             </div>
 
                             <p className="mt-3 text-xs leading-6 text-gray-600">
-                                {intl('page.dashboard.token.keepSecure')}
+                                Please ensure to save this token in a secure location as once you close this window, it will no longer be visible to you
                             </p>
 
                             <div className="mt-6 flex items-center justify-end gap-x-6">
@@ -64,7 +62,7 @@ export default function Page() {
                                     href="/dashboard/token"
                                     prefetch={false}
                                 >
-                                    {intl('page.dashboard.token.returnToOverview')}
+                                    Return to overview
                                 </Link>
                             </div>
                         </div>
@@ -73,7 +71,7 @@ export default function Page() {
                         <form className="px-4 py-5 space-y-6 sm:px-6" onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                                    {intl('form.fields.tokenName')}
+                                    Token name
                                 </label>
                                 <div className="relative mt-2 rounded-md shadow-sm">
                                     <input className={
@@ -104,7 +102,7 @@ export default function Page() {
                                 }
 
                                 <p className="mt-3 text-xs leading-6 text-gray-600">
-                                    {intl('page.dashboard.token.creationNotice')}
+                                    Once a new token has been generated, you will be able to view it in the overview. If needed, you can easily revoke the token at any time
                                 </p>
                             </div>
 
@@ -114,7 +112,7 @@ export default function Page() {
                                 <Link className="text-sm font-semibold leading-6 text-gray-900"
                                     href="/dashboard/token"
                                 >
-                                    {intl('form.actions.cancel')}
+                                    Cancel
                                 </Link>
 
                                 <button className="flex gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
@@ -128,7 +126,7 @@ export default function Page() {
                                         )
                                     }
 
-                                    {intl('page.dashboard.token.generateToken')}
+                                    Generate token
                                 </button>
                             </div>
                         </form>

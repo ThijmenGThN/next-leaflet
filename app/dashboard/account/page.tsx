@@ -3,7 +3,6 @@
 import { z } from 'zod'
 import { useTransition } from "react"
 import { useForm } from 'react-hook-form'
-import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -14,12 +13,11 @@ import * as actions from '@/server/dashboard'
 import Loading from '@/components/interface/Loading'
 
 export default function Page() {
-    const intl = useTranslations()
     const { data: session, status, update } = useSession()
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        name: z.string().min(2, { message: intl('form.validation.name.short') }).max(32, { message: intl('form.validation.name.long') }),
+        name: z.string().min(2, { message: "This name is too short" }).max(32, { message: "This name is too long" }),
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -34,16 +32,16 @@ export default function Page() {
         <form className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow" onSubmit={handleSubmit(onSubmit)}>
             <div className="px-4 py-5 sm:px-6">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
-                    {intl('keyword.profile')}
+                    Profile
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                    {intl('page.dashboard.infoAboutAccount')}
+                    Information related to your account
                 </p>
             </div>
             <div className="space-y-6 px-4 py-5 sm:p-6">
                 <div>
                     <label className="block text-sm font-medium leading-6 text-gray-900">
-                        {intl('form.fields.name')}
+                        Name
                     </label>
                     <div className="relative mt-2 rounded-md shadow-sm">
                         {
@@ -120,7 +118,7 @@ export default function Page() {
                             )
                         }
 
-                        {intl("form.actions.save")}
+                        Save
                     </button>
                 </div>
             </div>

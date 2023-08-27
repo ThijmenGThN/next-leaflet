@@ -4,7 +4,6 @@ import { z } from 'zod'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import { useTranslations } from 'next-intl'
 import { useState, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,12 +17,11 @@ import OAuth from '@/components/auth/OAuth'
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
-    const intl = useTranslations()
     const params = useSearchParams()
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        email: z.string().min(2, { message: intl('form.validation.email.short') }).max(64, { message: intl('form.validation.email.long') }).email(intl("form.validation.email.invalid"))
+        email: z.string().min(2, { message: "This email address is too short" }).max(64, { message: "This email address is too long" }).email("This email address is not valid")
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -52,7 +50,7 @@ export default function Page() {
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    {intl('page.auth.signUpAccount')}
+                    Sign up for an account
                 </h2>
             </div>
 
@@ -74,7 +72,7 @@ export default function Page() {
                                     </p>
 
                                     <p className="truncate text-sm mt-4 text-center font-medium text-gray-900">
-                                        {intl("page.auth.emailCreateAccount")}
+                                        We have sent you an email to create an account
                                     </p>
                                 </div>
                             )
@@ -83,7 +81,7 @@ export default function Page() {
                                     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                                         <div>
                                             <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                {intl("form.fields.email")}
+                                                Email address
                                             </label>
                                             <div className="relative mt-2 rounded-md shadow-sm">
                                                 <input className={
@@ -110,7 +108,7 @@ export default function Page() {
                                                 params.has('occupied')
                                                     ? (
                                                         <p className="mt-2 text-sm text-red-600">
-                                                            {intl("form.validation.email.taken")}
+                                                            This email address is already taken
                                                         </p>
                                                     )
                                                     : errors.email?.message && (
@@ -133,13 +131,13 @@ export default function Page() {
                                                     )
                                                 }
 
-                                                {intl('keyword.continue')}
+                                                Continue
                                             </button>
 
                                             {
                                                 params.has('occupied') && (
                                                     <Link href='/forgot' className="flex items-center justify-center w-full rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                                                        {intl('page.auth.resetPassword')}
+                                                        Reset your password
                                                     </Link>
                                                 )
                                             }
@@ -154,7 +152,7 @@ export default function Page() {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← {intl('page.auth.alreadyHaveAccount')}
+                        ← Already have an account?
                     </Link>
                 </div>
             </div>
