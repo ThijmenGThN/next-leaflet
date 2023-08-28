@@ -2,13 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { signIn, getProviders } from "next-auth/react"
-import { useTranslations } from "next-intl"
 
 const callbackUrl = '/dashboard'
 
 export default function Component() {
-    const intl = useTranslations()
-
     const [providers, setProviders] = useState<Array<any>>([])
 
     useEffect(() => {
@@ -23,7 +20,7 @@ export default function Component() {
                 </div>
                 <div className="relative flex justify-center text-sm font-medium leading-6">
                     <span className="bg-white px-6 text-gray-900">
-                        {intl('component.auth.continueWith')}
+                        Or continue with
                     </span>
                 </div>
             </div>

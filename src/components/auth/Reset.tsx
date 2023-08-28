@@ -4,7 +4,6 @@ import { z } from 'zod'
 import jwt from 'jsonwebtoken'
 import { signIn } from "next-auth/react"
 import { useForm } from 'react-hook-form'
-import { useTranslations } from 'next-intl'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -15,13 +14,12 @@ import * as actions from "@/server/auth"
 const callbackUrl = '/dashboard'
 
 export default function Component({ token }: { token: string }) {
-    const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        password: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') }),
-        repeatPassword: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') })
-    }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: intl('form.validation.password.repeatNoMatch'), path: ['repeatPassword'] })
+        password: z.string().min(8, { message: "This password is too short" }).max(64, { message: "This password is too long" }),
+        repeatPassword: z.string().min(8, { message: "This password is too short" }).max(64, { message: "This password is too long" })
+    }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: "The passwords do not match", path: ['repeatPassword'] })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
 
@@ -40,7 +38,7 @@ export default function Component({ token }: { token: string }) {
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('form.fields.password')}
+                    Password
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
@@ -72,7 +70,7 @@ export default function Component({ token }: { token: string }) {
 
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('component.auth.repeatPassword')}
+                    Repeat Password
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
@@ -110,7 +108,7 @@ export default function Component({ token }: { token: string }) {
                     type="checkbox"
                 />
                 <label htmlFor="showPassword" className="ml-3 block text-sm leading-6 text-gray-900 hover:cursor-pointer">
-                    {intl('component.auth.showPassword')}
+                    Show password
                 </label>
             </div>
 
@@ -125,7 +123,7 @@ export default function Component({ token }: { token: string }) {
                     )
                 }
 
-                {intl('keyword.confirm')}
+                Confirm
             </button>
         </form>
     )

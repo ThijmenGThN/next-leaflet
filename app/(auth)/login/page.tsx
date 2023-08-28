@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
 
 import OAuth from '@/components/auth/OAuth'
 import Credentials from '@/components/auth/Credentials'
@@ -8,7 +7,6 @@ import Credentials from '@/components/auth/Credentials'
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
-    const intl = useTranslations()
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -21,7 +19,7 @@ export default function Page() {
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    {intl("page.auth.signInYourAccount")}
+                    Sign in to your account
                 </h2>
             </div>
 
@@ -34,7 +32,7 @@ export default function Page() {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/">
-                        ← {intl("page.common.backToHome")}
+                        ← Back to homepage
                     </Link>
                 </div>
             </div>

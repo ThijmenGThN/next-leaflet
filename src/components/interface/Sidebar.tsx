@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { useTranslations } from 'next-intl'
 
 import gravatar from '@/helpers/gravatar'
 import { classNames } from "@/helpers/tailwind"
@@ -31,15 +30,14 @@ import {
 const homePath = "/dashboard"
 
 export default function Component({ children }: { children: React.ReactNode }) {
-    const intl = useTranslations("component.interface.navigation")
     const pathname = usePathname()
 
     const navigation = [
-        { name: intl("dashboard"), href: '/dashboard', icon: Squares2X2Icon },
-        { name: intl("viaClient"), href: '/dashboard/client', icon: ComputerDesktopIcon },
-        { name: intl("onServer"), href: '/dashboard/server', icon: ServerStackIcon },
-        { name: intl("myRole"), href: '/dashboard/role', icon: ShieldCheckIcon },
-        { name: intl("apiTokens"), href: '/dashboard/token', icon: KeyIcon }
+        { name: "Dashboard", href: '/dashboard', icon: Squares2X2Icon },
+        { name: "Via Client", href: '/dashboard/client', icon: ComputerDesktopIcon },
+        { name: "On Server", href: '/dashboard/server', icon: ServerStackIcon },
+        { name: "My Role", href: '/dashboard/role', icon: ShieldCheckIcon },
+        { name: "API Tokens", href: '/dashboard/token', icon: KeyIcon }
     ]
 
     const { data: session, status } = useSession()

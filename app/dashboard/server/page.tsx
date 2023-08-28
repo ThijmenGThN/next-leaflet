@@ -1,19 +1,16 @@
-"use client"
+import { getServerSession } from "next-auth"
 
-import { useTranslations } from 'next-intl'
-import { useSession } from 'next-auth/react'
+import options from "@/auth/options"
 
-export default function Page() {
-    const intl = useTranslations()
-
-    const { data: session, status } = useSession()
+export default async function Page() {
+    const session = await getServerSession(options)
 
     return (
         <div className="overflow-hidden rounded-md bg-white shadow">
             <ul role="list" className="divide-y divide-gray-200">
                 <li className="px-6 py-4">
                     <p className="font-semibold">
-                        {intl('page.dashboard.sessionViaClient')}
+                        Session data obtained within a server component
                     </p>
                     <p className="m-2">Hi {session?.user.name}</p>
                 </li>
