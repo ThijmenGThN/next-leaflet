@@ -18,8 +18,8 @@ export default function Component() {
     const router = useRouter()
 
     const vForm = z.object({
-        email: z.string().min(2, { message: intl('form.validation.email.short') }).max(64, { message: intl('form.validation.email.long') }).email(intl("form.validation.email.invalid")),
-        password: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') })
+        email: z.string().min(2, { message: "This email address is too short" }).max(64, { message: "This email address is too long" }).email("This email address is not valid"),
+        password: z.string().min(8, { message: "This password is too short" }).max(64, { message: "This password is too long" })
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -33,7 +33,7 @@ export default function Component() {
 
         const { error }: any = await signIn('credentials', { email, password, redirect: false })
 
-        if (error) setErrorMessage(intl('component.auth.signInFailed'))
+        if (error) setErrorMessage("Invalid credentials, try again or reset your password")
         else {
             setErrorMessage(undefined)
             router.refresh()
@@ -52,7 +52,7 @@ export default function Component() {
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                        {intl('form.fields.email')}
+                        Email address
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">

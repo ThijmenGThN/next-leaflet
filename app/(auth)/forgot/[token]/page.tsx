@@ -42,8 +42,8 @@ function Page({ email, token }: { email?: string, token: string }) {
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     {
                         email
-                            ? intl('page.auth.updateYourPassword')
-                            : intl("page.auth.passwordResetExpired")
+                            ? "Update your password"
+                            : "Password reset has expired"
                     }
                 </h2>
             </div>
@@ -75,11 +75,11 @@ function Page({ email, token }: { email?: string, token: string }) {
                                     <p className="truncate text-sm mt-4 text-center font-medium text-gray-900">The password reset has reached its expiration date.</p>
 
                                     <Link href="/forgot" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                                        {intl('page.auth.resetYourPassword')}
+                                        Reset your password
                                     </Link>
 
                                     <Link href='/register' className="flex items-center justify-center w-full rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                                        {intl('page.auth.signUpNewAccount')}
+                                        Sign up for a new account
                                     </Link>
                                 </>
                             )
@@ -88,7 +88,7 @@ function Page({ email, token }: { email?: string, token: string }) {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← {intl('page.auth.signInDifferentAccount')}
+                        ← Sign in to a different account
                     </Link>
                 </div>
             </div>

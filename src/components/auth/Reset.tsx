@@ -19,8 +19,8 @@ export default function Component({ token }: { token: string }) {
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        password: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') }),
-        repeatPassword: z.string().min(8, { message: intl('form.validation.password.short') }).max(64, { message: intl('form.validation.password.long') })
+        password: z.string().min(8, { message: "This password is too short" }).max(64, { message: "This password is too long" }),
+        repeatPassword: z.string().min(8, { message: "This password is too short" }).max(64, { message: "This password is too long" })
     }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: intl('form.validation.password.repeatNoMatch'), path: ['repeatPassword'] })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })

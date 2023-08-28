@@ -18,7 +18,7 @@ export default function Page() {
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
-        email: z.string().min(2, { message: intl('form.validation.email.short') }).max(64, { message: intl('form.validation.email.long') }).email(intl("form.validation.email.invalid"))
+        email: z.string().min(2, { message: "This email address is too short" }).max(64, { message: "This email address is too long" }).email("This email address is not valid")
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
@@ -47,7 +47,7 @@ export default function Page() {
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    {intl('page.auth.resetPassword')}
+                    Reset your password
                 </h2>
             </div>
 
@@ -67,7 +67,7 @@ export default function Page() {
                                     <p className="truncate text-sm font-medium text-gray-900">{formEmail}</p>
 
                                     <p className="truncate text-sm mt-4 text-center font-medium text-gray-900">
-                                        {intl("page.auth.emailResetAccount")}
+                                        We have sent you an email to reset your password
                                     </p>
                                 </div>
                             )
@@ -75,7 +75,7 @@ export default function Page() {
                                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                                     <div>
                                         <label className="block text-sm font-medium leading-6 text-gray-900">
-                                            {intl("form.fields.email")}
+                                            Email address
                                         </label>
                                         <div className="relative mt-2 rounded-md shadow-sm">
                                             <input className={
@@ -116,7 +116,7 @@ export default function Page() {
                                             )
                                         }
 
-                                        {intl('keyword.continue')}
+                                        Continue
                                     </button>
                                 </form>
                             )
@@ -125,7 +125,7 @@ export default function Page() {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← {intl('page.auth.signInYourAccount')}
+                        ← Sign in to your account
                     </Link>
                 </div>
             </div>
