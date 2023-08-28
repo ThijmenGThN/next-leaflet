@@ -39,7 +39,7 @@ export async function reset(email: string) {
         await Email(
             eReset({
                 email,
-                link: process.env.NEXTAUTH_URL + '/en/forgot/' + passwordResetToken,
+                link: process.env.NEXTAUTH_URL + '/forgot/' + passwordResetToken,
                 assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
             }),
             {
@@ -87,7 +87,7 @@ export async function register(email: string) {
     await Email(
         eRegister({
             email,
-            link: process.env.NEXTAUTH_URL + '/en/register/' + token,
+            link: process.env.NEXTAUTH_URL + '/register/' + token,
             assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
         }),
         {

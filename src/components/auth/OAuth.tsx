@@ -8,9 +8,7 @@ const callbackUrl = '/dashboard'
 export default function Component() {
     const [providers, setProviders] = useState<Array<any>>([])
 
-    useEffect(() => {
-        getProviders().then(({ credentials, ...OAuth }: any) => setProviders(Object.values(OAuth)))
-    }, [])
+    useEffect(() => {  getProviders().then(({ credentials, ...OAuth }: any) => setProviders(Object.values(OAuth))) }, [])
 
     return providers.length > 0 && (
         <>
