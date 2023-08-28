@@ -22,10 +22,6 @@ const providers = [
 
             return user
         }
-    }),
-    Discord({
-        clientId: process.env.DISCORD_CLIENT ?? '',
-        clientSecret: process.env.DISCORD_SECRET ?? '',
     })
 ]
 
