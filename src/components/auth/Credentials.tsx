@@ -6,7 +6,6 @@ import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { useTranslations } from "next-intl"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
@@ -14,7 +13,6 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 const callbackUrl = '/dashboard'
 
 export default function Component() {
-    const intl = useTranslations()
     const router = useRouter()
 
     const vForm = z.object({
@@ -86,7 +84,7 @@ export default function Component() {
 
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                        {intl('form.fields.password')}
+                        Password
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -125,7 +123,7 @@ export default function Component() {
                             type="checkbox"
                         />
                         <label htmlFor="showPassword" className="ml-3 block text-sm leading-6 text-gray-900 hover:cursor-pointer">
-                            {intl('component.auth.showPassword')}
+                            Show password
                         </label>
                     </div>
                 </div>
@@ -141,19 +139,19 @@ export default function Component() {
                         )
                     }
 
-                    {intl('component.auth.signIn')}
+                    Sign in
                 </button>
             </form>
 
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
                     <Link href="/forgot" className="font-semibold text-primary hover:text-primary-600">
-                        {intl('component.auth.forgotPassword')}
+                        Forgot password?
                     </Link>
                 </div>
                 <div className="text-sm leading-6">
                     <Link href="/register" className="font-semibold text-primary hover:text-primary-600">
-                        {intl('component.auth.createAccount')}
+                        Create an account
                     </Link>
                 </div>
             </div>

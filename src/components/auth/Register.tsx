@@ -3,7 +3,6 @@
 import { z } from 'zod'
 import { signIn } from "next-auth/react"
 import { useForm } from 'react-hook-form'
-import { useTranslations } from 'next-intl'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -14,7 +13,6 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 const callbackUrl = '/dashboard'
 
 export default function Component({ email }: { email: string }) {
-    const intl = useTranslations()
     const [isPending, startTransition] = useTransition()
 
     const vForm = z.object({
@@ -38,7 +36,7 @@ export default function Component({ email }: { email: string }) {
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('form.fields.name')}
+                    Name
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
@@ -70,7 +68,7 @@ export default function Component({ email }: { email: string }) {
 
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('form.fields.email')}
+                    Email address
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input
@@ -83,7 +81,7 @@ export default function Component({ email }: { email: string }) {
 
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('form.fields.password')}
+                    Password
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
@@ -115,7 +113,7 @@ export default function Component({ email }: { email: string }) {
 
             <div>
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                    {intl('form.fields.repeatPassword')}
+                    Repeat Password
                 </label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                     <input className={
@@ -153,7 +151,7 @@ export default function Component({ email }: { email: string }) {
                     type="checkbox"
                 />
                 <label htmlFor="showPassword" className="ml-3 block text-sm leading-6 text-gray-900 hover:cursor-pointer">
-                    {intl('component.auth.showPassword')}
+                    Show password
                 </label>
             </div>
 
@@ -168,7 +166,7 @@ export default function Component({ email }: { email: string }) {
                     )
                 }
 
-                {intl('component.auth.signUp')}
+                Sign up
             </button>
         </form>
     )

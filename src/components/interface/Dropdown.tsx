@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { signOut, useSession } from 'next-auth/react'
-import { useTranslations } from 'next-intl'
 
 import { classNames } from "@/helpers/tailwind"
 
@@ -18,7 +17,6 @@ interface iProps {
 }
 
 export default function Component(props: iProps) {
-    const intl = useTranslations('component.interface.dropdown')
     const { data: session } = useSession()
 
     return (
@@ -39,7 +37,7 @@ export default function Component(props: iProps) {
                 <Menu.Items className="absolute right-0 z-10 m-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="px-4 py-3">
                         <p className="text-sm">
-                            {intl("signedInAs")}
+                            Signed in as
                         </p>
                         <p className="truncate text-sm font-medium text-gray-900">
                             {session?.user?.email}
@@ -80,7 +78,7 @@ export default function Component(props: iProps) {
                                             )
                                         }
                                     >
-                                        {intl('signOut')}
+                                        Sign out
                                     </button>
                             }
                         </Menu.Item>
