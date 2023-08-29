@@ -36,14 +36,11 @@ export default function Form(props: iProps) {
 
     const [isPending, setIsPending] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>()
-
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     async function onSubmit(data: any) {
         setIsPending(true)
-
         await props.onSubmit(data).catch((message: string) => setErrorMessage(message))
-
         setIsPending(false)
     }
 

@@ -1,27 +1,24 @@
 "use client"
 
-import { z } from 'zod'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from "react"
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import * as actions from "@/server/dashboard"
+import * as actions from "@/server/dashboard/apiTokens"
 
 import { DocumentDuplicateIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline"
+
+import validate from '@/helpers/validation'
 
 export default function Page() {
     const [isPending, startTransition] = useTransition()
 
-    const vForm = z.object({
-        name: z.string().min(2, { message: "This name is too short" }).max(32, { message: "This name is too long" }),
-    })
-
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(validate.objects.name) })
 
     const [token, setToken] = useState<string>()
 
-    const onSubmit = ({ name }: any) => startTransition(async () => setToken(await actions.createToken({ name })))
+    const onSubmit = ({ name }: any) => startTransition(async () => setToken(await actions.create({ name })))
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">

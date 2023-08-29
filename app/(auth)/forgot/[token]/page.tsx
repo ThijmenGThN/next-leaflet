@@ -14,12 +14,16 @@ export default async function Logic({ params: { token } }: { params: { token: st
     let { email }: any = jwt.decode(token)
 
     try {
+
+        // ENSURE: All environment variables are set.
         if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
         jwt.verify(token, process.env.NEXTAUTH_SECRET)
 
+        // CHECK: If the supplied email exists and get the password reset token from the user account.
         const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
 
+        // COMPARE: Supplied token to the account token which has been created upon password reset.
         if (token != passwordResetToken) throw new Error('The provided token has expired.')
 
         return <Page email={email} token={token} />

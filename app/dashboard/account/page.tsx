@@ -8,23 +8,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-import * as actions from '@/server/dashboard'
+import * as actions from '@/server/dashboard/account'
 
 import Loading from '@/components/interface/Loading'
+
+import validate from '@/helpers/validation'
 
 export default function Page() {
     const { data: session, status, update } = useSession()
     const [isPending, startTransition] = useTransition()
 
-    const vForm = z.object({
-        name: z.string().min(2, { message: "This name is too short" }).max(32, { message: "This name is too long" }),
-    })
-
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(validate.objects.name) })
 
     const onSubmit = async ({ name }: any) =>
         startTransition(async () => {
-            await actions.updateAccount({ name })
+            await actions.update({ name })
             await update()
         })
 

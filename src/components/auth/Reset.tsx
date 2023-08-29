@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { signIn } from "next-auth/react"
 import { useTransition } from "react"
 
-import * as actions from "@/server/auth"
+import * as actions from "@/server/auth/forgot"
 
 import validate from '@/helpers/validation'
 
@@ -17,10 +17,8 @@ export default function Component({ token }: { token: string }) {
 
     const onSubmit = ({ password }: any) => new Promise(async (_, reject) => {
         startTransition(async () => {
-            await actions.updatePassword({ password, token })
-
+            await actions.update({ password, token })
             const { email }: any = jwt.decode(token)
-
             signIn('credentials', { email, password, callbackUrl })
         })
     })

@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 
 export default function Page() {
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
 
     return (
         <div className="overflow-hidden rounded-md bg-white shadow">

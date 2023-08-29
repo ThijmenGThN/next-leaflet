@@ -16,7 +16,6 @@ export default function Component() {
 
     const onSubmit = ({ email, password }: any) => new Promise(async (_, reject) => {
         const { error }: any = await signIn('credentials', { email, password, redirect: false })
-
         if (error) return reject("Invalid credentials, try again or reset your password")
 
         router.refresh()

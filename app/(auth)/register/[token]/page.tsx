@@ -12,9 +12,12 @@ export default function Page({ params: { token } }: { params: { token: string } 
     let { email }: any = jwt.decode(token)
 
     try {
+        
+        // ENSURE: All environment variables are set.
         if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
         jwt.verify(token, process.env.NEXTAUTH_SECRET)
+        
     }
     catch (_) { email = undefined }
 

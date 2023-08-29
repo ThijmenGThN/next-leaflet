@@ -10,18 +10,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
 import gravatar from "@/helpers/gravatar"
-import * as actions from "@/server/auth"
+import * as actions from "@/server/auth/forgot"
 
 import aLogo from '@/assets/logo.webp'
+
+import validate from '@/helpers/validation'
 
 export default function Page() {
     const [isPending, startTransition] = useTransition()
 
-    const vForm = z.object({
-        email: z.string().min(2, { message: "This email address is too short" }).max(64, { message: "This email address is too long" }).email("This email address is not valid")
-    })
-
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(vForm) })
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(validate.objects.email) })
 
     const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
@@ -29,8 +27,7 @@ export default function Page() {
     const onSubmit = ({ email }: any) =>
         startTransition(async () => {
             if (!email) return
-
-            await actions.reset(email)
+            await actions.request(email)
 
             setFormEmail(email)
             setHasBeenSent(true)

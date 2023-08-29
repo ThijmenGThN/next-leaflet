@@ -4,7 +4,7 @@ import { useTransition } from "react"
 import { useRouter } from 'next/navigation'
 import { TrashIcon } from "@heroicons/react/24/outline"
 
-import * as actions from '@/server/dashboard'
+import * as actions from '@/server/dashboard/apiTokens'
 
 export default function Component({ id }: { id: string }) {
     const router = useRouter()
@@ -13,7 +13,7 @@ export default function Component({ id }: { id: string }) {
 
     function onSubmit() {
         startTransition(async () => {
-            await actions.deleteToken({ id })
+            await actions.remove({ id })
             router.refresh()
         })
     }

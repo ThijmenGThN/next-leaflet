@@ -27,19 +27,18 @@ import {
     KeyIcon
 } from '@heroicons/react/24/outline'
 
+const navigation = [
+    { name: "Dashboard", href: '/dashboard', icon: Squares2X2Icon },
+    { name: "Via Client", href: '/dashboard/client', icon: ComputerDesktopIcon },
+    { name: "On Server", href: '/dashboard/server', icon: ServerStackIcon },
+    { name: "My Role", href: '/dashboard/role', icon: ShieldCheckIcon },
+    { name: "API Tokens", href: '/dashboard/token', icon: KeyIcon }
+]
+
 const homePath = "/dashboard"
 
 export default function Component({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
-
-    const navigation = [
-        { name: "Dashboard", href: '/dashboard', icon: Squares2X2Icon },
-        { name: "Via Client", href: '/dashboard/client', icon: ComputerDesktopIcon },
-        { name: "On Server", href: '/dashboard/server', icon: ServerStackIcon },
-        { name: "My Role", href: '/dashboard/role', icon: ShieldCheckIcon },
-        { name: "API Tokens", href: '/dashboard/token', icon: KeyIcon }
-    ]
-
     const { data: session, status } = useSession()
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
