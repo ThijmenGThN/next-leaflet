@@ -70,7 +70,7 @@ export default function Component(props: iProps) {
                             {
                                 ({ active }) =>
                                     <button
-                                        onClick={() => signOut()}
+                                        onClick={() => signOut({ callbackUrl: '/login' })}
                                         className={
                                             classNames(
                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',

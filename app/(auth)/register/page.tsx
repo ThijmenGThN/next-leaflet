@@ -25,8 +25,12 @@ export default function Page() {
 
     const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
+    const [isSending, setIsSending] = useState<boolean>(false)
 
-    const onSubmit = ({ email }: any) =>
+    const onSubmit = ({ email }: any) => {
+        setIsSending(true)
+        if (!email || isSending) return
+
         startTransition(async () => {
             if (!email) return
             await actions.request(email)
@@ -34,6 +38,7 @@ export default function Page() {
             setFormEmail(email)
             setHasBeenSent(true)
         })
+    }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
