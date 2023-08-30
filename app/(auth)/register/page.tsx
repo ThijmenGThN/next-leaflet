@@ -26,8 +26,8 @@ export default function Page() {
         startTransition(async () => {
             if (!email) return
 
-            const { error }: any = await actions.request(email)
-            if (error) return throwError('This email address is already taken')
+            try { await actions.request(email) }
+            catch (_) { return throwError('This email address is already taken') }
 
             setFormEmail(email)
             setHasBeenSent(true)
@@ -78,7 +78,7 @@ export default function Page() {
                                         validator={validate.objects.email}
                                         submit={{ label: 'Continue', position: 'full' }}
                                         fields={[
-                                            { type: 'email', label: 'Email address' }
+                                            { id: 'email', type: 'email', label: 'Email address' }
                                         ]}
                                     />
 

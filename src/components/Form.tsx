@@ -2,15 +2,15 @@
 
 import Link from "next/link"
 import { useForm } from "react-hook-form"
-import { useState } from "react"
+import { HTMLInputTypeAttribute, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { classNames } from "@/helpers/tailwind"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
 
-type iFieldTypes = 'name' | 'email' | 'password' | 'repeatPassword'
-type iOptionTypes = 'showPassword'
+type iFieldIds = 'name' | 'email' | 'password' | 'repeatPassword'
+type iOptionIds = 'showPassword'
 
 interface iForm {
     onSubmit: any
@@ -25,7 +25,8 @@ interface iForm {
         redirect: string
     }
     fields: Array<{
-        type: iFieldTypes
+        id: iFieldIds
+        type: HTMLInputTypeAttribute
         label: string
         value?: string
         autoComplete?: string
@@ -34,7 +35,8 @@ interface iForm {
 }
 
 interface iField {
-    type: iFieldTypes
+    id: iFieldIds
+    type: HTMLInputTypeAttribute
     label: string
     value?: string
     autoComplete?: string
@@ -45,7 +47,7 @@ interface iField {
 }
 
 interface iOption {
-    type: iOptionTypes
+    id: iOptionIds
     showPassword: boolean
     setShowPassword: Function
 }
@@ -73,6 +75,7 @@ export default function Form(props: iForm) {
                         <Field
                             key={index}
                             label={field.label}
+                            id={field.id}
                             type={field.type}
                             value={field.value}
                             autoComplete={field.autoComplete}
@@ -93,7 +96,7 @@ export default function Form(props: iForm) {
                 props.options && props.options.map((option, index) => (
                     <Options
                         key={index}
-                        type={option}
+                        id={option}
                         showPassword={showPassword}
                         setShowPassword={setShowPassword}
                     />
@@ -148,13 +151,13 @@ function Field(props: iField) {
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
                 <input className={
-                    props.errors[props.type]?.message || props.errorMessage
+                    props.errors[props.id]?.message || props.errorMessage
                         ? "block w-full rounded-md border-0 px-2 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
                         : "block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                 }
-                    {...props.register(props.type, { required: true })}
+                    {...props.register(props.id, { required: true })}
                     type={
-                        (props.type.toLowerCase().includes('password'))
+                        props.type == 'password'
                             ? props.showPassword ? 'text' : 'password'
                             : props.type
                     }
@@ -163,7 +166,7 @@ function Field(props: iField) {
                 />
 
                 {
-                    props.errors[props.type]?.message && (
+                    props.errors[props.id]?.message && (
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                             <ExclamationCircleIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
                         </div>
@@ -172,9 +175,9 @@ function Field(props: iField) {
             </div>
 
             {
-                props.errors[props.type]?.message && (
-                    <p className="mt-2 text-sm text-red-600" id="email-error">
-                        {props.errors[props.type]?.message.toString()}
+                props.errors[props.id]?.message && (
+                    <p className="mt-2 text-sm text-red-600">
+                        {props.errors[props.id]?.message.toString()}
                     </p>
                 )
             }
@@ -183,7 +186,7 @@ function Field(props: iField) {
 }
 
 function Options(props: iOption) {
-    switch (props.type) {
+    switch (props.id) {
 
         case 'showPassword':
             return (

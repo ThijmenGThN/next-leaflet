@@ -68,7 +68,7 @@ export default function Page() {
                                 validator={validate.objects.email}
                                 submit={{ label: "Continue", position: 'full' }}
                                 fields={[
-                                    { type: 'email', label: 'Email address' }
+                                    { id: 'email', type: 'email', label: 'Email address' }
                                 ]}
                             />
                     }

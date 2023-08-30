@@ -24,12 +24,12 @@ export default function Component({ email }: { email: string }) {
     return (
         <Form
             onSubmit={onSubmit}
-            submit={{ label: "Sign up" }}
+            submit={{ label: "Sign up", position: 'full' }}
             validator={validate.forms.register}
             fields={[
-                { type: 'name', label: 'Name' },
-                { type: 'password', label: 'Password' },
-                { type: 'repeatPassword', label: 'Repeat password' }
+                { id: 'name', type: 'text', label: 'Name' },
+                { id: 'password', type: 'password', label: 'Password' },
+                { id: 'repeatPassword', type: 'password', label: 'Repeat password' }
             ]}
             options={[
                 "showPassword"

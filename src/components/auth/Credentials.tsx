@@ -31,8 +31,8 @@ export default function Component() {
                 submit={{ label: "Sign in", position: 'full' }}
                 validator={validate.forms.login}
                 fields={[
-                    { type: 'email', label: 'Email address' },
-                    { type: 'password', label: 'Password' }
+                    { id: 'email', type: 'email', label: 'Email address' },
+                    { id: 'password', type: 'password', label: 'Password' }
                 ]}
                 options={[
                     'showPassword'

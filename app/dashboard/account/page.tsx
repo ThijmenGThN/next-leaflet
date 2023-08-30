@@ -44,7 +44,7 @@ export default function Page() {
                     validator={validate.objects.name}
                     submit={{ label: 'Save', position: 'right' }}
                     fields={[
-                        { type: 'name', label: 'Name', value: session?.user.name }
+                        { id: 'name', type: 'text', label: 'Name', value: session?.user.name }
                     ]}
                 />
             </div>

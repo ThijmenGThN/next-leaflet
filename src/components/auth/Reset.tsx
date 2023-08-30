@@ -29,8 +29,8 @@ export default function Component({ token }: { token: string }) {
             validator={validate.forms.password}
             submit={{ label: "Confirm", position: 'full' }}
             fields={[
-                { type: 'password', label: 'Password' },
-                { type: 'repeatPassword', label: 'Repeat password' }
+                { id: 'password', type: 'password', label: 'Password' },
+                { id: 'repeatPassword', type: 'password', label: 'Repeat password' }
             ]}
             options={[
                 'showPassword'
