@@ -17,6 +17,11 @@ const validators = {
             name: vTypes.name,
             email: vTypes.email,
             password: vTypes.password
+        }),
+
+        mail: z.object({
+            to: z.string().min(4).max(64).email(),
+            subject: z.string().min(1).max(64)
         })
 
     },

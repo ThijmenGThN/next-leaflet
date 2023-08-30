@@ -5,6 +5,7 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { classNames } from "@/helpers/tailwind"
 
 type iAcceptedFields = 'name' | 'email' | 'password' | 'repeatPassword'
 type iAcceptedOptions = 'showPassword'
@@ -13,13 +14,20 @@ interface iProps {
     onSubmit: any
     validator: any
     submitLabel: string
-    fields: Array<iAcceptedFields>
+    submitPosition?: 'left' | 'right' | 'full' | 'center'
+    fields: Array<{
+        type: iAcceptedFields
+        displayName?: string
+        defaultValue?: string
+    }>
     options?: Array<iAcceptedOptions>
 }
 
 interface iFields {
     type: iAcceptedFields
     errorMessage: string | undefined
+    defaultValue?: string
+    displayName?: string
     register: any
     errors: any
     showPassword: any
@@ -31,6 +39,15 @@ interface iOptions {
     setShowPassword: any
 }
 
+function translateSubmitPosition(position: iProps['submitPosition']) {
+    switch (position) {
+        case 'left': return 'mr-auto'
+        case 'right': return 'ml-auto'
+        case 'full': return 'w-full'
+        case 'center': return 'mx-auto'
+    }
+}
+
 export default function Form(props: iProps) {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(props.validator) })
 
@@ -40,26 +57,33 @@ export default function Form(props: iProps) {
 
     async function onSubmit(data: any) {
         setIsPending(true)
+        if (isPending) return
+
         await props.onSubmit(data).catch((message: string) => setErrorMessage(message))
         setIsPending(false)
     }
 
     return (
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            {
-                props.fields.map((field, index) => (
-                    <Fields
-                        key={index}
-                        type={field}
-                        errorMessage={errorMessage}
-                        register={register}
-                        errors={errors}
-                        showPassword={showPassword}
-                    />
-                ))
-            }
+            <div>
+                <div className="space-y-6">
+                    {
+                        props.fields.map((field, index) => (
+                            <Fields
+                                key={index}
+                                type={field.type}
+                                defaultValue={field.defaultValue}
+                                errorMessage={errorMessage}
+                                register={register}
+                                errors={errors}
+                                showPassword={showPassword}
+                            />
+                        ))
+                    }
+                </div>
 
-            {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+                {errorMessage && <p className="mt-2 text-sm text-red-600">{errorMessage}</p>}
+            </div>
 
             {
                 props.options && props.options.map((option, index) => (
@@ -72,7 +96,10 @@ export default function Form(props: iProps) {
                 ))
             }
 
-            <button className="flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            <button className={classNames(
+                translateSubmitPosition(props.submitPosition),
+                "flex gap-x-2 items-center justify-center rounded-md bg-primary px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            )}
                 type="submit"
             >
                 {
@@ -96,7 +123,7 @@ function Fields(props: iFields) {
             return (
                 <div>
                     <label className="block text-sm font-medium leading-6 text-gray-900">
-                        Name
+                        {props.displayName ?? 'Name'}
                     </label>
                     <div className="relative mt-2 rounded-md shadow-sm">
                         <input className={
@@ -106,6 +133,7 @@ function Fields(props: iFields) {
                         }
                             {...props.register("name", { required: true })}
                             type='text'
+                            defaultValue={props.defaultValue}
                             autoComplete="name"
                         />
 
@@ -132,7 +160,7 @@ function Fields(props: iFields) {
             return (
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                        Email address
+                        {props.displayName ?? 'Email address'}
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -170,7 +198,7 @@ function Fields(props: iFields) {
             return (
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                        Password
+                        {props.displayName ?? 'Password'}
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">
@@ -208,7 +236,7 @@ function Fields(props: iFields) {
             return (
                 <div>
                     <label htmlFor="repeatPassword" className="block text-sm font-medium leading-6 text-gray-900">
-                        Repeat Password
+                        {props.displayName ?? 'Repeat Password'}
                     </label>
                     <div className="mt-2">
                         <div className="relative mt-2 rounded-md shadow-sm">

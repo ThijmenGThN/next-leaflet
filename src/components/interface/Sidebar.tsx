@@ -195,7 +195,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                     <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
 
                     <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-                        <form className="relative flex flex-1" action="#" method="GET">
+                        <div className="relative flex flex-1">
                             <MagnifyingGlassIcon
                                 className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
                                 aria-hidden="true"
@@ -207,7 +207,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                 type="search"
                                 name="search"
                             />
-                        </form>
+                        </div>
                         <div className="flex items-center gap-x-4 lg:gap-x-6">
                             <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                                 <BellIcon className="h-6 w-6" aria-hidden="true" />

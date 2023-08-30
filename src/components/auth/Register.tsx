@@ -14,7 +14,7 @@ const callbackUrl = '/dashboard'
 export default function Component({ email }: { email: string }) {
     const [isPending, startTransition] = useTransition()
 
-    const onSubmit = ({ name, password }: any) => new Promise(async () => {
+    const onSubmit = ({ name, password }: any) => new Promise(async (_, throwError) => {
         startTransition(async () => {
             await actions.create({ name, email, password })
             signIn('credentials', { email, password, callbackUrl })
@@ -27,9 +27,9 @@ export default function Component({ email }: { email: string }) {
             submitLabel="Sign up"
             validator={validate.forms.register}
             fields={[
-                'name',
-                'password',
-                'repeatPassword'
+                { type: 'name' },
+                { type: 'password' },
+                { type: 'repeatPassword' }
             ]}
             options={[
                 "showPassword"
