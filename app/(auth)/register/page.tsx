@@ -2,10 +2,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 import gravatar from '@/helpers/gravatar'
 import * as actions from "@/server/auth/register"
@@ -27,9 +25,9 @@ export default function Page() {
     const onSubmit = ({ email }: any) => new Promise(async (_, throwError) => {
         startTransition(async () => {
             if (!email) return
-            if (params.has('occupied')) return throwError('This email address is already taken')
 
-            await actions.request(email)
+            const { error }: any = await actions.request(email)
+            if (error) return throwError('This email address is already taken')
 
             setFormEmail(email)
             setHasBeenSent(true)
@@ -78,9 +76,9 @@ export default function Page() {
                                     <Form
                                         onSubmit={onSubmit}
                                         validator={validate.objects.email}
-                                        submitLabel='Continue'
+                                        submit={{ label: 'Continue', position: 'full' }}
                                         fields={[
-                                            { type: 'email' }
+                                            { type: 'email', label: 'Email address' }
                                         ]}
                                     />
 

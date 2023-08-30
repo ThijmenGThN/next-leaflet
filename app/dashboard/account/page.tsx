@@ -41,10 +41,9 @@ export default function Page() {
                 <Form
                     onSubmit={onSubmit}
                     validator={validate.objects.name}
-                    submitLabel='Save'
-                    submitPosition='right'
+                    submit={{ label: 'Save', position: 'right' }}
                     fields={[
-                        { type: 'name', defaultValue: session?.user.name }
+                        { type: 'name', label: 'Name', value: session?.user.name }
                     ]}
                 />
             </div>

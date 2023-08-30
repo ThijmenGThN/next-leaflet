@@ -7,6 +7,8 @@ import prisma from '@/prisma/client'
 let apiSessionRequests = 0
 
 export async function GET(req: NextRequest) {
+
+    // REQUIRE: The requester to have a valid api token, the code block below will check it's integrity.
     try {
         if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 

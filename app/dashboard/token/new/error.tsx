@@ -14,7 +14,7 @@ export default function Error({ reset }: { reset: () => void }) {
             </div>
 
             <div className="px-4 py-5 sm:px-6">
-                <p className="flex px-4 sm:px-6 items-center justify-center gap-x-6 py-3">
+                <p className="flex items-center justify-center gap-x-6 py-3">
                     An API token with the same name has already been generated or you have reached the maximum limit for API tokens
                 </p>
 

@@ -66,9 +66,9 @@ export default function Page() {
                             : <Form
                                 onSubmit={onSubmit}
                                 validator={validate.objects.email}
-                                submitLabel="Continue"
+                                submit={{ label: "Continue", position: 'full' }}
                                 fields={[
-                                    { type: 'email' }
+                                    { type: 'email', label: 'Email address' }
                                 ]}
                             />
                     }

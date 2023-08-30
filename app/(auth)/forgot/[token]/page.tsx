@@ -9,29 +9,20 @@ import Reset from '@/components/auth/Reset'
 
 import aLogo from '@/assets/logo.webp'
 
-export default async function Logic({ params: { token } }: { params: { token: string } }) {
+export default async function Page({ params: { token } }: { params: { token: string } }) {
+
+    // ENSURE: All environment variables are set.
+    if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
 
     let { email }: any = jwt.decode(token)
 
-    try {
+    jwt.verify(token, process.env.NEXTAUTH_SECRET)
 
-        // ENSURE: All environment variables are set.
-        if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
+    // CHECK: If the supplied email exists and get the password reset token from the user account.
+    const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
 
-        jwt.verify(token, process.env.NEXTAUTH_SECRET)
-
-        // CHECK: If the supplied email exists and get the password reset token from the user account.
-        const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
-
-        // COMPARE: Supplied token to the account token which has been created upon password reset.
-        if (token != passwordResetToken) throw new Error('The provided token has expired.')
-
-        return <Page email={email} token={token} />
-    }
-    catch (_) { return <Page token={token} /> }
-}
-
-function Page({ email, token }: { email?: string, token: string }) {
+    // COMPARE: Supplied token to the account token which has been created upon password reset.
+    if (token != passwordResetToken) throw new Error('The provided token has expired.')
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

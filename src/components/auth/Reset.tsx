@@ -27,10 +27,10 @@ export default function Component({ token }: { token: string }) {
         <Form
             onSubmit={onSubmit}
             validator={validate.forms.password}
-            submitLabel="Confirm"
+            submit={{ label: "Confirm", position: 'full' }}
             fields={[
-                { type: 'password' },
-                { type: 'repeatPassword' }
+                { type: 'password', label: 'Password' },
+                { type: 'repeatPassword', label: 'Repeat password' }
             ]}
             options={[
                 'showPassword'

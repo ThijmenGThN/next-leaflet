@@ -28,11 +28,11 @@ export default function Component() {
         <>
             <Form
                 onSubmit={onSubmit}
-                submitLabel="Sign in"
+                submit={{ label: "Sign in", position: 'full' }}
                 validator={validate.forms.login}
                 fields={[
-                    { type: 'email' },
-                    { type: 'password' }
+                    { type: 'email', label: 'Email address' },
+                    { type: 'password', label: 'Password' }
                 ]}
                 options={[
                     'showPassword'

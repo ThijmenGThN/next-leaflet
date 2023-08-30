@@ -26,7 +26,7 @@ export async function request(email: string) {
     ) throw new Error('Missing NEXTAUTH environment variables.')
 
     // ENFORCE: No duplicate user entries.
-    if (await prisma.user.findUnique({ where: { email } })) return redirect('/register?occupied=' + email)
+    if (await prisma.user.findUnique({ where: { email } })) return { error: 'This email address is already taken' }
 
     // CREATE: A new token which will be supplied within the email to ensure right of registration.
     const token = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '1d' })

@@ -68,23 +68,17 @@ export default function Page() {
                                 </div>
                             </>
                         )
-                        : (
-                            <>
-                                <Form
-                                    onSubmit={onSubmit}
-                                    submitLabel='Generate token'
-                                    submitPosition='right'
-                                    validator={validate.objects.name}
-                                    fields={[
-                                        { type: 'name', displayName: 'Token name' }
-                                    ]}
-                                />
+                        : <Form
+                            onSubmit={onSubmit}
+                            submit={{ label: 'Generate token', position: 'right' }}
+                            cancel={{ label: 'Cancel', redirect: '/dashboard/token' }}
+                            description='Once a new token has been generated, you will be able to view it in the overview. If needed, you can easily revoke the token at any time'
+                            validator={validate.objects.name}
+                            fields={[
+                                { type: 'name', label: 'Token name' }
+                            ]}
+                        />
 
-                                <p className="mt-3 text-xs leading-6 text-gray-600">
-                                    Once a new token has been generated, you will be able to view it in the overview. If needed, you can easily revoke the token at any time
-                                </p>
-                            </>
-                        )
                 }
             </div>
 
