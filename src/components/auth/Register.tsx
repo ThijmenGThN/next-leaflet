@@ -14,7 +14,7 @@ const callbackUrl = '/dashboard'
 export default function Component({ email }: { email: string }) {
     const [isPending, startTransition] = useTransition()
 
-    const onSubmit = ({ name, password }: any) => new Promise(async (_, throwError) => {
+    const onSubmit = ({ name, password }: any) => new Promise<void>(async (resolve, throwError) => {
         startTransition(async () => {
             await actions.create({ name, email, password })
             signIn('credentials', { email, password, callbackUrl })

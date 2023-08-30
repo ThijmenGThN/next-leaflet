@@ -19,7 +19,7 @@ export default function Page() {
 
     const [token, setToken] = useState<string>()
 
-    const onSubmit = ({ name }: any) => new Promise(async (_, throwError) => {
+    const onSubmit = ({ name }: any) => new Promise<void>(async (resolve, throwError) => {
         startTransition(async () => setToken(await actions.create({ name })))
     })
 

@@ -19,10 +19,11 @@ export default function Page() {
     const { data: session, status, update } = useSession()
     const [isPending, startTransition] = useTransition()
 
-    const onSubmit = ({ name }: any) => new Promise(async (_, throwError) => {
+    const onSubmit = ({ name }: any) => new Promise<void>(async (resolve, throwError) => {
         startTransition(async () => {
             await actions.update({ name })
             update()
+            resolve()
         })
     })
 

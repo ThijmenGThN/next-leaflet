@@ -19,7 +19,7 @@ export default function Page() {
     const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
 
-    const onSubmit = ({ email }: any) => new Promise(async (_, throwError) => {
+    const onSubmit = ({ email }: any) => new Promise<void>(async (resolve, throwError) => {
         startTransition(async () => {
             if (!email) return
             actions.request(email)

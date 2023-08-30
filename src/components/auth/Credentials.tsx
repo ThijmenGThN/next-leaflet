@@ -14,7 +14,7 @@ const callbackUrl = '/dashboard'
 export default function Component() {
     const router = useRouter()
 
-    const onSubmit = ({ email, password }: any) => new Promise(async (_, throwError) => {
+    const onSubmit = ({ email, password }: any) => new Promise<void>(async (resolve, throwError) => {
         const { error }: any = await signIn('credentials', { email, password, redirect: false })
         if (error) return throwError("Invalid credentials, try again or reset your password")
 

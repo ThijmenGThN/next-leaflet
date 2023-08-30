@@ -15,7 +15,7 @@ const callbackUrl = '/dashboard'
 export default function Component({ token }: { token: string }) {
     const [isPending, startTransition] = useTransition()
 
-    const onSubmit = ({ password }: any) => new Promise(async (_, throwError) => {
+    const onSubmit = ({ password }: any) => new Promise<void>(async (resolve, throwError) => {
         startTransition(async () => {
             await actions.update({ password, token })
             const { email }: any = jwt.decode(token)
