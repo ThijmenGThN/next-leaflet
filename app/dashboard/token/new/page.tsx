@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import * as actions from "@/server/dashboard/apiTokens"
 
-import { DocumentDuplicateIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 
 import validate from '@/helpers/validation'
 import Form from '@/components/Form'

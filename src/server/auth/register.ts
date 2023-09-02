@@ -2,7 +2,6 @@
 
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { redirect } from 'next/navigation'
 
 import prisma from '@/prisma/client'
 import Email from '@/emails/client'
