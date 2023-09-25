@@ -51,41 +51,35 @@ export default function Page() {
 
             <div className="relative my-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                    {
-                        hasBeenSent
-                            ? (
-                                <div className="flex flex-col items-center justify-center gap-y-4">
-                                    <Image
-                                        className="h-16 w-16 rounded-full bg-gray-50 border"
-                                        src={gravatar(formEmail ?? '')}
-                                        width={80}
-                                        height={80}
-                                        alt=""
-                                    />
-                                    <p className="truncate text-sm font-medium text-gray-900">
-                                        {formEmail}
-                                    </p>
+                    {hasBeenSent
+                        ? <div className="flex flex-col items-center justify-center gap-y-4">
+                            <Image
+                                className="h-16 w-16 rounded-full bg-gray-50 border"
+                                src={gravatar(formEmail ?? '')}
+                                width={80}
+                                height={80}
+                                alt=""
+                            />
+                            <p className="text-sm font-medium text-gray-900">
+                                {formEmail}
+                            </p>
 
-                                    <p className="truncate text-sm mt-4 text-center font-medium text-gray-900">
-                                        We have sent you an email to create an account
-                                    </p>
-                                </div>
-                            )
-                            : (
-                                <>
-                                    <Form
-                                        onSubmit={onSubmit}
-                                        validator={validate.objects.email}
-                                        submit={{ label: 'Continue', position: 'full' }}
-                                        fields={[
-                                            { id: 'email', type: 'email', label: 'Email address' }
-                                        ]}
-                                    />
+                            <p className="text-sm mt-4 text-center font-medium text-gray-900">
+                                We have sent you an email to create an account
+                            </p>
+                        </div>
+                        : <>
+                            <Form
+                                onSubmit={onSubmit}
+                                validator={validate.objects.email}
+                                submit={{ label: 'Continue', position: 'full' }}
+                                fields={[
+                                    { id: 'email', type: 'email', label: 'Email address' }
+                                ]}
+                            />
 
-                                    <OAuth />
-                                </>
-                            )
-                    }
+                            <OAuth />
+                        </>}
                 </div>
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">

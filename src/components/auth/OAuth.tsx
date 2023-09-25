@@ -8,7 +8,7 @@ const callbackUrl = '/dashboard'
 export default function Component() {
     const [providers, setProviders] = useState<Array<any>>([])
 
-    useEffect(() => {  getProviders().then(({ credentials, ...OAuth }: any) => setProviders(Object.values(OAuth))) }, [])
+    useEffect(() => { getProviders().then(({ credentials, ...OAuth }: any) => setProviders(Object.values(OAuth))) }, [])
 
     return providers.length > 0 && (
         <>
@@ -24,17 +24,14 @@ export default function Component() {
             </div>
 
             <ul className="mt-6 grid grid-cols-2 gap-4">
-                {
-                    providers.map((provider: any) =>
-                        <li key={provider.id}>
-                            <button className="flex w-full items-center justify-center gap-3 rounded-md bg-black hover:bg-zinc-900 px-3 py-1.5 text-white"
-                                onClick={() => signIn(provider.id, { callbackUrl })}
-                            >
-                                <span className="text-sm font-semibold leading-6">{provider.name}</span>
-                            </button>
-                        </li>
-                    )
-                }
+                {providers.map((provider: any) =>
+                    <li key={provider.id}>
+                        <button className="flex w-full items-center justify-center gap-3 rounded-md bg-black hover:bg-zinc-900 px-3 py-1.5 text-white"
+                            onClick={() => signIn(provider.id, { callbackUrl })}
+                        >
+                            <span className="text-sm font-semibold leading-6">{provider.name}</span>
+                        </button>
+                    </li>)}
             </ul>
         </>
     )

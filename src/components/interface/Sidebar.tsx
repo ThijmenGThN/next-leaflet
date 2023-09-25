@@ -98,35 +98,33 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                             <li>
                                                 <ul role="list" className="-mx-2 space-y-1">
-                                                    {
-                                                        navigation.map((item, index) =>
-                                                            <li key={index}>
-                                                                <Link
-                                                                    href={item.href}
-                                                                    onClick={() => setSidebarOpen(false)}
+                                                    {navigation.map((item, index) =>
+                                                        <li key={index}>
+                                                            <Link
+                                                                href={item.href}
+                                                                onClick={() => setSidebarOpen(false)}
+                                                                className={
+                                                                    classNames(
+                                                                        pathname.endsWith(item.href)
+                                                                            ? 'bg-gray-50 text-primary'
+                                                                            : 'text-gray-700 hover:text-primary hover:bg-gray-50',
+                                                                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                                    )
+                                                                }
+                                                            >
+                                                                <item.icon
                                                                     className={
                                                                         classNames(
-                                                                            pathname.endsWith(item.href)
-                                                                                ? 'bg-gray-50 text-primary'
-                                                                                : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                                            pathname.endsWith(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                            'h-6 w-6 shrink-0'
                                                                         )
                                                                     }
-                                                                >
-                                                                    <item.icon
-                                                                        className={
-                                                                            classNames(
-                                                                                pathname.endsWith(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
-                                                                                'h-6 w-6 shrink-0'
-                                                                            )
-                                                                        }
-                                                                        aria-hidden="true"
-                                                                    />
-                                                                    {item.name}
-                                                                </Link>
-                                                            </li>
-                                                        )
-                                                    }
+                                                                    aria-hidden="true"
+                                                                />
+                                                                {item.name}
+                                                            </Link>
+                                                        </li>
+                                                    )}
                                                 </ul>
                                             </li>
                                         </ul>
@@ -151,34 +149,31 @@ export default function Component({ children }: { children: React.ReactNode }) {
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                             <li>
                                 <ul role="list" className="-mx-2 space-y-1">
-                                    {
-                                        navigation.map((item, index) =>
-                                            <li key={index}>
-                                                <Link
-                                                    href={item.href}
+                                    {navigation.map((item, index) =>
+                                        <li key={index}>
+                                            <Link
+                                                href={item.href}
+                                                className={
+                                                    classNames(
+                                                        pathname.endsWith(item.href)
+                                                            ? 'bg-gray-50 text-primary'
+                                                            : 'text-gray-700 hover:text-primary hover:bg-gray-50',
+                                                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                    )
+                                                }
+                                            >
+                                                <item.icon
                                                     className={
                                                         classNames(
-                                                            pathname.endsWith(item.href)
-                                                                ? 'bg-gray-50 text-primary'
-                                                                : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                            pathname.endsWith(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                            'h-6 w-6 shrink-0'
                                                         )
                                                     }
-                                                >
-                                                    <item.icon
-                                                        className={
-                                                            classNames(
-                                                                pathname.endsWith(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
-                                                                'h-6 w-6 shrink-0'
-                                                            )
-                                                        }
-                                                        aria-hidden="true"
-                                                    />
-                                                    {item.name}
-                                                </Link>
-                                            </li>
-                                        )
-                                    }
+                                                    aria-hidden="true"
+                                                />
+                                                {item.name}
+                                            </Link>
+                                        </li>)}
                                 </ul>
                             </li>
                         </ul>
@@ -221,19 +216,16 @@ export default function Component({ children }: { children: React.ReactNode }) {
                                     { name: 'Account', href: '/dashboard/account' }
                                 ]}
                             >
-                                {
-                                    status == 'loading'
-                                        ? <Loading type="avatar" />
-                                        : (
-                                            <Image
-                                                className="h-8 w-8 rounded-full bg-gray-50"
-                                                src={gravatar(session?.user?.email ?? '')}
-                                                width={80}
-                                                height={80}
-                                                alt=""
-                                            />
-                                        )
-                                }
+                                {status == 'loading'
+                                    ? <Loading type="avatar" />
+                                    : (
+                                        <Image
+                                            className="h-8 w-8 rounded-full bg-gray-50"
+                                            src={gravatar(session?.user?.email ?? '')}
+                                            width={80}
+                                            height={80}
+                                            alt=""
+                                        />)}
                             </Dropdown>
                         </div>
                     </div>
