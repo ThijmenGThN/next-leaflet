@@ -2,11 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useTransition } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 
 import gravatar from '@/helpers/gravatar'
-import * as actions from "@/server/auth/register"
 
 import OAuth from '@/components/auth/OAuth'
 
@@ -16,23 +14,19 @@ import validate from '@/helpers/validation'
 import Form from '@/components/Form'
 
 export default function Page() {
-    const params = useSearchParams()
-    const [isPending, startTransition] = useTransition()
-
     const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
 
-    const onSubmit = ({ email }: any) => new Promise<void>(async (resolve, throwError) => {
-        startTransition(async () => {
-            if (!email) return
+    const onSubmit = async ({ email }: any) => {
+        if (!email) return
 
-            try { await actions.request(email) }
-            catch (_) { return throwError('This email address is already taken') }
+        const { ok } = await fetch('/api/auth/register', { method: 'POST', body: JSON.stringify({ email }) })
 
-            setFormEmail(email)
-            setHasBeenSent(true)
-        })
-    })
+        if (!ok) throw new Error('Registration attempt has failed.')
+
+        setFormEmail(email)
+        setHasBeenSent(true)
+    }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

@@ -1,25 +1,27 @@
+"use client"
+
 import Link from 'next/link'
 import Image from 'next/image'
 import jwt from 'jsonwebtoken'
+import { signIn } from 'next-auth/react'
 
 import gravatar from '@/helpers/gravatar'
+import validate from '@/helpers/validation'
 
-import Register from '@/components/auth/Register'
+import Form from '@/components/Form'
 
 import aLogo from '@/assets/logo.webp'
 
+const callbackUrl = '/dashboard'
+
 export default function Page({ params: { token } }: { params: { token: string } }) {
+
     let { email }: any = jwt.decode(token)
 
-    try {
-
-        // ENSURE: All environment variables are set.
-        if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
-
-        jwt.verify(token, process.env.NEXTAUTH_SECRET)
-
+    const onSubmit = async ({ name, password }: any) => {
+        fetch('/api/auth/register/create', { method: 'POST', body: JSON.stringify({ name, email, password, token }) })
+        signIn('credentials', { email, password, callbackUrl })
     }
-    catch (_) { email = undefined }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -32,38 +34,36 @@ export default function Page({ params: { token } }: { params: { token: string } 
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    {email
-                        ? "Complete your registration"
-                        : "Registration has expired"}
+                    Complete your registration
                 </h2>
             </div>
 
             <div className="relative my-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                    {email
-                        ? <>
-                            <div className="flex mb-8 flex-col items-center justify-center gap-y-4">
-                                <Image
-                                    className="h-16 w-16 rounded-full bg-gray-50 border"
-                                    src={gravatar(email)}
-                                    width={80}
-                                    height={80}
-                                    alt=""
-                                />
-                                <p className="text-sm font-medium text-gray-900">{email}</p>
-                            </div>
+                    <div className="flex mb-8 flex-col items-center justify-center gap-y-4">
+                        <Image
+                            className="h-16 w-16 rounded-full bg-gray-50 border"
+                            src={gravatar(email)}
+                            width={80}
+                            height={80}
+                            alt=""
+                        />
+                        <p className="text-sm font-medium text-gray-900">{email}</p>
+                    </div>
 
-                            <Register email={email} />
-                        </>
-                        : <>
-                            <p className="text-sm font-medium text-gray-900">
-                                The registration has reached its expiration date
-                            </p>
-
-                            <Link href="/register" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                                Sign up for a new account
-                            </Link>
-                        </>}
+                    <Form
+                        onSubmit={onSubmit}
+                        submit={{ label: "Sign up", position: 'full' }}
+                        validator={validate.forms.register}
+                        fields={[
+                            { id: 'name', type: 'text', label: 'Name' },
+                            { id: 'password', type: 'password', label: 'Password' },
+                            { id: 'repeatPassword', type: 'password', label: 'Repeat password' }
+                        ]}
+                        options={[
+                            "showPassword"
+                        ]}
+                    />
                 </div>
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
