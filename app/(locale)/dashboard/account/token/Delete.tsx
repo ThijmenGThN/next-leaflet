@@ -11,7 +11,7 @@ export default function Component({ id }: { id: string }) {
 
     async function onSubmit() {
         setIsLoading(true)
-        await fetch('/api/dashboard/token/delete', { method: 'POST', body: JSON.stringify({ id }) })
+        await fetch('/api/auth/account/token/delete', { method: 'POST', body: JSON.stringify({ id }) })
         router.refresh()
     }
 
