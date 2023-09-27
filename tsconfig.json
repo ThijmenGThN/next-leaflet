@@ -20,7 +20,6 @@
       "@/auth/*": ["app/api/auth/[...nextauth]/*"],
       "@/components/*": ["src/components/*"],
       "@/helpers/*": ["src/helpers/*"],
-      "@/server/*": ["src/server/*"],
       "@/emails/*": ["src/emails/*"],
       "@/styles/*": ["src/styles/*"],
       "@/assets/*": ["src/assets/*"],

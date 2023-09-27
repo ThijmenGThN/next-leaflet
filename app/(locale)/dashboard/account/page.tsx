@@ -1,24 +1,17 @@
 "use client"
 
-import { useTransition } from "react"
 import { useSession } from 'next-auth/react'
-
-import * as actions from '@/server/dashboard/account'
 
 import validate from '@/helpers/validation'
 import Form from '@/components/Form'
 
 export default function Page() {
-    const { data: session, status, update } = useSession()
-    const [isPending, startTransition] = useTransition()
+    const { data: session, update } = useSession()
 
-    const onSubmit = ({ name }: any) => new Promise<void>(async (resolve, throwError) => {
-        startTransition(async () => {
-            await actions.update({ name })
-            update()
-            resolve()
-        })
-    })
+    const onSubmit = async ({ name }: any) => {
+        await fetch('/api/dashboard/account', { method: 'POST', body: JSON.stringify({ name, email: 'harold@mail.com' }) })
+        update()
+    }
 
     return (
         <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">

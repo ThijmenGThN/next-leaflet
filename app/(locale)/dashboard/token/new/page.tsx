@@ -1,11 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
-import { useState, useTransition } from "react"
-import { zodResolver } from '@hookform/resolvers/zod'
-
-import * as actions from "@/server/dashboard/apiTokens"
+import { useState } from "react"
 
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 
@@ -13,25 +9,31 @@ import validate from '@/helpers/validation'
 import Form from '@/components/Form'
 
 export default function Page() {
-    const [isPending, startTransition] = useTransition()
-
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(validate.objects.name) })
 
     const [token, setToken] = useState<string>()
 
-    const onSubmit = ({ name }: any) => new Promise<void>(async (resolve, throwError) => {
-        startTransition(async () => setToken(await actions.create({ name })))
-    })
+
+    async function onSubmit({ name }: { name: string }) {
+        const res = await fetch('/api/dashboard/token/create', { method: 'POST', body: JSON.stringify({ name }) })
+
+        if (!res.ok) throw new Error()
+
+        const token = await res.json()
+
+        setToken(token)
+    }
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
-            <div className="px-4 py-5 sm:px-6">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">
-                    API Tokens
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                    Private authorization tokens to request data from our endpoint
-                </p>
+            <div className="px-4 py-5 flex gap-y-4 items-left flex-col justify-between md:items-center md:flex-row sm:px-6">
+                <div>
+                    <h2 className="text-base font-semibold leading-7 text-gray-900">
+                        API Tokens
+                    </h2>
+                    <p className="mt-1 text-sm leading-6 text-gray-600">
+                        Private authorization tokens to request data from our endpoint
+                    </p>
+                </div>
             </div>
 
             <div className="px-4 py-5 sm:px-6">
@@ -76,6 +78,6 @@ export default function Page() {
                         ]}
                     />}
             </div>
-        </div >
+        </div>
     )
 }

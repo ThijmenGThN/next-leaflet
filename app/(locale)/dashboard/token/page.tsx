@@ -1,16 +1,18 @@
 import Link from "next/link"
-import { getServerSession } from "next-auth"
 
-import options from "@/auth/options"
 import prisma from "@/prisma/client"
 
 import DeleteToken from "@/components/dashboard/DeleteToken"
 
 import type { ApiToken } from "@prisma/client"
+import { getServerSession } from "next-auth"
 
 export default async function Page() {
-    const session = await getServerSession(options)
-    const tokens: Array<ApiToken> = await prisma.apiToken.findMany({ where: { owner: session?.user.email } })
+    const session = await getServerSession()
+
+    const tokens: Array<ApiToken> = session?.user.email
+        ? await prisma.apiToken.findMany({ where: { owner: session.user.email } })
+        : []
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
@@ -30,10 +32,11 @@ export default async function Page() {
                     Generate new token
                 </Link>
             </div>
+
             <div className="space-y-6">
                 <ul role="list" className="divide-y divide-gray-100">
-                    {tokens.length > 0
-                        && tokens.map((token: ApiToken) =>
+                    {
+                        tokens.length > 0 && tokens.map((token: ApiToken) =>
                             <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
                                 <div className="min-w-0">
                                     <div className="flex items-start gap-x-3">
@@ -49,7 +52,8 @@ export default async function Page() {
                                     <DeleteToken id={token.id} />
                                 </div>
                             </li>
-                        )}
+                        )
+                    }
                 </ul>
             </div>
         </div>
