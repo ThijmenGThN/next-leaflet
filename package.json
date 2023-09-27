@@ -49,5 +49,8 @@
   "prisma": {
     "schema": "src/prisma/schema.prisma",
     "seed": "ts-node src/prisma/seed.ts"
+  },
+  "devDependencies": {
+    "next-intl": "3.0.0-beta.19"
   }
 }

@@ -3,6 +3,7 @@
         "postcss.config.js": true,
         ".eslintrc.json": true,
         "next-env.d.ts": true,
+        "**/*...rest*": true,
         ".react-email": true,
         "node_modules": true,
         "debug.log": true,

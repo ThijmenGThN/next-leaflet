@@ -18,12 +18,13 @@
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/auth/*": ["app/api/auth/[...nextauth]/*"],
-      "@/components/*": ["src/components/*"],
-      "@/helpers/*": ["src/helpers/*"],
-      "@/emails/*": ["src/emails/*"],
-      "@/styles/*": ["src/styles/*"],
       "@/assets/*": ["src/assets/*"],
-      "@/prisma/*": ["src/prisma/*"]
+      "@/components/*": ["src/components/*"],
+      "@/emails/*": ["src/emails/*"],
+      "@/helpers/*": ["src/helpers/*"],
+      "@/locales/*": ["src/assets/*"],
+      "@/prisma/*": ["src/prisma/*"],
+      "@/styles/*": ["src/styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

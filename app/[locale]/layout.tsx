@@ -1,6 +1,8 @@
 import { Inter } from 'next/font/google'
+import { notFound } from 'next/navigation'
 
 import Session from './Session'
+import { locales } from '../../middleware'
 
 import '@/styles/globals.css'
 
@@ -13,10 +15,12 @@ export const metadata: Metadata = {
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children, params: { locale } }: { children: React.ReactNode, params: { locale: string } }) {
+
+    locales.some(cur => cur === locale) ?? notFound()
 
     return (
-        <html lang="en" className="h-full">
+        <html lang={locale} className="h-full">
             <body className={inter.className + ' h-full'}>
                 <Session>
                     {children}
