@@ -21,18 +21,12 @@ import {
     Squares2X2Icon,
     MagnifyingGlassIcon,
     XMarkIcon,
-    ComputerDesktopIcon,
-    ServerStackIcon,
-    ShieldCheckIcon,
-    KeyIcon
+    CpuChipIcon
 } from '@heroicons/react/24/outline'
 
 const navigation = [
     { name: "Dashboard", href: '/dashboard', icon: Squares2X2Icon },
-    { name: "Via Client", href: '/dashboard/client', icon: ComputerDesktopIcon },
-    { name: "On Server", href: '/dashboard/server', icon: ServerStackIcon },
-    { name: "My Role", href: '/dashboard/role', icon: ShieldCheckIcon },
-    { name: "API Tokens", href: '/dashboard/token', icon: KeyIcon }
+    { name: "Example", href: '/dashboard/example', icon: CpuChipIcon }
 ]
 
 const homePath = "/dashboard"

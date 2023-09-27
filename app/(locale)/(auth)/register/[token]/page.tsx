@@ -19,7 +19,8 @@ export default function Page({ params: { token } }: { params: { token: string } 
     let { email }: any = jwt.decode(token)
 
     const onSubmit = async ({ name, password }: any) => {
-        fetch('/api/auth/register/create', { method: 'POST', body: JSON.stringify({ name, email, password, token }) })
+        await fetch('/api/auth/register/create', { method: 'POST', body: JSON.stringify({ name, password, token }) })
+
         signIn('credentials', { email, password, callbackUrl })
     }
 

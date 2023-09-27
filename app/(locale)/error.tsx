@@ -54,7 +54,7 @@ export default function Error({ reset }: { reset: () => void }) {
                             <button className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                                 onClick={reset}
                             >
-                                Back to homepage
+                                Try again
                             </button>
                             <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet" className="text-sm font-semibold leading-6 text-gray-900">
                                 Contribute <span aria-hidden="true">→</span>

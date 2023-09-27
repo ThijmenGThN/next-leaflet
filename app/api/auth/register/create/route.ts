@@ -13,16 +13,25 @@ export async function POST(req: NextRequest) {
         process.env.NEXTAUTH_SECRET
     )) return NextResponse.json('Internal server error.', { status: 500 })
 
-    const { name, email, password, token } = await req.json()
+    const { name, password, token } = await req.json()
 
-    if (!validate.objects.user.safeParse({ name, email, password }).success) return NextResponse.json('The provided user details do not meet the criteria.', { status: 400 })
-    jwt.verify(token, process.env.NEXTAUTH_SECRET, (err: any) => {
+    if (!(
+        validate.objects.name.safeParse({ name }).success &&
+        validate.objects.password.safeParse({ password }).success
+    )) return NextResponse.json('The provided user details do not meet the criteria.', { status: 400 })
+
+    let email
+    jwt.verify(token, process.env.NEXTAUTH_SECRET, (err: any, decoded: any) => {
         if (err) return NextResponse.json('The provided token has expired.', { status: 401 })
+        email = decoded.email
     })
+
+    if (!email) return NextResponse.json('The provided token has expired.', { status: 401 })
 
     await prisma.user.create({
         data: {
-            name, email,
+            name,
+            email,
             password: await bcrypt.hash(password, 12)
         }
     })

@@ -12,6 +12,7 @@ const validators = {
 
         name: z.object({ name: vTypes.name }),
         email: z.object({ email: vTypes.email }),
+        password: z.object({ password: vTypes.password }),
 
         user: z.object({
             name: vTypes.name,

@@ -10,10 +10,10 @@ export default async function Page() {
             <ul role="list" className="divide-y divide-gray-200">
                 <li className="px-6 py-4">
                     <p className="font-semibold">
-                        Your role fetched via a client component
+                        Server
                     </p>
-                    <p className="m-2">
-                        You have the {session?.user.role} role.
+                    <p>
+                        {session?.user.name} (<b>{session?.user.role}</b>)
                     </p>
                 </li>
             </ul>
