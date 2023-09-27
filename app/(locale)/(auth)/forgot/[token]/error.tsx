@@ -25,10 +25,10 @@ export default function Error() {
             <div className="relative my-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 flex flex-col gap-y-4">
 
-                    <p className="text-sm mt-4 text-center font-medium text-gray-900">The password reset has reached its expiration date.</p>
+                    <p className="text-sm text-center font-medium text-gray-900">The password reset has reached its expiration date.</p>
 
                     <Link href="/forgot" className="mt-5 flex w-full gap-x-2 items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                        Reset your password
+                        Reset your password again
                     </Link>
 
                     <Link href='/register' className="flex items-center justify-center w-full rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">

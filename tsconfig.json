@@ -23,8 +23,7 @@
       "@/emails/*": ["src/emails/*"],
       "@/styles/*": ["src/styles/*"],
       "@/assets/*": ["src/assets/*"],
-      "@/prisma/*": ["src/prisma/*"],
-      "@/types/*": ["src/types/*"]
+      "@/prisma/*": ["src/prisma/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

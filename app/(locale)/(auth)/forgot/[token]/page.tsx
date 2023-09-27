@@ -11,7 +11,7 @@ import aLogo from '@/assets/logo.webp'
 
 export default async function Page({ params: { token } }: { params: { token: string } }) {
 
-    if (!process.env.NEXTAUTH_SECRET) throw new Error('Missing NEXTAUTH environment variables.')
+    if (!process.env.NEXTAUTH_SECRET) throw new Error()
 
     let { email }: any = jwt.decode(token)
 
@@ -19,7 +19,7 @@ export default async function Page({ params: { token } }: { params: { token: str
 
     const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
 
-    if (token != passwordResetToken) throw new Error('The provided token has expired.')
+    if (token != passwordResetToken) throw new Error()
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

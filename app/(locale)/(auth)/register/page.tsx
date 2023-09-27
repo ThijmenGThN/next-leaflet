@@ -21,8 +21,7 @@ export default function Page() {
         if (!email) return
 
         const { ok } = await fetch('/api/auth/register', { method: 'POST', body: JSON.stringify({ email }) })
-
-        if (!ok) throw new Error('Registration attempt has failed.')
+        if (!ok) throw new Error()
 
         setFormEmail(email)
         setHasBeenSent(true)

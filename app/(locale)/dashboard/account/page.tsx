@@ -4,6 +4,7 @@ import Name from './Name'
 import Token from './Token'
 
 export default async function Page() {
+
     const session = await getServerSession()
 
     return (

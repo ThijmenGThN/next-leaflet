@@ -12,15 +12,11 @@ export default function Page() {
 
     const [token, setToken] = useState<string>()
 
-
     async function onSubmit({ name }: { name: string }) {
         const res = await fetch('/api/auth/account/token/create', { method: 'POST', body: JSON.stringify({ name }) })
-
         if (!res.ok) throw new Error()
 
-        const token = await res.json()
-
-        setToken(token)
+        setToken(await res.json())
     }
 
     return (

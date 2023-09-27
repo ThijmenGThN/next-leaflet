@@ -8,6 +8,7 @@ import DeleteToken from "./token/Delete"
 import type { ApiToken } from "@prisma/client"
 
 export default async function Page() {
+
     const session = await getServerSession()
 
     const tokens: Array<ApiToken> = session?.user.email

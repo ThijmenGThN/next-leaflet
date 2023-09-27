@@ -16,7 +16,6 @@ export default function Component() {
 
     async function onSubmit({ email, password }: { email: string, password: string }) {
         const { error }: any = await signIn('credentials', { email, password, redirect: false })
-
         if (error) throw new Error()
 
         router.refresh()
