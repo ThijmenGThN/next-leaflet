@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import OAuth from '@/components/auth/OAuth'
-import Credentials from '@/components/auth/Credentials'
+import OAuth from '../OAuth'
+import Credentials from './Credentials'
 
 import aLogo from '@/assets/logo.webp'
 

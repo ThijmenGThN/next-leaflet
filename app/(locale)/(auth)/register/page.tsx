@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 import gravatar from '@/helpers/gravatar'
 
-import OAuth from '@/components/auth/OAuth'
+import OAuth from '../OAuth'
 
 import aLogo from '@/assets/logo.webp'
 

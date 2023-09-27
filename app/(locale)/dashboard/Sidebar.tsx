@@ -10,8 +10,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import gravatar from '@/helpers/gravatar'
 import { classNames } from "@/helpers/tailwind"
 
-import Dropdown from '@/components/interface/Dropdown'
-import Loading from '@/components/interface/Loading'
+import Dropdown from './Dropdown'
+import Loading from '@/components/Loader'
 
 import aLogo from '@/assets/logo.webp'
 

@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import prisma from '@/prisma/client'
 import gravatar from '@/helpers/gravatar'
 
-import Reset from '@/components/auth/Reset'
+import Reset from './Reset'
 
 import aLogo from '@/assets/logo.webp'
 
