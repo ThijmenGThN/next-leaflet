@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
     if (!process.env.NEXTAUTH_SECRET) return NextResponse.json('Internal server error.', { status: 500 })
 
     const session = await getToken({ req })
-
     if (!session) return NextResponse.json('You are not authorized to perform this action.', { status: 401 })
 
     const { name } = await req.json()
