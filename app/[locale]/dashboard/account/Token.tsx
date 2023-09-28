@@ -6,9 +6,10 @@ import prisma from "@/prisma/client"
 import DeleteToken from "./token/Delete"
 
 import type { ApiToken } from "@prisma/client"
+import { useTranslations } from "next-intl"
 
 export default async function Page() {
-
+    const t = useTranslations('dashboard')
     const session = await getServerSession()
 
     const tokens: Array<ApiToken> = session?.user.email
@@ -23,14 +24,14 @@ export default async function Page() {
                         API Tokens
                     </h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">
-                        Private authorization tokens to request data from our endpoint
+                        {t('private-authorization-tokens-to-request-data-from-our-endpoint')}
                     </p>
                 </div>
 
                 <Link className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     href="/dashboard/account/token"
                 >
-                    Generate new token
+                    {t('generate-new-token')}
                 </Link>
             </div>
 
@@ -41,11 +42,13 @@ export default async function Page() {
                             <li key={token.id} className="flex px-4 sm:px-6 items-center justify-between gap-x-6 py-5">
                                 <div className="min-w-0">
                                     <div className="flex items-start gap-x-3">
-                                        <p className="text-sm font-semibold leading-6 text-gray-900">{token.name}</p>
+                                        <p className="text-sm font-semibold leading-6 text-gray-900">
+                                            {token.name}
+                                        </p>
                                     </div>
                                     <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
                                         <p className="whitespace-nowrap">
-                                            Created on {new Date(token.createdOn).toLocaleString('en', { month: "long", day: "numeric", year: "numeric" })}
+                                            {t('created-on')} {new Date(token.createdOn).toLocaleString('en', { month: "long", day: "numeric", year: "numeric" })}
                                         </p>
                                     </div>
                                 </div>

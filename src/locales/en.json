@@ -1,5 +1,5 @@
 {
-  "example": {
+  "next-leaflet": {
     "an-optimized-tech-stack-for-efficiency": "An optimized tech stack for efficiency",
     "report-an-issue": "Report an issue",
     "dashboard": "Dashboard",
@@ -10,5 +10,27 @@
     "an-error-occurred": "An error occurred",
     "sorry-something-unexpected-happened": "Sorry, something unexpected happened",
     "try-again": "Try again"
+  },
+  "dashboard": {
+    "signed-in-as": "Signed in as",
+    "sign-out": "Sign out",
+    "welcome-to-the-dashboard-of-next-leaflet": "Welcome to the dashboard of next-leaflet",
+    "an-optimized-tech-stack-for-efficiency-an-all-in-one-solution-to-quickly-build-modern-web-apps": "An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.",
+    "private-authorization-tokens-to-request-data-from-our-endpoint": "Private authorization tokens to request data from our endpoint",
+    "generate-new-token": "Generate new token",
+    "created-on": "Created on",
+    "information-related-to-your-account": "Information related to your account",
+    "an-api-token-with-the-same-name-has-already-been-generated-or-you-have-reached-the-maximum-limit-for-api-tokens": "An API token with the same name has already been generated or you have reached the maximum limit for API tokens",
+    "try-again": "Try again",
+    "your-new-token": "Your new token",
+    "copy": "Copy",
+    "please-ensure-to-save-this-token-in-a-secure-location-as-once-you-close-this-window-it-will-no-longer-be-visible-to-you": "Please ensure to save this token in a secure location as once you close this window, it will no longer be visible to you",
+    "return-to-overview": "Return to overview",
+    "once-a-new-token-has-been-generated-you-will-be-able-to-view-it-in-the-overview-if-needed-you-can-easily-revoke-the-token-at-any-time": "Once a new token has been generated, you will be able to view it in the overview. If needed, you can easily revoke the token at any time",
+    "generate-token": "Generate token",
+    "cancel": "Cancel",
+    "token-name": "Token name",
+    "profile": "Profile",
+    "name": "Name"
   }
 }

@@ -3,12 +3,15 @@
 import Link from 'next/link'
 import { useState } from "react"
 
+import { useTranslations } from 'next-intl'
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 
 import validate from '@/helpers/validation'
+
 import Form from '@/components/Form'
 
 export default function Page() {
+    const t = useTranslations('dashboard')
 
     const [token, setToken] = useState<string>()
 
@@ -27,7 +30,7 @@ export default function Page() {
                         API Tokens
                     </h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">
-                        Private authorization tokens to request data from our endpoint
+                        {t('private-authorization-tokens-to-request-data-from-our-endpoint')}
                     </p>
                 </div>
             </div>
@@ -36,7 +39,7 @@ export default function Page() {
                 {token
                     ? <>
                         <label className="block text-sm font-medium leading-6 text-gray-900">
-                            Your new token
+                            {t('your-new-token')}
                         </label>
                         <div className="mt-2 flex rounded-md shadow-sm">
                             <p className="block w-full rounded-none truncate rounded-l-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-gray-50 sm:text-sm sm:leading-6">
@@ -46,12 +49,12 @@ export default function Page() {
                                 onClick={() => navigator.clipboard.writeText(token)}
                             >
                                 <DocumentDuplicateIcon className="-ml-0.5 h-5 w-5 text-gray-400 group-focus:text-primary" />
-                                Copy
+                                {t('copy')}
                             </button>
                         </div>
 
                         <p className="mt-3 text-xs leading-6 text-gray-600">
-                            Please ensure to save this token in a secure location as once you close this window, it will no longer be visible to you
+                            {t('please-ensure-to-save-this-token-in-a-secure-location-as-once-you-close-this-window-it-will-no-longer-be-visible-to-you')}
                         </p>
 
                         <div className="mt-6 flex items-center justify-end gap-x-6">
@@ -59,18 +62,18 @@ export default function Page() {
                                 href="/dashboard/account"
                                 prefetch={false}
                             >
-                                Return to overview
+                                {t('return-to-overview')}
                             </Link>
                         </div>
                     </>
                     : <Form
                         onSubmit={onSubmit}
-                        submit={{ label: 'Generate token', position: 'right' }}
-                        cancel={{ label: 'Cancel', redirect: '/dashboard/account' }}
-                        description='Once a new token has been generated, you will be able to view it in the overview. If needed, you can easily revoke the token at any time'
+                        submit={{ label: t('generate-token'), position: 'right' }}
+                        cancel={{ label: t('cancel'), redirect: '/dashboard/account' }}
+                        description={t('once-a-new-token-has-been-generated-you-will-be-able-to-view-it-in-the-overview-if-needed-you-can-easily-revoke-the-token-at-any-time')}
                         validator={validate.objects.name}
                         fields={[
-                            { id: 'name', type: 'text', label: 'Token name' }
+                            { id: 'name', type: 'text', label: t('token-name') }
                         ]}
                     />}
             </div>

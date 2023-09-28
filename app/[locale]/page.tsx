@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
-    const t = useTranslations()
+    const t = useTranslations('next-leaflet')
 
     return (
         <div className="bg-white">
@@ -22,7 +22,7 @@ export default function Page() {
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
                         <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet/issues" className="text-sm font-semibold leading-6 text-gray-900">
-                            {t('example.report-an-issue')} <span aria-hidden="true">&rarr;</span>
+                            {t('report-an-issue')} <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>
                 </nav>
@@ -47,17 +47,17 @@ export default function Page() {
                             next-leaflet
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            {t('example.an-optimized-tech-stack-for-efficiency')}
+                            {t('an-optimized-tech-stack-for-efficiency')}
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 href="/dashboard"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                {t('example.dashboard')}
+                                {t('dashboard')}
                             </Link>
                             <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet" className="text-sm font-semibold leading-6 text-gray-900">
-                                {t('example.contribute')} <span aria-hidden="true">→</span>
+                                {t('contribute')} <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>
