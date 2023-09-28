@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
+import { NextIntlClientProvider as Localizer, useMessages } from 'next-intl'
 
 import Session from './Session'
 import { locales } from '../../middleware'
@@ -22,9 +23,12 @@ export default function Layout({ children, params: { locale } }: { children: Rea
     return (
         <html lang={locale} className="h-full">
             <body className={inter.className + ' h-full'}>
-                <Session>
-                    {children}
-                </Session>
+
+                <Localizer locale={locale} messages={useMessages()}>
+                    <Session>
+                        {children}
+                    </Session>
+                </Localizer>
             </body>
         </html>
     )

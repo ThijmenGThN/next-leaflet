@@ -5,16 +5,24 @@ import prisma from "@/prisma/client"
 
 import DeleteToken from "./token/Delete"
 
-import type { ApiToken } from "@prisma/client"
 import { useTranslations } from "next-intl"
 
-export default async function Page() {
-    const t = useTranslations('dashboard')
+import type { ApiToken } from "@prisma/client"
+
+export default async function Logic() {
     const session = await getServerSession()
 
-    const tokens: Array<ApiToken> = session?.user.email
-        ? await prisma.apiToken.findMany({ where: { owner: session.user.email } })
-        : []
+    return <Page
+        tokens={
+            session?.user.email
+                ? await prisma.apiToken.findMany({ where: { owner: session.user.email } })
+                : []
+        }
+    />
+}
+
+function Page({ tokens }: { tokens: Array<ApiToken> }) {
+    const t = useTranslations('dashboard')
 
     return (
         <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">

@@ -1,16 +1,19 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
+import { useSession } from 'next-auth/react'
 
 import validate from '@/helpers/validation'
 
 import Form from '@/components/Form'
 
-export default function Component({ name }: { name: string }) {
+export default function Component() {
     const t = useTranslations('dashboard')
+    const { data: session, update } = useSession()
 
     const onSubmit = async ({ name }: any) => {
         await fetch('/api/auth/account/name/update', { method: 'POST', body: JSON.stringify({ name }) })
+        await update()
     }
 
     return (
@@ -30,7 +33,7 @@ export default function Component({ name }: { name: string }) {
                     validator={validate.objects.name}
                     submit={{ label: 'Save', position: 'right' }}
                     fields={[
-                        { id: 'name', type: 'text', label: t('name'), value: name }
+                        { id: 'name', type: 'text', label: t('name'), value: session?.user.name }
                     ]}
                 />
             </div>

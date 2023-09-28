@@ -10,9 +10,7 @@ import Reset from './Reset'
 
 import aLogo from '@/assets/logo.webp'
 
-export default async function Page({ params: { token } }: { params: { token: string } }) {
-    const t = useTranslations('auth')
-
+export default async function Logic({ params: { token } }: { params: { token: string } }) {
     if (!process.env.NEXTAUTH_SECRET) throw new Error()
 
     let { email }: any = jwt.decode(token)
@@ -22,6 +20,15 @@ export default async function Page({ params: { token } }: { params: { token: str
     const { passwordResetToken }: any = await prisma.user.findUnique({ where: { email } })
 
     if (token != passwordResetToken) throw new Error()
+
+    return <Page
+        email={email}
+        token={token}
+    />
+}
+
+function Page({ email, token }: { email: string, token: string }) {
+    const t = useTranslations('auth')
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
