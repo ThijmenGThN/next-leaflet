@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import Image from 'next/image'
+import { useTranslations } from "next-intl"
 
 import aLogo from '@/assets/logo.webp'
 
 export default function Error({ reset }: { reset: () => void }) {
+    const t = useTranslations()
 
     return (
         <div className="bg-white">
@@ -22,7 +24,7 @@ export default function Error({ reset }: { reset: () => void }) {
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
                         <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet/issues" className="text-sm font-semibold leading-6 text-gray-900">
-                            Report an issue <span aria-hidden="true">&rarr;</span>
+                            {t('example.report-an-issue')} <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>
                 </nav>
@@ -45,19 +47,19 @@ export default function Error({ reset }: { reset: () => void }) {
                     <div className="text-center">
                         <p className="text-base font-semibold text-primary">500</p>
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            An error occurred
+                            {t('example.an-error-occurred')}
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            Sorry, something unexpected happened
+                            {t('example.sorry-something-unexpected-happened')}
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <button className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                                 onClick={reset}
                             >
-                                Try again
+                                {t('example.try-again')}
                             </button>
                             <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet" className="text-sm font-semibold leading-6 text-gray-900">
-                                Contribute <span aria-hidden="true">→</span>
+                                {t('example.contribute')} <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         Email(
             eRegister({
                 email,
-                link: process.env.NEXTAUTH_URL + '/register/' + token,
+                link: process.env.NEXTAUTH_URL + '/en/register/' + token,
                 assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
             }),
             {

@@ -1,9 +1,11 @@
 import Link from "next/link"
 import Image from 'next/image'
+import { useTranslations } from "next-intl"
 
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
+    const t = useTranslations()
 
     return (
         <div className="bg-white">
@@ -20,7 +22,7 @@ export default function Page() {
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
                         <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet/issues" className="text-sm font-semibold leading-6 text-gray-900">
-                            Report an issue <span aria-hidden="true">&rarr;</span>
+                            {t('example.report-an-issue')} <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>
                 </nav>
@@ -43,20 +45,20 @@ export default function Page() {
                     <div className="text-center">
                         <p className="text-base font-semibold text-primary">404</p>
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            Page not found
+                            {t('example.page-not-found')}
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            Sorry, we could not find the page you are looking for
+                            {t('example.sorry-we-could-not-find-the-page-you-are-looking-for')}
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 href="/"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                Back to homepage
+                                {t('example.back-to-homepage')}
                             </Link>
                             <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet" className="text-sm font-semibold leading-6 text-gray-900">
-                                Contribute <span aria-hidden="true">→</span>
+                                {t('example.contribute')} <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>
