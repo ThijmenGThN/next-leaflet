@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import jwt from 'jsonwebtoken'
+import { useTranslations } from 'next-intl'
 
 import prisma from '@/prisma/client'
 import gravatar from '@/helpers/gravatar'
@@ -10,6 +11,7 @@ import Reset from './Reset'
 import aLogo from '@/assets/logo.webp'
 
 export default async function Page({ params: { token } }: { params: { token: string } }) {
+    const t = useTranslations('auth')
 
     if (!process.env.NEXTAUTH_SECRET) throw new Error()
 
@@ -32,7 +34,7 @@ export default async function Page({ params: { token } }: { params: { token: str
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Update your password
+                    {t('update-your-password')}
                 </h2>
             </div>
 
@@ -46,7 +48,9 @@ export default async function Page({ params: { token } }: { params: { token: str
                             height={80}
                             alt=""
                         />
-                        <p className="text-sm font-medium text-gray-900">{email}</p>
+                        <p className="text-sm font-medium text-gray-900">
+                            {email}
+                        </p>
                     </div>
 
                     <div className="mt-8">
@@ -56,7 +60,7 @@ export default async function Page({ params: { token } }: { params: { token: str
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← Sign in to a different account
+                        ← {t('sign-in-to-a-different-account')}
                     </Link>
                 </div>
             </div>

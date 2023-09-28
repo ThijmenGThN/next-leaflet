@@ -1,11 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 import { signIn, getProviders } from "next-auth/react"
 
 const callbackUrl = '/dashboard'
 
 export default function Component() {
+    const t = useTranslations()
+
     const [providers, setProviders] = useState<Array<any>>([])
 
     useEffect(() => { getProviders().then(({ credentials, ...OAuth }: any) => setProviders(Object.values(OAuth))) }, [])
@@ -18,7 +21,7 @@ export default function Component() {
                 </div>
                 <div className="relative flex justify-center text-sm font-medium leading-6">
                     <span className="bg-white px-6 text-gray-900">
-                        Or continue with
+                        {t('auth.or-continue-with')}
                     </span>
                 </div>
             </div>
@@ -30,7 +33,9 @@ export default function Component() {
                             <button className="flex w-full items-center justify-center gap-3 rounded-md bg-black hover:bg-zinc-900 px-3 py-1.5 text-white"
                                 onClick={() => signIn(provider.id, { callbackUrl })}
                             >
-                                <span className="text-sm font-semibold leading-6">{provider.name}</span>
+                                <span className="text-sm font-semibold leading-6">
+                                    {provider.name}
+                                </span>
                             </button>
                         </li>
                     )

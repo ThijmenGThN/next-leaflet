@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import jwt from 'jsonwebtoken'
 import { signIn } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import gravatar from '@/helpers/gravatar'
 import validate from '@/helpers/validation'
@@ -15,6 +16,7 @@ import aLogo from '@/assets/logo.webp'
 const callbackUrl = '/dashboard'
 
 export default function Page({ params: { token } }: { params: { token: string } }) {
+    const t = useTranslations('auth')
 
     let { email }: any = jwt.decode(token)
 
@@ -35,7 +37,7 @@ export default function Page({ params: { token } }: { params: { token: string } 
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Complete your registration
+                    {t('complete-your-registration')}
                 </h2>
             </div>
 
@@ -49,17 +51,19 @@ export default function Page({ params: { token } }: { params: { token: string } 
                             height={80}
                             alt=""
                         />
-                        <p className="text-sm font-medium text-gray-900">{email}</p>
+                        <p className="text-sm font-medium text-gray-900">
+                            {email}
+                        </p>
                     </div>
 
                     <Form
                         onSubmit={onSubmit}
-                        submit={{ label: "Sign up", position: 'full' }}
+                        submit={{ label: t('sign-up'), position: 'full' }}
                         validator={validate.forms.register}
                         fields={[
-                            { id: 'name', type: 'text', label: 'Name' },
-                            { id: 'password', type: 'password', label: 'Password' },
-                            { id: 'repeatPassword', type: 'password', label: 'Repeat password' }
+                            { id: 'name', type: 'text', label: t('name') },
+                            { id: 'password', type: 'password', label: t('password') },
+                            { id: 'repeatPassword', type: 'password', label: t('repeat-password') }
                         ]}
                         options={[
                             "showPassword"
@@ -69,7 +73,7 @@ export default function Page({ params: { token } }: { params: { token: string } 
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← Sign in to a different account
+                        ← {t('sign-in-to-a-different-account')}
                     </Link>
                 </div>
             </div >

@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
+import { useTranslations } from "next-intl"
 
 import validate from '@/helpers/validation'
 
@@ -12,6 +13,7 @@ import Form from '@/components/Form'
 const callbackUrl = '/dashboard'
 
 export default function Component() {
+    const t = useTranslations('auth')
     const router = useRouter()
 
     async function onSubmit({ email, password }: { email: string, password: string }) {
@@ -28,11 +30,11 @@ export default function Component() {
         <>
             <Form
                 onSubmit={onSubmit}
-                submit={{ label: "Sign in", position: 'full' }}
+                submit={{ label: t('sign-in'), position: 'full' }}
                 validator={validate.forms.login}
                 fields={[
-                    { id: 'email', type: 'email', label: 'Email address' },
-                    { id: 'password', type: 'password', label: 'Password' }
+                    { id: 'email', type: 'email', label: t('email-address') },
+                    { id: 'password', type: 'password', label: t('password') }
                 ]}
                 options={[
                     'showPassword'
@@ -42,12 +44,12 @@ export default function Component() {
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
                     <Link href="/forgot" className="font-semibold text-primary hover:text-primary-600">
-                        Forgot password?
+                        {t('forgot-password')}
                     </Link>
                 </div>
                 <div className="text-sm leading-6">
                     <Link href="/register" className="font-semibold text-primary hover:text-primary-600">
-                        Create an account
+                        {t('create-an-account')}
                     </Link>
                 </div>
             </div>

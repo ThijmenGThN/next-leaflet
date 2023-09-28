@@ -3,9 +3,9 @@
 import Link from "next/link"
 import Image from 'next/image'
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 import gravatar from "@/helpers/gravatar"
-
 import validate from '@/helpers/validation'
 
 import Form from "@/components/Form"
@@ -13,6 +13,8 @@ import Form from "@/components/Form"
 import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
+    const t = useTranslations('auth')
+
     const [formEmail, setFormEmail] = useState<string>()
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
 
@@ -36,7 +38,7 @@ export default function Page() {
                     />
                 </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Reset your password
+                    {t('reset-your-password')}
                 </h2>
             </div>
 
@@ -52,18 +54,20 @@ export default function Page() {
                                     height={80}
                                     alt=""
                                 />
-                                <p className="text-sm font-medium text-gray-900">{formEmail}</p>
+                                <p className="text-sm font-medium text-gray-900">
+                                    {formEmail}
+                                </p>
 
                                 <p className="text-sm mt-4 text-center font-medium text-gray-900">
-                                    We have sent you an email to reset your password
+                                    {t('we-have-sent-you-an-email-to-reset-your-password')}
                                 </p>
                             </div>
                             : <Form
                                 onSubmit={onSubmit}
                                 validator={validate.objects.email}
-                                submit={{ label: "Continue", position: 'full' }}
+                                submit={{ label: t('continue'), position: 'full' }}
                                 fields={[
-                                    { id: 'email', type: 'email', label: 'Email address' }
+                                    { id: 'email', type: 'email', label: t('email-address') }
                                 ]}
                             />
                     }
@@ -71,7 +75,7 @@ export default function Page() {
 
                 <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                     <Link href="/login">
-                        ← Sign in to your account
+                        ← {t('sign-in-to-your-account')}
                     </Link>
                 </div>
             </div>
