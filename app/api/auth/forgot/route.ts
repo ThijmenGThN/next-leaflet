@@ -15,26 +15,32 @@ export async function POST(req: NextRequest) {
         process.env.NEXTAUTH_SECRET
     )) return NextResponse.json('Internal server error.', { status: 500 })
 
-    const { email } = await req.json()
+    try {
+        const { email } = await req.json()
 
-    if (!vTypes.email.safeParse(email).success) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
+        if (!vTypes.email.safeParse(email).success) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
 
-    const passwordResetToken = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' })
+        const passwordResetToken = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' })
 
-    await prisma.user.update({ where: { email }, data: { passwordResetToken } })
+        await prisma.user.update({ where: { email }, data: { passwordResetToken } })
 
-    Email(
-        eReset({
-            email,
-            link: process.env.NEXTAUTH_URL + '/forgot/' + passwordResetToken,
-            assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
-        }),
-        {
-            to: email,
-            subject: 'Reset your password'
-        }
-    )
+        Email(
+            eReset({
+                email,
+                link: process.env.NEXTAUTH_URL + '/forgot/' + passwordResetToken,
+                assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
+            }),
+            {
+                to: email,
+                subject: 'Reset your password'
+            }
+        )
 
-    return NextResponse.json('We have sent you an email to reset your password.', { status: 200 })
+        return NextResponse.json('We have sent you an email to reset your password.', { status: 200 })
+    }
+
+    catch {
+        return NextResponse.json('Internal server error, try again later.', { status: 500 })
+    }
 
 }
