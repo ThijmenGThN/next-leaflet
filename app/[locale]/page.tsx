@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import aLogo from '@/assets/logo.webp'
+import Switcher from "@/components/locale/Switcher"
+
+import { locales } from '../../middleware'
 
 export default function Page() {
     const t = useTranslations('next-leaflet')
@@ -21,9 +24,9 @@ export default function Page() {
                         </Link>
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
-                        <Link target="_blank" href="https://github.com/ThijmenGThN/next-leaflet/issues" className="text-sm font-semibold leading-6 text-gray-900">
-                            {t('report-an-issue')} <span aria-hidden="true">&rarr;</span>
-                        </Link>
+
+                        <Switcher locales={locales} />
+
                     </div>
                 </nav>
             </header>
