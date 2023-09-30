@@ -23,7 +23,6 @@ export default function Layout({ children, params: { locale } }: { children: Rea
     return (
         <html lang={locale} className="h-full">
             <body className={inter.className + ' h-full'}>
-
                 <Localizer locale={locale} messages={useMessages()}>
                     <Session>
                         {children}
