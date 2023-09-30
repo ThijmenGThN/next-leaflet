@@ -1,14 +1,13 @@
 "use client"
 
+import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
-
-import validate from '@/helpers/validation'
 
 import Form from '@/components/Form'
 
 export default function Component() {
-    const t = useTranslations('dashboard')
+    const t = useTranslations()
     const { data: session, update } = useSession()
 
     const onSubmit = async ({ name }: any) => {
@@ -20,20 +19,26 @@ export default function Component() {
         <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
             <div className="px-4 py-5 sm:px-6">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
-                    {t('profile')}
+                    {t('dashboard.profile')}
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                    {t('information-related-to-your-account')}
+                    {t('dashboard.information-related-to-your-account')}
                 </p>
             </div>
 
             <div className='px-4 py-5 sm:px-6'>
                 <Form
                     onSubmit={onSubmit}
-                    validator={validate.objects.name}
-                    submit={{ label: 'Save', position: 'right' }}
+                    validator={
+                        z.object({
+                            name: z.string()
+                                .min(2, { message: t('auth.this-name-is-too-short') })
+                                .max(32, { message: t('auth.this-name-is-too-long') })
+                        })
+                    }
+                    submit={{ label: t('dashboard.save'), position: 'right' }}
                     fields={[
-                        { id: 'name', type: 'text', label: t('name'), value: session?.user.name }
+                        { id: 'name', type: 'text', label: t('dashboard.name'), value: session?.user.name }
                     ]}
                 />
             </div>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 import prisma from '@/prisma/client'
 
-import { getApiToken } from "@/helpers/apiToken"
+import { getApiToken } from "@/helpers/api/token"
 
 let apiSessionRequests = 0
 

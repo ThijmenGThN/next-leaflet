@@ -1,10 +1,9 @@
+import { z } from 'zod'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { NextRequest, NextResponse } from "next/server"
 
 import prisma from '@/prisma/client'
-
-import validate from '@/helpers/validation'
 
 export async function POST(req: NextRequest) {
 
@@ -17,8 +16,16 @@ export async function POST(req: NextRequest) {
         const { name, password, token } = await req.json()
 
         if (!(
-            validate.objects.name.safeParse({ name }).success &&
-            validate.objects.password.safeParse({ password }).success
+            z.object({
+                name: z.string()
+                    .min(2, { message: "This name is too short" })
+                    .max(32, { message: "This name is too long" })
+            }).safeParse({ name }).success &&
+            z.object({
+                password: z.string()
+                    .min(8, { message: "This password is too short" })
+                    .max(64, { message: "This password is too long" })
+            }).safeParse({ password }).success
         )) return NextResponse.json('The provided user details do not meet the criteria.', { status: 400 })
 
         let email

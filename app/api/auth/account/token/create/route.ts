@@ -1,3 +1,4 @@
+import { z } from "zod"
 import crypto from "crypto"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -5,8 +6,6 @@ import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
 
 import prisma from '@/prisma/client'
-
-import { vTypes } from '@/helpers/validation'
 
 export async function POST(req: NextRequest) {
 
@@ -18,7 +17,11 @@ export async function POST(req: NextRequest) {
 
         const { name } = await req.json()
 
-        if (!vTypes.name.safeParse(name).success) return NextResponse.json('The provided name does not meet the criteria.', { status: 400 })
+        if (!z.string()
+            .min(2, { message: "This name is too short" })
+            .max(32, { message: "This name is too long" })
+            .safeParse(name).success
+        ) return NextResponse.json('The provided name does not meet the criteria.', { status: 400 })
 
         if (await prisma.apiToken.findFirst({ where: { name, owner: session.email } })) return NextResponse.json('An API token with the same name has already been generated.', { status: 403 })
         if (await prisma.apiToken.count({ where: { owner: session.email } }) >= 25) return NextResponse.json('You have reached the maximum limit for API tokens.', { status: 403 })

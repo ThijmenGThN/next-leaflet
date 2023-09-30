@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 
+import { z } from "zod"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 import prisma from '@/prisma/client'
-
-import { vTypes } from '@/helpers/validation'
 
 export async function POST(req: NextRequest) {
 
@@ -17,7 +16,11 @@ export async function POST(req: NextRequest) {
     try {
         const { password, token } = await req.json()
 
-        if (!vTypes.password.safeParse(password).success) return NextResponse.json('The provided password does not meet the required criteria.', { status: 400 })
+        if (!z.string()
+            .min(8, { message: "This password is too short" })
+            .max(64, { message: "This password is too long" })
+            .safeParse(password).success
+        ) return NextResponse.json('The provided password does not meet the required criteria.', { status: 400 })
 
         let email
         jwt.verify(token, process.env.NEXTAUTH_SECRET, (err: any, decoded: any) => {

@@ -1,12 +1,11 @@
 "use client"
 
+import { z } from "zod"
 import Link from "next/link"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { useTranslations } from "next-intl"
-
-import validate from '@/helpers/validation'
 
 import Form from '@/components/Form'
 
@@ -31,7 +30,16 @@ export default function Component() {
             <Form
                 onSubmit={onSubmit}
                 submit={{ label: t('sign-in'), position: 'full' }}
-                validator={validate.forms.login}
+                validator={
+                    z.object({
+                        email: z.string()
+                            .min(2, { message: t('this-email-address-is-too-short') })
+                            .max(64, { message: t('this-email-address-is-too-long') }).email(t('this-email-address-is-not-valid')),
+                        password: z.string()
+                            .min(8, { message: t('this-password-is-too-short') })
+                            .max(64, { message: t('this-password-is-too-long') })
+                    })
+                }
                 fields={[
                     { id: 'email', type: 'email', label: t('email-address') },
                     { id: 'password', type: 'password', label: t('password') }

@@ -31,7 +31,8 @@
         "cancel": "Annuleren",
         "token-name": "Tokennaam",
         "profile": "Profiel",
-        "name": "Naam"
+        "name": "Naam",
+        "save": "Redden"
     },
     "auth": {
         "or-continue-with": "Of ga verder met",
@@ -63,6 +64,14 @@
         "password-reset-has-expired": "Het opnieuw instellen van het wachtwoord is verlopen",
         "the-password-reset-has-reached-its-expiration-date": "Het opnieuw instellen van het wachtwoord heeft de vervaldatum bereikt.",
         "reset-your-password-again": "Stel uw wachtwoord opnieuw in",
-        "show-password": "Wachtwoord tonen"
+        "show-password": "Laat wachtwoord zien",
+        "this-name-is-too-short": "Deze naam is te kort",
+        "this-email-address-is-too-short": "Dit e-mailadres is te kort",
+        "this-password-is-too-short": "Dit wachtwoord is te kort",
+        "this-name-is-too-long": "Deze naam is te lang",
+        "this-email-address-is-too-long": "Dit e-mailadres is te lang",
+        "this-password-is-too-long": "Dit wachtwoord is te lang",
+        "this-email-address-is-not-valid": "Dit e-mailadres is niet geldig",
+        "the-passwords-do-not-match": "de wachtwoorden komen niet overeen"
     }
 }

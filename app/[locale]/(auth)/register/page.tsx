@@ -1,11 +1,11 @@
 "use client"
 
+import { z } from 'zod'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
-import validate from '@/helpers/validation'
 import gravatar from '@/helpers/gravatar'
 
 import Form from '@/components/Form'
@@ -67,7 +67,14 @@ export default function Page() {
                             : <>
                                 <Form
                                     onSubmit={onSubmit}
-                                    validator={validate.objects.email}
+                                    validator={
+                                        z.object({
+                                            email: z.string()
+                                                .min(2, { message: t('this-email-address-is-too-short') })
+                                                .max(64, { message: t('this-email-address-is-too-long') })
+                                                .email(t('this-email-address-is-not-valid'))
+                                        })
+                                    }
                                     submit={{ label: t('continue'), position: 'full' }}
                                     fields={[
                                         { id: 'email', type: 'email', label: t('email-address') }

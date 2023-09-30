@@ -1,5 +1,6 @@
 "use client"
 
+import { z } from 'zod'
 import Link from 'next/link'
 import Image from 'next/image'
 import jwt from 'jsonwebtoken'
@@ -7,7 +8,6 @@ import { signIn } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
 import gravatar from '@/helpers/gravatar'
-import validate from '@/helpers/validation'
 
 import Form from '@/components/Form'
 
@@ -59,7 +59,19 @@ export default function Page({ params: { token } }: { params: { token: string } 
                     <Form
                         onSubmit={onSubmit}
                         submit={{ label: t('sign-up'), position: 'full' }}
-                        validator={validate.forms.register}
+                        validator={
+                            z.object({
+                                name: z.string()
+                                    .min(2, { message: t('this-name-is-too-short') })
+                                    .max(32, { message: t('this-name-is-too-long') }),
+                                password: z.string()
+                                    .min(8, { message: t('this-password-is-too-short') })
+                                    .max(64, { message: t('this-password-is-too-long') }),
+                                repeatPassword: z.string()
+                                    .min(8, { message: t('this-password-is-too-short') })
+                                    .max(64, { message: t('this-password-is-too-long') })
+                            }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: t('the-passwords-do-not-match'), path: ['repeatPassword'] })
+                        }
                         fields={[
                             { id: 'name', type: 'text', label: t('name') },
                             { id: 'password', type: 'password', label: t('password') },

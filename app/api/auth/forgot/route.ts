@@ -1,7 +1,6 @@
+import { z } from 'zod'
 import jwt from 'jsonwebtoken'
 import { NextRequest, NextResponse } from "next/server"
-
-import { vTypes } from '@/helpers/validation'
 
 import prisma from '@/prisma/client'
 import Email from '@/emails/client'
@@ -18,7 +17,12 @@ export async function POST(req: NextRequest) {
     try {
         const { email } = await req.json()
 
-        if (!vTypes.email.safeParse(email).success) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
+        if (!z.string()
+            .min(2, { message: "This email address is too short" })
+            .max(64, { message: "This email address is too long" })
+            .email("This email address is not valid")
+            .safeParse(email).success
+        ) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
 
         const passwordResetToken = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' })
 

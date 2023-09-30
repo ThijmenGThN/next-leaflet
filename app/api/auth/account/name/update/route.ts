@@ -1,6 +1,6 @@
+import { z } from 'zod'
 import prisma from '@/prisma/client'
 import { getToken } from "next-auth/jwt"
-import { vTypes } from "@/helpers/validation"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(req: NextRequest) {
@@ -12,7 +12,11 @@ export async function POST(req: NextRequest) {
 
         const { name } = await req.json()
 
-        if (!vTypes.name.safeParse(name).success) return NextResponse.json('The provided name does not meet the criteria.', { status: 400 })
+        if (!z.string()
+            .min(2, { message: "This name is too short" })
+            .max(32, { message: "This name is too long" })
+            .safeParse(name).success
+        ) return NextResponse.json('The provided name does not meet the criteria.', { status: 400 })
 
         await prisma.user.update({
             where: { email: session.email },

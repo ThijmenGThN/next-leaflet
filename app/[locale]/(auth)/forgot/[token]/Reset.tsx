@@ -1,10 +1,9 @@
 "use client"
 
+import { z } from 'zod'
 import jwt from 'jsonwebtoken'
 import { signIn } from "next-auth/react"
 import { useTranslations } from 'next-intl'
-
-import validate from '@/helpers/validation'
 
 import Form from '@/components/Form'
 
@@ -25,7 +24,16 @@ export default function Component({ token }: { token: string }) {
     return (
         <Form
             onSubmit={onSubmit}
-            validator={validate.forms.password}
+            validator={
+                z.object({
+                    password: z.string()
+                        .min(8, { message: t('this-password-is-too-short') })
+                        .max(64, { message: t('this-password-is-too-long') }),
+                    repeatPassword: z.string()
+                        .min(8, { message: t('this-password-is-too-short') })
+                        .max(64, { message: t('this-password-is-too-long') })
+                }).refine(({ password, repeatPassword }) => password == repeatPassword, { message: t('the-passwords-do-not-match'), path: ['repeatPassword'] })
+            }
             submit={{ label: t('confirm'), position: 'full' }}
             fields={[
                 { id: 'password', type: 'password', label: t('password') },

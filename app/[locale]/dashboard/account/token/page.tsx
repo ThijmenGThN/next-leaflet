@@ -1,17 +1,16 @@
 "use client"
 
+import { z } from 'zod'
 import Link from 'next/link'
 import { useState } from "react"
 
 import { useTranslations } from 'next-intl'
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 
-import validate from '@/helpers/validation'
-
 import Form from '@/components/Form'
 
 export default function Page() {
-    const t = useTranslations('dashboard')
+    const t = useTranslations()
 
     const [token, setToken] = useState<string>()
 
@@ -30,7 +29,7 @@ export default function Page() {
                         API Tokens
                     </h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">
-                        {t('private-authorization-tokens-to-request-data-from-our-endpoint')}
+                        {t('dashboard.private-authorization-tokens-to-request-data-from-our-endpoint')}
                     </p>
                 </div>
             </div>
@@ -39,7 +38,7 @@ export default function Page() {
                 {token
                     ? <>
                         <label className="block text-sm font-medium leading-6 text-gray-900">
-                            {t('your-new-token')}
+                            {t('dashboard.your-new-token')}
                         </label>
                         <div className="mt-2 flex rounded-md shadow-sm">
                             <p className="block w-full rounded-none truncate rounded-l-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-gray-50 sm:text-sm sm:leading-6">
@@ -49,12 +48,12 @@ export default function Page() {
                                 onClick={() => navigator.clipboard.writeText(token)}
                             >
                                 <DocumentDuplicateIcon className="-ml-0.5 h-5 w-5 text-gray-400 group-focus:text-primary" />
-                                {t('copy')}
+                                {t('dashboard.copy')}
                             </button>
                         </div>
 
                         <p className="mt-3 text-xs leading-6 text-gray-600">
-                            {t('please-ensure-to-save-this-token-in-a-secure-location-as-once-you-close-this-window-it-will-no-longer-be-visible-to-you')}
+                            {t('dashboard.please-ensure-to-save-this-token-in-a-secure-location-as-once-you-close-this-window-it-will-no-longer-be-visible-to-you')}
                         </p>
 
                         <div className="mt-6 flex items-center justify-end gap-x-6">
@@ -62,18 +61,24 @@ export default function Page() {
                                 href="/dashboard/account"
                                 prefetch={false}
                             >
-                                {t('return-to-overview')}
+                                {t('dashboard.return-to-overview')}
                             </Link>
                         </div>
                     </>
                     : <Form
                         onSubmit={onSubmit}
-                        submit={{ label: t('generate-token'), position: 'right' }}
-                        cancel={{ label: t('cancel'), redirect: '/dashboard/account' }}
-                        description={t('once-a-new-token-has-been-generated-you-will-be-able-to-view-it-in-the-overview-if-needed-you-can-easily-revoke-the-token-at-any-time')}
-                        validator={validate.objects.name}
+                        submit={{ label: t('dashboard.generate-token'), position: 'right' }}
+                        cancel={{ label: t('dashboard.cancel'), redirect: '/dashboard/account' }}
+                        description={t('dashboard.once-a-new-token-has-been-generated-you-will-be-able-to-view-it-in-the-overview-if-needed-you-can-easily-revoke-the-token-at-any-time')}
+                        validator={
+                            z.object({
+                                name: z.string()
+                                    .min(2, { message: t('auth.this-name-is-too-short') })
+                                    .max(32, { message: t('auth.this-name-is-too-long') })
+                            })
+                        }
                         fields={[
-                            { id: 'name', type: 'text', label: t('token-name') }
+                            { id: 'name', type: 'text', label: t('dashboard.token-name') }
                         ]}
                     />}
             </div>

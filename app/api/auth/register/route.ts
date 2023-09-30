@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import jwt from 'jsonwebtoken'
 import { NextRequest, NextResponse } from "next/server"
 
@@ -5,8 +6,6 @@ import prisma from '@/prisma/client'
 import Email from '@/emails/client'
 
 import eRegister from '@/emails/Register'
-
-import { vTypes } from '@/helpers/validation'
 
 export async function POST(req: NextRequest) {
 
@@ -18,7 +17,13 @@ export async function POST(req: NextRequest) {
     try {
         const { email } = await req.json()
 
-        if (!vTypes.email.safeParse(email).success) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
+        if (!z.string()
+            .min(2, { message: "This email address is too short" })
+            .max(64, { message: "This email address is too long" })
+            .email("This email address is not valid")
+            .safeParse(email).success
+        ) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
+
         if (await prisma.user.findUnique({ where: { email } })) return NextResponse.json('The provided email address is already taken.', { status: 403 })
 
         const token = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '1d' })

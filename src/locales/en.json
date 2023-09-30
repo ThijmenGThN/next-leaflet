@@ -31,7 +31,8 @@
     "cancel": "Cancel",
     "token-name": "Token name",
     "profile": "Profile",
-    "name": "Name"
+    "name": "Name",
+    "save": "Save"
   },
   "auth": {
     "or-continue-with": "Or continue with",
@@ -63,6 +64,14 @@
     "password-reset-has-expired": "Password reset has expired",
     "the-password-reset-has-reached-its-expiration-date": "The password reset has reached its expiration date.",
     "reset-your-password-again": "Reset your password again",
-    "show-password": "Show password"
+    "show-password": "Show password",
+    "this-name-is-too-short": "This name is too short",
+    "this-email-address-is-too-short": "This email address is too short",
+    "this-password-is-too-short": "This password is too short",
+    "this-name-is-too-long": "This name is too long",
+    "this-email-address-is-too-long": "This email address is too long",
+    "this-password-is-too-long": "This password is too long",
+    "this-email-address-is-not-valid": "This email address is not valid",
+    "the-passwords-do-not-match": "The passwords do not match"
   }
 }
