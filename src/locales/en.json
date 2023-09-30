@@ -62,6 +62,7 @@
     "update-your-password": "Update your password",
     "password-reset-has-expired": "Password reset has expired",
     "the-password-reset-has-reached-its-expiration-date": "The password reset has reached its expiration date.",
-    "reset-your-password-again": "Reset your password again"
+    "reset-your-password-again": "Reset your password again",
+    "show-password": "Show password"
   }
 }

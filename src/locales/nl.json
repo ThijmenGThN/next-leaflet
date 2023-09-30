@@ -62,6 +62,7 @@
         "update-your-password": "Update uw wachtwoord",
         "password-reset-has-expired": "Het opnieuw instellen van het wachtwoord is verlopen",
         "the-password-reset-has-reached-its-expiration-date": "Het opnieuw instellen van het wachtwoord heeft de vervaldatum bereikt.",
-        "reset-your-password-again": "Stel uw wachtwoord opnieuw in"
+        "reset-your-password-again": "Stel uw wachtwoord opnieuw in",
+        "show-password": "Wachtwoord tonen"
     }
 }

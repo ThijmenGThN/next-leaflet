@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { classNames } from "@/helpers/tailwind"
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { useTranslations } from "next-intl"
 
 type iFieldIds = 'name' | 'email' | 'password' | 'repeatPassword'
 type iOptionIds = 'showPassword'
@@ -171,6 +172,8 @@ function Field(props: iField) {
 }
 
 function Options(props: iOption) {
+    const t = useTranslations('auth')
+
     switch (props.id) {
 
         case 'showPassword':
@@ -181,7 +184,7 @@ function Options(props: iOption) {
                         type="checkbox"
                     />
                     <label htmlFor="showPassword" className="ml-3 block text-sm leading-6 text-gray-900 hover:cursor-pointer">
-                        Show password
+                        {t('show-password')}
                     </label>
                 </div>
             )
