@@ -3499,15 +3499,14 @@ next-auth@^4.22.1:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
-next-intl@3.0.0-beta.19:
-  version "3.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.0.0-beta.19.tgz#4af0382ee32451daa17e1d25e847cbc7ea129d57"
-  integrity sha512-F9ZZ342rDUJE3hOD2ZkKtkbeJNNUQtorN0Wnr2gThgLeeyKchbwm5KgijK4gOU66Yw91V1lRuGEcV6BMJdSaxg==
+next-intl@^2.20.2:
+  version "2.20.2"
+  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-2.20.2.tgz#c7045fb9f5d915d01661cd81896db1e21c50d549"
+  integrity sha512-28IarFfRzuOjPo6fjAY2RMWVdeejuvzW7jzwVnBfHU6EB0GYwQPWIq1G5YK4gWb44R6dqnjjVDqphWrLwKE+Vw==
   dependencies:
     "@formatjs/intl-localematcher" "^0.2.32"
     negotiator "^0.6.3"
-    server-only "0.0.1"
-    use-intl "3.0.0-beta.3"
+    use-intl "^2.20.2"
 
 next@^13.5.3:
   version "13.5.3"
@@ -4421,11 +4420,6 @@ semver@^7.3.5, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
   dependencies:
     lru-cache "^6.0.0"
 
-server-only@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/server-only/-/server-only-0.0.1.tgz#0f366bb6afb618c37c9255a314535dc412cd1c9e"
-  integrity sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==
-
 set-blocking@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
@@ -5108,10 +5102,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-use-intl@3.0.0-beta.3:
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-3.0.0-beta.3.tgz#6e8fc168826ba32db77162cbeab2d86f24fc4e2d"
-  integrity sha512-b5c9F6F3Yw7xbdIVdDBj2qh5BHntdr2Obp3c40OTxXOwqDIyjAbOxjezGe7ak8EGo0TEezyN6oPvi6aQWPjDdQ==
+use-intl@^2.20.2:
+  version "2.20.2"
+  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-2.20.2.tgz#f57c3ed83ad86ffe30f6c3af41236396363e2b37"
+  integrity sha512-Mvd16M2nAlXcOqm17jWCK69DmsSgn4h9dgvcZ6UbYAzdJQiuu5TFBVxd1f3xRRs2qXb94/E2j/1AcqzmN9TMtg==
   dependencies:
     "@formatjs/ecma402-abstract" "^1.11.4"
     intl-messageformat "^9.3.18"

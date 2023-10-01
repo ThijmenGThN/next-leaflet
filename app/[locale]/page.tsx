@@ -1,11 +1,11 @@
+"use client"
+
 import Link from "next/link"
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import aLogo from '@/assets/logo.webp'
 import Switcher from "@/components/locale/Switcher"
-
-import { locales } from '../../middleware'
 
 export default function Page() {
     const t = useTranslations('next-leaflet')
@@ -25,7 +25,7 @@ export default function Page() {
                     </div>
                     <div className="flex lg:flex-1 lg:justify-end">
 
-                        <Switcher locales={locales} />
+                        <Switcher />
 
                     </div>
                 </nav>

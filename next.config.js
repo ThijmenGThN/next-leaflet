@@ -1,8 +1,6 @@
 
-const withNextIntl = require('next-intl/plugin')('./src/helpers/locales.ts')
-
-module.exports = withNextIntl({
+module.exports = {
     images: {
         domains: ['www.gravatar.com']
     }
-})
+}

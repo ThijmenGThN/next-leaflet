@@ -3,7 +3,7 @@ import { withAuth } from 'next-auth/middleware'
 import createIntlMiddleware from 'next-intl/middleware'
 
 export const defaultLocale = 'en'
-export const locales = ['en', 'nl']
+export const locales = ['en', 'nl'] // Also reflect changes in → src/components/locale/Switcher
 
 const publicPages = ['/', '/login', '/register', '/forgot']
 

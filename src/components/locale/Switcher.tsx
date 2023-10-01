@@ -9,7 +9,12 @@ import { Listbox, Transition } from '@headlessui/react'
 
 import { classNames } from '@/helpers/tailwind'
 
-export default function Component({ locales }: { locales: Array<string> }) {
+const locales = [
+    'en',
+    'nl'
+]
+
+export default function Component() {
     const locale = useLocale()
     const pathname = usePathname()
 

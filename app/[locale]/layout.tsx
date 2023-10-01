@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { NextIntlClientProvider as Localizer } from 'next-intl'
 
 import Session from './Session'
+
 import { locales } from '../../middleware'
 
 import '@/styles/globals.css'

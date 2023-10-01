@@ -1,7 +1,6 @@
-import Link from "next/link"
-import { getServerSession } from "next-auth"
+"use client"
 
-import prisma from "@/prisma/client"
+import Link from "next/link"
 
 import DeleteToken from "./token/Delete"
 
@@ -9,19 +8,7 @@ import { useTranslations } from "next-intl"
 
 import type { ApiToken } from "@prisma/client"
 
-export default async function Logic() {
-    const session = await getServerSession()
-
-    return <Page
-        tokens={
-            session?.user.email
-                ? await prisma.apiToken.findMany({ where: { owner: session.user.email } })
-                : []
-        }
-    />
-}
-
-function Page({ tokens }: { tokens: Array<ApiToken> }) {
+export default function Page({ tokens }: { tokens: Array<ApiToken> }) {
     const t = useTranslations('dashboard')
 
     return (
