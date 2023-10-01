@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import { NextIntlClientProvider as Localizer, useMessages } from 'next-intl'
+import { NextIntlClientProvider as Localizer } from 'next-intl'
 
 import Session from './Session'
 import { locales } from '../../middleware'
@@ -16,14 +16,18 @@ export const metadata: Metadata = {
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Layout({ children, params: { locale } }: { children: React.ReactNode, params: { locale: string } }) {
+export default async function Layout({ children, params: { locale } }: { children: React.ReactNode, params: { locale: string } }) {
 
     locales.some(cur => cur === locale) ?? notFound()
+
+    let messages
+    try { messages = (await import(`../../src/locales/${locale}.json`)).default }
+    catch (error) { notFound() }
 
     return (
         <html lang={locale} className="h-full">
             <body className={inter.className + ' h-full'}>
-                <Localizer locale={locale} messages={useMessages()}>
+                <Localizer locale={locale} messages={messages}>
                     <Session>
                         {children}
                     </Session>

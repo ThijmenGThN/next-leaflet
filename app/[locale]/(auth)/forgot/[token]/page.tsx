@@ -1,16 +1,10 @@
-import Link from 'next/link'
-import Image from 'next/image'
 import jwt from 'jsonwebtoken'
-import { useTranslations } from 'next-intl'
 
 import prisma from '@/prisma/client'
-import gravatar from '@/helpers/gravatar'
 
 import Reset from './Reset'
 
-import aLogo from '@/assets/logo.webp'
-
-export default async function Logic({ params: { token } }: { params: { token: string } }) {
+export default async function Page({ params: { token } }: { params: { token: string } }) {
     if (!process.env.NEXTAUTH_SECRET) throw new Error()
 
     let { email }: any = jwt.decode(token)
@@ -21,56 +15,8 @@ export default async function Logic({ params: { token } }: { params: { token: st
 
     if (token != passwordResetToken) throw new Error()
 
-    return <Page
-        email={email}
+    return <Reset
         token={token}
+        email={email}
     />
-}
-
-function Page({ email, token }: { email: string, token: string }) {
-    const t = useTranslations('auth')
-
-    return (
-        <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <Link href="/">
-                    <Image
-                        className="mx-auto h-10 w-auto"
-                        src={aLogo}
-                        alt=""
-                    />
-                </Link>
-                <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    {t('update-your-password')}
-                </h2>
-            </div>
-
-            <div className="relative my-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-                <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 flex flex-col gap-y-4">
-                    <div className="flex flex-col items-center justify-center gap-y-4">
-                        <Image
-                            className="h-16 w-16 rounded-full bg-gray-50 border"
-                            src={gravatar(email)}
-                            width={80}
-                            height={80}
-                            alt=""
-                        />
-                        <p className="text-sm font-medium text-gray-900">
-                            {email}
-                        </p>
-                    </div>
-
-                    <div className="mt-8">
-                        <Reset token={token} />
-                    </div>
-                </div>
-
-                <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
-                    <Link href="/login">
-                        ← {t('sign-in-to-a-different-account')}
-                    </Link>
-                </div>
-            </div>
-        </div>
-    )
 }
