@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
             .max(64, { message: "This email address is too long" })
             .email("This email address is not valid")
             .safeParse(email).success
-        ) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
+        ) return NextResponse.json('The provided address does not meet the criteria of an email address.', { status: 400 })
 
         if (await prisma.user.findUnique({ where: { email } })) return NextResponse.json('The provided email address is already taken.', { status: 403 })
 

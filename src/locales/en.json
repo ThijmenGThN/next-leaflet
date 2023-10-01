@@ -31,8 +31,12 @@
     "cancel": "Cancel",
     "token-name": "Token name",
     "profile": "Profile",
+    "sorry-something-unexpected-happened": "Sorry, something unexpected happened",
     "name": "Name",
-    "save": "Save"
+    "save": "Save",
+    "the-provided-token-name-is-too-long-or-short": "The provided token name is too long or short.",
+    "an-api-token-with-the-same-name-already-exists": "An API token with the same name already exists.",
+    "you-have-reached-the-maximum-amount-of-api-tokens-allowed": "You have reached the maximum amount of API tokens allowed."
   },
   "auth": {
     "or-continue-with": "Or continue with",
@@ -48,6 +52,7 @@
     "complete-your-registration": "Complete your registration",
     "name": "Name",
     "sign-up": "Sign up",
+    "sorry-something-unexpected-happened": "Sorry, something unexpected happened",
     "password": "Password",
     "repeat-password": "Repeat password",
     "registration-has-expired": "Registration has expired",
@@ -72,6 +77,9 @@
     "this-email-address-is-too-long": "This email address is too long",
     "this-password-is-too-long": "This password is too long",
     "this-email-address-is-not-valid": "This email address is not valid",
-    "the-passwords-do-not-match": "The passwords do not match"
+    "the-passwords-do-not-match": "The passwords do not match",
+    "invalid-credentials-try-again-or-reset-your-password": "Invalid credentials, try again or reset your password.",
+    "the-provided-address-does-not-meet-the-criteria-of-an-email-address": "The provided address does not meet the criteria of an email address.",
+    "the-provided-email-address-is-already-taken": "The provided email address is already taken."
   }
 }

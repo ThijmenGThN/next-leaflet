@@ -16,7 +16,11 @@ export default function Page() {
 
     async function onSubmit({ name }: { name: string }) {
         const res = await fetch('/api/auth/account/token/create', { method: 'POST', body: JSON.stringify({ name }) })
-        if (!res.ok) throw new Error()
+
+        if (res.status == 400) return new Error(t('dashboard.the-provided-token-name-is-too-long-or-short'))
+        if (res.status == 409) return new Error(t('dashboard.an-api-token-with-the-same-name-already-exists'))
+        if (res.status == 403) return new Error(t('dashboard.you-have-reached-the-maximum-amount-of-api-tokens-allowed'))
+        if (!res.ok) return new Error(t('dashboard.sorry-something-unexpected-happened'))
 
         setToken(await res.json())
     }

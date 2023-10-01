@@ -64,7 +64,9 @@ export default function Form(props: iForm) {
         setIsPending(true)
         if (isPending) return
 
-        await props.onSubmit(data).catch((message: string) => setErrorMessage(message))
+        const res = await props.onSubmit(data)
+        if (res instanceof Error) setErrorMessage(res.message)
+
         setIsPending(false)
     }
 

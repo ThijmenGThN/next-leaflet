@@ -22,8 +22,11 @@ export default function Page() {
     const onSubmit = async ({ email }: any) => {
         if (!email) return
 
-        const { ok } = await fetch('/api/auth/register', { method: 'POST', body: JSON.stringify({ email }) })
-        if (!ok) throw new Error()
+        const res = await fetch('/api/auth/register', { method: 'POST', body: JSON.stringify({ email }) })
+
+        if (res.status == 400) return new Error(t('the-provided-address-does-not-meet-the-criteria-of-an-email-address'))
+        if (res.status == 403) return new Error(t('the-provided-email-address-is-already-taken'))
+        if (!res.ok) return new Error(t('sorry-something-unexpected-happened'))
 
         setFormEmail(email)
         setHasBeenSent(true)

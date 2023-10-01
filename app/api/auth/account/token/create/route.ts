@@ -21,10 +21,10 @@ export async function POST(req: NextRequest) {
             .min(2, { message: "This name is too short" })
             .max(32, { message: "This name is too long" })
             .safeParse(name).success
-        ) return NextResponse.json('The provided name does not meet the criteria.', { status: 400 })
+        ) return NextResponse.json('The provided token name is too long or short.', { status: 400 })
 
-        if (await prisma.apiToken.findFirst({ where: { name, owner: session.email } })) return NextResponse.json('An API token with the same name has already been generated.', { status: 403 })
-        if (await prisma.apiToken.count({ where: { owner: session.email } }) >= 25) return NextResponse.json('You have reached the maximum limit for API tokens.', { status: 403 })
+        if (await prisma.apiToken.findFirst({ where: { name, owner: session.email } })) return NextResponse.json('An API token with the same name already exists.', { status: 409 })
+        if (await prisma.apiToken.count({ where: { owner: session.email } }) >= 25) return NextResponse.json('You have reached the maximum amount of API tokens allowed.', { status: 403 })
 
         const token = crypto.randomBytes(20).toString()
 

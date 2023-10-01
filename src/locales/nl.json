@@ -31,8 +31,12 @@
         "cancel": "Annuleren",
         "token-name": "Tokennaam",
         "profile": "Profiel",
+        "sorry-something-unexpected-happened": "Sorry, er is iets onverwachts gebeurd",
         "name": "Naam",
-        "save": "Redden"
+        "save": "Opslaan",
+        "the-provided-token-name-is-too-long-or-short": "De opgegeven tokennaam is te lang of te kort.",
+        "an-api-token-with-the-same-name-already-exists": "Er bestaat al een API-token met dezelfde naam.",
+        "you-have-reached-the-maximum-amount-of-api-tokens-allowed": "U heeft het maximale toegestane aantal API-tokens bereikt."
     },
     "auth": {
         "or-continue-with": "Of ga verder met",
@@ -48,6 +52,7 @@
         "complete-your-registration": "Voltooi je registratie",
         "name": "Naam",
         "sign-up": "Aanmelden",
+        "sorry-something-unexpected-happened": "Sorry, er is iets onverwachts gebeurd",
         "password": "Wachtwoord",
         "repeat-password": "herhaal wachtwoord",
         "registration-has-expired": "Registratie is verlopen",
@@ -72,6 +77,9 @@
         "this-email-address-is-too-long": "Dit e-mailadres is te lang",
         "this-password-is-too-long": "Dit wachtwoord is te lang",
         "this-email-address-is-not-valid": "Dit e-mailadres is niet geldig",
-        "the-passwords-do-not-match": "de wachtwoorden komen niet overeen"
+        "the-passwords-do-not-match": "de wachtwoorden komen niet overeen",
+        "invalid-credentials-try-again-or-reset-your-password": "Ongeldige inloggegevens, probeer het opnieuw of reset uw wachtwoord.",
+        "the-provided-address-does-not-meet-the-criteria-of-an-email-address": "Het opgegeven adres voldoet niet aan de criteria van een e-mailadres.",
+        "the-provided-email-address-is-already-taken": "Het opgegeven e-mailadres is al in gebruik."
     }
 }
