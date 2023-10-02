@@ -19,9 +19,10 @@ export default function Page() {
     const [hasBeenSent, setHasBeenSent] = useState<boolean>(false)
 
     const onSubmit = async ({ email }: any) => {
-        if (!email) return
+        const { ok, status } = await fetch('/api/auth/forgot', { method: 'POST', body: JSON.stringify({ email }) })
 
-        await fetch('/api/auth/forgot', { method: 'POST', body: JSON.stringify({ email }) })
+        if (status == 406) return new Error(t('an-account-with-this-email-address-does-not-exists'))
+        if (!ok) return new Error(t('sorry-something-unexpected-happened'))
 
         setFormEmail(email)
         setHasBeenSent(true)

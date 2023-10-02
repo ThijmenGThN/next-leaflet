@@ -80,6 +80,10 @@
     "the-passwords-do-not-match": "The passwords do not match",
     "invalid-credentials-try-again-or-reset-your-password": "Invalid credentials, try again or reset your password.",
     "the-provided-address-does-not-meet-the-criteria-of-an-email-address": "The provided address does not meet the criteria of an email address.",
-    "the-provided-email-address-is-already-taken": "The provided email address is already taken."
+    "the-provided-email-address-is-already-taken": "The provided email address is already taken.",
+    "the-provided-password-does-not-meet-the-required-criteria": "The provided password does not meet the required criteria.",
+    "an-account-with-this-email-address-does-not-exists": "An account with this email address does not exists.",
+    "the-provided-token-has-expired": "The provided token has expired.",
+    "an-account-with-this-email-address-has-already-been-registered": "An account with this email address has already been registered."
   }
 }

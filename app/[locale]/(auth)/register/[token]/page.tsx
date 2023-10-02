@@ -18,10 +18,15 @@ const callbackUrl = '/dashboard'
 export default function Page({ params: { token } }: { params: { token: string } }) {
     const t = useTranslations('auth')
 
-    let { email }: any = jwt.decode(token)
+    let { email } = jwt.decode(token) as { email: string | undefined }
+    if (!email) throw new Error(t('the-registration-has-reached-its-expiration-date'))
 
     const onSubmit = async ({ name, password }: any) => {
-        await fetch('/api/auth/register/create', { method: 'POST', body: JSON.stringify({ name, password, token }) })
+        const { ok, status } = await fetch('/api/auth/register/create', { method: 'POST', body: JSON.stringify({ name, password, token }) })
+
+        if (status == 409) return new Error(t('an-account-with-this-email-address-has-already-been-registered'))
+        if (status == 401) return new Error(t('the-provided-token-has-expired'))
+        if (!ok) return new Error(t('sorry-something-unexpected-happened'))
 
         signIn('credentials', { email, password, callbackUrl })
     }

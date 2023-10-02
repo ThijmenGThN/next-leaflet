@@ -17,8 +17,8 @@ export async function POST(req: NextRequest) {
         const { password, token } = await req.json()
 
         if (!z.string()
-            .min(8, { message: "This password is too short" })
-            .max(64, { message: "This password is too long" })
+            .min(8)
+            .max(64)
             .safeParse(password).success
         ) return NextResponse.json('The provided password does not meet the required criteria.', { status: 400 })
 
@@ -41,10 +41,9 @@ export async function POST(req: NextRequest) {
         })
 
         return NextResponse.json('The password has succesfully been updated to the one provided.', { status: 200 })
-    }
-
+    } 
+    
     catch {
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
-
 }

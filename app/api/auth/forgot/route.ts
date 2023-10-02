@@ -18,33 +18,38 @@ export async function POST(req: NextRequest) {
         const { email } = await req.json()
 
         if (!z.string()
-            .min(2, { message: "This email address is too short" })
-            .max(64, { message: "This email address is too long" })
-            .email("This email address is not valid")
+            .min(2)
+            .max(64)
+            .email()
             .safeParse(email).success
         ) return NextResponse.json('The provided email does not meet the criteria of an email address.', { status: 400 })
 
         const passwordResetToken = jwt.sign({ email }, process.env.NEXTAUTH_SECRET, { expiresIn: '45m' })
 
-        await prisma.user.update({ where: { email }, data: { passwordResetToken } })
+        try {
+            await prisma.user.update({ where: { email }, data: { passwordResetToken } })
 
-        Email(
-            eReset({
-                email,
-                link: process.env.NEXTAUTH_URL + '/en/forgot/' + passwordResetToken,
-                assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
-            }),
-            {
-                to: email,
-                subject: 'Reset your password'
-            }
-        )
+            Email(
+                eReset({
+                    email,
+                    link: process.env.NEXTAUTH_URL + '/en/forgot/' + passwordResetToken,
+                    assets: { logoUrl: process.env.NEXTAUTH_URL + '/logo.webp' }
+                }),
+                {
+                    to: email,
+                    subject: 'Reset your password'
+                }
+            )
 
-        return NextResponse.json('We have sent you an email to reset your password.', { status: 200 })
-    }
-
+            return NextResponse.json('We have sent you an email to reset your password.', { status: 200 })
+        } 
+        
+        catch (error) {
+            return NextResponse.json('An account with this email address does not exists.', { status: 406 })
+        }
+    } 
+    
     catch {
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
-
 }

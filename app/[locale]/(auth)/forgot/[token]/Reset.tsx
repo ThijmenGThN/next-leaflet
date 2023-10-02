@@ -19,11 +19,11 @@ export default function Component({ token, email }: { token: string, email: stri
     const t = useTranslations('auth')
 
     const onSubmit = async ({ password }: any) => {
-        if (!password) return
+        const { ok, status } = await fetch('/api/auth/forgot/update', { method: 'POST', body: JSON.stringify({ token, password }) })
 
-        fetch('/api/auth/forgot/update', { method: 'POST', body: JSON.stringify({ token, password }) })
+        if (status == 401) return new Error(t('password-reset-has-expired'))
+        if (!ok) return new Error(t('sorry-something-unexpected-happened'))
 
-        const { email }: any = jwt.decode(token)
         signIn('credentials', { email, password, callbackUrl })
     }
 

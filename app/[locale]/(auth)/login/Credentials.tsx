@@ -23,6 +23,7 @@ export default function Component() {
         router.push(callbackUrl)
     }
 
+    // Already load the dashboard to make the signin feel swift.
     useEffect(() => { router.prefetch(callbackUrl) }, [router])
 
     return (

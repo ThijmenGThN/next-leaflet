@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
         const { email } = await req.json()
 
         if (!z.string()
-            .min(2, { message: "This email address is too short" })
-            .max(64, { message: "This email address is too long" })
-            .email("This email address is not valid")
+            .min(2)
+            .max(64)
+            .email()
             .safeParse(email).success
         ) return NextResponse.json('The provided address does not meet the criteria of an email address.', { status: 400 })
 
