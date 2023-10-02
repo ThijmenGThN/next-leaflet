@@ -13,8 +13,8 @@ export async function POST(req: NextRequest) {
         const { name } = await req.json()
 
         if (!z.string()
-            .min(2, { message: "This name is too short" })
-            .max(32, { message: "This name is too long" })
+            .min(2)
+            .max(32)
             .safeParse(name).success
         ) return NextResponse.json('The provided name does not meet the criteria.', { status: 400 })
 

@@ -11,7 +11,10 @@ export default function Component() {
     const { data: session, update } = useSession()
 
     const onSubmit = async ({ name }: any) => {
-        await fetch('/api/auth/account/name/update', { method: 'POST', body: JSON.stringify({ name }) })
+        const { ok } = await fetch('/api/auth/account/name/update', { method: 'POST', body: JSON.stringify({ name }) })
+
+        if (!ok) return new Error(t('dashboard.sorry-something-unexpected-happened'))
+
         await update()
     }
 
