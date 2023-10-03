@@ -33,7 +33,7 @@
         "profile": "Profiel",
         "sorry-something-unexpected-happened": "Sorry, er is iets onverwachts gebeurd",
         "name": "Naam",
-        "save": "Opslaan",
+        "save": "Redden",
         "the-provided-token-name-is-too-long-or-short": "De opgegeven tokennaam is te lang of te kort.",
         "an-api-token-with-the-same-name-already-exists": "Er bestaat al een API-token met dezelfde naam.",
         "you-have-reached-the-maximum-amount-of-api-tokens-allowed": "U heeft het maximale toegestane aantal API-tokens bereikt."
@@ -80,6 +80,10 @@
         "the-passwords-do-not-match": "de wachtwoorden komen niet overeen",
         "invalid-credentials-try-again-or-reset-your-password": "Ongeldige inloggegevens, probeer het opnieuw of reset uw wachtwoord.",
         "the-provided-address-does-not-meet-the-criteria-of-an-email-address": "Het opgegeven adres voldoet niet aan de criteria van een e-mailadres.",
-        "the-provided-email-address-is-already-taken": "Het opgegeven e-mailadres is al in gebruik."
+        "the-provided-email-address-is-already-taken": "Het opgegeven e-mailadres is al in gebruik.",
+        "the-provided-password-does-not-meet-the-required-criteria": "Het opgegeven wachtwoord voldoet niet aan de vereiste criteria.",
+        "an-account-with-this-email-address-does-not-exists": "Er bestaat geen account met dit e-mailadres.",
+        "the-provided-token-has-expired": "Het opgegeven token is verlopen.",
+        "an-account-with-this-email-address-has-already-been-registered": "Er is al een account met dit e-mailadres geregistreerd."
     }
 }
