@@ -2,8 +2,6 @@ import { z } from 'zod'
 import { createTransport } from 'nodemailer'
 import { render } from '@react-email/render'
 
-import validate from '@/helpers/validation'
-
 import type { ReactElement } from 'react'
 
 interface iOptions {
@@ -20,7 +18,15 @@ export default async function Email(Component: ReactElement, options: iOptions) 
         !process.env.EMAIL_PASS
     ) throw new Error('Missing EMAIL environment variables.')
 
-    if (!(validate.objects.mail.safeParse(options)).success) throw new Error('Supplied options are invalid.')
+    if (!z.object({
+        to: z.string()
+            .min(2, { message: "This email address is too short" })
+            .max(64, { message: "This email address is too long" })
+            .email("This email address is not valid"),
+        subject: z.string()
+            .min(2, { message: "This subject is too short" })
+            .max(256, { message: "This subject is too long" })
+    }).safeParse(options).success) throw new Error('Supplied options are invalid.')
 
     await createTransport({
         secure: true,
