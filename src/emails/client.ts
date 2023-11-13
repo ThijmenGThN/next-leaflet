@@ -29,7 +29,6 @@ export default async function Email(Component: ReactElement, options: iOptions) 
     }).safeParse(options).success) throw new Error('Supplied options are invalid.')
 
     await createTransport({
-        secure: true,
         host: process.env.EMAIL_HOST,
         port: parseInt(process.env.EMAIL_PORT),
         auth: {
