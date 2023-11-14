@@ -42,14 +42,16 @@ export async function POST(req: NextRequest) {
             )
 
             return NextResponse.json('We have sent you an email to reset your password.', { status: 200 })
-        } 
-        
+        }
+
         catch (error) {
+            console.error(error)
             return NextResponse.json('An account with this email address does not exists.', { status: 406 })
         }
-    } 
-    
-    catch {
+    }
+
+    catch (error) {
+        console.error(error)
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
 }

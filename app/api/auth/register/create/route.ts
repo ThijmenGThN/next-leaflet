@@ -49,11 +49,13 @@ export async function POST(req: NextRequest) {
         }
 
         catch (error) {
+            console.error(error)
             return NextResponse.json('An account with this email address has already been registered.', { status: 409 })
         }
     }
 
-    catch {
+    catch (error) {
+        console.error(error)
         return NextResponse.json('Internal server error, try again later.', { status: 500 })
     }
 }
