@@ -30,11 +30,11 @@
     "bcrypt": "^5.1.0",
     "crypto-js": "^4.1.1",
     "eslint": "8.45.0",
-    "eslint-config-next": "^13.5.3",
+    "eslint-config-next": "^14.0.3",
     "jsonwebtoken": "^9.0.1",
-    "next": "^13.5.3",
+    "next": "^14.0.3",
     "next-auth": "^4.22.1",
-    "next-intl": "^2.20.2",
+    "next-intl": "^3.0.3",
     "nodemailer": "^6.9.4",
     "postcss": "8.4.26",
     "prisma": "^5.0.0",
@@ -51,6 +51,5 @@
   "prisma": {
     "schema": "src/prisma/schema.prisma",
     "seed": "ts-node src/prisma/seed.ts"
-  },
-  "devDependencies": {}
+  }
 }

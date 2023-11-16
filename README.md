@@ -1,4 +1,17 @@
 
+# NextJS 14
+
+## Todo
+
+- Localizer needs adjustments.
+- Disabled locale switcher.
+
+## ToFix
+
+### Attempted import error: 'renderToReadableStream'
+./node_modules/@react-email/components/node_modules/@react-email/render/dist/index.mjs
+Attempted import error: 'renderToReadableStream' is not exported from 'react-dom/server' (imported as 'renderToReadableStream').
+
 # next-leaflet
 
 An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.
