@@ -28,16 +28,18 @@ export default async function Email(Component: ReactElement, options: iOptions) 
             .max(256, { message: "This subject is too long" })
     }).safeParse(options).success) throw new Error('Supplied options are invalid.')
 
-    await createTransport({
-        host: process.env.EMAIL_HOST,
-        port: parseInt(process.env.EMAIL_PORT),
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    }).sendMail({
-        ...options,
-        from: process.env.EMAIL_FROM,
-        html: render(Component)
-    })
+    try {
+        await createTransport({
+            host: process.env.EMAIL_HOST,
+            port: parseInt(process.env.EMAIL_PORT),
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        }).sendMail({
+            ...options,
+            from: process.env.EMAIL_FROM,
+            html: render(Component)
+        })
+    } catch (error) { console.error(error) }
 }
