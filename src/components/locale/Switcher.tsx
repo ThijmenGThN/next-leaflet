@@ -6,12 +6,7 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import { Listbox, Transition } from '@headlessui/react'
 
 import { classNames } from '@/helpers/tailwind'
-import { Link, usePathname } from '@/helpers/navigation'
-
-const locales = [
-    'en',
-    'nl'
-] as const
+import { locales, Link, usePathname } from '@/helpers/navigation'
 
 export default function Component() {
     const locale = useLocale()

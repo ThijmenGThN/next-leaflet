@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { withAuth } from 'next-auth/middleware'
 import createIntlMiddleware from 'next-intl/middleware'
 
-import { locales } from '@/helpers/navigation' // Also reflect changes in → src/components/locale/Switcher
+import { locales } from '@/helpers/navigation'
 
 const publicPages = [
     '/',
