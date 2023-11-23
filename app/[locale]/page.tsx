@@ -1,11 +1,13 @@
 "use client"
 
-import Link from "next/link"
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import aLogo from '@/assets/logo.webp'
+import { Link } from '@/helpers/navigation'
+
 import Switcher from "@/components/locale/Switcher"
+
+import aLogo from '@/assets/logo.webp'
 
 export default function Page() {
     const t = useTranslations('next-leaflet')
