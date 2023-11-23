@@ -1,17 +1,4 @@
 
-# NextJS 14
-
-## Todo
-
-- Localizer needs adjustments.
-- Disabled locale switcher.
-
-## ToFix
-
-### Attempted import error: 'renderToReadableStream'
-./node_modules/@react-email/components/node_modules/@react-email/render/dist/index.mjs
-Attempted import error: 'renderToReadableStream' is not exported from 'react-dom/server' (imported as 'renderToReadableStream').
-
 # next-leaflet
 
 An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.
@@ -71,9 +58,13 @@ nano .env
 yarn install
 ```
 > <b>Don't have yarn installed? </b><br/>
-> You can install it via npm.
+> 1. Enabling Corepack, this will add yarn to your path.
 > ```sh
-> npm i -g yarn
+> corepack enable
+> ```
+> 2. Updating Yarn, to the latest stable release.
+> ```sh
+> yarn set version stable
 > ```
 
 ## Development
