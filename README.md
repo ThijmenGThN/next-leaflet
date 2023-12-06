@@ -58,9 +58,13 @@ nano .env
 yarn install
 ```
 > <b>Don't have yarn installed? </b><br/>
-> You can install it via npm.
+> 1. Enabling Corepack, this will add yarn to your path.
 > ```sh
-> npm i -g yarn
+> corepack enable
+> ```
+> 2. Updating Yarn, to the latest stable release.
+> ```sh
+> yarn set version stable
 > ```
 
 ## Development

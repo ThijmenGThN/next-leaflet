@@ -4,7 +4,7 @@ import { NextIntlClientProvider as Localizer } from 'next-intl'
 
 import Session from './Session'
 
-import { locales } from '../../middleware'
+import { locales } from '@/helpers/navigation'
 
 import '@/styles/globals.css'
 
