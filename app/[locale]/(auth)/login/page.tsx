@@ -1,13 +1,14 @@
 "use client"
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import OAuth from '../OAuth'
-import Credentials from './Credentials'
+import { Link } from '@/helpers/navigation'
 
 import aLogo from '@/assets/logo.webp'
+
+import OAuth from '../OAuth'
+import Credentials from './Credentials'
 
 export default function Page() {
     const t = useTranslations('auth')

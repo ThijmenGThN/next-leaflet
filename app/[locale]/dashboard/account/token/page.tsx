@@ -1,11 +1,12 @@
 "use client"
 
 import { z } from 'zod'
-import Link from 'next/link'
 import { useState } from "react"
-
 import { useTranslations } from 'next-intl'
+
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
+
+import { Link } from '@/helpers/navigation'
 
 import Form from '@/components/Form'
 

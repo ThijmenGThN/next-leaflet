@@ -1,17 +1,18 @@
 "use client"
 
 import { z } from 'zod'
-import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
+import { Link } from '@/helpers/navigation'
 import gravatar from '@/helpers/gravatar'
 
 import Form from '@/components/Form'
-import OAuth from '../OAuth'
 
 import aLogo from '@/assets/logo.webp'
+
+import OAuth from '../OAuth'
 
 export default function Page() {
     const t = useTranslations('auth')
