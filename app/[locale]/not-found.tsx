@@ -7,7 +7,7 @@ import { Link } from '@/helpers/navigation'
 
 import aLogo from '@/assets/logo.webp'
 
-export default function Page() {
+export default function NotFound() {
     const t = useTranslations('next-leaflet')
 
     return (
