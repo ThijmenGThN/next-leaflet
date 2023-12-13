@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    container_name: pocketbase
+    restart: unless-stopped
+    ports: [ "8000:8090" ]
+    volumes: ["./data:/pb_data"]
