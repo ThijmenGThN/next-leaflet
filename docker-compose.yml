@@ -1,14 +1,26 @@
 version: "3"
 
 services:
+  # next:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: next
+  #   restart: unless-stopped
+  #   ports: [ "3000:3000" ]
+  #   volumes:
+  #     - /app/node_modules
+  #     - .:/app
+
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     container_name: pocketbase
     restart: unless-stopped
-    ports: [ "8000:8090" ]
+    ports: [ "8090:8090" ]
     volumes: 
-      - ./src/migrations:/pb_migrations
-      - ./src/types/pocketbase.d.ts:/pb_data/types.d.ts
+      - ./src/backend/migrations:/pb_migrations
+      - ./src/backend/pocketbase.d.ts:/pb_data/types.d.ts
+      - ./src/backend/hooks:/pb_hooks
       - pb_data:/pb_data
 
 volumes: 

@@ -1,4 +1,4 @@
-/// <reference path="../types/pocketbase.d.ts" />
+/// <reference path="../pocketbase.d.ts" />
 
 migrate(
 
