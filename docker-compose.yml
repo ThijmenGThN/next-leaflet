@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3"
 
 services:
   pocketbase:
@@ -6,4 +6,10 @@ services:
     container_name: pocketbase
     restart: unless-stopped
     ports: [ "8000:8090" ]
-    volumes: ["./data:/pb_data"]
+    volumes: 
+      - ./src/migrations:/pb_migrations
+      - ./src/types/pocketbase.d.ts:/pb_data/types.d.ts
+      - pb_data:/pb_data
+
+volumes: 
+  pb_data:

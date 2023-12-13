@@ -8,10 +8,6 @@
 node_modules
 
 
-# Pocketbase
-data/logs.db
-
-
 # Package Manager
 npm-debug.log*
 
