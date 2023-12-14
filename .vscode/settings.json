@@ -5,6 +5,7 @@
         ".eslintrc.json": true,
         "next-env.d.ts": true,
         "node_modules": true,
+        "LICENSE.md": true,
         "debug.log": true,
         ".next": true
     }
