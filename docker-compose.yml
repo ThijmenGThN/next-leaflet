@@ -5,7 +5,6 @@ services:
   #   build:
   #     context: .
   #     dockerfile: Dockerfile
-  #   container_name: next
   #   restart: unless-stopped
   #   ports: [ "3000:3000" ]
   #   volumes:
@@ -14,14 +13,13 @@ services:
 
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
-    container_name: pocketbase
     restart: unless-stopped
     ports: [ "8090:8090" ]
     volumes: 
-      - ./src/backend/migrations:/pb_migrations
-      - ./src/backend/pocketbase.d.ts:/pb_data/types.d.ts
-      - ./src/backend/hooks:/pb_hooks
       - pb_data:/pb_data
+      - ./src/backend/types.d.ts:/pb_data/types.d.ts
+      - ./src/backend/migrations:/pb_migrations
+      - ./src/backend/hooks:/pb_hooks
 
 volumes: 
   pb_data:

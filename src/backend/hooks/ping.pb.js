@@ -1,4 +1,4 @@
-/// <reference path="../pocketbase.d.ts" />
+/// <reference path="../types.d.ts" />
 
 // Sample code, see: https://pocketbase.io/docs/js-overview/
 

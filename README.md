@@ -1,2 +1,2 @@
 
-# next-leaflet / supabase
+# next-leaflet / pocketbase
