@@ -1,20 +1,25 @@
 version: "3"
 
 services:
-  # next:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   restart: unless-stopped
-  #   ports: [ "3000:3000" ]
-  #   volumes:
-  #     - /app/node_modules
-  #     - .:/app
 
+  # ┏━ NextJS | A framework to build web apps.
+  next:
+    image: node:20-alpine
+    command: ["next", "build" , "&&", "next", "start"]
+    restart: unless-stopped
+    profiles: ["prod"]
+    env_file: .env
+    working_dir: /app
+    volumes: [.:/app]
+    ports: [$NEXT_PORT:3000]
+    depends_on: [pocketbase]
+
+  # ┏━ Pocketbase | This'll provide our backend.
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     restart: unless-stopped
-    ports: [ "8090:8090" ]
+    ports: ["$POCKETBASE_PORT:8090"]
+    env_file: .env
     volumes: 
       - pb_data:/pb_data
       - ./src/backend/types.d.ts:/pb_data/types.d.ts
