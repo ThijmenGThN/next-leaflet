@@ -15,7 +15,6 @@ import {
     BellIcon,
     HomeIcon,
     TrashIcon,
-    UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 
@@ -29,44 +28,41 @@ interface typeNotification {
     created: string
 }
 
-async function deleteNotification(id: string) {
-    pb.collection('notifications').delete(id)
-}
-
 const navigation = [
-    { name: 'Dashboard', href: '/dash', icon: HomeIcon },
-    { name: 'Users', href: '/dash/users', icon: UsersIcon }
+    { name: 'Dashboard', href: '/dash', icon: HomeIcon }
 ]
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const router = useRouter()
     const pathname = usePathname()
 
+    const [sidebarOpen, setSidebarOpen] = useState(false)
     const [authEmail, setAuthEmail] = useState<string>()
     const [avatar, setAvatar] = useState<string>(gravatar('next@leaflet.app'))
     const [notifications, setNotifications] = useState<Array<typeNotification>>([])
 
     const isCurrent = (href: string) => pathname == href
 
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const deleteNotification = (id: string) => pb.collection('notifications').delete(id)
+
+    const updateNotifications = () => pb.collection('notifications').getFullList({ sort: '-created' })
+        .then(records => setNotifications(records.map(({ id, title, message, created }) => ({ id, title, message, created }))))
+        .catch(e => setNotifications([]))
 
     async function signOut() {
         await pb.authStore.clear()
         router.push('/login')
     }
 
-    function updateNotifications() {
-        pb.collection('notifications').getFullList({ sort: '-created' })
-            .then(records => setNotifications(records.map(({ id, title, message, created }) => ({ id, title, message, created }))))
-            .catch(e => setNotifications([]))
-    }
-
     useEffect(() => {
         setAvatar(gravatar())
         setAuthEmail(pb.authStore.model?.email)
-
         updateNotifications()
+    }, [])
+
+    useEffect(() => {
         pb.collection('notifications').subscribe('*', e => updateNotifications())
+        return () => { pb.collection('notifications').unsubscribe('*') }
     }, [])
 
     return (
