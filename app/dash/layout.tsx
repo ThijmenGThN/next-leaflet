@@ -1,48 +1,42 @@
 "use client"
 
+import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
 import React, { Fragment, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+
+import pb from '@/helpers/pocketbase'
+import { classNames } from '@/helpers/tailwind'
 
 import {
     Bars3Icon,
     BellIcon,
-    CalendarIcon,
-    ChartPieIcon,
-    DocumentDuplicateIcon,
-    FolderIcon,
     HomeIcon,
     UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 
-import { classNames } from '@/helpers/tailwind'
-
 import assetLogo from '@/assets/logo.webp'
+import gravatar from '@/helpers/gravatar'
 
 const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
-const teams = [
-    { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-    { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-    { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
-]
-const userNavigation = [
-    { name: 'Your profile', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Dashboard', href: '/dash', icon: HomeIcon },
+    { name: 'Users', href: '/dash/users', icon: UsersIcon }
 ]
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+    const router = useRouter()
     const pathname = usePathname()
 
+    const isCurrent = (href: string) => pathname.startsWith(href)
+
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
+    async function signOut() {
+        await pb.authStore.clear()
+        router.push('/login')
+    }
 
     return (
         <div className='min-h-screen bg-gray-50'>
@@ -104,7 +98,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             <a
                                                                 href={item.href}
                                                                 className={classNames(
-                                                                    item.current
+                                                                    isCurrent(item.href)
                                                                         ? 'bg-gray-50 text-primary'
                                                                         : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -112,42 +106,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             >
                                                                 <item.icon
                                                                     className={classNames(
-                                                                        item.current ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                        isCurrent(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
                                                                         'h-6 w-6 shrink-0'
                                                                     )}
                                                                     aria-hidden="true"
                                                                 />
                                                                 {item.name}
-                                                            </a>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                                                <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                                    {teams.map((team) => (
-                                                        <li key={team.name}>
-                                                            <a
-                                                                href={team.href}
-                                                                className={classNames(
-                                                                    team.current
-                                                                        ? 'bg-gray-50 text-primary'
-                                                                        : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                                                )}
-                                                            >
-                                                                <span
-                                                                    className={classNames(
-                                                                        team.current
-                                                                            ? 'text-primary border-primary'
-                                                                            : 'text-gray-400 border-gray-200 group-hover:border-primary group-hover:text-primary',
-                                                                        'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
-                                                                    )}
-                                                                >
-                                                                    {team.initial}
-                                                                </span>
-                                                                <span className="truncate">{team.name}</span>
                                                             </a>
                                                         </li>
                                                     ))}
@@ -182,7 +146,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             <a
                                                 href={item.href}
                                                 className={classNames(
-                                                    item.current
+                                                    isCurrent(item.href)
                                                         ? 'bg-gray-50 text-primary'
                                                         : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -190,42 +154,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             >
                                                 <item.icon
                                                     className={classNames(
-                                                        item.current ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                        isCurrent(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
                                                         'h-6 w-6 shrink-0'
                                                     )}
                                                     aria-hidden="true"
                                                 />
                                                 {item.name}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                            <li>
-                                <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                                <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                    {teams.map((team) => (
-                                        <li key={team.name}>
-                                            <a
-                                                href={team.href}
-                                                className={classNames(
-                                                    team.current
-                                                        ? 'bg-gray-50 text-primary'
-                                                        : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                                )}
-                                            >
-                                                <span
-                                                    className={classNames(
-                                                        team.current
-                                                            ? 'text-primary border-primary'
-                                                            : 'text-gray-400 border-gray-200 group-hover:border-primary group-hover:text-primary',
-                                                        'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
-                                                    )}
-                                                >
-                                                    {team.initial}
-                                                </span>
-                                                <span className="truncate">{team.name}</span>
                                             </a>
                                         </li>
                                     ))}
@@ -252,9 +186,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative">
                         <Menu.Button className="-m-1.5 flex items-center p-1.5">
-                            <img
+                            <Image
                                 className="h-8 w-8 rounded-full bg-gray-50"
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                src={gravatar()}
+                                width={128}
+                                height={128}
                                 alt=""
                             />
                         </Menu.Button>
@@ -268,21 +204,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             leaveTo="transform opacity-0 scale-95"
                         >
                             <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                                {userNavigation.map((item) => (
-                                    <Menu.Item key={item.name}>
-                                        {({ active }) => (
-                                            <a
-                                                href={item.href}
-                                                className={classNames(
-                                                    active ? 'bg-gray-50' : '',
-                                                    'block px-3 py-1 text-sm leading-6 text-gray-900'
-                                                )}
-                                            >
-                                                {item.name}
-                                            </a>
-                                        )}
-                                    </Menu.Item>
-                                ))}
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <Link
+                                            href="/dash/profile"
+                                            className={classNames(
+                                                active ? 'bg-gray-50' : '',
+                                                'block px-3 py-1 text-sm leading-6 text-gray-900'
+                                            )}
+                                        >
+                                            Your profile
+                                        </Link>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <div
+                                            className={classNames(
+                                                active ? 'bg-gray-50' : '',
+                                                'block px-3 py-1 text-sm leading-6 text-gray-900 hover:cursor-pointer'
+                                            )}
+                                            onClick={signOut}
+                                        >
+                                            Sign out
+                                        </div>
+                                    )}
+                                </Menu.Item>
                             </Menu.Items>
                         </Transition>
                     </Menu>
