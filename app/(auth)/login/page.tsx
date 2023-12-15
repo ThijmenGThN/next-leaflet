@@ -10,7 +10,13 @@ import { classNames } from "@/helpers/tailwind"
 
 import assetLogo from '@/assets/logo.webp'
 
-export default function Page({ redirectUrl }: { redirectUrl?: string }) {
+
+// -- AUTH REDIRECT URL --
+
+const REDIRECT_URL = '/dash'
+
+
+export default function Page() {
     const router = useRouter()
 
     const [authError, setAuthError] = useState<string | null>()
@@ -29,8 +35,8 @@ export default function Page({ redirectUrl }: { redirectUrl?: string }) {
 
         try {
             await pb.collection('users').authWithPassword(email, password)
-
-            router.push(redirectUrl ?? '/dash')
+            
+            router.push(REDIRECT_URL)
         }
         catch (e: any) {
             setAuthError(e.response.message ?? "Something went wrong, try again later.")
