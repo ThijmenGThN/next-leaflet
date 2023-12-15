@@ -1,4 +1,3 @@
-
 import crypto from 'crypto'
 
 import pb from '@/helpers/pocketbase'
@@ -13,13 +12,11 @@ type iTypes = 'identicon' | 'monsterid' | 'wavatar' | 'retro' | 'robohash'
 
 export default function gravatar(email?: string, type?: iTypes) {
 
-    if (typeof window !== undefined) {
+    if (!email && typeof window !== undefined) {
         const authEmail = pb.authStore.model?.email
         if (authEmail) email = authEmail
     }
 
-    if (!email) email = 'next@leaflet.app'
-
-    const id = hash(email.trim().toLowerCase())
+    const id = hash((email ?? 'next@leaflet.app').trim().toLowerCase())
     return `https://www.gravatar.com/avatar/${id}?s=200&r=g&d=${type ?? 'identicon'}`
 }

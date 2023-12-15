@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 
@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const router = useRouter()
     const pathname = usePathname()
 
-    const isCurrent = (href: string) => pathname.startsWith(href)
+    const isCurrent = (href: string) => pathname == href
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -37,6 +37,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         await pb.authStore.clear()
         router.push('/login')
     }
+
+    const [avatar, setAvatar] = useState<string>(gravatar('next@leaflet.app'))
+    useEffect(() => { setAvatar(gravatar()) })
 
     return (
         <div className='min-h-screen bg-gray-50'>
@@ -95,7 +98,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                 <ul role="list" className="-mx-2 space-y-1">
                                                     {navigation.map((item) => (
                                                         <li key={item.name}>
-                                                            <a
+                                                            <Link
                                                                 href={item.href}
                                                                 className={classNames(
                                                                     isCurrent(item.href)
@@ -112,7 +115,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                     aria-hidden="true"
                                                                 />
                                                                 {item.name}
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -143,7 +146,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 <ul role="list" className="-mx-2 space-y-1">
                                     {navigation.map((item) => (
                                         <li key={item.name}>
-                                            <a
+                                            <Link
                                                 href={item.href}
                                                 className={classNames(
                                                     isCurrent(item.href)
@@ -160,7 +163,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     aria-hidden="true"
                                                 />
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -188,7 +191,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         <Menu.Button className="-m-1.5 flex items-center p-1.5">
                             <Image
                                 className="h-8 w-8 rounded-full bg-gray-50"
-                                src={gravatar()}
+                                src={avatar}
                                 width={128}
                                 height={128}
                                 alt=""
