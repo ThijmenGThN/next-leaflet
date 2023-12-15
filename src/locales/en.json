@@ -28,7 +28,13 @@
     "youre-all-caught-up": "You're all caught up.",
     "signed-in-as": "Signed in as",
     "account": "Account",
-    "sign-out": "Sign out"
+    "sign-out": "Sign out",
+    "cancel": "Cancel",
+    "save": "Save",
+    "account-settings": "Account Settings",
+    "information-related-to-your-personal-profile": "Information related to your personal profile",
+    "name": "Name",
+    "email-address": "Email address"
   },
   "log-in": "Log in",
   "an-optimized-tech-stack-for-efficiency": "An optimized tech stack for efficiency.",

@@ -1,11 +1,13 @@
 "use client"
 
 import { FormEvent, useState } from "react"
+import { useTranslations } from "next-intl"
 
 import pb from "@/helpers/pocketbase"
 import { useRouter } from "@/helpers/navigation"
 
 export default function Page() {
+    const t = useTranslations('dash')
     const router = useRouter()
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -32,13 +34,17 @@ export default function Page() {
                 <form onSubmit={onSubmit}>
                     <div className="space-y-12">
                         <div className="border-b border-gray-900/10 pb-12">
-                            <h2 className="text-base font-semibold leading-7 text-gray-900">Account Settings</h2>
-                            <p className="mt-1 text-sm leading-6 text-gray-600">Information related to your personal profile</p>
+                            <h2 className="text-base font-semibold leading-7 text-gray-900">
+                                {t('account-settings')}
+                            </h2>
+                            <p className="mt-1 text-sm leading-6 text-gray-600">
+                                {t('information-related-to-your-personal-profile')}
+                            </p>
 
                             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div className="sm:col-span-4">
                                     <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Name
+                                        {t('name')}
                                     </label>
                                     <div className="mt-2">
                                         <input
@@ -54,7 +60,7 @@ export default function Page() {
 
                                 <div className="sm:col-span-4">
                                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Email address
+                                        {t('email-address')}
                                     </label>
                                     <div className="mt-2">
                                         <input
@@ -76,7 +82,7 @@ export default function Page() {
                         <div className="text-sm font-semibold leading-6 text-gray-900 hover:cursor-pointer"
                             onClick={router.back}
                         >
-                            Cancel
+                            {t('cancel')}
                         </div>
                         <button
                             type="submit"
@@ -87,7 +93,7 @@ export default function Page() {
                                     <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd" />
                                 </svg>
                             }
-                            Save
+                            {t('save')}
                         </button>
                     </div>
                 </form>

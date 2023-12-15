@@ -28,7 +28,13 @@
         "youre-all-caught-up": "Er zijn geen berichten",
         "signed-in-as": "Aangemeld als",
         "account": "Account",
-        "sign-out": "Afmelden"
+        "sign-out": "Afmelden",
+        "cancel": "Annuleren",
+        "save": "Opslaan",
+        "account-settings": "Account Instellingen",
+        "information-related-to-your-personal-profile": "Informatie gerelateerd aan uw persoonlijke profiel",
+        "name": "Naam",
+        "email-address": "E-mailadres"
     },
     "log-in": "Inloggen",
     "an-optimized-tech-stack-for-efficiency": "Een geoptimaliseerde tech-stack voor efficiëntie.",
