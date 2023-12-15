@@ -1,14 +1,17 @@
 "use client"
 
-import { Link } from '@/helpers/navigation'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { useTranslations } from 'use-intl'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
-import assetLogo from '@/assets/logo.webp'
+import { Link } from '@/helpers/navigation'
 import { classNames } from '@/helpers/tailwind'
+
+import LocaleSwitcher from '@/components/LocaleSwitcher'
+
+import assetLogo from '@/assets/logo.webp'
 
 const navigation = [
     { name: 'Repository', href: 'https://github.com/ThijmenGThN/next-leaflet' },
@@ -54,9 +57,7 @@ export default function Hero() {
                         ))}
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                            {t('log-in')} <span aria-hidden="true">&rarr;</span>
-                        </Link>
+                        <LocaleSwitcher />
                     </div>
                 </nav>
                 <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -92,13 +93,8 @@ export default function Hero() {
                                         </Link>
                                     ))}
                                 </div>
-                                <div className="py-6">
-                                    <Link
-                                        href="/login"
-                                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        {t('log-in')}
-                                    </Link>
+                                <div className="py-6 flex flex-col items-center">
+                                    <LocaleSwitcher />
                                 </div>
                             </div>
                         </div>
@@ -147,7 +143,7 @@ export default function Hero() {
                                 href="/login"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                {t('get-started')}
+                                {t('log-in')}
                             </Link>
                             <Link href={process.env.NEXT_PUBLIC_POCKETBASE_URL + '/_'} target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
                                 {t('open-pocketbase')} <span aria-hidden="true">→</span>
