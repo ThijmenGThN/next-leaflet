@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
+import { useTranslations } from 'use-intl'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import assetLogo from '@/assets/logo.webp'
@@ -16,6 +17,7 @@ const navigation = [
 ]
 
 export default function Hero() {
+    const t = useTranslations()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
@@ -49,7 +51,7 @@ export default function Hero() {
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                            Log in <span aria-hidden="true">&rarr;</span>
+                            {t('log-in')} <span aria-hidden="true">&rarr;</span>
                         </Link>
                     </div>
                 </nav>
@@ -91,7 +93,7 @@ export default function Hero() {
                                         href="/login"
                                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
-                                        Log in
+                                        {t('log-in')}
                                     </Link>
                                 </div>
                             </div>
@@ -122,29 +124,29 @@ export default function Hero() {
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                         <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                            An optimized tech stack for efficiency.{' '}
+                            {t('an-optimized-tech-stack-for-efficiency')}{' '}
                             <Link href="https://github.com/ThijmenGThN/next-leaflet" target='_blank' className="font-semibold text-primary">
                                 <span className="absolute inset-0" aria-hidden="true" />
-                                Read more <span aria-hidden="true">&rarr;</span>
+                                {t('read-more')} <span aria-hidden="true">&rarr;</span>
                             </Link>
                         </div>
                     </div>
                     <div className="text-center">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            next-leaflet
+                            {t('next-leaflet')}
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            A comprehensive and efficient appstack that combines the power of Next.js and the flexibility of PocketBase for streamlined web application development.
+                            {t('a-comprehensive-and-efficient-appstack-that-combines-the-power-of-next-js-and-the-flexibility-of-pocketbase-for-streamlined-web-application-development')}
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
                                 href="/login"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                Get started
+                                {t('get-started')}
                             </Link>
                             <Link href={process.env.NEXT_PUBLIC_POCKETBASE_URL + '/_'} target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
-                                Open Pocketbase <span aria-hidden="true">→</span>
+                                {t('open-pocketbase')} <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>

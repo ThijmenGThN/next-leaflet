@@ -2,11 +2,13 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { Fragment, useEffect, useState } from 'react'
+import { useFormatter, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 
 import pb from '@/helpers/pocketbase'
+import gravatar from '@/helpers/gravatar'
 import { classNames } from '@/helpers/tailwind'
 
 import {
@@ -19,7 +21,6 @@ import {
 } from '@heroicons/react/24/outline'
 
 import assetLogo from '@/assets/logo.webp'
-import gravatar from '@/helpers/gravatar'
 
 interface typeNotification {
     id: string
@@ -33,6 +34,8 @@ const navigation = [
 ]
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+    const t = useTranslations('dash')
+    const { dateTime } = useFormatter()
     const router = useRouter()
     const pathname = usePathname()
 
@@ -40,8 +43,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const [authEmail, setAuthEmail] = useState<string>()
     const [avatar, setAvatar] = useState<string>(gravatar('next@leaflet.app'))
     const [notifications, setNotifications] = useState<Array<typeNotification>>([])
-
-    const isCurrent = (href: string) => pathname == href
 
     const deleteNotification = (id: string) => pb.collection('notifications').delete(id)
 
@@ -125,7 +126,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             <Link
                                                                 href={item.href}
                                                                 className={classNames(
-                                                                    isCurrent(item.href)
+                                                                    item.href == pathname
                                                                         ? 'bg-gray-50 text-primary'
                                                                         : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -133,7 +134,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             >
                                                                 <item.icon
                                                                     className={classNames(
-                                                                        isCurrent(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                                        item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
                                                                         'h-6 w-6 shrink-0'
                                                                     )}
                                                                     aria-hidden="true"
@@ -173,7 +174,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             <Link
                                                 href={item.href}
                                                 className={classNames(
-                                                    isCurrent(item.href)
+                                                    item.href == pathname
                                                         ? 'bg-gray-50 text-primary'
                                                         : 'text-gray-700 hover:text-primary hover:bg-gray-50',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -181,7 +182,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             >
                                                 <item.icon
                                                     className={classNames(
-                                                        isCurrent(item.href) ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
+                                                        item.href == pathname ? 'text-primary' : 'text-gray-400 group-hover:text-primary',
                                                         'h-6 w-6 shrink-0'
                                                     )}
                                                     aria-hidden="true"
@@ -201,7 +202,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
-                <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
+                <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 capitalize">
+                    {navigation.find(record => record.href = pathname)?.name}
+                </div>
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                     {/* Notifications dropdown */}
                     <Menu as="div" className="relative inline-block text-left">
@@ -223,7 +226,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         >
                             <Menu.Items className="absolute right-0 z-10 mt-2 w-64 md:w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <p className="px-4 py-3">
-                                    Notifications
+                                    {t('notifications')}
                                 </p>
                                 <ul className="divide-y divide-gray-100 max-h-80 overflow-y-auto">
                                     {notifications.length > 0
@@ -233,7 +236,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     <p className='font-semibold'>{notify.title}</p>
                                                     <p>{notify.message}</p>
                                                     <p className='text-xs text-gray-500'>
-                                                        Created on {new Date(notify.created).toLocaleDateString()} at {new Date(notify.created).toLocaleTimeString()}
+                                                        {t('received-on-datetime', {
+                                                            datetime: dateTime(new Date(notify.created), {
+                                                                "day": "numeric",
+                                                                "hour": "numeric",
+                                                                "minute": "numeric",
+                                                                "month": "short"
+                                                            })
+                                                        })}
                                                     </p>
                                                 </div>
                                                 <button className='-m-1.5 p-1.5'
@@ -245,7 +255,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         ))
                                         : (
                                             <li className='px-4 py-6 flex flex-col gap-y-2 items-center'>
-                                                You&apos;re all caught up.
+                                                {t('youre-all-caught-up')}
                                             </li>
                                         )
                                     }
@@ -280,8 +290,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         >
                             <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div className="px-4 py-3">
-                                    <p className="text-sm">Signed in as</p>
-                                    <p className="truncate text-sm font-medium text-gray-900">{authEmail}</p>
+                                    <p className="text-sm">
+                                        {t('signed-in-as')}
+                                    </p>
+                                    <p className="truncate text-sm font-medium text-gray-900">
+                                        {authEmail}
+                                    </p>
                                 </div>
                                 <div className="py-1">
                                     <Menu.Item>
@@ -293,7 +307,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     'block px-4 py-2 text-sm'
                                                 )}
                                             >
-                                                Account
+                                                {t('account')}
                                             </Link>
                                         )}
                                     </Menu.Item>
@@ -308,7 +322,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     'block w-full px-4 py-2 text-left text-sm'
                                                 )}
                                             >
-                                                Sign out
+                                                {t('sign-out')}
                                             </button>
                                         )}
                                     </Menu.Item>
