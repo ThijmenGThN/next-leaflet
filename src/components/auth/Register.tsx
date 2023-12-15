@@ -28,7 +28,7 @@ export default function Register({ redirectUrl }: { redirectUrl?: string }) {
             if (!email || !password || !passwordConfirm) throw "Some required fields have not been filled in."
             if (password.length < 8) throw "Password must be at least 8 characters"
             if (password.length > 72) throw "Password cannot exceed 72 characters."
-            if (password != passwordConfirm) throw "The provided passwords do not match."
+            if (password != passwordConfirm) throw "Passwords must both match."
         }
         catch (message: any) {
             setIsLoading(false)
@@ -69,6 +69,7 @@ export default function Register({ redirectUrl }: { redirectUrl?: string }) {
                         name="name"
                         type="text"
                         autoComplete="name"
+                        autoFocus
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                     />
                 </div>

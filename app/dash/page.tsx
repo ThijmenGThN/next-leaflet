@@ -28,6 +28,7 @@ export default function Page() {
         <div className="container mx-auto mt-24 flex flex-col gap-y-4 items-center">
             <p>
                 Welcome to the dash!
+                <b>This is still WIP</b>
             </p>
 
             {JSON.stringify(user)}
