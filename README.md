@@ -63,7 +63,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 </details>
 
-### Deployment
+## Deployment
 
 <details><summary>Instructions</summary>
 
