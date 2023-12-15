@@ -2,14 +2,18 @@
 
 import Link from "next/link"
 import Image from 'next/image'
-import { useState, type FormEvent } from "react"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 import pb from '@/helpers/pocketbase'
 import gravatar from "@/helpers/gravatar"
 
+import type { FormEvent } from "react"
+
 import assetLogo from '@/assets/logo.webp'
 
 export default function Page() {
+    const t = useTranslations('auth')
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [hasConcluded, setHasConcluded] = useState<string>()
@@ -37,7 +41,7 @@ export default function Page() {
                     alt=""
                 />
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Reset your password
+                    {t('reset-your-password')}
                 </h2>
             </div>
 
@@ -57,7 +61,7 @@ export default function Page() {
                             </p>
 
                             <div className="flex w-full items-center gap-x-2 justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-500">
-                                We have sent you an email to reset your password
+                                {t('we-have-sent-you-an-email-to-reset-your-password')}
                             </div>
                         </div>
                     )
@@ -65,7 +69,7 @@ export default function Page() {
                         <form className="space-y-6" onSubmit={onSubmit}>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Email address
+                                    {t('email-address')}
                                 </label >
                                 <div className="mt-2">
                                     <input
@@ -89,7 +93,7 @@ export default function Page() {
                                     </svg>
                                 }
 
-                                Reset
+                                {t('reset')}
                             </button>
                         </form >
                     )
@@ -98,12 +102,12 @@ export default function Page() {
             <div className="flex mt-5 items-center justify-between">
                 <div className="text-sm leading-6">
                     <Link href="/login" className="font-semibold text-primary hover:text-primary-600">
-                        Sign in to your account
+                        {t('sign-in-to-your-account')}
                     </Link>
                 </div>
                 <div className="text-sm leading-6">
                     <Link href="/register" className="font-semibold text-primary hover:text-primary-600">
-                        Create an account
+                        {t('create-an-account')}
                     </Link>
                 </div>
             </div>

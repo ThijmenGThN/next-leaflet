@@ -8,5 +8,8 @@ export const locales = ['en', 'nl']
 export default createMiddleware({ locales, defaultLocale: 'en', localePrefix: 'as-needed' })
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+    matcher: [
+        '/((?!api|_next|_vercel|.*\\..*).*)',
+        '/([\\w-]+)?/users/(.+)'
+    ]
 }

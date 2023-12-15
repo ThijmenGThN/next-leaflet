@@ -2,11 +2,14 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { useState, type FormEvent } from "react"
 
 import pb from '@/helpers/pocketbase'
 import { classNames } from "@/helpers/tailwind"
+
+import type { FormEvent } from "react"
 
 import assetLogo from '@/assets/logo.webp'
 
@@ -17,6 +20,7 @@ const REDIRECT_URL = '/dash'
 
 
 export default function Page() {
+    const t = useTranslations('auth')
     const router = useRouter()
 
     const [authError, setAuthError] = useState<string | null>()
@@ -34,10 +38,10 @@ export default function Page() {
             passwordConfirm = formData.get('passwordConfirm') as string
 
         try {
-            if (!email || !password || !passwordConfirm) throw "Some required fields have not been filled in."
-            if (password.length < 8) throw "Password must be at least 8 characters"
-            if (password.length > 72) throw "Password cannot exceed 72 characters."
-            if (password != passwordConfirm) throw "Passwords must both match."
+            if (!email || !password || !passwordConfirm) throw t('some-required-fields-have-not-been-filled-in')
+            if (password.length < 8) throw t('password-must-be-at-least-8-characters')
+            if (password.length > 72) throw t('password-cannot-exceed-72-characters')
+            if (password != passwordConfirm) throw t('passwords-must-both-match')
         }
         catch (message: any) {
             setIsLoading(false)
@@ -56,11 +60,11 @@ export default function Page() {
 
             await pb.collection('users').authWithPassword(email, password)
             document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
-            
-            router.push('/dash')
+
+            router.push(REDIRECT_URL)
         }
         catch (e: any) {
-            setAuthError("Email address already taken, reset or try a different one.")
+            setAuthError(t('email-address-already-taken-reset-or-try-a-different-one'))
         }
 
         setIsLoading(false)
@@ -75,14 +79,14 @@ export default function Page() {
                     alt=""
                 />
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Sign up for an account
+                    {t('sign-up-for-an-account')}
                 </h2>
             </div>
 
             <form className="space-y-6" onSubmit={onSubmit}>
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                        Name
+                        {t('name')}
                     </label>
                     <div className="mt-2">
                         <input
@@ -98,7 +102,7 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                        Email address
+                        {t('email-address')}
                     </label>
                     <div className="mt-2">
                         <input
@@ -117,7 +121,7 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                        Password
+                        {t('password')}
                     </label>
                     <div className="mt-2">
                         <input
@@ -136,7 +140,7 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="passwordConfirm" className="block text-sm font-medium leading-6 text-gray-900">
-                        Confirm password
+                        {t('confirm-password')}
                     </label>
                     <div className="mt-2">
                         <input
@@ -169,7 +173,7 @@ export default function Page() {
                             type="checkbox"
                         />
                         <label htmlFor="show-password" className="ml-3 block text-sm leading-6 text-gray-900">
-                            Show password
+                            {t('show-password')}
                         </label>
                     </div>
                 </div>
@@ -182,19 +186,18 @@ export default function Page() {
                             <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd" />
                         </svg>
                     }
-
-                    Sign up
+                    {t('sign-up')}
                 </button>
 
                 <div className="flex mt-5 items-center justify-between">
                     <div className="text-sm leading-6">
                         <Link href="/reset" className="font-semibold text-primary hover:text-primary-600">
-                            Forgot password?
+                            {t('forgot-password')}
                         </Link>
                     </div>
                     <div className="text-sm leading-6">
                         <Link href="/login" className="font-semibold text-primary hover:text-primary-600">
-                            Sign in to your account
+                            {t('sign-in-to-your-account')}
                         </Link>
                     </div>
                 </div>

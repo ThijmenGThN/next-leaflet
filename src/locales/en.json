@@ -1,1 +1,25 @@
-{}
+{
+    "auth": {
+        "sign-in-to-your-account": "Sign in to your account",
+        "something-went-wrong-try-again-later": "Something went wrong, try again later.",
+        "email-address": "Email address",
+        "password": "Password",
+        "show-password": "Show password",
+        "sign-in": "Sign in",
+        "forgot-password": "Forgot password?",
+        "create-an-account": "Create an account",
+        "some-required-fields-have-not-been-filled-in": "Some required fields have not been filled in.",
+        "password-must-be-at-least-8-characters": "Password must be at least 8 characters",
+        "password-cannot-exceed-72-characters": "Password cannot exceed 72 characters.",
+        "passwords-must-both-match": "Passwords must both match.",
+        "email-address-already-taken-reset-or-try-a-different-one": "Email address already taken, reset or try a different one.",
+        "sign-up-for-an-account": "Sign up for an account",
+        "name": "Name",
+        "confirm-password": "Confirm password",
+        "sign-up": "Sign up",
+        "reset-your-password": "Reset your password",
+        "we-have-sent-you-an-email-to-reset-your-password": "We have sent you an email to reset your password",
+        "reset": "Reset",
+        "back-to-homepage": "Back to homepage"
+    }
+}

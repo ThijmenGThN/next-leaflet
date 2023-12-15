@@ -1,6 +1,9 @@
+
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+    const t = useTranslations('auth')
 
     return (
         <div className='h-screen'>
@@ -12,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                     <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
                         <Link href="/">
-                            ← Back to homepage
+                            ← {t('back-to-homepage')}
                         </Link>
                     </div>
                 </div>

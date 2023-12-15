@@ -1,6 +1,7 @@
 
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
+import { NextIntlClientProvider as Localizer, useMessages } from 'next-intl'
 
 import type { Metadata } from 'next'
 
@@ -22,7 +23,9 @@ export default function RootLayout({ children, params: { locale } }: { children:
     return (
         <html lang={locale}>
             <body className={inter.className}>
-                {children}
+                <Localizer locale={locale} messages={useMessages()}>
+                    {children}
+                </Localizer>
             </body>
         </html>
     )
