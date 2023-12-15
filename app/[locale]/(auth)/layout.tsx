@@ -1,5 +1,5 @@
 
-import Link from 'next/link'
+import { Link } from '@/helpers/navigation'
 import { useTranslations } from 'next-intl'
 
 export default function Layout({ children }: { children: React.ReactNode }) {

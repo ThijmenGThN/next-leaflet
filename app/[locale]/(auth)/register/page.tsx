@@ -1,10 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import { useRouter } from "next/navigation"
+import { Link, useRouter } from '@/helpers/navigation'
 
 import pb from '@/helpers/pocketbase'
 import { classNames } from "@/helpers/tailwind"

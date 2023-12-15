@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from '@/helpers/navigation'
 import Image from 'next/image'
 import { useState } from "react"
 import { useTranslations } from "next-intl"

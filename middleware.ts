@@ -1,11 +1,10 @@
 
-// -- internationalization --
+// -- Internationalization --
 
 import createMiddleware from 'next-intl/middleware'
+import { locales, localePrefix, defaultLocale } from './src/helpers/navigation'
 
-export const locales = ['en', 'nl']
-
-export default createMiddleware({ locales, defaultLocale: 'en', localePrefix: 'as-needed' })
+export default createMiddleware({ defaultLocale, localePrefix, locales })
 
 export const config = {
     matcher: [

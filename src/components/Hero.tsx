@@ -1,6 +1,6 @@
 "use client"
 
-import Link from 'next/link'
+import { Link } from '@/helpers/navigation'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
@@ -133,7 +133,7 @@ export default function Hero() {
                     </div>
                     <div className="text-center">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            {t('next-leaflet')}
+                            next-leaflet
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
                             {t('a-comprehensive-and-efficient-appstack-that-combines-the-power-of-next-js-and-the-flexibility-of-pocketbase-for-streamlined-web-application-development')}

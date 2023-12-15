@@ -5,7 +5,7 @@ import { NextIntlClientProvider as Localizer, useMessages } from 'next-intl'
 
 import type { Metadata } from 'next'
 
-import { locales } from '@/../middleware'
+import { locales } from '@/helpers/navigation'
 
 import '@/styles/globals.css'
 

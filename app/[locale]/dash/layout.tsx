@@ -1,11 +1,10 @@
 "use client"
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { useFormatter, useTranslations } from 'next-intl'
-import { usePathname, useRouter } from 'next/navigation'
 import React, { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Link, usePathname, useRouter } from '@/helpers/navigation'
 
 import pb from '@/helpers/pocketbase'
 import gravatar from '@/helpers/gravatar'
@@ -203,7 +202,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <div className="flex-1 text-sm font-semibold leading-6 text-gray-900 capitalize">
-                    {navigation.find(record => record.href = pathname)?.name}
+                    {navigation.find(record => record.href == pathname)?.name}
                 </div>
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                     {/* Notifications dropdown */}

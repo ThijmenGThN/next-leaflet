@@ -6,6 +6,7 @@
         ".eslintrc.json": true,
         "next-env.d.ts": true,
         "node_modules": true,
+        // "middleware.ts": true,
         "LICENSE.md": true,
         "debug.log": true,
         ".vscode": true,
