@@ -30,7 +30,7 @@ export default function Login({ redirectUrl }: { redirectUrl?: string }) {
             router.push(redirectUrl ?? '/dash')
         }
         catch (e: any) {
-            setAuthError(e.response.message ?? "An unexpected has occoured.")
+            setAuthError(e.response.message ?? "Something went wrong, try again later.")
         }
 
         setIsLoading(false)
