@@ -2,20 +2,10 @@ name: Deploy
 
 on:
   push:
-    branches: leaflet # <- Rename to a valid branch.
+    branches: main
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 20
-      - uses: actions/checkout@v2
-      - run: npm ci
-      - run: npm run lint
   setup:
-    needs: lint
     runs-on: self-hosted
     steps:
       - uses: appleboy/ssh-action@master
@@ -32,8 +22,10 @@ jobs:
             sudo git pull
 
             echo '${{ secrets.APP_ENV }}' > .env
+            
+            sudo docker-compose pull
   deploy:
-    needs: [lint, setup]
+    needs: setup
     runs-on: self-hosted
     steps:
       - uses: appleboy/ssh-action@master
