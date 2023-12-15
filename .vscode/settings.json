@@ -1,5 +1,6 @@
 {
     "files.exclude": {
+        "src/locales/i18n.ts": true,
         "package-lock.json": true,
         "postcss.config.js": true,
         ".eslintrc.json": true,
@@ -7,6 +8,7 @@
         "node_modules": true,
         "LICENSE.md": true,
         "debug.log": true,
+        ".vscode": true,
         ".next": true
     }
 }

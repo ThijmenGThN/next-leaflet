@@ -35,7 +35,7 @@ export default function Page() {
 
         try {
             await pb.collection('users').authWithPassword(email, password)
-            
+
             router.push(REDIRECT_URL)
         }
         catch (e: any) {
