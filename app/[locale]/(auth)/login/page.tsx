@@ -45,7 +45,7 @@ export default function Page() {
             setAuthError(e.response.message ?? t('something-went-wrong-try-again-later'))
         }
 
-        setIsLoading(false)
+        setTimeout(() => setIsLoading(false), 500)
     }
 
     return (

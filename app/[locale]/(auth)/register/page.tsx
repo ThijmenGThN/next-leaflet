@@ -43,8 +43,10 @@ export default function Page() {
             if (password != passwordConfirm) throw t('passwords-must-both-match')
         }
         catch (message: any) {
-            setIsLoading(false)
-            return setAuthError(message)
+            setTimeout(() => {
+                setIsLoading(false)
+                return setAuthError(message)
+            }, 500)
         }
 
         try {
@@ -66,7 +68,7 @@ export default function Page() {
             setAuthError(t('email-address-already-taken-reset-or-try-a-different-one'))
         }
 
-        setIsLoading(false)
+        setTimeout(() => setIsLoading(false), 500)
     }
 
     return (

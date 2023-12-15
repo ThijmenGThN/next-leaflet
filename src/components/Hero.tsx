@@ -8,6 +8,7 @@ import { useTranslations } from 'use-intl'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import assetLogo from '@/assets/logo.webp'
+import { classNames } from '@/helpers/tailwind'
 
 const navigation = [
     { name: 'Repository', href: 'https://github.com/ThijmenGThN/next-leaflet' },
@@ -33,7 +34,10 @@ export default function Hero() {
                             />
                         </div>
                     </div>
-                    <div className="flex lg:hidden">
+                    <div className={classNames(
+                        mobileMenuOpen ? 'hidden' : 'lg:hidden',
+                        "flex"
+                    )}>
                         <button
                             type="button"
                             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
