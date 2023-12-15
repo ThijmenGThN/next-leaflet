@@ -15,6 +15,11 @@ export default function Page() {
         router.push('/login')
     }
 
+    async function update() {
+        await pb.collection("users").authRefresh()
+        setUser(pb.authStore.model)
+    }
+
     useEffect(() => {
         setUser(pb.authStore.model)
     }, [])
@@ -27,11 +32,19 @@ export default function Page() {
 
             {JSON.stringify(user)}
 
-            <button className="text-white px-4 py-2 rounded bg-black"
-                onClick={signOut}
-            >
-                Sign out
-            </button>
+            <div className="flex gap-x-8">
+                <button className="text-white px-4 py-2 rounded bg-black"
+                    onClick={signOut}
+                >
+                    Sign out
+                </button>
+
+                <button className="text-white px-4 py-2 rounded bg-black"
+                    onClick={update}
+                >
+                    Update
+                </button>
+            </div>
         </div>
     )
 }

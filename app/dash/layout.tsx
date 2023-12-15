@@ -5,7 +5,7 @@ import pb from "@/helpers/pocketbase"
 
 import type { ReactNode } from "react"
 
-export default async function RestrictiveLayout({ children }: { children: ReactNode }) {
+export default function RestrictiveLayout({ children }: { children: ReactNode }) {
 
     const authCookie = cookies().get("pb_auth")
 

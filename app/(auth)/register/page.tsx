@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import Login from '@/components/auth/Login'
+import Register from '@/components/auth/Register'
 
 import assetLogo from '@/assets/logo.webp'
 
@@ -17,13 +17,13 @@ export default function Page() {
                         alt=""
                     />
                     <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                        Sign in to your account
+                        Sign up for an account
                     </h2>
                 </div>
 
                 <div className="relative my-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                     <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                        <Login />
+                        <Register />
                     </div>
 
                     <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
