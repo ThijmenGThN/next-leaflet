@@ -11,14 +11,27 @@ import { classNames } from '@/helpers/tailwind'
 
 import {
     Bars3Icon,
+    BellAlertIcon,
     BellIcon,
     HomeIcon,
+    TrashIcon,
     UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 
 import assetLogo from '@/assets/logo.webp'
 import gravatar from '@/helpers/gravatar'
+
+interface typeNotification {
+    id: string
+    title: string
+    message: string
+    created: string
+}
+
+async function deleteNotification(id: string) {
+    pb.collection('notifications').delete(id)
+}
 
 const navigation = [
     { name: 'Dashboard', href: '/dash', icon: HomeIcon },
@@ -29,6 +42,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const router = useRouter()
     const pathname = usePathname()
 
+    const [authEmail, setAuthEmail] = useState<string>()
+    const [avatar, setAvatar] = useState<string>(gravatar('next@leaflet.app'))
+    const [notifications, setNotifications] = useState<Array<typeNotification>>([])
+
     const isCurrent = (href: string) => pathname == href
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -38,8 +55,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         router.push('/login')
     }
 
-    const [avatar, setAvatar] = useState<string>(gravatar('next@leaflet.app'))
-    useEffect(() => { setAvatar(gravatar()) })
+    function updateNotifications() {
+        pb.collection('notifications').getFullList({ sort: '-created' })
+            .then(records => setNotifications(records.map(({ id, title, message, created }) => ({ id, title, message, created }))))
+            .catch(e => setNotifications([]))
+    }
+
+    useEffect(() => {
+        setAvatar(gravatar())
+        setAuthEmail(pb.authStore.model?.email)
+
+        updateNotifications()
+        pb.collection('notifications').subscribe('*', e => updateNotifications())
+    }, [])
 
     return (
         <div className='min-h-screen bg-gray-50'>
@@ -179,24 +207,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </button>
                 <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">Dashboard</div>
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
-                    <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    {/* Separator */}
-                    <div className="h-6 w-px bg-gray-200" aria-hidden="true" />
-
-                    {/* Profile dropdown */}
-                    <Menu as="div" className="relative">
-                        <Menu.Button className="-m-1.5 flex items-center p-1.5">
-                            <Image
-                                className="h-8 w-8 rounded-full bg-gray-50"
-                                src={avatar}
-                                width={128}
-                                height={128}
-                                alt=""
-                            />
+                    {/* Notifications dropdown */}
+                    <Menu as="div" className="relative inline-block text-left">
+                        <Menu.Button className="-m-1.5 flex items-center p-1.5 text-gray-400 hover:text-gray-500">
+                            {notifications.length > 0
+                                ? <BellAlertIcon className="h-6 w-6 text-primary" aria-hidden="true" />
+                                : <BellIcon className="h-6 w-6" aria-hidden="true" />
+                            }
                         </Menu.Button>
+
                         <Transition
                             as={Fragment}
                             enter="transition ease-out duration-100"
@@ -206,33 +225,98 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                         >
-                            <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <Link
-                                            href="/dash/profile"
-                                            className={classNames(
-                                                active ? 'bg-gray-50' : '',
-                                                'block px-3 py-1 text-sm leading-6 text-gray-900'
-                                            )}
-                                        >
-                                            Your profile
-                                        </Link>
-                                    )}
-                                </Menu.Item>
-                                <Menu.Item>
-                                    {({ active }) => (
-                                        <div
-                                            className={classNames(
-                                                active ? 'bg-gray-50' : '',
-                                                'block px-3 py-1 text-sm leading-6 text-gray-900 hover:cursor-pointer'
-                                            )}
-                                            onClick={signOut}
-                                        >
-                                            Sign out
-                                        </div>
-                                    )}
-                                </Menu.Item>
+                            <Menu.Items className="absolute right-0 z-10 mt-2 w-64 md:w-96 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <p className="px-4 py-3">
+                                    Notifications
+                                </p>
+                                <ul className="divide-y divide-gray-100 max-h-80 overflow-y-auto">
+                                    {notifications.length > 0
+                                        ? notifications.map((notify, index) => (
+                                            <li className='px-4 py-3 flex gap-x-4 justify-between items-center' key={index}>
+                                                <div className='flex flex-col gap-y-2 text-sm'>
+                                                    <p className='font-semibold'>{notify.title}</p>
+                                                    <p>{notify.message}</p>
+                                                    <p className='text-xs text-gray-500'>
+                                                        Created on {new Date(notify.created).toLocaleDateString()} at {new Date(notify.created).toLocaleTimeString()}
+                                                    </p>
+                                                </div>
+                                                <button className='-m-1.5 p-1.5'
+                                                    onClick={() => deleteNotification(notify.id)}
+                                                >
+                                                    <TrashIcon className="h-6 w-6 text-gray-500 hover:text-gray-600" aria-hidden="true" />
+                                                </button>
+                                            </li>
+                                        ))
+                                        : (
+                                            <li className='px-4 py-6 flex flex-col gap-y-2 items-center'>
+                                                You&apos;re all caught up.
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </Menu.Items>
+                        </Transition>
+                    </Menu>
+
+                    {/* Separator */}
+                    <div className="h-6 w-px bg-gray-200" aria-hidden="true" />
+
+                    {/* Profile dropdown */}
+                    <Menu as="div" className="relative inline-block text-left">
+                        <Menu.Button className="-m-1.5 flex items-center p-1.5">
+                            <Image
+                                className="h-8 w-8 rounded-full bg-gray-50"
+                                src={avatar}
+                                width={128}
+                                height={128}
+                                alt=""
+                            />
+                        </Menu.Button>
+
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                        >
+                            <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="px-4 py-3">
+                                    <p className="text-sm">Signed in as</p>
+                                    <p className="truncate text-sm font-medium text-gray-900">{authEmail}</p>
+                                </div>
+                                <div className="py-1">
+                                    <Menu.Item>
+                                        {({ active }) => (
+                                            <Link
+                                                href="/dash/account"
+                                                className={classNames(
+                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                    'block px-4 py-2 text-sm'
+                                                )}
+                                            >
+                                                Account
+                                            </Link>
+                                        )}
+                                    </Menu.Item>
+                                </div>
+                                <div className="py-1">
+                                    <Menu.Item>
+                                        {({ active }) => (
+                                            <button
+                                                onClick={signOut}
+                                                className={classNames(
+                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                    'block w-full px-4 py-2 text-left text-sm'
+                                                )}
+                                            >
+                                                Sign out
+                                            </button>
+                                        )}
+                                    </Menu.Item>
+                                </div>
                             </Menu.Items>
                         </Transition>
                     </Menu>
