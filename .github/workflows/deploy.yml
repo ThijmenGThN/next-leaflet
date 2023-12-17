@@ -19,6 +19,7 @@ jobs:
             cd ~/env/${{github.event.repository.name}}
             
             sudo git clone https://github.com/${{github.repository}} .
+            sudo git clean -f
             sudo git pull
 
             echo '${{ secrets.APP_ENV }}' > .env
