@@ -17,12 +17,10 @@ export default function Page() {
         setIsLoading(true)
 
         const formData = new FormData(event.currentTarget)
-        const name = formData.get('name') as string,
-            email = formData.get('email') as string
+        const name = formData.get('name') as string
 
         await pb.collection('users').update(pb.authStore.model?.id, {
-            "name": name,
-            "email": email
+            "name": name
         })
 
         setTimeout(() => setIsLoading(false), 500)
@@ -65,12 +63,9 @@ export default function Page() {
                                     <div className="mt-2">
                                         <input
                                             id="email"
-                                            name="email"
-                                            type="email"
-                                            required
-                                            defaultValue={pb.authStore.model?.email}
-                                            autoComplete="email"
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                                            value={pb.authStore.model?.email}
+                                            disabled
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
