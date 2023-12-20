@@ -12,6 +12,7 @@ import '@/styles/globals.css'
 export const metadata: Metadata = {
     title: 'next-leaflet',
     description: 'An optimized tech stack for efficiency.',
+    manifest: 'manifest.json'
 }
 
 const inter = Inter({ subsets: ['latin'] })

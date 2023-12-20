@@ -1,0 +1,21 @@
+{
+    "name": "next-leaflet",
+    "short_name": "next-leaflet",
+    "description": "An optimized tech stack for efficiency.",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#11999e",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "appicon.webp",
+            "type": "image/webp",
+            "sizes": "512x512"
+        }
+    ],
+    "ios": {
+        "apple-mobile-web-app-capable": true,
+        "apple-mobile-web-app-title": "next-leaflet",
+        "apple-mobile-web-app-status-bar-style": "white"
+    }
+}
