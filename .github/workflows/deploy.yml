@@ -3,8 +3,8 @@ name: Deploy
 on:
   push:
     # Branch on which to automatically run the deploy-action.
-    # ┗━ Options: branch.name ━━ default: "main" ━ example: "production"
-    # branches: main
+    # ┗━ Options: branch.name ━━ example: "main"
+    branches: disabled
 
 jobs:
   setup:
