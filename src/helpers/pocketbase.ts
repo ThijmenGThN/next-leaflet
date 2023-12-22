@@ -18,6 +18,9 @@ else {
     pb.authStore.onChange(() => {
         document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
     })
+
+    // Prevents exceptions, nextjs in dev-mode executes effects twice.
+    if (process && process.env.NODE_ENV === 'development') pb.autoCancellation(false)
 }
 
 export default pb
