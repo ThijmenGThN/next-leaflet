@@ -1,12 +1,12 @@
 "use client"
 
 import Image from 'next/image'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslations } from 'next-intl'
-import { Link, useRouter } from '@/helpers/navigation'
 
 import pb from '@/helpers/pocketbase'
 import { classNames } from "@/helpers/tailwind"
+import { Link, useRouter } from '@/helpers/navigation'
 
 import type { FormEvent } from "react"
 
@@ -23,8 +23,14 @@ export default function Page() {
     const router = useRouter()
 
     const [authError, setAuthError] = useState<string | null>()
+    const [authProviders, setAuthProviders] = useState<Array<any>>([])
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    async function authWithOAuth2(provider: string) {
+        await pb.collection('users').authWithOAuth2({ provider })
+        router.push(REDIRECT_URL)
+    }
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -38,7 +44,6 @@ export default function Page() {
 
         try {
             await pb.collection('users').authWithPassword(email, password)
-
             router.push(REDIRECT_URL)
         }
         catch (e: any) {
@@ -47,6 +52,11 @@ export default function Page() {
 
         setTimeout(() => setIsLoading(false), 500)
     }
+
+    useEffect(() => {
+        pb.collection('users').listAuthMethods()
+            .then(methods => setAuthProviders(methods.authProviders))
+    }, [])
 
     return (
         <>
@@ -146,6 +156,34 @@ export default function Page() {
                     </div>
                 </div>
             </form>
+
+            {authProviders.length > 0 && (
+                <div className='flex flex-col gap-y-6 mt-8'>
+                    <div className="relative">
+                        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div className="w-full border-t border-gray-200" />
+                        </div>
+                        <div className="relative flex justify-center text-sm font-medium leading-6">
+                            <span className="bg-white px-6 text-gray-900">Or continue with</span>
+                        </div>
+                    </div>
+
+                    <ul className={classNames(
+                        authProviders.length > 1 ? 'grid-cols-2' : 'grid-cols-1',
+                        "grid gap-4"
+                    )}>
+                        {authProviders.map((provider, index) => (
+                            <li key={index}>
+                                <button className="text-sm bg-black hover:bg-zinc-800 text-white p-2 rounded-lg w-full"
+                                    onClick={() => authWithOAuth2(provider.name)}
+                                >
+                                    {provider.displayName}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </>
     )
 }
