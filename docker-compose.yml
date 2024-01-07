@@ -19,7 +19,7 @@ services:
 
   # ┏━ Pocketbase | This'll provide our backend.
   pocketbase:
-    image: ghcr.io/muchobien/pocketbase:latest
+    image: ghcr.io/muchobien/pocketbase:0.20
     restart: unless-stopped
     ports: ["$POCKETBASE_PORT:8090"]
     env_file: .env
