@@ -74,11 +74,13 @@ export default function Page() {
     return (
         <>
             <div className="absolute left-0 -top-36 w-full">
-                <Image
-                    className="mx-auto h-10 w-auto"
-                    src={assetLogo}
-                    alt=""
-                />
+                <Link href="/">
+                    <Image
+                        className="mx-auto h-10 w-auto"
+                        src={assetLogo}
+                        alt=""
+                    />
+                </Link>
                 <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     {t('sign-up-for-an-account')}
                 </h2>

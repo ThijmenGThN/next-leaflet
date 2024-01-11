@@ -1,5 +1,6 @@
 {
     "files.exclude": {
+        "src/backend/routes/nginx.conf": true,
         "src/locales/i18n.ts": true,
         "package-lock.json": true,
         "postcss.config.js": true,

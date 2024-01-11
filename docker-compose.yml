@@ -5,14 +5,15 @@ services:
   # ┏━ NextJS | A framework to build web apps.
   next:
     image: node:20-alpine
-    command: sh -c "npm ci && npm run build && npm start"
+    command: >
+      sh -c 'npm ci && if [ "$PRODUCTION" == "true" ]; 
+        then npm run build && npm start
+        else npm run dev
+      fi'
     restart: unless-stopped
-    profiles: ["prod"]
-    env_file: .env
     working_dir: /app
-    ports: [$NEXT_PORT:3000]
-    depends_on: [pocketbase]
-    volumes: 
+    depends_on: [ pocketbase ]
+    volumes:
       - next_build:/app/.next
       - next_modules:/app/node_modules
       - ./:/app
@@ -21,15 +22,21 @@ services:
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:0.20
     restart: unless-stopped
-    ports: ["$POCKETBASE_PORT:8090"]
-    env_file: .env
-    volumes: 
+    volumes:
       - pocketbase_data:/pb_data
       - ./src/backend/types.d.ts:/pb_data/types.d.ts
       - ./src/backend/migrations:/pb_migrations
       - ./src/backend/hooks:/pb_hooks
-      
-volumes: 
+
+  # ┏━ Nginx | Ensures same origin for both services.
+  nginx:
+    image: nginx:1.25
+    depends_on: [ next, pocketbase ]
+    volumes: [ "./src/backend/routes:/etc/nginx/conf.d" ]
+    ports: [ "${PORT:-3000}:3000" ]
+    attach: false
+
+volumes:
   next_build:
   next_modules:
   pocketbase_data:

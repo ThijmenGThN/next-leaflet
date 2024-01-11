@@ -145,7 +145,7 @@ export default function Hero() {
                             >
                                 {t('log-in')}
                             </Link>
-                            <Link href={process.env.NEXT_PUBLIC_POCKETBASE_URL + '/_'} target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
+                            <Link href='/_' target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
                                 {t('open-pocketbase')} <span aria-hidden="true">→</span>
                             </Link>
                         </div>
