@@ -12,17 +12,21 @@ export default function Page() {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    // This gets triggered when the form is submitted.
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         setIsLoading(true)
 
+        // Extract data from the form.
         const formData = new FormData(event.currentTarget)
         const name = formData.get('name') as string
 
-        await pb.collection('users').update(pb.authStore.model?.id, {
-            "name": name
-        })
+        // If data has not been provided.
+        if (!name) return setIsLoading(false)
 
+        await pb.collection('users').update(pb.authStore.model?.id, { name })
+
+        // Disable the loader, add a small delay for a better user experience.
         setTimeout(() => setIsLoading(false), 500)
     }
 

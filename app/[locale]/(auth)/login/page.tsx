@@ -27,22 +27,31 @@ export default function Page() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    // Attempt authentication via Oauth2.
     async function authWithOAuth2(provider: string) {
-        await pb.collection('users').authWithOAuth2({ provider })
-        router.push(REDIRECT_URL)
+        try {
+            await pb.collection('users').authWithOAuth2({ provider })
+            router.push(REDIRECT_URL)
+        }
+        catch (e: any) {
+            setAuthError(e.response.message ?? t('something-went-wrong-try-again-later'))
+        }
     }
 
+    // This gets triggered when the form is submitted.
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         setIsLoading(true)
 
+        // Extract data from the form.
         const formData = new FormData(event.currentTarget)
-        const email = formData.get('email') as string,
-            password = formData.get('password') as string
+        const email = formData.get('email') as string
+        const password = formData.get('password') as string
 
-        if (!email || !password) return
+        if (!(email && password)) return setIsLoading(false)
 
         try {
+            // Attempt authentication via email and password.
             await pb.collection('users').authWithPassword(email, password)
             router.push(REDIRECT_URL)
         }
@@ -50,9 +59,11 @@ export default function Page() {
             setAuthError(e.response.message ?? t('something-went-wrong-try-again-later'))
         }
 
+        // Disable the loader, add a small delay for a better user experience.
         setTimeout(() => setIsLoading(false), 500)
     }
 
+    // Fetch all Oauth2 methods once the page loads.
     useEffect(() => {
         pb.collection('users').listAuthMethods()
             .then(methods => setAuthProviders(methods.authProviders))

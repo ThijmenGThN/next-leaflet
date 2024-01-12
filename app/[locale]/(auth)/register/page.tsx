@@ -26,6 +26,7 @@ export default function Page() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    // This gets triggered when the form is submitted.
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         setIsLoading(true)
@@ -43,6 +44,7 @@ export default function Page() {
             if (password != passwordConfirm) throw t('passwords-must-both-match')
         }
         catch (message: any) {
+            // Disable the loader, add a small delay for a better user experience.
             setTimeout(() => {
                 setIsLoading(false)
                 return setAuthError(message)
@@ -59,15 +61,21 @@ export default function Page() {
 
             await pb.collection('users').requestVerification(email)
 
+            // Attempt authentication via email and password.
             await pb.collection('users').authWithPassword(email, password)
             document.cookie = pb.authStore.exportToCookie({ httpOnly: false })
 
             router.push(REDIRECT_URL)
         }
         catch (e: any) {
-            setAuthError(t('email-address-already-taken-reset-or-try-a-different-one'))
+            // Disable the loader, add a small delay for a better user experience.
+            setTimeout(() => {
+                setIsLoading(false)
+                return setAuthError(t('email-address-already-taken-reset-or-try-a-different-one'))
+            }, 500)
         }
 
+        // Disable the loader, add a small delay for a better user experience.
         setTimeout(() => setIsLoading(false), 500)
     }
 
