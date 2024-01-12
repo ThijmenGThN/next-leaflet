@@ -10,6 +10,7 @@ services:
         then npm run build && npm start
         else npm run dev
       fi'
+    container_name: next
     restart: unless-stopped
     working_dir: /app
     depends_on: [ pocketbase ]
@@ -18,10 +19,12 @@ services:
       - ./node_modules:/app/node_modules
       - ./:/app
 
-  # ┏━ Pocketbase | This'll provide our backend.
+  # ┏━ Pocketbase | An inclusive BAAS database provider.
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:0.20
+    container_name: pocketbase
     restart: unless-stopped
+    attach: false
     volumes:
       - pocketbase_data:/pb_data
       - ./src/backend/types.d.ts:/pb_data/types.d.ts
@@ -32,6 +35,8 @@ services:
   nginx:
     image: nginx:1.25
     depends_on: [ next, pocketbase ]
+    container_name: router
+    restart: unless-stopped
     volumes: [ "./src/backend/routes:/etc/nginx/conf.d" ]
     ports: [ "${PORT:-3000}:3000" ]
     attach: false
