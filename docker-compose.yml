@@ -15,7 +15,7 @@ services:
     depends_on: [ pocketbase ]
     volumes:
       - next_build:/app/.next
-      - next_modules:/app/node_modules
+      - ./node_modules:/app/node_modules
       - ./:/app
 
   # ┏━ Pocketbase | This'll provide our backend.
