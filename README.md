@@ -52,7 +52,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 ``` docker compose up ```
 
-The stack is now accessible on your preferred browser at http://localhost:3000, the pocketbase interface can be found at http://localhost:3000/pb/\_
+The stack is now accessible on your preferred browser at http://localhost:3000, the pocketbase interface can be found at http://localhost:3000/pb/_/
 
 #### Stop
 
@@ -84,7 +84,7 @@ To stop the stack from running simply execute the ` CTRL + C ` shortcut.
 
 ``` docker compose up -d ```
 
-The stack is now accessible on your preferred browser at http://localhost:3000 or on a differently defined port as stated in the `.env` file, the pocketbase interface can be found at http://localhost:3000/pb/\_
+The stack is now accessible on your preferred browser at http://localhost:3000 or on a differently defined port as stated in the `.env` file, the pocketbase interface can be found at http://localhost:3000/pb/_/
 
 
 
