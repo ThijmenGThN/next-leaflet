@@ -34,8 +34,6 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 ## Getting Started
 
-
-
 <details><summary>Development</summary>
 
 ### Dependencies
@@ -54,7 +52,7 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 ``` docker compose up ```
 
-The stack is now accessible on your preferred browser at http://localhost:3000.
+The stack is now accessible on your preferred browser at http://localhost:3000, the pocketbase interface can be found at http://localhost:3000/pb/_
 
 #### Stop
 
@@ -86,7 +84,9 @@ To stop the stack from running simply execute the ` CTRL + C ` shortcut.
 
 ``` docker compose up -d ```
 
-The stack is now accessible on your preferred browser at http://localhost:3000 or on a differently defined port as stated in the `.env` file.
+The stack is now accessible on your preferred browser at http://localhost:3000 or on a differently defined port as stated in the `.env` file, the pocketbase interface can be found at http://localhost:3000/pb/_
+
+
 
 #### Stop
 
@@ -98,6 +98,21 @@ The stack is now accessible on your preferred browser at http://localhost:3000 o
 
 ## Fundamentals
 
+<details><summary>Install Node Packages</summary>
+
+#### Install
+
+``` docker compose exec next npm i -D <package> ```
+
+#### Remove
+
+``` docker compose exec next npm r <package> ```
+
+</details>
+
+> ` NPM ` ` MODULES `
+
+
 <details><summary>Next Navigation API</summary>
 
 Instead of using `next/navigation` you should opt for the helper at ` @helpers/navigation `, this is a replacement required by ` next-intl ` it offers the same functionality.
@@ -107,23 +122,26 @@ Instead of using `next/navigation` you should opt for the helper at ` @helpers/n
 > ` Link ` ` useRouter ` ` Redirect ` ` usePathname `
 
 
-## Guides
+<details><summary>Accessing Pocketbase</summary>
 
-<details><summary>Node Packages</summary>
+Pocketbase has a client executable, below is an example that outputs all available commands. You can learn more on how to use it [here](https://pocketbase.io/docs).
 
-### Manage Packages
-
-> Replace ` <package> ` with the module you'd like to modify.
-
-#### Adding
-
-``` docker compose exec next npm i -D <package> ```
-
-#### Removing
-
-``` docker compose exec next npm r <package> ```
+``` docker compose exec pocketbase pocketbase --help ```
 
 </details>
+
+> ` CLI `
+
+
+<details><summary>Schema Snapshots</summary>
+
+Executing the following will generate a schema snapshot in ` src/backend/migrations `, note that this process does not save any collection data.
+
+``` docker compose exec pocketbase pocketbase migrate collections ```
+
+</details>
+
+> ` Pocketbase ` ` Migrations `
 
 
 
