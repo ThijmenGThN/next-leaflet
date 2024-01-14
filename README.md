@@ -1,9 +1,9 @@
 
 # next-leaflet
 
-An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.
-
 ![preview](https://i.imgur.com/oulW1VO.png)
+
+An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.
 
 
 
