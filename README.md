@@ -110,7 +110,7 @@ The stack is now accessible on your preferred browser at http://localhost:3000 o
 
 </details>
 
-> ` NPM ` ` MODULES `
+> ` NPM ` ` Modules `
 
 
 <details><summary>Next Navigation API</summary>
@@ -142,6 +142,67 @@ Executing the following will generate a schema snapshot in ` src/backend/migrati
 </details>
 
 > ` Pocketbase ` ` Migrations `
+
+
+<details><summary>Gravatar</summary>
+
+This helper allows you to easily obtain an image URL from an email address using Gravatar API.
+
+#### Implementation
+
+1. Import the helper into your route.
+
+    ```tsx
+    import gravatar from '@/helpers/gravatar'
+    ```
+
+2. Obtain the avatar from gravatar.
+
+    ```tsx
+    const avatar = gravatar('next@leaflet.app')
+    ```
+
+    This will return a URL from the Gravatar API which is an image. Here's an example result: ` https://www.gravatar.com/avatar/372...ba9?s=200&r=g&d=identicon `
+
+3. (Optional) You can also choose the avatar style.
+
+    ```tsx
+    const avatar = gravatar('next@leaflet.app', 'identicon')    
+    ```
+
+    You can choose between the following avatar types:
+
+    `identicon` `monsterid` `wavatar` `retro` `robohash`
+
+    _The default icon style is `identicon`_
+
+#### Example
+
+Here's an example of how you can use the Gravatar helper in your code. It is recommended to add a fallback image in case Gravatar doesn't return anything or to display while Gravatar is still loading.
+
+```tsx
+import gravatar from '@/helpers/gravatar'
+
+export default function Page() {
+
+    const [avatar, setAvatar] = useState<string>('<fallback_url>')
+
+    // This'll run once when the page loads. 
+    useEffect(() => {
+        setAvatar(gravatar(user.email))
+    }, [])
+
+    return (
+        <>
+            <Image src={avatar} alt="" />
+        </>
+    )
+}
+```
+
+</details>
+
+> ` Helpers ` ` Avatars `
 
 
 
