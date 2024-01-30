@@ -1,6 +1,6 @@
 {
   "name": "next-leaflet",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,7 +19,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "pocketbase": "^0.20",
+    "pocketbase": "^0.21",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",

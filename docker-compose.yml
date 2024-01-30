@@ -21,7 +21,7 @@ services:
 
   # ┏━ Pocketbase | An inclusive BAAS database provider.
   pocketbase:
-    image: ghcr.io/muchobien/pocketbase:0.20
+    image: ghcr.io/muchobien/pocketbase:0.21
     container_name: pocketbase
     restart: unless-stopped
     attach: false
