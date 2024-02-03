@@ -9,6 +9,10 @@
 node_modules
 
 
+# Pocketbase
+**/backend/storage
+
+
 # Package Manager
 npm-debug.log*
 

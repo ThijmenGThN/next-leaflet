@@ -29,6 +29,7 @@ services:
       - pocketbase_data:/pb_data
       - ./src/backend/types.d.ts:/pb_data/types.d.ts
       - ./src/backend/migrations:/pb_migrations
+      - ./src/backend/storage:/pb_data/storage
       - ./src/backend/hooks:/pb_hooks
 
   # ┏━ Nginx | Ensures same origin for both services.
