@@ -6,9 +6,14 @@ services:
   next:
     image: node:20-alpine
     command: >
-      sh -c 'npm ci && if [ "$PRODUCTION" == "true" ]; 
-        then npm run build && npm start
-        else npm run dev
+      sh -c 'if [ "$PRODUCTION" == "true" ]; 
+        then 
+          npm ci
+          npm run build
+          npm start
+        else 
+          npm install
+          npm run dev
       fi'
     container_name: next
     restart: unless-stopped
