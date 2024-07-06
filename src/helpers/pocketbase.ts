@@ -4,7 +4,15 @@ import Pocketbase from 'pocketbase'
 var pb: Pocketbase
 
 // -- Server
-if (typeof window === 'undefined') pb = new Pocketbase('http://pocketbase:8090')
+if (typeof window === 'undefined') {
+    pb = new Pocketbase('http://pocketbase:8090')
+
+    // If both PBAs are defined, request persistent authentication.
+    if (process.env.PBA_USER && process.env.PBA_PASS)
+        pb.admins.authWithPassword(process.env.PBA_USER, process.env.PBA_PASS, {
+            autoRefreshThreshold: 30 * 60
+        })
+}
 
 // -- Client
 else {
