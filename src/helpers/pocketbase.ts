@@ -6,12 +6,6 @@ var pb: Pocketbase
 // -- Server
 if (typeof window === 'undefined') {
     pb = new Pocketbase('http://pocketbase:8090')
-
-    // If both PBAs are defined, request persistent authentication.
-    if (process.env.PBA_USER && process.env.PBA_PASS)
-        pb.admins.authWithPassword(process.env.PBA_USER, process.env.PBA_PASS, {
-            autoRefreshThreshold: 30 * 60
-        })
 }
 
 // -- Client
@@ -26,4 +20,20 @@ else {
     if (process && process.env.NODE_ENV === 'development') pb.autoCancellation(false)
 }
 
+// -- Server: Elevates permissions to Administrator rights.
+async function elevateToAdmin() {
+    try {
+        if (typeof window !== 'undefined' || !process.env.PBA_USER || !process.env.PBA_PASS) return false
+        if (pb.authStore.isAdmin) return true
+        
+        await pb.admins.authWithPassword(process.env.PBA_USER, process.env.PBA_PASS, {
+            autoRefreshThreshold: 30 * 60
+        })
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
 export default pb
+export { elevateToAdmin }
