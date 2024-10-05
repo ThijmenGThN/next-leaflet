@@ -37,18 +37,18 @@ async function elevateToAdmin() {
 }
 
 // -- Server: Ensure that the session is valid.
-async function sessionIsValid(cookies: any) {
+async function getUserFromCookies(cookies: any) {
     if (typeof window !== 'undefined') throw new Error("This function is only available on the server.")
 
     try {
         const authCookie = await cookies.get('pb_auth')
         pb.authStore.loadFromCookie('pb_auth=' + authCookie?.value)
         await pb.collection('users').authRefresh()
-        return pb.authStore.isValid
+        return pb.authStore.isValid ? pb.authStore.model : false
     } catch (error) {
         return false
     }
 }
 
 export default pb
-export { elevateToAdmin, sessionIsValid }
+export { elevateToAdmin, getUserFromCookies }
