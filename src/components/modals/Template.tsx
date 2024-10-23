@@ -3,8 +3,10 @@ import { useTranslations } from 'next-intl'
 
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 
-export default function TemplateModal({ open, setOpen, buttonText }: { open: boolean, setOpen: (value: boolean) => void, buttonText: string }) {
-    useTranslations()
+import { XMarkIcon } from '@heroicons/react/24/outline'
+
+export default function TemplateModal({ open, setOpen }: { open: boolean, setOpen: (value: boolean) => void }) {
+    const t = useTranslations()
 
     const [isLoading, setIsLoading] = useState<Boolean>(false)
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -44,11 +46,27 @@ export default function TemplateModal({ open, setOpen, buttonText }: { open: boo
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
                             <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-
+                                
                                 <form onSubmit={onSubmit}>
-                                    <div>
+                                    <div className="space-y-6">
+                                        <div className='flex justify-between'>
+                                            <div>
+                                                <h2 className="text-base font-semibold leading-7 text-gray-900">
+                                                    A splandid modal title
+                                                </h2>
+                                                <p className="mt-1 text-sm leading-6 text-gray-600">
+                                                    Descriptive description for a modal.
+                                                </p>
+                                            </div>
 
-                                        {/* Your fields */}
+                                            <div className='flex items-start'>
+                                                <button className='flex items-center rounded-full hover:bg-gray-100 p-3' onClick={() => setOpen(false)}>
+                                                    <XMarkIcon className='w-6 h-6' />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Your input fields */}
 
                                     </div>
 
@@ -60,11 +78,11 @@ export default function TemplateModal({ open, setOpen, buttonText }: { open: boo
                                             {isLoading && <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 animate-spin">
                                                 <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd" />
                                             </svg>}
-                                            {buttonText}
+                                            Submit
                                         </button>
                                     </div>
                                 </form>
-
+                                
                             </DialogPanel>
                         </TransitionChild>
                     </div>
