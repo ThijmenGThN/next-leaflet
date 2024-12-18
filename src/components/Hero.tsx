@@ -1,27 +1,24 @@
 "use client"
 
+import Link from "next/link"
 import Image from 'next/image'
 import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { useTranslations } from 'use-intl'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Dialog, DialogPanel } from '@headlessui/react'
 
-import { Link } from '@/helpers/navigation'
 import { classNames } from '@/helpers/tailwind'
 
-import LocaleSwitcher from '@/components/LocaleSwitcher'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import assetLogo from '@/assets/logo.webp'
 
 const navigation = [
     { name: 'Repository', href: 'https://github.com/ThijmenGThN/next-leaflet' },
     { name: 'Next.js', href: 'https://nextjs.org' },
-    { name: 'Pocketbase', href: 'https://pocketbase.io' },
+    { name: 'Payload', href: 'https://payloadcms.com' },
     { name: 'Tailwind', href: 'https://tailwindcss.com' },
 ]
 
 export default function Hero() {
-    const t = useTranslations()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
@@ -56,13 +53,10 @@ export default function Hero() {
                             </Link>
                         ))}
                     </div>
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <LocaleSwitcher />
-                    </div>
                 </nav>
                 <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                     <div className="fixed inset-0 z-50" />
-                    <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                         <div className="flex items-center justify-between">
                             <div className="-m-1.5 p-1.5">
                                 <Image
@@ -93,12 +87,9 @@ export default function Hero() {
                                         </Link>
                                     ))}
                                 </div>
-                                <div className="py-6 flex flex-col items-center">
-                                    <LocaleSwitcher />
-                                </div>
                             </div>
                         </div>
-                    </Dialog.Panel>
+                    </DialogPanel>
                 </Dialog>
             </header>
 
@@ -124,10 +115,10 @@ export default function Hero() {
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                         <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                            {t('an-optimized-tech-stack-for-efficiency')}{' '}
+                            An optimized tech stack for efficiency{' '}
                             <Link href="https://github.com/ThijmenGThN/next-leaflet" target='_blank' className="font-semibold text-primary">
                                 <span className="absolute inset-0" aria-hidden="true" />
-                                {t('read-more')} <span aria-hidden="true">&rarr;</span>
+                                Read more <span aria-hidden="true">&rarr;</span>
                             </Link>
                         </div>
                     </div>
@@ -136,17 +127,17 @@ export default function Hero() {
                             next-leaflet
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            {t('a-comprehensive-and-efficient-appstack-that-combines-the-power-of-next-js-and-the-flexibility-of-pocketbase-for-streamlined-web-application-development')}
+                            A comprehensive and efficient app stack that combines the power of <b>Next.js</b> and the flexibility of <b>Payload</b> for streamlined web application development.
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
-                                href="/login"
+                                href="/admin"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
-                                {t('log-in')}
+                                Dashboard
                             </Link>
-                            <Link href='/pb/_' target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
-                                {t('open-pocketbase')} <span aria-hidden="true">→</span>
+                            <Link href='https://payloadcms.com/docs/getting-started/what-is-payload' target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
+                                Payload Docs <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>

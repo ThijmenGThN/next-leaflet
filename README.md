@@ -10,16 +10,16 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 ### Powered by
 
 - [NextJS](https://nextjs.org)
-- [Pocketbase](https://pocketbase.io)
+- [Payload](https://payloadcms.com)
 
 
 
 ### Features
 
-- [Realtime Database](https://pocketbase.io)
-- [Authentication](https://pocketbase.io/docs/authentication/)
-- [File Storage](https://pocketbase.io/docs/files-handling/)
-- [Localization](https://next-intl-docs.vercel.app)
+- [Database](https://payloadcms.com/docs/database/overview)
+- [Authentication](https://payloadcms.com/docs/access-control/overview)
+- [Storage](https://payloadcms.com/docs/upload/overview)
+- [Localization](https://payloadcms.com/docs/configuration/localization#locales)
 
 
 
@@ -31,6 +31,8 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 - [HeadlessUI](https://headlessui.com)
 
 
+
+> Everything from this point on has been copied from branch "pocketbase" and has to be reworked !
 
 ## Getting Started
 
