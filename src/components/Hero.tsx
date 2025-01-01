@@ -131,13 +131,13 @@ export default function Hero() {
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <Link
-                                href="/admin"
+                                href="/login"
                                 className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                             >
                                 Dashboard
                             </Link>
-                            <Link href='https://payloadcms.com/docs/getting-started/what-is-payload' target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
-                                Payload Docs <span aria-hidden="true">→</span>
+                            <Link href='/admin' target='_blank' className="text-sm font-semibold leading-6 text-gray-900">
+                                Payload Admin <span aria-hidden="true">→</span>
                             </Link>
                         </div>
                     </div>

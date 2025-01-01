@@ -22,11 +22,8 @@ export default buildConfig({
   ],
   admin: {
     user: Users.slug,
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
+    importMap: { baseDir: path.resolve(dirname) },
   },
-  secret: process.env.PAYLOAD_SECRET || '',
   db: sqliteAdapter({
     client: {
       url: "file:./src/backend/database/data.db",
@@ -35,9 +32,8 @@ export default buildConfig({
     prodMigrations: migrations,
     migrationDir: path.resolve(dirname, './src/backend/migrations'),
   }),
-  typescript: {
-    outputFile: path.resolve(dirname, './src/types/payload-types.ts'),
-  },
+  secret: process.env.PAYLOAD_SECRET || '',
+  typescript: { outputFile: path.resolve(dirname, './src/types/payload-types.ts') },
   editor: lexicalEditor(),
   sharp,
 })
