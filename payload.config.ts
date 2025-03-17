@@ -1,4 +1,3 @@
-import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
@@ -31,18 +30,18 @@ const email = process.env.SMTP_HOST ? nodemailerAdapter({
   },
 }) : undefined
 
-const db = process.env.DATABASE_TYPE == "postgres"
+const db = !process.env.DATABASE_URI?.startsWith("file://")
   ? postgresAdapter({
     prodMigrations: migrations,
     pool: {
-      connectionString: `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${process.env.DATBASE_HOST}:${process.env.DATBASE_PORT}/${process.env.DATABASE_TABLE}`
+      connectionString: `${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${process.env.DATBASE_HOST}:${process.env.DATBASE_PORT}/${process.env.DATABASE_TABLE}`
     },
     migrationDir: path.resolve(dirname, './src/backend/migrations'),
   })
   : sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL ?? "file:database.db",
-      authToken: process.env.DATABASE_AUTH_TOKEN,
+      url: process.env.DATABASE_URL ?? "file://database.db",
+      authToken: process.env.DATABASE_PASS,
     }
   })
 

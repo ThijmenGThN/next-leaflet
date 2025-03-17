@@ -1,7 +1,10 @@
+
+import createNextIntlPlugin from 'next-intl/plugin'
 import { withPayload } from '@payloadcms/next/withPayload'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const withNextIntl = createNextIntlPlugin("./src/locales/request.ts")
+
+export default withNextIntl(withPayload({
     output: "standalone",
     images: {
         remotePatterns: [
@@ -11,6 +14,4 @@ const nextConfig = {
             },
         ],
     }
-}
-
-export default withPayload(nextConfig)
+}))
