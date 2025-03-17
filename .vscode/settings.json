@@ -16,7 +16,7 @@
     }
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
@@ -30,7 +30,6 @@
     ".prettierrc.json": true,
     "postcss.config.js": true,
     "eslint.config.mjs": true,
-    "src/app/(payload)": true,
     "package-lock.json": true,
   },
   "[json]": {

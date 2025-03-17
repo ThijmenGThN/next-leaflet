@@ -1,7 +1,6 @@
 
 # payload
-/media
-database.db
+/data
 
 # dependencies
 /node_modules

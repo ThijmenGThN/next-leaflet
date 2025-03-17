@@ -8,7 +8,7 @@ export default async function RestrictiveTemplate({ children }: { children: Reac
 
     // Redirect if user authenticated.
     if ((await cookies()).get('payload-token')) {
-        redirect('/dash')
+        redirect('/')
     }
 
     return (

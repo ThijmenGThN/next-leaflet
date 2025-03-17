@@ -5,9 +5,39 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  auth: true,
+  auth: {
+    cookies: {
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'None',
+    },
+  },
+  access: {
+    create: () => true,
+    read: () => true,
+    update: () => true,
+    delete: () => true,
+  },
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: "firstname",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "lastname",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "role",
+      type: "select",
+      required: true,
+      defaultValue: "customer",
+      options: [
+        { label: "Admin", value: "admin" },
+        { label: "Customer", value: "customer" },
+      ],
+    }
   ],
+  timestamps: true,
 }

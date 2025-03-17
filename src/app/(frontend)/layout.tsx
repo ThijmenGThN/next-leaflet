@@ -1,5 +1,4 @@
-
-import { Inter } from 'next/font/google'
+import { Ubuntu } from 'next/font/google'
 
 import type { Metadata } from 'next'
 
@@ -7,16 +6,16 @@ import '@/styles/globals.css'
 
 export const metadata: Metadata = {
     title: 'next-leaflet',
-    description: 'An optimized tech stack for efficiency.',
+    description: "An optimized tech stack for efficiency.",
 }
 
-const inter = Inter({ subsets: ['latin'] })
+const ubuntu = Ubuntu({ weight: '400', subsets: ['latin'] })
 
-export default function Layout({ children }: { children: React.ReactNode}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={ubuntu.className}>
                 {children}
             </body>
         </html>

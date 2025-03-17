@@ -1,60 +1,71 @@
-
+import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
-import { Users } from './src/backend/collections/Users'
-import { Media } from './src/backend/collections/Media'
-
-import { migrations } from './src/backend/migrations'
-
-if (!process.env.PAYLOAD_SECRET) throw new Error('No environment variable for PAYLOAD_SECRET defined, use the .env.example file.')
+import { migrations } from '@/backend/migrations'
+import { Users } from '@/backend/collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-const secret = process.env.PAYLOAD_SECRET
+
+const email = process.env.SMTP_HOST ? nodemailerAdapter({
+  defaultFromName: process.env.MAIL_DEFAULT_NAME ?? "Next Leaflet",
+  defaultFromAddress: process.env.MAIL_DEFAULT_ADDRESS ?? "next@leaflet.app",
+  transportOptions: {
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    },
+  },
+}) : undefined
+
+const db = process.env.DATABASE_TYPE == "postgres"
+  ? postgresAdapter({
+    prodMigrations: migrations,
+    pool: {
+      connectionString: `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${process.env.DATBASE_HOST}:${process.env.DATBASE_PORT}/${process.env.DATABASE_TABLE}`
+    },
+    migrationDir: path.resolve(dirname, './src/backend/migrations'),
+  })
+  : sqliteAdapter({
+    client: {
+      url: process.env.DATABASE_URL ?? "sqlite://./data/database.db",
+      authToken: process.env.DATABASE_AUTH_TOKEN,
+    }
+  })
+
+const collectionsDir = path.resolve(dirname, './src/backend/collections')
+const collectionFiles = fs.readdirSync(collectionsDir).filter(file => file.endsWith('.ts') || file.endsWith('.js'))
+
+const collections = collectionFiles.map(file => {
+  const collection = require(path.join(collectionsDir, file))
+  return collection.default || collection
+})
 
 export default buildConfig({
-  secret,
+  db,
+  email,
+  sharp,
+  collections,
+  secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_DOMAIN || 'http://localhost:3000',
-  collections: [
-    Users,
-    Media
-  ],
+  csrf: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
+  cors: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
   admin: {
     user: Users.slug,
     importMap: {
-      baseDir: path.resolve(dirname),
+      baseDir: path.resolve(dirname)
     },
   },
-  db: sqliteAdapter({
-    client: {
-      url: "file:database.db",
-      authToken: process.env.PAYLOAD_SECRET,
-    },
-    prodMigrations: migrations,
-    migrationDir: path.resolve(dirname, './src/backend/migrations'),
-  }),
-  email: nodemailerAdapter({
-    defaultFromAddress: 'info@upalert.me',
-    defaultFromName: 'UpAlert',
-    transportOptions: {
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    },
-  }),
-  csrf: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
-  cors: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
   typescript: {
-    outputFile: path.resolve(dirname, './src/types/payload-types.ts'),
+    outputFile: path.resolve(dirname, './src/types/payload-types.ts')
   },
-  sharp,
 })

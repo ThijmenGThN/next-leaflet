@@ -10,7 +10,7 @@ const nextConfig = {
                 hostname: 'www.gravatar.com',
             },
         ],
-    },
+    }
 }
 
 export default withPayload(nextConfig)

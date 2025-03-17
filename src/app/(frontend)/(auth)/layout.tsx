@@ -1,18 +1,29 @@
+import Link from 'next/link'
+import Image from 'next/image'
+
+import aLogoWide from "@/assets/brand/logo.svg"
+import aDashboard from "@/assets/product/dashboard.webp"
+
+import "@/styles/auth.css"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className='h-screen'>
-            <div className="flex min-h-full flex-1 flex-col justify-center py-12 bg-gray-50 sm:px-6 lg:px-8">
-                <div className="relative mb-10 mt-36 sm:mx-auto sm:w-full sm:max-w-[480px]">
-                    <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                        {children}
-                    </div>
 
-                    <div className="absolute -bottom-10 left-5 text-center text-sm text-gray-500">
-                        <a href="/">
-                            ← Back to homepage
-                        </a>
+    return (
+        <div className='rings flex flex-col'>
+            <div className='m-12 flex'>
+                <Link href="/">
+                    <Image src={aLogoWide} alt="UpAlert" className="h-10 w-auto" />
+                </Link>
+            </div>
+
+            <div className='flex flex-row-reverse items-center grow mb-24 xl:mx-auto'>
+                <div className='hidden md:flex items-center'>
+                    <div className='bg-slate-100 shadow h-auto ring-1 ring-slate-200 -mr-48 xl:mr-0 rounded-lg overflow-hidden'>
+                        <Image src={aDashboard} alt="The Dashboard" className='h-full' />
                     </div>
+                </div>
+                <div className='flex mx-auto md:mx-0 md:px-24'>
+                    {children}
                 </div>
             </div>
         </div>
