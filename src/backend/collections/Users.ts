@@ -5,12 +5,13 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  auth: {
-    cookies: {
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'None',
-    },
-  },
+  auth: true,
+  // {
+  // cookies: {
+  // secure: process.env.NODE_ENV === 'production',
+  // sameSite: 'None',
+  // },
+  // },
   access: {
     create: () => true,
     read: () => true,

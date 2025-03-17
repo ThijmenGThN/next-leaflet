@@ -30,7 +30,7 @@ const email = process.env.SMTP_HOST ? nodemailerAdapter({
   },
 }) : undefined
 
-const db = !process.env.DATABASE_URI?.startsWith("file://")
+const db = !process.env.DATABASE_URI?.startsWith("file:")
   ? postgresAdapter({
     prodMigrations: migrations,
     pool: {
@@ -40,7 +40,7 @@ const db = !process.env.DATABASE_URI?.startsWith("file://")
   })
   : sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL ?? "file://database.db",
+      url: process.env.DATABASE_URL ?? "file:database.db",
       authToken: process.env.DATABASE_PASS,
     }
   })

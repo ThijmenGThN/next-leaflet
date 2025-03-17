@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
-
 type FormData = {
     name: string
     email: string
@@ -84,12 +82,6 @@ export default function Page() {
                         className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ${error ? 'ring-2 ring-inset ring-red-400 pr-10' : 'ring-1 ring-inset ring-gray-300'
                             } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6`}
                     />
-                    {error && (
-                        <ExclamationCircleIcon
-                            aria-hidden="true"
-                            className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-red-500"
-                        />
-                    )}
                 </div>
             </div>
 
@@ -110,12 +102,6 @@ export default function Page() {
                         className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ${error ? 'ring-2 ring-inset ring-red-400 pr-10' : 'ring-1 ring-inset ring-gray-300'
                             } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6`}
                     />
-                    {error && (
-                        <ExclamationCircleIcon
-                            aria-hidden="true"
-                            className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-red-500"
-                        />
-                    )}
                 </div>
             </div>
 
@@ -137,12 +123,6 @@ export default function Page() {
                             className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ${error ? 'ring-2 ring-inset ring-red-400 pr-10' : 'ring-1 ring-inset ring-gray-300'
                                 } placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6`}
                         />
-                        {error && (
-                            <ExclamationCircleIcon
-                                aria-hidden="true"
-                                className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-red-500"
-                            />
-                        )}
                     </div>
                 </div>
                 {error && <p id="password-error" className="mt-2 text-sm text-red-600">
