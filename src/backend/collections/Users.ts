@@ -32,10 +32,10 @@ export const Users: CollectionConfig = {
       name: "role",
       type: "select",
       required: true,
-      defaultValue: "customer",
+      defaultValue: "user",
       options: [
         { label: "Admin", value: "admin" },
-        { label: "Customer", value: "customer" },
+        { label: "User", value: "user" },
       ],
     }
   ],

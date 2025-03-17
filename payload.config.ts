@@ -11,6 +11,10 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { migrations } from '@/backend/migrations'
 import { Users } from '@/backend/collections/Users'
 
+const collections = [
+  Users,
+]
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -37,26 +41,18 @@ const db = process.env.DATABASE_TYPE == "postgres"
   })
   : sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL ?? "sqlite://./data/database.db",
+      url: process.env.DATABASE_URL ?? "file:database.db",
       authToken: process.env.DATABASE_AUTH_TOKEN,
     }
   })
-
-const collectionsDir = path.resolve(dirname, './src/backend/collections')
-const collectionFiles = fs.readdirSync(collectionsDir).filter(file => file.endsWith('.ts') || file.endsWith('.js'))
-
-const collections = collectionFiles.map(file => {
-  const collection = require(path.join(collectionsDir, file))
-  return collection.default || collection
-})
 
 export default buildConfig({
   db,
   email,
   sharp,
   collections,
-  secret: process.env.PAYLOAD_SECRET || '',
-  serverURL: process.env.NEXT_PUBLIC_DOMAIN || 'http://localhost:3000',
+  secret: process.env.PAYLOAD_SECRET ?? '',
+  serverURL: process.env.NEXT_PUBLIC_DOMAIN ?? 'http://localhost:3000',
   csrf: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
   cors: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
   admin: {
