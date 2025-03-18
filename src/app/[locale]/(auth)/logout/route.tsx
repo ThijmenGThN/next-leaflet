@@ -1,9 +1,10 @@
-import { cookies } from "next/headers"
+import { cookies as useCookies } from "next/headers"
 import { NextResponse } from "next/server"
 
 export async function GET() {
-    const cookieStore = await cookies()
-    cookieStore.delete("payload-token")
-    cookieStore.delete("project")
+    const cookies = await useCookies()
+    cookies.delete("project")
+    cookies.delete("payload-token")
+    
     return NextResponse.redirect(process.env.NEXT_PUBLIC_DOMAIN + '/login')
 }
