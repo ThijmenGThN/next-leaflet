@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useRouter } from '@/locales/navigation'
+import { Link, useRouter } from '@/locales/navigation'
 
 type FormData = {
     email: string
@@ -42,32 +42,42 @@ export default function Page() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <input
-                    {...register('email', { required: "Email is required" })}
-                    type="email"
-                    placeholder="Email"
-                />
-                {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
-            </div>
-            <div>
-                <input
-                    {...register('password', { required: "Password is required" })}
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                />
-                {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
-            </div>
-            <div>
-                <input
-                    type="checkbox"
-                    checked={showPassword}
-                    onChange={() => setShowPassword(!showPassword)}
-                />
-                <label>Show Password</label>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <input
+                        {...register('email', { required: "Email is required" })}
+                        type="email"
+                        placeholder="Email"
+                    />
+                    {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+                </div>
+                <div>
+                    <input
+                        {...register('password', { required: "Password is required" })}
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Password"
+                    />
+                    {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
+                </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        checked={showPassword}
+                        onChange={() => setShowPassword(!showPassword)}
+                    />
+                    <label>Show Password</label>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+
+            <Link href="/register">
+                Register
+            </Link>
+
+            <Link href="/reset">
+                Reset
+            </Link>
+        </>
     )
 }
