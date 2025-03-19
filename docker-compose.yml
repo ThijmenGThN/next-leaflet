@@ -7,7 +7,7 @@ services:
     image: node:22-alpine
     restart: unless-stopped
     working_dir: /app
-    command: npm ci && npm run build && npm start
+    command: npm run deploy
     ports: [ "3000:3000" ]
     volumes:
       - ./:/app

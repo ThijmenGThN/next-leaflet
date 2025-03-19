@@ -13,7 +13,8 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation node .next/standalone/server.js",
-    "email": "email dev --dir ./src/emails"
+    "email": "email dev --dir ./src/emails",
+    "deploy": "npm ci && npm run build && npm start"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.2.0",
