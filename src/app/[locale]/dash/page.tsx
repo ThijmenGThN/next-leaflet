@@ -1,6 +1,5 @@
 "use client"
 
-import { testEmail } from "@/functions/email"
 import { Link } from "@/locales/navigation"
 
 export default function Page() {
@@ -8,6 +7,10 @@ export default function Page() {
     return (
         <>
             Dashboard
+
+            <Link href="/dash/profile">
+                Profile
+            </Link>
 
             <Link href="/logout">
                 Logout

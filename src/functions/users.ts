@@ -5,9 +5,6 @@ import { headers as nextHeaders } from 'next/headers'
 import { User } from '@/types/payload-types'
 
 import { getPayload } from './connector'
-import { sendEmail } from './email'
-
-import ResetEmail from '@/emails/Reset'
 
 export async function getUser(): Promise<Partial<User> | null> {
     const payload = await getPayload()
@@ -67,5 +64,28 @@ export async function createUser(data: Omit<User, "id" | "role" | "updatedAt" | 
     } catch (error) {
         console.error('Error creating user:', error)
         return null
+    }
+}
+
+export async function updateUser(data: { firstname: string; lastname: string }): Promise<boolean> {
+    const payload = await getPayload()
+    try {
+        const user = await getUser()
+        if (!user || user.id === undefined) return false
+
+        await payload.update({
+            collection: 'users',
+            id: user.id,
+            data: {
+                firstname: data.firstname,
+                lastname: data.lastname
+            },
+            overrideAccess: false
+        })
+
+        return true
+    } catch (error) {
+        console.error('Error updating user:', error)
+        return false
     }
 }
