@@ -56,3 +56,20 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+/* Use the following website to add your own themes.
+https://tailwind-palette-generator.mdelarue.dev/ */
+
+@theme {
+  --color-primary-50: oklch(0.9372 0.0169 196.7648);
+  --color-primary-100: oklch(0.8746 0.0338 198.8221);
+  --color-primary-200: oklch(0.8112 0.0511 197.7282);
+  --color-primary-300: oklch(0.7482 0.0680 198.1868);
+  --color-primary-400: oklch(0.6853 0.0851 199.2923);
+  --color-primary-500: oklch(0.6215 0.1030 199.0194);
+  --color-primary-600: oklch(0.5416 0.0857 199.0898);
+  --color-primary-700: oklch(0.4616 0.0686 199.0981);
+  --color-primary-800: oklch(0.3813 0.0513 199.0100);
+  --color-primary-900: oklch(0.2997 0.0340 198.5199);
+  --color-primary-950: oklch(0.2195 0.0170 195.9594);
+}
