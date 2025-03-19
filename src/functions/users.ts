@@ -7,7 +7,7 @@ import { User } from '@/types/payload-types'
 import { getPayload } from './connector'
 import { sendEmail } from './email'
 
-import VerifyEmail from '@/emails/auth/Verify'
+import ResetEmail from '@/emails/Reset'
 
 export async function getUser(): Promise<Partial<User> | null> {
     const payload = await getPayload()
@@ -57,14 +57,13 @@ export async function resetPassword(data: {
 export async function createUser(data: Omit<User, "id" | "role" | "updatedAt" | "createdAt">): Promise<User | null> {
     const payload = await getPayload()
     try {
-        const user = await payload.create({
+        return await payload.create({
             collection: 'users',
             data: {
                 ...data,
                 role: "user"
             },
         })
-        return user
     } catch (error) {
         console.error('Error creating user:', error)
         return null

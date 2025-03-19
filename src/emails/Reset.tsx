@@ -1,9 +1,9 @@
 import { Html, Head, Body, Link, Text } from "@react-email/components"
 
-export default function Reset() {
+export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 
     const colors = {
-        brand: "#12D37C",
+        brand: "#11999e",
         background: "#FAFAFA",
         white: "#FFFFFF",
         lightGray: "#F2F4F8",
@@ -205,7 +205,7 @@ export default function Reset() {
                                                                             overflow: "hidden"
                                                                         }}>
                                                                             <Link
-                                                                                href="{ACTION_URL}"
+                                                                                href={ACTION_URL}
                                                                                 style={{
                                                                                     display: "inline-block",
                                                                                     color: colors.white,

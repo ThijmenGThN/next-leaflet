@@ -19,21 +19,15 @@ export default function Page({ token }: { token: string }) {
     const [message, setMessage] = useState<string | null>(null)
 
     const onSubmit = async ({ password, confirmPassword }: FormData) => {
-        if (password !== confirmPassword) {
-            setMessage("Passwords do not match")
-            return
-        }
+        if (password !== confirmPassword) return setMessage("Passwords do not match")
 
         try {
             const successful = await resetPassword({
                 token,
                 password
             })
-
-            setMessage(successful
-                ? "Password reset successful"
-                : "Password reset failed"
-            )
+            if (successful) return router.push("/login")
+            setMessage("Password reset failed")
         } catch (err) {
             console.error(err)
             setMessage("Password reset failed")

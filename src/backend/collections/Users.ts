@@ -1,11 +1,14 @@
+import React from 'react'
+import { render } from '@react-email/render'
 import type { CollectionConfig } from 'payload'
+
+import Reset from '@/emails/Reset'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   admin: {
     useAsTitle: 'email',
   },
-  auth: true,
   access: {
     create: () => true,
     read: () => true,
@@ -24,11 +27,6 @@ export const Users: CollectionConfig = {
       required: true,
     },
     {
-      name: "verified",
-      type: "checkbox",
-      defaultValue: false,
-    },
-    {
       name: "role",
       type: "select",
       required: true,
@@ -40,4 +38,14 @@ export const Users: CollectionConfig = {
     }
   ],
   timestamps: true,
+  auth: {
+    forgotPassword: {
+      generateEmailHTML: async ({ token }: { token?: string } = {}) => {
+        return await render(React.createElement(
+          Reset,
+          { ACTION_URL: process.env.NEXT_PUBLIC_DOMAIN + "/reset/" + token }
+        ))
+      }
+    }
+  },
 }
