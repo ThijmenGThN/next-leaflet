@@ -3,7 +3,6 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
@@ -30,30 +29,21 @@ const email = process.env.SMTP_HOST ? nodemailerAdapter({
   },
 }) : undefined
 
-const db = !process.env.DATABASE_URI?.startsWith("file:")
-  ? postgresAdapter({
-    prodMigrations: migrations,
-    pool: {
-      connectionString: `${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${process.env.DATBASE_HOST}:${process.env.DATBASE_PORT}/${process.env.DATABASE_TABLE}`
-    },
-    migrationDir: path.resolve(dirname, './src/backend/migrations'),
-  })
-  : sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URL ?? "file:database.db",
-      authToken: process.env.DATABASE_PASS,
-    }
-  })
-
 export default buildConfig({
-  db,
   email,
   sharp,
   collections,
-  secret: process.env.PAYLOAD_SECRET ?? '',
-  serverURL: process.env.NEXT_PUBLIC_DOMAIN ?? 'http://localhost:3000',
-  csrf: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
-  cors: [process.env.NEXT_PUBLIC_DOMAIN ?? "http://localhost:3000"],
+  secret: process.env.PAYLOAD_SECRET as string,
+  serverURL: process.env.NEXT_PUBLIC_DOMAIN as string,
+  csrf: [process.env.NEXT_PUBLIC_DOMAIN as string],
+  cors: [process.env.NEXT_PUBLIC_DOMAIN as string],
+  db: postgresAdapter({
+    prodMigrations: migrations,
+    migrationDir: path.resolve(dirname, './src/backend/migrations'),
+    pool: {
+      connectionString: `postgres://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_TABLE}`
+    },
+  }),
   admin: {
     user: Users.slug,
     importMap: {

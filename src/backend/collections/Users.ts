@@ -6,12 +6,6 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: true,
-  // {
-  // cookies: {
-  // secure: process.env.NODE_ENV === 'production',
-  // sameSite: 'None',
-  // },
-  // },
   access: {
     create: () => true,
     read: () => true,
@@ -28,6 +22,11 @@ export const Users: CollectionConfig = {
       name: "lastname",
       type: "text",
       required: true,
+    },
+    {
+      name: "verified",
+      type: "checkbox",
+      defaultValue: false,
     },
     {
       name: "role",

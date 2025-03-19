@@ -15,6 +15,7 @@ export default function Page() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
     const [showPassword, setShowPassword] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const onSubmit = async ({ email, password }: FormData) => {
         try {
@@ -31,12 +32,17 @@ export default function Page() {
             const data = await req.json()
 
             if (!req.ok) {
-                throw new Error(data.message || "Login failed")
+                setErrorMessage(data.message || "Login failed")
+                return
             }
 
             const user = data.user
-            if (user) router.push("/dash")
+            if (user) {
+                setErrorMessage(null) // Clear any previous error
+                router.push("/dash")
+            }
         } catch (err) {
+            setErrorMessage("An unexpected error occurred. Please try again.")
             console.error(err)
         }
     }
@@ -70,6 +76,8 @@ export default function Page() {
                 </div>
                 <button type="submit">Submit</button>
             </form>
+
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
             <Link href="/register">
                 Register

@@ -1,0 +1,32 @@
+
+services:
+
+  next:
+    profiles: ["prod"]
+    depends_on: [ database ]
+    image: node:22-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: npm ci && npm run build && npm start
+    ports: [ "3000:3000" ]
+    volumes:
+      - ./:/app
+      - next_build:/app/.next
+      - next_modules:/app/node_modules
+
+  database:
+    profiles: ["dev", "prod"]
+    image: postgres:17.2
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${DATABASE_TABLE}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+    ports: [ "5432:5432" ]
+    volumes: 
+      - ./data/database:/var/lib/postgresql/data
+
+volumes:
+  next_build:
+  next_modules:

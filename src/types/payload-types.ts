@@ -118,6 +118,7 @@ export interface User {
   id: number;
   firstname: string;
   lastname: string;
+  verified?: boolean | null;
   role: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
@@ -189,6 +190,7 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   firstname?: T;
   lastname?: T;
+  verified?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;

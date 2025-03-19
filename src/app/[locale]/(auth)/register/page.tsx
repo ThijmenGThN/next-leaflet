@@ -20,6 +20,7 @@ export default function Page() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>()
     const [showPassword, setShowPassword] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const onSubmit = async ({ email, password, firstname, lastname }: FormData) => {
         try {
@@ -28,9 +29,27 @@ export default function Page() {
                 firstname,
                 lastname
             })
-            if (user) router.push("/dash")
+
+            if (!user) {
+                setErrorMessage("Failed to create user. Please try again.")
+                return
+            }
+
+            const req = await fetch(`/api/users/login`, {
+                method: "POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            })
+
+            if (req.ok) router.push("/dash")
+            else router.push("/login")
         } catch (err) {
             console.error(err)
+            setErrorMessage("An unexpected error occurred. Please try again.")
         }
     }
 
@@ -39,6 +58,7 @@ export default function Page() {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
+                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 <div>
                     <input
                         {...register('firstname', { required: "First name is required" })}
