@@ -4,7 +4,7 @@ services:
   next:
     profiles: ["prod"]
     depends_on: [ database ]
-    image: node:22-alpine
+    build: .
     restart: unless-stopped
     working_dir: /app
     command: npm run deploy
