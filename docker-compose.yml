@@ -1,18 +1,33 @@
-
 services:
 
   next:
     profiles: ["prod"]
-    depends_on: [ database ]
-    build: .
+    build:
+      context: .
+      args:
+        - PAYLOAD_SECRET
+        - NEXT_PUBLIC_DOMAIN
+        - DATABASE_HOST
+        - DATABASE_PORT
+        - DATABASE_USER
+        - DATABASE_PASS
+        - DATABASE_TABLE
     restart: unless-stopped
     working_dir: /app
-    command: npm run deploy
-    ports: [ "3000:3000" ]
+    ports: ["3000:3000"]
+    env_file: .env
     volumes:
       - ./:/app
       - next_build:/app/.next
       - next_modules:/app/node_modules
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   database:
     profiles: ["dev", "prod"]
@@ -23,9 +38,14 @@ services:
       POSTGRES_DB: ${DATABASE_TABLE}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASS}
-    ports: [ "5432:5432" ]
-    volumes: 
+    ports: ["5432:5432"]
+    volumes:
       - ./data/database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_TABLE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   next_build:
