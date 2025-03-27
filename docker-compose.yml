@@ -13,13 +13,8 @@ services:
         - DATABASE_PASS
         - DATABASE_TABLE
     restart: unless-stopped
-    working_dir: /app
     ports: ["3000:3000"]
     env_file: .env
-    volumes:
-      - ./:/app
-      - next_build:/app/.next
-      - next_modules:/app/node_modules
     depends_on:
       database:
         condition: service_healthy
@@ -46,7 +41,3 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-volumes:
-  next_build:
-  next_modules:
