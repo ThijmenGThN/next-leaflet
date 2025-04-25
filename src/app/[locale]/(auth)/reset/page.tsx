@@ -11,15 +11,21 @@ type FormData = {
 export default function Page() {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
     const [isSubmitting, setIsSubmitting] = useState(false)
-
+    const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null)
+    
     const onSubmit = async ({ email }: FormData) => {
-        setIsSubmitting(true)
         try {
             await forgotPassword(email)
+            setMessage({
+                text: "If an account exists with this email, you will receive password reset instructions shortly.",
+                type: 'success'
+            })
         } catch (err) {
             console.error(err)
-        } finally {
-            setIsSubmitting(false)
+            setMessage({
+                text: "Something went wrong. Please try again later.",
+                type: 'error'
+            })
         }
     }
 
