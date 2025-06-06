@@ -1,28 +1,34 @@
 "use client"
 
-import { Link } from "@/locales/navigation"
+import { useTranslations } from "next-intl"
 import { User, Home, Bell, Settings, LogOut } from 'lucide-react'
 
+import { Link } from "@/locales/navigation"
+
 export default function Page() {
+    const t = useTranslations()
+
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Sidebar */}
             <aside className="fixed inset-y-0 left-0 bg-white w-64 border-r border-gray-200 hidden md:block">
                 <div className="h-16 flex items-center px-6 border-b border-gray-200">
-                    <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
+                    <h1 className="text-xl font-bold text-gray-800">
+                        {t('dash.dashboard')}
+                    </h1>
                 </div>
                 <nav className="p-4 space-y-1">
                     <Link href="/dash" className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg">
                         <Home className="h-5 w-5 mr-3 text-primary-600" />
-                        Dashboard
+                        {t('dash.dashboard')}
                     </Link>
                     <Link href="/dash/profile" className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                         <User className="h-5 w-5 mr-3 text-gray-500" />
-                        Profile
+                        {t('dash.profile')}
                     </Link>
                     <Link href="/logout" className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
                         <LogOut className="h-5 w-5 mr-3 text-gray-500" />
-                        Logout
+                        {t('logout')}
                     </Link>
                 </nav>
             </aside>
@@ -54,7 +60,9 @@ export default function Page() {
 
                 {/* Dashboard content */}
                 <main className="p-4 md:p-6">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6">Welcome to your Dashboard</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                        {t('dash.welcome-to-your-dashboard')}
+                    </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -63,8 +71,12 @@ export default function Page() {
                                     <Home className="h-6 w-6 text-primary-600" />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500">Dashboard</p>
-                                    <h3 className="text-xl font-bold text-gray-800">Overview</h3>
+                                    <p className="text-sm font-medium text-gray-500">
+                                        {t('dash.dashboard')}
+                                    </p>
+                                    <h3 className="text-xl font-bold text-gray-800">
+                                        {t('dash.overview')}
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -75,8 +87,12 @@ export default function Page() {
                                     <User className="h-6 w-6 text-green-600" />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500">User</p>
-                                    <h3 className="text-xl font-bold text-gray-800">Profile</h3>
+                                    <p className="text-sm font-medium text-gray-500">
+                                        {t('dash.user')}
+                                    </p>
+                                    <h3 className="text-xl font-bold text-gray-800">
+                                        {t('dash.profile')}
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -87,23 +103,33 @@ export default function Page() {
                                     <Settings className="h-6 w-6 text-purple-600" />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500">System</p>
-                                    <h3 className="text-xl font-bold text-gray-800">Settings</h3>
+                                    <p className="text-sm font-medium text-gray-500">
+                                        {t('dash.system')}
+                                    </p>
+                                    <h3 className="text-xl font-bold text-gray-800">
+                                        {t('dash.settings')}
+                                    </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
+                        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                            {t('dash.quick-links')}
+                        </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Link href="/dash/profile" className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
                                 <User className="h-5 w-5 text-primary-600 mr-3" />
-                                <span className="text-gray-700">Edit Profile</span>
+                                <span className="text-gray-700">
+                                    {t('dash.edit-profile')}
+                                </span>
                             </Link>
                             <Link href="/logout" className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
                                 <LogOut className="h-5 w-5 text-red-600 mr-3" />
-                                <span className="text-gray-700">Logout</span>
+                                <span className="text-gray-700">
+                                    {t('logout')}
+                                </span>
                             </Link>
                         </div>
                     </div>

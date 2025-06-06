@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { createUser } from '@/functions/users'
 import { useRouter } from '@/locales/navigation'
 import { Eye, EyeOff, UserPlus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type FormData = {
     email: string
@@ -16,6 +17,7 @@ type FormData = {
 }
 
 export default function Page() {
+    const t = useTranslations()
     const router = useRouter()
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>()
@@ -31,7 +33,7 @@ export default function Page() {
             })
 
             if (!user) {
-                setErrorMessage("Failed to create user. Please try again.")
+                setErrorMessage(t('failed-to-create-user-please-try-again'))
                 return
             }
 
@@ -49,7 +51,7 @@ export default function Page() {
             else router.push("/login")
         } catch (err) {
             console.error(err)
-            setErrorMessage("An unexpected error occurred. Please try again.")
+            setErrorMessage(t('an-unexpected-error-occurred-please-try-again'))
         }
     }
 
@@ -57,7 +59,7 @@ export default function Page() {
 
     return (
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">Create an account</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('create-an-account')}</h1>
 
             {errorMessage && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
@@ -69,13 +71,13 @@ export default function Page() {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-1">
-                            First Name
+                            {t('first-name')}
                         </label>
                         <input
                             id="firstname"
-                            {...register('firstname', { required: "First name is required" })}
+                            {...register('firstname', { required: t('first-name-is-required') })}
                             type="text"
-                            placeholder="John"
+                            placeholder={t('john')}
                             className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         />
                         {errors.firstname && <p className="mt-1 text-sm text-red-600">{errors.firstname.message}</p>}
@@ -83,13 +85,13 @@ export default function Page() {
 
                     <div>
                         <label htmlFor="lastname" className="block text-sm font-medium text-gray-700 mb-1">
-                            Last Name
+                            {t('last-name')}
                         </label>
                         <input
                             id="lastname"
-                            {...register('lastname', { required: "Last name is required" })}
+                            {...register('lastname', { required: t('last-name-is-required') })}
                             type="text"
-                            placeholder="Doe"
+                            placeholder={t('doe')}
                             className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                         />
                         {errors.lastname && <p className="mt-1 text-sm text-red-600">{errors.lastname.message}</p>}
@@ -98,11 +100,11 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        Email
+                        {t('email')}
                     </label>
                     <input
                         id="email"
-                        {...register('email', { required: "Email is required" })}
+                        {...register('email', { required: t('email-is-required') })}
                         type="email"
                         placeholder="you@example.com"
                         className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -112,12 +114,12 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                        Password
+                        {t('password')}
                     </label>
                     <div className="relative">
                         <input
                             id="password"
-                            {...register('password', { required: "Password is required" })}
+                            {...register('password', { required: t('password-is-required') })}
                             type={showPassword ? 'text' : 'password'}
                             placeholder="••••••••"
                             className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -135,14 +137,14 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                        Confirm Password
+                        {t('confirm-password')}
                     </label>
                     <div className="relative">
                         <input
                             id="confirmPassword"
                             {...register('confirmPassword', {
-                                required: "Please confirm your password",
-                                validate: value => value === password || "Passwords do not match"
+                                required: t('please-confirm-your-password'),
+                                validate: value => value === password || t('passwords-do-not-match')
                             })}
                             type={showPassword ? 'text' : 'password'}
                             placeholder="••••••••"
@@ -161,7 +163,7 @@ export default function Page() {
                         className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                     />
                     <label htmlFor="show-password" className="ml-2 block text-sm text-gray-700">
-                        Show Password
+                        {t('show-password')}
                     </label>
                 </div>
 
@@ -170,15 +172,15 @@ export default function Page() {
                     className="w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg flex items-center justify-center transition-colors duration-150"
                 >
                     <UserPlus className="h-5 w-5 mr-2" />
-                    Create Account
+                    {t('create-account')}
                 </button>
             </form>
 
             <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
-                    Already have an account?{' '}
+                    {t('already-have-an-account')}{' '}
                     <Link href="/login" className="font-medium text-primary-600 hover:text-primary-800">
-                        Login
+                        {t('login')}
                     </Link>
                 </p>
             </div>

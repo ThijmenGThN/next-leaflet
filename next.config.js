@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin("./src/locales/request.ts")
 
 export default withNextIntl(withPayload({
     output: "standalone",
+    turbopack: {},
     images: {
         remotePatterns: [
             {

@@ -1,12 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { updateUser } from "@/functions/users"
-import { User } from "@/types/payload-types"
+import { useTranslations } from "next-intl"
 import { UserCircle, Save, ArrowLeft } from 'lucide-react'
+
 import { Link } from "@/locales/navigation"
 
+import { updateUser } from "@/functions/users"
+
+import { User } from "@/types/payload-types"
+
 export default function Client({ user }: { user: User }) {
+    const t = useTranslations()
+
     const [firstName, setFirstName] = useState(user.firstname)
     const [lastName, setLastName] = useState(user.lastname)
     const [isSaving, setIsSaving] = useState(false)
@@ -18,13 +24,13 @@ export default function Client({ user }: { user: User }) {
         try {
             await updateUser({ firstname: firstName, lastname: lastName })
             setMessage({
-                text: "Profile updated successfully",
+                text: t('dash.profile-updated-successfully'),
                 type: 'success'
             })
         } catch (error) {
             console.error(error)
             setMessage({
-                text: "Failed to update profile",
+                text: t('dash.failed-to-update-profile'),
                 type: 'error'
             })
         } finally {
@@ -42,7 +48,9 @@ export default function Client({ user }: { user: User }) {
                         <Link href="/dash" className="mr-4 p-2 rounded-lg text-gray-600 hover:bg-gray-100">
                             <ArrowLeft className="h-5 w-5" />
                         </Link>
-                        <h1 className="text-xl font-bold text-gray-800">Edit Profile</h1>
+                        <h1 className="text-xl font-bold text-gray-800">
+                            {t('dash.edit-profile')}
+                        </h1>
                     </div>
                 </header>
 
@@ -54,7 +62,9 @@ export default function Client({ user }: { user: User }) {
                                 <UserCircle className="h-10 w-10" />
                             </div>
                             <div>
-                                <h2 className="text-lg font-bold text-gray-800">{firstName} {lastName}</h2>
+                                <h2 className="text-lg font-bold text-gray-800">
+                                    {firstName} {lastName}
+                                </h2>
                                 <p className="text-gray-500">{user.email}</p>
                             </div>
                         </div>
@@ -68,7 +78,7 @@ export default function Client({ user }: { user: User }) {
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                                    First Name
+                                    {t('dash.first-name')}
                                 </label>
                                 <input
                                     id="firstName"
@@ -81,7 +91,7 @@ export default function Client({ user }: { user: User }) {
 
                             <div>
                                 <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Last Name
+                                    {t('dash.last-name')}
                                 </label>
                                 <input
                                     id="lastName"
@@ -104,12 +114,12 @@ export default function Client({ user }: { user: User }) {
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                             </svg>
-                                            Saving...
+                                            {t('dash.saving')}...
                                         </>
                                     ) : (
                                         <>
                                             <Save className="h-5 w-5 mr-2" />
-                                            Save Changes
+                                            {t('dash.save-changes')}
                                         </>
                                     )}
                                 </button>

@@ -62,19 +62,19 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 To deploy in production mode:
 
-1. Stop any running containers:
+1. Update your `.env` file to set the production profile:
     ```bash
-    docker compose down
+    COMPOSE_PROFILES=prod
     ```
 
-2. Set the production profile in your environment:
+2. Build the production containers:
     ```bash
-    export COMPOSE_PROFILES=prod
+    docker compose build
     ```
 
 3. Start the production stack:
     ```bash
-    docker compose up -d
+    docker compose up
     ```
 
 The server might take a moment to initialize. You can monitor the startup process with:

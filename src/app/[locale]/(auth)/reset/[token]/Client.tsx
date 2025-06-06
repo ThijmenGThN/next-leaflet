@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { resetPassword } from '@/functions/users'
 import { Eye, EyeOff, RefreshCw } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type FormData = {
     password: string
@@ -12,6 +13,7 @@ type FormData = {
 }
 
 export default function Page({ token }: { token: string }) {
+    const t = useTranslations()
     const router = useRouter()
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
@@ -21,7 +23,7 @@ export default function Page({ token }: { token: string }) {
 
     const onSubmit = async ({ password, confirmPassword }: FormData) => {
         if (password !== confirmPassword) {
-            setMessage("Passwords do not match")
+            setMessage(t('passwords-do-not-match'))
             setIsSuccess(false)
             return
         }
@@ -33,24 +35,24 @@ export default function Page({ token }: { token: string }) {
             })
 
             if (successful) {
-                setMessage("Password reset successful. Redirecting to login...")
+                setMessage(t('password-reset-successful-redirecting-to-login'))
                 setIsSuccess(true)
                 setTimeout(() => router.push("/login"), 2000)
                 return
             }
 
-            setMessage("Password reset failed")
+            setMessage(t('password-reset-failed'))
             setIsSuccess(false)
         } catch (err) {
             console.error(err)
-            setMessage("Password reset failed")
+            setMessage(t('password-reset-failed-0'))
             setIsSuccess(false)
         }
     }
 
     return (
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">Reset Password</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('reset-password')}</h1>
 
             {message && (
                 <div className={`mb-4 p-3 ${isSuccess ? 'bg-green-50 border-green-200 text-green-600' : 'bg-red-50 border-red-200 text-red-600'} border rounded-lg text-sm`}>
@@ -61,12 +63,12 @@ export default function Page({ token }: { token: string }) {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                        New Password
+                        {t('new-password')}
                     </label>
                     <div className="relative">
                         <input
                             id="password"
-                            {...register('password', { required: "Password is required" })}
+                            {...register('password', { required: t('password-is-required') })}
                             type={showPassword ? 'text' : 'password'}
                             placeholder="••••••••"
                             className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -84,11 +86,11 @@ export default function Page({ token }: { token: string }) {
 
                 <div>
                     <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                        Confirm Password
+                        {t('confirm-password')}
                     </label>
                     <input
                         id="confirmPassword"
-                        {...register('confirmPassword', { required: "Confirm Password is required" })}
+                        {...register('confirmPassword', { required: t('confirm-password-is-required') })}
                         type={showPassword ? 'text' : 'password'}
                         placeholder="••••••••"
                         className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -105,7 +107,7 @@ export default function Page({ token }: { token: string }) {
                         className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                     />
                     <label htmlFor="show-password" className="ml-2 block text-sm text-gray-700">
-                        Show Password
+                        {t('show-password')}
                     </label>
                 </div>
 
@@ -115,7 +117,7 @@ export default function Page({ token }: { token: string }) {
                     disabled={isSuccess}
                 >
                     <RefreshCw className="h-5 w-5 mr-2" />
-                    Reset Password
+                    {t('reset-password-0')}
                 </button>
             </form>
         </div>

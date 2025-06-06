@@ -46,7 +46,7 @@ export async function resetPassword(data: {
         })
         console.log(result)
         return Boolean(result)
-    } catch (error) {
+    } catch {
         return false
     }
 }

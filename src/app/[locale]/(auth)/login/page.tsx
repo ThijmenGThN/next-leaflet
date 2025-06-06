@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useRouter } from '@/locales/navigation'
 import { Eye, EyeOff, LogIn } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type FormData = {
     email: string
@@ -11,6 +12,7 @@ type FormData = {
 }
 
 export default function Page() {
+    const t = useTranslations()
     const router = useRouter()
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
@@ -32,7 +34,7 @@ export default function Page() {
             const data = await req.json()
 
             if (!req.ok) {
-                setErrorMessage(data.message || "Login failed")
+                setErrorMessage(data.message || t('login-failed'))
                 return
             }
 
@@ -42,14 +44,14 @@ export default function Page() {
                 router.push("/dash")
             }
         } catch (err) {
-            setErrorMessage("An unexpected error occurred. Please try again.")
+            setErrorMessage(t('an-unexpected-error-occurred-please-try-again'))
             console.error(err)
         }
     }
 
     return (
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">Login to your account</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('login-to-your-account')}</h1>
 
             {errorMessage && (
                 <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
@@ -60,11 +62,11 @@ export default function Page() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        Email
+                        {t('email')}
                     </label>
                     <input
                         id="email"
-                        {...register('email', { required: "Email is required" })}
+                        {...register('email', { required: t('email-is-required') })}
                         type="email"
                         placeholder="you@example.com"
                         className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -74,12 +76,12 @@ export default function Page() {
 
                 <div>
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                        Password
+                        {t('password')}
                     </label>
                     <div className="relative">
                         <input
                             id="password"
-                            {...register('password', { required: "Password is required" })}
+                            {...register('password', { required: t('password-is-required') })}
                             type={showPassword ? 'text' : 'password'}
                             placeholder="••••••••"
                             className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
@@ -103,12 +105,12 @@ export default function Page() {
                             className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                         />
                         <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                            Remember me
+                            {t('remember-me')}
                         </label>
                     </div>
 
                     <Link href="/reset" className="text-sm font-medium text-primary-600 hover:text-primary-800">
-                        Forgot password?
+                        {t('forgot-password')}
                     </Link>
                 </div>
 
@@ -117,15 +119,15 @@ export default function Page() {
                     className="w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg flex items-center justify-center transition-colors duration-150"
                 >
                     <LogIn className="h-5 w-5 mr-2" />
-                    Sign in
+                    {t('sign-in-0')}
                 </button>
             </form>
 
             <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
-                    Don't have an account?{' '}
+                    {t('don-and-apos-t-have-an-account')}{' '}
                     <Link href="/register" className="font-medium text-primary-600 hover:text-primary-800">
-                        Register
+                        {t('register')}
                     </Link>
                 </p>
             </div>
