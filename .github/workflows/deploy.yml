@@ -86,3 +86,19 @@ jobs:
             echo "Performing health check on $DOMAIN"
             curl -f $DOMAIN || exit 1
             echo "Health check passed"
+
+  cleanup:
+    needs: deploy
+    runs-on: self-hosted
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST || 'localhost' }}
+          port: ${{ secrets.SSH_PORT || '22' }}
+          username: ${{ secrets.SSH_USER || 'root' }}
+          script: |
+            # ━ Clean up old Docker images
+            echo "Cleaning up old Docker images..."
+            docker image prune -f
+            echo "Docker cleanup completed"
