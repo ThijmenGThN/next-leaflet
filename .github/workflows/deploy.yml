@@ -34,9 +34,10 @@ jobs:
       - uses: appleboy/ssh-action@master
         with:
           # SSH connection configuration
-          # ┗━ Uses SSH_KEY and SSH_HOST secret in format: username@host:port
+          # ┗━ Uses SSH_KEY and SSH_HOST secret in format: username@host or username@host:port
           key: ${{ secrets.SSH_KEY }}
-          host: ${{ secrets.SSH_HOST }}
+          host: ${{ contains(secrets.SSH_HOST, ':') && split(secrets.SSH_HOST, ':')[0] || secrets.SSH_HOST }}
+          port: ${{ contains(secrets.SSH_HOST, ':') && split(secrets.SSH_HOST, ':')[1] || '22' }}
           # Deployment script
           # ┗━ Complete deployment process with setup, code update, and service restart
           script: |
