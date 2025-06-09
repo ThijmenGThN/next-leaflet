@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      # Setup Node.js environment
-      # ┗━ Configures Node.js 
       - uses: actions/setup-node@v4
         with:
           node-version: '23'
@@ -27,63 +24,50 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      
-      # Parse SSH secret
-      # ┗━ Extracts user, host and port from SSH_HOST secret
-      - name: Parse SSH connection details
-        id: ssh-parse
-        run: |
-          SSH_HOST="${{ secrets.SSH_HOST }}"
-          
-          # Extract user (everything before @)
-          if [[ "$SSH_HOST" == *"@"* ]]; then
-            USER="${SSH_HOST%%@*}"
-            HOST_PORT="${SSH_HOST#*@}"
-          else
-            USER=""
-            HOST_PORT="$SSH_HOST"
-          fi
-          
-          # Extract host and port
-          if [[ "$HOST_PORT" == *":"* ]]; then
-            HOST="${HOST_PORT%:*}"
-            PORT="${HOST_PORT##*:}"
-          else
-            HOST="$HOST_PORT"
-            PORT="22"
-          fi
-          
-          echo "user=$USER" >> $GITHUB_OUTPUT
-          echo "host=$HOST" >> $GITHUB_OUTPUT
-          echo "port=$PORT" >> $GITHUB_OUTPUT
-
-      # SSH connection configuration
-      # ┗━ Uses SSH_KEY and parsed SSH connection details
       - uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.SSH_KEY }}
-          user: ${{ steps.ssh-parse.outputs.user }}
-          host: ${{ steps.ssh-parse.outputs.host }}
-          port: ${{ steps.ssh-parse.outputs.port }}
+            host: ${{ secrets.SSH_HOST || 'localhost' }}
+            port: ${{ secrets.SSH_PORT || '22' }}
+            username: ${{ secrets.SSH_USER || 'root' }}
           script: |
-            # Create project directory structure
+            # ━ Create project directory structure
             mkdir -p ~/env/${{github.event.repository.name}}
             cd ~/env/${{github.event.repository.name}}
             
-            # Initialize repository if it doesn't exist
+            # ━ Initialize repository if it doesn't exist
             if [ ! -d ".git" ]; then
               git clone https://github.com/${{github.repository}} .
             fi
             
-            # Update codebase
+            # ━ Update codebase
             git fetch origin
             git reset --hard origin/${{ github.ref_name }}
             git clean -fd
 
-            # Configure environment
+            # ━ Configure environment
             echo '${{ secrets.APP_ENV }}' > .env
             
-            # Update and restart services
+            # ━ Update and restart services
             docker compose pull
             docker compose build
             docker compose up -d
+
+  healthcheck:
+    needs: deploy
+    runs-on: self-hosted
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST || 'localhost' }}
+          port: ${{ secrets.SSH_PORT || '22' }}
+          username: ${{ secrets.SSH_USER || 'root' }}
+          script: |
+            # ━ Extract domain from environment
+            DOMAIN=$(echo '${{ secrets.APP_ENV }}' | grep NEXT_PUBLIC_DOMAIN | cut -d'=' -f2)
+            
+            # ━ Perform health check
+            echo "Performing health check on $DOMAIN"
+            curl -f http://$DOMAIN || curl -f https://$DOMAIN || exit 1
+            echo "Health check passed"
