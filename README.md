@@ -149,13 +149,13 @@ Go to your repository Settings → Secrets and variables → Actions, and add th
   cat ~/.ssh/id_ed25519
   ```
 
-- `SSH_HOST`: SSH connection string in format `username@hostname:port`
-  ```
-  # Example
-  deploy@your-server.com:22
-  ```
+#### Optional SSH Secrets (with defaults):
+- `SSH_HOST`: SSH hostname or IP (defaults to 'localhost')
+- `SSH_PORT`: SSH port number (defaults to '22')
+- `SSH_USER`: SSH username (defaults to 'root')
 
-- `APP_ENV`: Your complete production `.env` file content
+#### Application Configuration:
+- `APP_ENV`: Your complete production `.env` file content (must include `NEXT_PUBLIC_DOMAIN`)
   ```
   PAYLOAD_SECRET=your-secret-here
   NEXT_PUBLIC_DOMAIN=https://your-domain.com
@@ -165,15 +165,12 @@ Go to your repository Settings → Secrets and variables → Actions, and add th
 
 ### 3. Enable Deployment
 
-1. Edit `.github/workflows/deploy.yml`
-2. Change the branches trigger from `disabled` to your target branch:
-   ```yaml
-   on:
-     push:
-       branches: main  # or your preferred branch
-   ```
+The deployment workflow includes:
+- **Lint**: Code quality checks
+- **Deploy**: Build and deploy the application via SSH
+- **Healthcheck**: Verify the application is responding using your domain
 
-3. Commit and push to trigger the deployment workflow
+The workflow automatically triggers on pushes to the `main` branch.
 
 ### 4. Server Prerequisites
 
@@ -182,6 +179,7 @@ Your deployment server needs:
 - SSH access configured
 - Git installed
 - Sufficient permissions to run Docker commands
+- Network access to your domain for health checks
 
 </details>
 
