@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    # Branch on which to automatically run the deploy-action.
+    # ┗━ Options: branch.name ━━ example: "main"
+    branches: disabled
+
+jobs:
+
+  lint:
+    # Runner configuration
+    # ┗━ Uses GitHub-hosted Ubuntu runner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Setup Node.js environment
+      # ┗━ Configures Node.js 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+  
+  deploy:
+    # Job dependencies
+    # ┗━ Only runs after lint job completes successfully
+    needs: lint
+    # Runner configuration
+    # ┗━ Uses self-hosted runner for deployment to production server
+    runs-on: self-hosted
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          # SSH connection configuration
+          # ┗━ Uses SSH_KEY and SSH_HOST secret in format: username@host:port
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          # Deployment script
+          # ┗━ Complete deployment process with setup, code update, and service restart
+          script: |
+            # Create project directory structure
+            mkdir -p ~/env/${{github.event.repository.name}}
+            cd ~/env/${{github.event.repository.name}}
+            
+            # Initialize repository if it doesn't exist
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/${{github.repository}} .
+            fi
+            
+            # Update codebase
+            git fetch origin
+            git reset --hard origin/${{ github.ref_name }}
+            git clean -fd
+
+            # Configure environment
+            echo '${{ secrets.APP_ENV }}' > .env
+            
+            # Update and restart services
+            docker compose pull
+            docker compose build
+            docker compose up -d
