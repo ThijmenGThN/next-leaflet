@@ -18,9 +18,8 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run lint
-  
-  deploy:
-    needs: lint
+
+  build:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -48,9 +47,25 @@ jobs:
             # ━ Configure environment
             echo '${{ secrets.APP_ENV }}' > .env
             
-            # ━ Update and restart services
+            # ━ Build services
             docker compose pull
             docker compose build
+  
+  deploy:
+    needs: [lint, build]
+    runs-on: self-hosted
+    steps:
+      - uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST || 'localhost' }}
+          port: ${{ secrets.SSH_PORT || '22' }}
+          username: ${{ secrets.SSH_USER || 'root' }}
+          script: |
+            # ━ Navigate to project directory
+            cd ~/env/${{github.event.repository.name}}
+            
+            # ━ Start services
             docker compose up -d
 
   healthcheck:
@@ -69,5 +84,5 @@ jobs:
             
             # ━ Perform health check
             echo "Performing health check on $DOMAIN"
-            curl -f http://$DOMAIN || curl -f https://$DOMAIN || exit 1
+            curl -f $DOMAIN || exit 1
             echo "Health check passed"
