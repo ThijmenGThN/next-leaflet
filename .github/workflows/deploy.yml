@@ -36,23 +36,39 @@ jobs:
       
       - name: Parse SSH connection details
         # Parse SSH secret
-        # ┗━ Extracts host and port from SSH_HOST secret
+        # ┗━ Extracts user, host and port from SSH_HOST secret
         id: ssh-parse
         run: |
           SSH_HOST="${{ secrets.SSH_HOST }}"
-          if [[ "$SSH_HOST" == *":"* ]]; then
-            echo "host=${SSH_HOST%:*}" >> $GITHUB_OUTPUT
-            echo "port=${SSH_HOST##*:}" >> $GITHUB_OUTPUT
+          
+          # Extract user (everything before @)
+          if [[ "$SSH_HOST" == *"@"* ]]; then
+            USER="${SSH_HOST%%@*}"
+            HOST_PORT="${SSH_HOST#*@}"
           else
-            echo "host=$SSH_HOST" >> $GITHUB_OUTPUT
-            echo "port=22" >> $GITHUB_OUTPUT
+            USER=""
+            HOST_PORT="$SSH_HOST"
           fi
+          
+          # Extract host and port
+          if [[ "$HOST_PORT" == *":"* ]]; then
+            HOST="${HOST_PORT%:*}"
+            PORT="${HOST_PORT##*:}"
+          else
+            HOST="$HOST_PORT"
+            PORT="22"
+          fi
+          
+          echo "user=$USER" >> $GITHUB_OUTPUT
+          echo "host=$HOST" >> $GITHUB_OUTPUT
+          echo "port=$PORT" >> $GITHUB_OUTPUT
 
       - uses: appleboy/ssh-action@master
         with:
           # SSH connection configuration
-          # ┗━ Uses SSH_KEY and SSH_HOST secret in format: username@host or username@host:port
+          # ┗━ Uses SSH_KEY and parsed SSH connection details
           key: ${{ secrets.SSH_KEY }}
+          user: ${{ steps.ssh-parse.outputs.user }}
           host: ${{ steps.ssh-parse.outputs.host }}
           port: ${{ steps.ssh-parse.outputs.port }}
           # Deployment script
