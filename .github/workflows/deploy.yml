@@ -98,7 +98,7 @@ jobs:
           port: ${{ secrets.SSH_PORT || '22' }}
           username: ${{ secrets.SSH_USER || 'root' }}
           script: |
-            # ━ Clean up old Docker images
-            echo "Cleaning up old Docker images..."
+            # ━ Clean up old Docker images and build cache
             docker image prune -f
+            docker builder prune -af
             echo "Docker cleanup completed"
