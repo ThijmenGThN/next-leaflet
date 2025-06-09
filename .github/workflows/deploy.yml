@@ -4,16 +4,15 @@ on:
   push:
     # Branch on which to automatically run the deploy-action.
     # ┗━ Options: branch.name ━━ example: "main"
-    branches: disabled
+    branches: main
 
 jobs:
 
   lint:
-    # Runner configuration
-    # ┗━ Uses GitHub-hosted Ubuntu runner
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       # Setup Node.js environment
       # ┗━ Configures Node.js 
       - uses: actions/setup-node@v4
@@ -24,19 +23,14 @@ jobs:
       - run: npm run lint
   
   deploy:
-    # Job dependencies
-    # ┗━ Only runs after lint job completes successfully
     needs: lint
-    # Runner configuration
-    # ┗━ Uses self-hosted runner for deployment to production server
     runs-on: self-hosted
     steps:
-
       - uses: actions/checkout@v4
       
+      # Parse SSH secret
+      # ┗━ Extracts user, host and port from SSH_HOST secret
       - name: Parse SSH connection details
-        # Parse SSH secret
-        # ┗━ Extracts user, host and port from SSH_HOST secret
         id: ssh-parse
         run: |
           SSH_HOST="${{ secrets.SSH_HOST }}"
@@ -63,16 +57,14 @@ jobs:
           echo "host=$HOST" >> $GITHUB_OUTPUT
           echo "port=$PORT" >> $GITHUB_OUTPUT
 
+      # SSH connection configuration
+      # ┗━ Uses SSH_KEY and parsed SSH connection details
       - uses: appleboy/ssh-action@master
         with:
-          # SSH connection configuration
-          # ┗━ Uses SSH_KEY and parsed SSH connection details
           key: ${{ secrets.SSH_KEY }}
           user: ${{ steps.ssh-parse.outputs.user }}
           host: ${{ steps.ssh-parse.outputs.host }}
           port: ${{ steps.ssh-parse.outputs.port }}
-          # Deployment script
-          # ┗━ Complete deployment process with setup, code update, and service restart
           script: |
             # Create project directory structure
             mkdir -p ~/env/${{github.event.repository.name}}
