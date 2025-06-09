@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --turbopack",
-    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev --turbopack",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
@@ -34,9 +34,7 @@
     "react-dom": "19.1.0",
     "react-email": "^4.0.16",
     "react-hook-form": "^7.57.0",
-    "sharp": "0.34.2"
-  },
-  "devDependencies": {
+    "sharp": "0.34.2",
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.8",
     "@types/amqplib": "^0.10.7",
