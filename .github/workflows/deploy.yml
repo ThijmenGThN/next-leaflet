@@ -31,13 +31,30 @@ jobs:
     # ┗━ Uses self-hosted runner for deployment to production server
     runs-on: self-hosted
     steps:
+
+      - uses: actions/checkout@v4
+      
+      - name: Parse SSH connection details
+        # Parse SSH secret
+        # ┗━ Extracts host and port from SSH_HOST secret
+        id: ssh-parse
+        run: |
+          SSH_HOST="${{ secrets.SSH_HOST }}"
+          if [[ "$SSH_HOST" == *":"* ]]; then
+            echo "host=${SSH_HOST%:*}" >> $GITHUB_OUTPUT
+            echo "port=${SSH_HOST##*:}" >> $GITHUB_OUTPUT
+          else
+            echo "host=$SSH_HOST" >> $GITHUB_OUTPUT
+            echo "port=22" >> $GITHUB_OUTPUT
+          fi
+
       - uses: appleboy/ssh-action@master
         with:
           # SSH connection configuration
           # ┗━ Uses SSH_KEY and SSH_HOST secret in format: username@host or username@host:port
           key: ${{ secrets.SSH_KEY }}
-          host: ${{ contains(secrets.SSH_HOST, ':') && split(secrets.SSH_HOST, ':')[0] || secrets.SSH_HOST }}
-          port: ${{ contains(secrets.SSH_HOST, ':') && split(secrets.SSH_HOST, ':')[1] || '22' }}
+          host: ${{ steps.ssh-parse.outputs.host }}
+          port: ${{ steps.ssh-parse.outputs.port }}
           # Deployment script
           # ┗━ Complete deployment process with setup, code update, and service restart
           script: |
