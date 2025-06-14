@@ -13,7 +13,7 @@ services:
         - DATABASE_PASS
         - DATABASE_TABLE
     restart: unless-stopped
-    ports: ["3000:3000"]
+    ports: ["${NEXT_PORT:-3000}:3000"]
     env_file: .env
     depends_on:
       database:
@@ -33,7 +33,7 @@ services:
       POSTGRES_DB: ${DATABASE_TABLE}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASS}
-    ports: ["5432:5432"]
+    ports: ["${DATABASE_PORT:-5432}:5432"]
     volumes:
       - ./data/database:/var/lib/postgresql/data
     healthcheck:
