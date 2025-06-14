@@ -45,7 +45,7 @@ export default buildConfig({
     prodMigrations: migrations,
     migrationDir: path.resolve(dirname, './src/backend/migrations'),
     pool: {
-      connectionString: `postgres://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${databaseHost}:${process.env.DATABASE_PORT}/${process.env.DATABASE_TABLE}`
+      connectionString: `postgres://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${databaseHost}:${process.env.COMPOSE_PROFILES === 'prod' ? '5432' : process.env.DATABASE_PORT}/${process.env.DATABASE_TABLE}`
     },
   }),
   admin: {
