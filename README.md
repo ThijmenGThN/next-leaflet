@@ -54,11 +54,27 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 
 6. Create your first admin user by visiting `/admin` in your browser.
 
+## Template Synchronization
+
+When you create your project from [next-leaflet](https://github.com/ThijmenGThN/next-leaflet), you can easily sync with the latest template updates using:
+
+```bash
+npm run sync-template
+```
+
+That's it! The command will automatically:
+
+1. **Check for uncommitted changes** - Warns you if you have unsaved work
+2. **Fetch latest template changes** - Downloads new commits from the template repo
+3. **Show what's new** - Displays what's changed since your last sync
+4. **Merge changes** - Automatically integrates template updates into your project
+
 ## Available Scripts
 
 - `npm run dev` - Start development server with Turbopack
 - `npm run build` - Build for production
 - `npm run start` - Start production server
+- `npm run sync-template` - Sync with template repository updates
 - `npm run generate:types` - Generate TypeScript types from Payload config
 - `npm run lint` - Run ESLint
 - `npm run email` - Start email development server

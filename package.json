@@ -14,7 +14,8 @@
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation node .next/standalone/server.js",
     "email": "email dev --dir ./src/emails",
-    "deploy": "npm ci && npm run build && npm start"
+    "deploy": "npm ci && npm run build && npm start",
+    "sync-template": "node .sync-template.js"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.41.0",
