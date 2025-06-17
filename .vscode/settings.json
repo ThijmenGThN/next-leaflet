@@ -32,6 +32,7 @@
     "eslint.config.mjs": true,
     "package-lock.json": true,
     "src/middleware.ts": true,
+    ".sync-template.js": true,
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
