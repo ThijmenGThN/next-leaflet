@@ -40,6 +40,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Template sync temporary files
-.sync-backup/
