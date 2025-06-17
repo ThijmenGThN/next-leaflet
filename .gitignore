@@ -1,6 +1,5 @@
 # payload
 /data
-/archive/db
 
 # dependencies
 /node_modules
