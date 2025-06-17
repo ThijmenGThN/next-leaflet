@@ -56,7 +56,7 @@ function main() {
         try {
             execCommand(`git log --oneline HEAD..${TEMPLATE_REMOTE}/main`, true);
         } catch {
-            templateBranch = 'master';
+            templateBranch = 'main';
         }
 
         const newCommits = execCommand(`git log --oneline HEAD..${TEMPLATE_REMOTE}/${templateBranch}`, true);
@@ -71,7 +71,7 @@ function main() {
 
         // Merge template changes
         log('🔀 Merging template changes...', 'info');
-        execCommand(`git merge ${TEMPLATE_REMOTE}/${templateBranch} --no-ff -m "chore: sync with template repository"`);
+        execCommand(`git merge ${TEMPLATE_REMOTE}/${templateBranch} --no-ff --allow-unrelated-histories -m "chore: sync with template repository"`);
 
         log('✅ Template sync completed successfully!', 'success');
         log('💡 Run your tests and push changes if everything looks good.', 'info');
