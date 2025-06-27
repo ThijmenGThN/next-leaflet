@@ -2,9 +2,13 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useRouter } from '@/locales/navigation'
-import { Eye, EyeOff, LogIn } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useRouter, Link } from '@/locales/navigation'
+import { LogIn } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 type FormData = {
     email: string
@@ -12,125 +16,116 @@ type FormData = {
 }
 
 export default function Page() {
-    const t = useTranslations()
     const router = useRouter()
-
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
-    const [showPassword, setShowPassword] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     const onSubmit = async ({ email, password }: FormData) => {
+        setIsLoading(true)
+        setErrorMessage(null)
+
         try {
             const req = await fetch(`/api/users/login`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    email,
-                    password,
-                }),
+                body: JSON.stringify({ email, password }),
             })
 
             const data = await req.json()
 
             if (!req.ok) {
-                setErrorMessage(data.message || t('login-failed'))
+                setErrorMessage(data.message || "Invalid email or password")
+                setIsLoading(false)
                 return
             }
 
-            const user = data.user
-            if (user) {
-                setErrorMessage(null) // Clear any previous error
+            if (data.user) {
                 router.push("/dash")
             }
-        } catch (err) {
-            setErrorMessage(t('an-unexpected-error-occurred-please-try-again'))
-            console.error(err)
+        } catch {
+            setErrorMessage("An unexpected error occurred. Please try again.")
+            setIsLoading(false)
         }
     }
 
     return (
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('login-to-your-account')}</h1>
+        <div className="min-h-screen flex items-center justify-center bg-background">
+            <Card className="w-full max-w-sm">
+                <CardHeader className="space-y-1">
+                    <CardTitle className="text-2xl">Login</CardTitle>
+                    <CardDescription>Enter your email and password to login</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                autoComplete="email"
+                                placeholder="john.doe@example.com"
+                                {...register('email', {
+                                    required: "Email is required",
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: 'Invalid email address'
+                                    }
+                                })}
+                                disabled={isLoading}
+                            />
+                            {errors.email && (
+                                <p className="text-sm text-destructive">{errors.email.message}</p>
+                            )}
+                        </div>
 
-            {errorMessage && (
-                <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-                    {errorMessage}
-                </div>
-            )}
+                        <div className="space-y-2">
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                autoComplete="current-password"
+                                {...register('password', { required: "Password is required" })}
+                                disabled={isLoading}
+                            />
+                            {errors.password && (
+                                <p className="text-sm text-destructive">{errors.password.message}</p>
+                            )}
+                        </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('email')}
-                    </label>
-                    <input
-                        id="email"
-                        {...register('email', { required: t('email-is-required') })}
-                        type="email"
-                        placeholder="you@example.com"
-                        className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    />
-                    {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
-                </div>
+                        <Button type="submit" className="w-full" disabled={isLoading}>
+                            {isLoading ? (
+                                <>
+                                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Signing in...
+                                </>
+                            ) : (
+                                <>
+                                    <LogIn className="mr-2 h-4 w-4" />
+                                    Sign in
+                                </>
+                            )}
+                        </Button>
 
-                <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('password')}
-                    </label>
-                    <div className="relative">
-                        <input
-                            id="password"
-                            {...register('password', { required: t('password-is-required') })}
-                            type={showPassword ? 'text' : 'password'}
-                            placeholder="••••••••"
-                            className="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-                        >
-                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                        </button>
-                    </div>
-                    {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
-                </div>
+                        {errorMessage && (
+                            <p className='text-sm text-destructive'>
+                                {errorMessage}
+                            </p>
+                        )}
 
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                        <input
-                            id="remember-me"
-                            type="checkbox"
-                            className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
-                        />
-                        <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                            {t('remember-me')}
-                        </label>
-                    </div>
-
-                    <Link href="/reset" className="text-sm font-medium text-primary-600 hover:text-primary-800">
-                        {t('forgot-password')}
-                    </Link>
-                </div>
-
-                <button
-                    type="submit"
-                    className="w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg flex items-center justify-center transition-colors duration-150"
-                >
-                    <LogIn className="h-5 w-5 mr-2" />
-                    {t('sign-in-0')}
-                </button>
-            </form>
-
-            <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600">
-                    {t('don-and-apos-t-have-an-account')}{' '}
-                    <Link href="/register" className="font-medium text-primary-600 hover:text-primary-800">
-                        {t('register')}
-                    </Link>
-                </p>
-            </div>
+                        <div className="text-center text-sm">
+                            Don't have an account?{' '}
+                            <Link href="/register" className="text-primary underline">
+                                Register
+                            </Link>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
     )
 }

@@ -7,7 +7,7 @@ import type { ReactNode } from "react"
 
 export default async function Template({ children }: { children: ReactNode }) {
 
-    if (await isLoggedIn()) redirect("/")
+    if (await isLoggedIn()) redirect("/dash")
 
     return (
         <>

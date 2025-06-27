@@ -1,8 +1,10 @@
-import { Ubuntu } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { routing } from '@/locales/routing'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
+
 import type { Metadata } from 'next'
+
 import '@/styles/globals.css'
 
 export const metadata: Metadata = {
@@ -10,7 +12,7 @@ export const metadata: Metadata = {
     description: "An optimized tech stack for efficiency.",
 }
 
-const ubuntu = Ubuntu({ weight: '400', subsets: ['latin'] })
+const inter = Inter({ weight: '400', subsets: ['latin'] })
 
 export default async function Layout({ children, params }: { children: React.ReactNode, params: Promise<{ locale: string }> }) {
     const { locale } = await params
@@ -18,7 +20,7 @@ export default async function Layout({ children, params }: { children: React.Rea
 
     return (
         <html lang={locale}>
-            <body className={ubuntu.className}>
+            <body className={inter.className}>
                 <NextIntlClientProvider>
                     {children}
                 </NextIntlClientProvider>

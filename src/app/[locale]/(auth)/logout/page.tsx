@@ -21,10 +21,12 @@ export default function Page() {
     }, [router])
 
     return (
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center">
-            <Loader className="h-8 w-8 animate-spin text-primary-600 mx-auto mb-4" />
-            <h1 className="text-xl font-semibold text-gray-800 mb-2">{t('logging-out')}</h1>
-            <p className="text-gray-600">{t('you-will-be-redirected-shortly')}</p>
+        <div className="flex items-center justify-center min-h-screen">
+            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 text-center">
+                <Loader className="h-8 w-8 animate-spin text-primary-600 mx-auto mb-4" />
+                <h1 className="text-xl font-semibold text-gray-800 mb-2">{t('logging-out')}</h1>
+                <p className="text-gray-600">{t('you-will-be-redirected-shortly')}</p>
+            </div>
         </div>
     )
 }
