@@ -1,4 +1,4 @@
-import { LogIn, UserPlus } from "lucide-react"
+import { LogIn, UserPlus, Palette } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/locales/navigation"
 
@@ -19,6 +19,14 @@ export default function Page() {
                         <Link href="/register">
                             <UserPlus className="h-4 w-4 mr-2" />
                             Register
+                        </Link>
+                    </Button>
+                </div>
+                <div className="mt-6">
+                    <Button asChild variant="secondary" size="sm" className="w-full sm:w-auto">
+                        <Link href="/ui">
+                            <Palette className="h-4 w-4 mr-2" />
+                            UI Components
                         </Link>
                     </Button>
                 </div>
