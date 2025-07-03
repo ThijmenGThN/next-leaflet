@@ -3,7 +3,7 @@
 import { Home, User, LogOut } from 'lucide-react'
 import { Link, usePathname } from "@/locales/navigation"
 import { Button } from '@/components/ui/button'
-import { cn } from '@/libs/cn'
+import { cn } from '@/helpers/utils'
 
 const sidebarItems = [
     {
