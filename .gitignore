@@ -21,6 +21,7 @@
 /build
 
 # misc
+archive
 .DS_Store
 *.pem
 git*
