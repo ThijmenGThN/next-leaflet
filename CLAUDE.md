@@ -64,6 +64,7 @@ The CMS manages these core collections:
 ### File Organization
 - Use existing component patterns and structures as templates
 - Follow the established folder structure strictly
+- **Layout Components**: Create reusable layout components in `src/components/` rather than in app routes. Use `layout.tsx` files only for Next.js App Router layouts
 
 ### Component Development
 - **UI Components**: Use Shadcn/UI patterns in `src/components/ui/`

@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Alert, AlertDescription } from '@/components/ui/alert'
 
 type FormData = {
     email: string
@@ -89,9 +88,18 @@ export default function Page() {
                                 {...register('password', { required: "Password is required" })}
                                 disabled={isLoading}
                             />
-                            {errors.password && (
-                                <p className="text-sm text-destructive">{errors.password.message}</p>
-                            )}
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    {errors.password && (
+                                        <p className="text-sm text-destructive">{errors.password.message}</p>
+                                    )}
+                                </div>
+                                <div>
+                                    <Link href="/reset" className="text-sm text-primary underline">
+                                        Forgot password?
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
 
                         <Button type="submit" className="w-full" disabled={isLoading}>
@@ -118,7 +126,7 @@ export default function Page() {
                         )}
 
                         <div className="text-center text-sm">
-                            Don't have an account?{' '}
+                            Don&apos;t have an account?{' '}
                             <Link href="/register" className="text-primary underline">
                                 Register
                             </Link>

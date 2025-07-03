@@ -55,7 +55,7 @@ export default function Page() {
             } else {
                 router.push("/login")
             }
-        } catch (err) {
+        } catch {
             setErrorMessage('An unexpected error occurred. Please try again.')
             setIsLoading(false)
         }
@@ -178,11 +178,18 @@ export default function Page() {
                             )}
                         </Button>
 
-                        <div className="text-center text-sm">
-                            Already have an account?{' '}
-                            <Link href="/login" className="text-primary underline">
-                                Login
-                            </Link>
+                        <div className="text-center text-sm space-y-2">
+                            <div>
+                                <Link href="/reset" className="text-primary underline">
+                                    Forgot your password?
+                                </Link>
+                            </div>
+                            <div>
+                                Already have an account?{' '}
+                                <Link href="/login" className="text-primary underline">
+                                    Login
+                                </Link>
+                            </div>
                         </div>
                     </form>
                 </CardContent>

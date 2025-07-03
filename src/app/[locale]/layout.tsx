@@ -20,7 +20,7 @@ export default async function Layout({ children, params }: { children: React.Rea
     if (!hasLocale(routing.locales, locale)) notFound()
 
     return (
-        <html lang={locale}>
+        <html lang={locale} suppressHydrationWarning>
             <body className={inter.className}>
                 <ThemeProvider
                     attribute="class"

@@ -43,7 +43,7 @@ export const Users: CollectionConfig = {
       generateEmailHTML: async ({ token }: { token?: string } = {}) => {
         return await render(React.createElement(
           Reset,
-          { ACTION_URL: process.env.NEXT_PUBLIC_DOMAIN + "/reset/" + token }
+          { ACTION_URL: process.env.NEXT_PUBLIC_DOMAIN + "/reset?token=" + token }
         ))
       }
     }
