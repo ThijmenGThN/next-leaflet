@@ -61,6 +61,11 @@ The CMS manages these core collections:
 
 ## Code Standards & Guidelines
 
+### Responsive Design Philosophy
+- **CRITICAL**: All components, pages, and layouts MUST be responsive by default
+- **Mobile First**: Design and implement for mobile devices first, then enhance for larger screens
+- **Breakpoints**: Use Tailwind's responsive utilities (sm:, md:, lg:, xl:, 2xl:) consistently
+
 ### File Organization
 - Use existing component patterns and structures as templates
 - Follow the established folder structure strictly
@@ -71,7 +76,7 @@ The CMS manages these core collections:
 - **Component Styling**: Use Tailwind CSS v4 with class-variance-authority (cva)
 - **Component Props**: Use TypeScript interfaces with proper typing
 - **Accessibility**: Follow Radix UI accessibility patterns
-- **Responsive Design**: Use Tailwind responsive utilities
+- **Responsive Design**: MANDATORY - Use Tailwind responsive utilities for all layout, typography, and spacing
 
 ### Code Patterns
 - **Imports**: Use `@/*` path aliases consistently
@@ -104,7 +109,8 @@ The CMS manages these core collections:
 
 ### Performance Guidelines
 - **Server Components**: Use by default, client components only when needed
-- **Image Optimization**: Use Next.js Image component with proper sizing
+- **Image Optimization**: Use Next.js Image component with proper sizing and responsive breakpoints
+- **Responsive Images**: Always implement responsive images with appropriate sizes for different screen dimensions
 
 ### Documentation Standards
 - **NEVER** create documentation files unless explicitly requested
