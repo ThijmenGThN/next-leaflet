@@ -28,10 +28,10 @@ export default function Page() {
     const onSubmit = async ({ email, password, firstname, lastname }: FormData) => {
         setIsLoading(true)
         setErrorMessage(null)
-        
+
         try {
             const user = await createUser({
-                email, 
+                email,
                 password,
                 firstname,
                 lastname
@@ -110,7 +110,7 @@ export default function Page() {
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
-                                {...register('email', { 
+                                {...register('email', {
                                     required: 'Email is required',
                                     pattern: {
                                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -130,7 +130,7 @@ export default function Page() {
                             <Label htmlFor="password">Password</Label>
                             <Input
                                 id="password"
-                                {...register('password', { 
+                                {...register('password', {
                                     required: 'Password is required',
                                     minLength: {
                                         value: 8,
@@ -179,11 +179,6 @@ export default function Page() {
                         </Button>
 
                         <div className="text-center text-sm space-y-2">
-                            <div>
-                                <Link href="/reset" className="text-primary underline">
-                                    Forgot your password?
-                                </Link>
-                            </div>
                             <div>
                                 Already have an account?{' '}
                                 <Link href="/login" className="text-primary underline">
