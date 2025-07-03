@@ -5,6 +5,11 @@ and generate custom color palettes for your project.
 
 @import "tailwindcss";
 @import "tw-animate-css";
+
+button:hover {
+  cursor: pointer;
+}
+
 /*
 ---break---
 */
@@ -221,9 +226,9 @@ and generate custom color palettes for your project.
 
   --shadow-color: hsl(0 0% 0%);
 
-  --shadow-opacity: 0.18;
+  --shadow-opacity: 0;
 
-  --shadow-blur: 2px;
+  --shadow-blur: 0px;
 
   --shadow-spread: 0px;
 
@@ -235,21 +240,21 @@ and generate custom color palettes for your project.
 
   --spacing: 0.25rem;
 
-  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+  --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.00);
 
-  --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+  --shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.00);
 
-  --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+  --shadow-sm: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+  --shadow: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
+  --shadow-md: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
+  --shadow-lg: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
+  --shadow-xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
+  --shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.00);
 
   --tracking-normal: 0em;
 }
@@ -272,7 +277,7 @@ and generate custom color palettes for your project.
 
   --popover-foreground: oklch(1 0 0);
 
-  --primary: oklch(1 0 0);
+  --primary: oklch(0.6715 0.1112 198.6518);
 
   --primary-foreground: oklch(0 0 0);
 
@@ -334,9 +339,9 @@ and generate custom color palettes for your project.
 
   --shadow-color: hsl(0 0% 0%);
 
-  --shadow-opacity: 0.18;
+  --shadow-opacity: 0;
 
-  --shadow-blur: 2px;
+  --shadow-blur: 0px;
 
   --shadow-spread: 0px;
 
@@ -348,21 +353,21 @@ and generate custom color palettes for your project.
 
   --spacing: 0.25rem;
 
-  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+  --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.00);
 
-  --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+  --shadow-xs: 0px 1px 0px 0px hsl(0 0% 0% / 0.00);
 
-  --shadow-sm: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+  --shadow-sm: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 1px 2px -1px hsl(0 0% 0% / 0.18);
+  --shadow: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-md: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 2px 4px -1px hsl(0 0% 0% / 0.18);
+  --shadow-md: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 2px 4px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-lg: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 4px 6px -1px hsl(0 0% 0% / 0.18);
+  --shadow-lg: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
+  --shadow-xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
 
-  --shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
+  --shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0.00);
 }
 
 /*

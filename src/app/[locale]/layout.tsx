@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { routing } from '@/locales/routing'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { ThemeProvider } from 'next-themes'
 
 import type { Metadata } from 'next'
 
@@ -21,9 +22,16 @@ export default async function Layout({ children, params }: { children: React.Rea
     return (
         <html lang={locale}>
             <body className={inter.className}>
-                <NextIntlClientProvider>
-                    {children}
-                </NextIntlClientProvider>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <NextIntlClientProvider>
+                        {children}
+                    </NextIntlClientProvider>
+                </ThemeProvider>
             </body>
         </html>
     )
