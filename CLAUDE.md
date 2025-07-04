@@ -70,9 +70,12 @@ The CMS manages these core collections:
 - Use existing component patterns and structures as templates
 - Follow the established folder structure strictly
 - **Layout Components**: Create reusable layout components in `src/components/` rather than in app routes. Use `layout.tsx` files only for Next.js App Router layouts
+- **Component Organization**: In `src/components/`, organize components into categorized folders with preferably one depth, maximum two levels allowed (e.g., `src/components/forms/`, `src/components/navigation/`)
 
 ### Component Development
 - **UI Components**: Use Shadcn/UI patterns in `src/components/ui/`
+- **UI Component Restrictions**: NEVER edit files in `src/components/ui/` unless explicitly asked to modify them
+- **Toasts**: Use Sonner for toast notifications with Shadcn/UI
 - **Component Styling**: Use Tailwind CSS v4 with class-variance-authority (cva)
 - **Component Props**: Use TypeScript interfaces with proper typing
 - **Accessibility**: Follow Radix UI accessibility patterns
