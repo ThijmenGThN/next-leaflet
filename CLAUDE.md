@@ -95,6 +95,7 @@ The CMS manages these core collections:
 ### Payload CMS Patterns
 - **Collections**: Follow Users collection pattern in `src/backend/collections/`
 - **Email Templates**: Use React Email with Payload's email system
+- **Relationships**: When creating or updating documents with relationship fields, use only the ID of the related document, not the full object
 
 ### Internationalization
 - **Messages**: Add translations to `src/locales/messages/` for both `en.json` and `nl.json`
