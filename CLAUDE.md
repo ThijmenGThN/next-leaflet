@@ -75,7 +75,9 @@ The CMS manages these core collections:
 ### Component Development
 - **UI Components**: Use Shadcn/UI patterns in `src/components/ui/`
 - **UI Component Restrictions**: NEVER edit files in `src/components/ui/` unless explicitly asked to modify them
+- **Theming**: Always rely on Shadcn/UI theming system for consistent styling
 - **Toasts**: Use Sonner for toast notifications with Shadcn/UI
+- **Button Loading States**: Always use spinners for buttons with loading states
 - **Component Styling**: Use Tailwind CSS v4 with class-variance-authority (cva)
 - **Component Props**: Use TypeScript interfaces with proper typing
 - **Accessibility**: Follow Radix UI accessibility patterns
