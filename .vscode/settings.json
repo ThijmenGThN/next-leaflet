@@ -26,7 +26,6 @@
     ".next": true,
     ".npmrc": true,
     "node_modules": true,
-    ".turboignore": true,
     "next-env.d.ts": true,
     ".prettierrc.json": true,
     "postcss.config.js": true,

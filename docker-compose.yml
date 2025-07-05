@@ -35,9 +35,12 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASS}
     ports: ["${DATABASE_PORT:-5432}:5432"]
     volumes:
-      - ./data/database:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_TABLE}"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+volumes:
+  database:
