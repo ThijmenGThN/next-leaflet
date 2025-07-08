@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
-import { resetPassword } from '@/functions/users'
+import { resetPassword } from '@/functions/auth/users'
 import { Eye, EyeOff, RefreshCw } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { createUser } from '@/functions/users'
+import { createUser } from '@/functions/auth/users'
 import { useRouter, Link } from '@/locales/navigation'
 import { UserPlus } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'

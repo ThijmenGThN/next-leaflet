@@ -71,6 +71,8 @@ The CMS manages these core collections:
 - Follow the established folder structure strictly
 - **Layout Components**: Create reusable layout components in `src/components/` rather than in app routes. Use `layout.tsx` files only for Next.js App Router layouts
 - **Component Organization**: In `src/components/`, organize components into categorized folders with preferably one depth, maximum two levels allowed (e.g., `src/components/forms/`, `src/components/navigation/`)
+- **Function Organization**: In `src/functions/`, organize functions into categorized folders with preferably one depth, maximum two levels allowed (e.g., `src/functions/auth/`, `src/functions/validation/`)
+- **Connector Exception**: The `connector.ts` file should remain in the root of the functions folder (`src/functions/connector.ts`) as it's a core utility used across all function categories
 
 ### Component Development
 - **UI Components**: Use Shadcn/UI patterns in `src/components/ui/`

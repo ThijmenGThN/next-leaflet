@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { getUser } from "@/functions/users"
+import { getUser } from "@/functions/auth/users"
 import Client from "./Client"
 import { User } from "@/types/payload-types"
 

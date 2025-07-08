@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Save } from 'lucide-react'
-import { updateUser } from "@/functions/users"
+import { updateUser } from "@/functions/auth/users"
 import { User } from "@/types/payload-types"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'

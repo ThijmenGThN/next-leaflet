@@ -4,7 +4,7 @@ import React from 'react'
 
 import { render } from '@react-email/render'
 
-import { getPayload } from "./connector"
+import { getPayload } from "../connector"
 
 export async function sendEmail(to: string, subject: string, email: () => React.JSX.Element): Promise<boolean> {
     const payload = await getPayload()

@@ -1,7 +1,7 @@
 
 import { redirect } from "next/navigation"
 
-import { isLoggedIn } from "@/functions/users"
+import { isLoggedIn } from "@/functions/auth/users"
 
 import type { ReactNode } from "react"
 
