@@ -82,6 +82,7 @@ The CMS manages these core collections:
 - **Component Props**: Use TypeScript interfaces with proper typing
 - **Accessibility**: Follow Radix UI accessibility patterns
 - **Responsive Design**: MANDATORY - Use Tailwind responsive utilities for all layout, typography, and spacing
+- **CRITICAL - Card Padding**: NEVER add padding inside Shadcn/UI Card components (Card, CardContent, CardHeader, CardFooter) as they already include proper padding. Especially avoid vertical padding (pt-*, pb-*, py-*) within card content areas.
 
 ### Code Patterns
 - **Imports**: Use `@/*` path aliases consistently
@@ -90,6 +91,7 @@ The CMS manages these core collections:
 - **State Management**: Prefer server components, use React Context sparingly
 - **Error Handling**: Follow established error boundary patterns
 - **Data Fetching**: Use Next.js server components and server actions
+- **CRITICAL - Server Actions vs API Routes**: ALWAYS prefer server actions over API routes for server-side logic. Server actions provide better type safety, simpler error handling, and better integration with React forms. Only use API routes for external API integration, webhooks, or when you specifically need REST endpoints for third-party consumption. Server actions should be placed in `src/functions/` directory.
 
 ### TypeScript Standards
 - **Types**: Use auto-generated Payload types from `src/types/payload-types.ts`

@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { User as UserType } from '@/types/payload-types'
 import gravatar from '@/helpers/gravatar'
 import { ThemeSwitcher } from '@/components/ui/theme-switcher'
+import Image from 'next/image'
 
 const sidebarItems = [
     {
@@ -73,9 +74,11 @@ export default function DashboardLayout({
                     {user && (
                         <Card className='py-4'>
                             <CardContent className="flex items-center space-x-3 px-3">
-                                <img
+                                <Image
                                     src={gravatar(user.email)}
                                     alt="User avatar"
+                                    width={40}
+                                    height={40}
                                     className="w-10 h-10 rounded-full"
                                 />
                                 <div className="flex-1 min-w-0">

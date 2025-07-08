@@ -3,11 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LogOut, CheckCircle, Loader2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { Card, CardContent } from '@/components/ui/card'
 
 export default function Page() {
-    const t = useTranslations()
     const router = useRouter()
     const [step, setStep] = useState<'logging-out' | 'success' | 'redirecting'>('logging-out')
 

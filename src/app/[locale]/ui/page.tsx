@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, Check, X, Plus, Minus, Play, Pause, RotateCcw, Settings, User, Mail, Phone, Home, MapPin, Calendar, Clock, Search, Filter, Edit, Trash2, Download, Upload, Share2, Star, Heart, Bookmark, MessageCircle, ThumbsUp, Eye, EyeOff, Lock, Unlock, Menu, Grid, List, BarChart3, PieChart, TrendingUp, AlertCircle, CheckCircle, XCircle, Info, HelpCircle, ExternalLink, Link, Copy, Scissors, Clipboard, Save, FileText, Folder, Image, Video, Music, Mic, Camera, Bell, BellOff, Volume2, VolumeX, Wifi, WifiOff, Battery, Bluetooth, Zap, Sun, Moon, CloudRain, Snowflake, Thermometer } from "lucide-react"
+import { ArrowLeft, Plus, User, Minus, Star, Calendar, Settings, AlertCircle, XCircle, Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -41,10 +41,9 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { Resizable, ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Link as NavLink } from "@/locales/navigation"
 
 export default function UIShowcase() {
@@ -370,7 +369,7 @@ export default function UIShowcase() {
                     <AccordionItem value="item-3">
                       <AccordionTrigger>Is it animated?</AccordionTrigger>
                       <AccordionContent>
-                        Yes. It's animated by default, but you can disable it if you prefer.
+                        Yes. It&apos;s animated by default, but you can disable it if you prefer.
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -495,7 +494,7 @@ export default function UIShowcase() {
                       <SheetHeader>
                         <SheetTitle>Edit profile</SheetTitle>
                         <SheetDescription>
-                          Make changes to your profile here. Click save when you're done.
+                          Make changes to your profile here. Click save when you&apos;re done.
                         </SheetDescription>
                       </SheetHeader>
                       <div className="grid gap-4 py-4">
