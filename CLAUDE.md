@@ -100,6 +100,7 @@ The CMS manages these core collections:
 - **Interfaces**: Define component props and API responses
 - **Strict Mode**: Follow ESLint rules in `eslint.config.mjs`
 - **Naming**: Use PascalCase for components, camelCase for functions/variables
+- **ESLint Exceptions**: ESLint errors in `src/backend/migrations/` don't need to be fixed as they are auto-generated
 
 ### Payload CMS Patterns
 - **Collections**: Follow Users collection pattern in `src/backend/collections/`
