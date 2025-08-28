@@ -1,1 +1,1 @@
-export const importMap = {}
+export const importMap = {};

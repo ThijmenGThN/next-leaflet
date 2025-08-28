@@ -1,18 +1,9 @@
-
-import { redirect } from "next/navigation"
-
-import { isLoggedIn } from "@/functions/auth/users"
-
-import type { ReactNode } from "react"
+import { redirect } from "next/navigation";
+import type { ReactNode } from "react";
+import { isLoggedIn } from "@/functions/auth/users";
 
 export default async function Template({ children }: { children: ReactNode }) {
+	if (await isLoggedIn()) redirect("/dash");
 
-    if (await isLoggedIn()) redirect("/dash")
-
-    return (
-        <>
-            {children}
-        </>
-    )
-
+	return <>{children}</>;
 }

@@ -1,22 +1,21 @@
-import { Html, Head, Body, Link, Text } from "@react-email/components"
+import { Body, Head, Html, Link, Text } from "@react-email/components";
 
 export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
+	const colors = {
+		brand: "#11999e",
+		background: "#FAFAFA",
+		white: "#FFFFFF",
+		lightGray: "#F2F4F8",
+		text: "#263238",
+		secondaryText: "#546E7A",
+		borderColor: "#E0E0E0",
+	};
 
-    const colors = {
-        brand: "#11999e",
-        background: "#FAFAFA",
-        white: "#FFFFFF",
-        lightGray: "#F2F4F8",
-        text: "#263238",
-        secondaryText: "#546E7A",
-        borderColor: "#E0E0E0"
-    };
-
-    return (
-        <Html>
-            <Head>
-                <style>
-                    {`
+	return (
+		<Html>
+			<Head>
+				<style>
+					{`
             @media only screen and (max-width: 600px) {
               .container { width: 100% !important; }
               .mobile-padding { padding: 30px 20px !important; }
@@ -25,293 +24,429 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
               .center-on-mobile { text-align: center !important; }
             }
           `}
-                </style>
-            </Head>
-            <Body style={{
-                margin: "0",
-                padding: "0",
-                backgroundColor: colors.background,
-                fontFamily: "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-                color: colors.text,
-                WebkitFontSmoothing: "antialiased"
-            }}>
-                <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ backgroundColor: colors.background }}>
-                    <tr>
-                        <td align="center" style={{ padding: "10px" }}>
-                            <table className="container" cellPadding="0" cellSpacing="0" border={0} style={{
-                                maxWidth: "600px",
-                                width: "100%",
-                                margin: "0 auto"
-                            }}>
-                                {/* Minimalist header */}
-                                <tr>
-                                    <td>
-                                        <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
-                                            <tr>
-                                                <td style={{ padding: "30px 40px" }} className="header-padding">
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
-                                                        <tr>
-                                                            <td>
-                                                                <table cellPadding="0" cellSpacing="0" border={0}>
-                                                                    <tr>
-                                                                        <td style={{
-                                                                            width: "32px",
-                                                                            height: "32px",
-                                                                            borderRadius: "8px",
-                                                                            backgroundColor: colors.brand
-                                                                        }}>
-                                                                            <Text style={{
-                                                                                margin: "0",
-                                                                                color: colors.white,
-                                                                                fontWeight: "700",
-                                                                                fontSize: "18px",
-                                                                                lineHeight: "32px",
-                                                                                textAlign: "center"
-                                                                            }}>
-                                                                                N
-                                                                            </Text>
-                                                                        </td>
-                                                                        <td style={{ paddingLeft: "12px" }}>
-                                                                            <Text style={{
-                                                                                margin: "0",
-                                                                                color: colors.text,
-                                                                                fontWeight: "600",
-                                                                                fontSize: "18px"
-                                                                            }}>
-                                                                                next-leaflet
-                                                                            </Text>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
+				</style>
+			</Head>
+			<Body
+				style={{
+					margin: "0",
+					padding: "0",
+					backgroundColor: colors.background,
+					fontFamily: "'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+					color: colors.text,
+					WebkitFontSmoothing: "antialiased",
+				}}
+			>
+				<table
+					width="100%"
+					cellPadding="0"
+					cellSpacing="0"
+					border={0}
+					style={{ backgroundColor: colors.background }}
+				>
+					<tr>
+						<td align="center" style={{ padding: "10px" }}>
+							<table
+								className="container"
+								cellPadding="0"
+								cellSpacing="0"
+								border={0}
+								style={{
+									maxWidth: "600px",
+									width: "100%",
+									margin: "0 auto",
+								}}
+							>
+								{/* Minimalist header */}
+								<tr>
+									<td>
+										<table
+											width="100%"
+											cellPadding="0"
+											cellSpacing="0"
+											border={0}
+										>
+											<tr>
+												<td
+													style={{ padding: "30px 40px" }}
+													className="header-padding"
+												>
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+													>
+														<tr>
+															<td>
+																<table
+																	cellPadding="0"
+																	cellSpacing="0"
+																	border={0}
+																>
+																	<tr>
+																		<td
+																			style={{
+																				width: "32px",
+																				height: "32px",
+																				borderRadius: "8px",
+																				backgroundColor: colors.brand,
+																			}}
+																		>
+																			<Text
+																				style={{
+																					margin: "0",
+																					color: colors.white,
+																					fontWeight: "700",
+																					fontSize: "18px",
+																					lineHeight: "32px",
+																					textAlign: "center",
+																				}}
+																			>
+																				N
+																			</Text>
+																		</td>
+																		<td style={{ paddingLeft: "12px" }}>
+																			<Text
+																				style={{
+																					margin: "0",
+																					color: colors.text,
+																					fontWeight: "600",
+																					fontSize: "18px",
+																				}}
+																			>
+																				next-leaflet
+																			</Text>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
 
-                                {/* Main content card */}
-                                <tr>
-                                    <td>
-                                        <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{
-                                            backgroundColor: colors.white,
-                                            borderRadius: "16px",
-                                            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                                            overflow: "hidden"
-                                        }}>
-                                            {/* Top accent bar */}
-                                            <tr>
-                                                <td style={{ height: "6px", backgroundColor: colors.brand }}></td>
-                                            </tr>
+								{/* Main content card */}
+								<tr>
+									<td>
+										<table
+											width="100%"
+											cellPadding="0"
+											cellSpacing="0"
+											border={0}
+											style={{
+												backgroundColor: colors.white,
+												borderRadius: "16px",
+												boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+												overflow: "hidden",
+											}}
+										>
+											{/* Top accent bar */}
+											<tr>
+												<td
+													style={{
+														height: "6px",
+														backgroundColor: colors.brand,
+													}}
+												></td>
+											</tr>
 
-                                            {/* Content area */}
-                                            <tr>
-                                                <td style={{ padding: "40px" }} className="mobile-padding">
-                                                    {/* Illustration dots - abstract modern element */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ marginBottom: "30px" }}>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <table cellPadding="0" cellSpacing="0" border={0}>
-                                                                    <tr>
-                                                                        <td style={{
-                                                                            width: "8px",
-                                                                            height: "8px",
-                                                                            borderRadius: "4px",
-                                                                            backgroundColor: colors.brand,
-                                                                            opacity: "0.2"
-                                                                        }}></td>
-                                                                        <td style={{ width: "8px" }}></td>
-                                                                        <td style={{
-                                                                            width: "8px",
-                                                                            height: "8px",
-                                                                            borderRadius: "4px",
-                                                                            backgroundColor: colors.brand,
-                                                                            opacity: "0.4"
-                                                                        }}></td>
-                                                                        <td style={{ width: "8px" }}></td>
-                                                                        <td style={{
-                                                                            width: "8px",
-                                                                            height: "8px",
-                                                                            borderRadius: "4px",
-                                                                            backgroundColor: colors.brand,
-                                                                            opacity: "0.6"
-                                                                        }}></td>
-                                                                        <td style={{ width: "8px" }}></td>
-                                                                        <td style={{
-                                                                            width: "8px",
-                                                                            height: "8px",
-                                                                            borderRadius: "4px",
-                                                                            backgroundColor: colors.brand,
-                                                                            opacity: "0.8"
-                                                                        }}></td>
-                                                                        <td style={{ width: "8px" }}></td>
-                                                                        <td style={{
-                                                                            width: "8px",
-                                                                            height: "8px",
-                                                                            borderRadius: "4px",
-                                                                            backgroundColor: colors.brand
-                                                                        }}></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+											{/* Content area */}
+											<tr>
+												<td
+													style={{ padding: "40px" }}
+													className="mobile-padding"
+												>
+													{/* Illustration dots - abstract modern element */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+														style={{ marginBottom: "30px" }}
+													>
+														<tr>
+															<td align="center">
+																<table
+																	cellPadding="0"
+																	cellSpacing="0"
+																	border={0}
+																>
+																	<tr>
+																		<td
+																			style={{
+																				width: "8px",
+																				height: "8px",
+																				borderRadius: "4px",
+																				backgroundColor: colors.brand,
+																				opacity: "0.2",
+																			}}
+																		></td>
+																		<td style={{ width: "8px" }}></td>
+																		<td
+																			style={{
+																				width: "8px",
+																				height: "8px",
+																				borderRadius: "4px",
+																				backgroundColor: colors.brand,
+																				opacity: "0.4",
+																			}}
+																		></td>
+																		<td style={{ width: "8px" }}></td>
+																		<td
+																			style={{
+																				width: "8px",
+																				height: "8px",
+																				borderRadius: "4px",
+																				backgroundColor: colors.brand,
+																				opacity: "0.6",
+																			}}
+																		></td>
+																		<td style={{ width: "8px" }}></td>
+																		<td
+																			style={{
+																				width: "8px",
+																				height: "8px",
+																				borderRadius: "4px",
+																				backgroundColor: colors.brand,
+																				opacity: "0.8",
+																			}}
+																		></td>
+																		<td style={{ width: "8px" }}></td>
+																		<td
+																			style={{
+																				width: "8px",
+																				height: "8px",
+																				borderRadius: "4px",
+																				backgroundColor: colors.brand,
+																			}}
+																		></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
 
-                                                    {/* Main heading */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ marginBottom: "20px" }}>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <Text style={{
-                                                                    fontSize: "24px",
-                                                                    fontWeight: "700",
-                                                                    color: colors.text,
-                                                                    margin: "0",
-                                                                    letterSpacing: "-0.5px"
-                                                                }}>
-                                                                    Reset your password
-                                                                </Text>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+													{/* Main heading */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+														style={{ marginBottom: "20px" }}
+													>
+														<tr>
+															<td align="center">
+																<Text
+																	style={{
+																		fontSize: "24px",
+																		fontWeight: "700",
+																		color: colors.text,
+																		margin: "0",
+																		letterSpacing: "-0.5px",
+																	}}
+																>
+																	Reset your password
+																</Text>
+															</td>
+														</tr>
+													</table>
 
-                                                    {/* Subheading */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ marginBottom: "35px" }}>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <Text style={{
-                                                                    fontSize: "16px",
-                                                                    fontWeight: "normal",
-                                                                    color: colors.secondaryText,
-                                                                    margin: "0",
-                                                                    lineHeight: "1.5"
-                                                                }}>
-                                                                    Click the button below to securely reset your password
-                                                                </Text>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+													{/* Subheading */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+														style={{ marginBottom: "35px" }}
+													>
+														<tr>
+															<td align="center">
+																<Text
+																	style={{
+																		fontSize: "16px",
+																		fontWeight: "normal",
+																		color: colors.secondaryText,
+																		margin: "0",
+																		lineHeight: "1.5",
+																	}}
+																>
+																	Click the button below to securely reset your
+																	password
+																</Text>
+															</td>
+														</tr>
+													</table>
 
-                                                    {/* Action button */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ marginBottom: "35px" }}>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <table cellPadding="0" cellSpacing="0" border={0}>
-                                                                    <tr>
-                                                                        <td style={{
-                                                                            backgroundColor: colors.brand,
-                                                                            borderRadius: "10px",
-                                                                            overflow: "hidden"
-                                                                        }}>
-                                                                            <Link
-                                                                                href={ACTION_URL}
-                                                                                style={{
-                                                                                    display: "inline-block",
-                                                                                    color: colors.white,
-                                                                                    fontSize: "15px",
-                                                                                    fontWeight: "600",
-                                                                                    textDecoration: "none",
-                                                                                    padding: "14px 32px",
-                                                                                    letterSpacing: "0.3px"
-                                                                                }}
-                                                                            >
-                                                                                Reset Password
-                                                                            </Link>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+													{/* Action button */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+														style={{ marginBottom: "35px" }}
+													>
+														<tr>
+															<td align="center">
+																<table
+																	cellPadding="0"
+																	cellSpacing="0"
+																	border={0}
+																>
+																	<tr>
+																		<td
+																			style={{
+																				backgroundColor: colors.brand,
+																				borderRadius: "10px",
+																				overflow: "hidden",
+																			}}
+																		>
+																			<Link
+																				href={ACTION_URL}
+																				style={{
+																					display: "inline-block",
+																					color: colors.white,
+																					fontSize: "15px",
+																					fontWeight: "600",
+																					textDecoration: "none",
+																					padding: "14px 32px",
+																					letterSpacing: "0.3px",
+																				}}
+																			>
+																				Reset Password
+																			</Link>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
 
-                                                    {/* Time indicator */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ marginBottom: "30px" }}>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <table cellPadding="0" cellSpacing="0" border={0} style={{
-                                                                    backgroundColor: colors.lightGray,
-                                                                    borderRadius: "20px",
-                                                                    padding: "6px 16px"
-                                                                }}>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <Text style={{
-                                                                                margin: "0",
-                                                                                fontSize: "12px",
-                                                                                color: colors.secondaryText,
-                                                                                fontWeight: "500"
-                                                                            }}>
-                                                                                Expires in 24 hours
-                                                                            </Text>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+													{/* Time indicator */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+														style={{ marginBottom: "30px" }}
+													>
+														<tr>
+															<td align="center">
+																<table
+																	cellPadding="0"
+																	cellSpacing="0"
+																	border={0}
+																	style={{
+																		backgroundColor: colors.lightGray,
+																		borderRadius: "20px",
+																		padding: "6px 16px",
+																	}}
+																>
+																	<tr>
+																		<td>
+																			<Text
+																				style={{
+																					margin: "0",
+																					fontSize: "12px",
+																					color: colors.secondaryText,
+																					fontWeight: "500",
+																				}}
+																			>
+																				Expires in 24 hours
+																			</Text>
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
 
-                                                    {/* Divider */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0} style={{ marginBottom: "25px" }}>
-                                                        <tr>
-                                                            <td style={{
-                                                                height: "1px",
-                                                                backgroundColor: colors.borderColor,
-                                                                opacity: "0.5"
-                                                            }}></td>
-                                                        </tr>
-                                                    </table>
+													{/* Divider */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+														style={{ marginBottom: "25px" }}
+													>
+														<tr>
+															<td
+																style={{
+																	height: "1px",
+																	backgroundColor: colors.borderColor,
+																	opacity: "0.5",
+																}}
+															></td>
+														</tr>
+													</table>
 
-                                                    {/* Security note */}
-                                                    <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <Text style={{
-                                                                    fontSize: "14px",
-                                                                    color: colors.secondaryText,
-                                                                    margin: "0",
-                                                                    lineHeight: "1.5",
-                                                                    textAlign: "center"
-                                                                }}>
-                                                                    If you did not request this email, you can ignore it.
-                                                                    <br />
-                                                                    Your password will remain unchanged.
-                                                                </Text>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
+													{/* Security note */}
+													<table
+														width="100%"
+														cellPadding="0"
+														cellSpacing="0"
+														border={0}
+													>
+														<tr>
+															<td align="center">
+																<Text
+																	style={{
+																		fontSize: "14px",
+																		color: colors.secondaryText,
+																		margin: "0",
+																		lineHeight: "1.5",
+																		textAlign: "center",
+																	}}
+																>
+																	If you did not request this email, you can
+																	ignore it.
+																	<br />
+																	Your password will remain unchanged.
+																</Text>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
 
-                                {/* Footer */}
-                                <tr>
-                                    <td style={{ padding: "30px 20px" }}>
-                                        <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
-                                            <tr>
-                                                <td align="center">
-                                                    <Text style={{
-                                                        fontSize: "13px",
-                                                        color: colors.secondaryText,
-                                                        margin: "0",
-                                                        lineHeight: "1.5"
-                                                    }}>
-                                                        © 2025 next-leaflet, all rights reserved.
-                                                        <br />
-                                                        next@leaflet.app • 010 123 4567
-                                                    </Text>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </Body>
-        </Html>
-    );
+								{/* Footer */}
+								<tr>
+									<td style={{ padding: "30px 20px" }}>
+										<table
+											width="100%"
+											cellPadding="0"
+											cellSpacing="0"
+											border={0}
+										>
+											<tr>
+												<td align="center">
+													<Text
+														style={{
+															fontSize: "13px",
+															color: colors.secondaryText,
+															margin: "0",
+															lineHeight: "1.5",
+														}}
+													>
+														© 2025 next-leaflet, all rights reserved.
+														<br />
+														next@leaflet.app • 010 123 4567
+													</Text>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</Body>
+		</Html>
+	);
 }
