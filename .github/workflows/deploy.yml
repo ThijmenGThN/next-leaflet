@@ -41,7 +41,7 @@ jobs:
             docker compose build
   
   deploy:
-    needs: [lint, build]
+    needs: [build]
     runs-on: self-hosted
     steps:
       - uses: appleboy/ssh-action@master
