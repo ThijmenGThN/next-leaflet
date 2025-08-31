@@ -10,7 +10,7 @@
 		"devsafe": "rm -rf .next && next dev --turbopack",
 		"generate:importmap": "payload generate:importmap",
 		"generate:types": "payload generate:types",
-		"lint": "biome check --fix && next lint && tsc",
+		"lint": "biome check --fix; next lint; tsc",
 		"payload": "payload",
 		"start": "node .next/standalone/server.js",
 		"email": "email dev --dir ./src/emails",
