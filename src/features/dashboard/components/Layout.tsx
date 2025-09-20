@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import gravatar from "@/helpers/gravatar";
-import { cn } from "@/helpers/utils";
+import { cn } from "@/lib/utils";
 import { Link, usePathname } from "@/locales/navigation";
 import type { User as UserType } from "@/types/payload-types";
 
@@ -23,7 +23,7 @@ const sidebarItems = [
 	},
 ];
 
-export default function DashboardLayout({
+export default function Layout({
 	children,
 	user,
 }: {
@@ -95,7 +95,7 @@ export default function DashboardLayout({
 
 					{/* Bottom Actions */}
 					<div className="flex items-center justify-between mb-4">
-						<Link href="/logout">
+						<Link href="/login">
 							<Button
 								type="submit"
 								variant="ghost"

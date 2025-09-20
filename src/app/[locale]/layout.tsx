@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { hasLocale, NextIntlClientProvider as LocaleProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
 import { routing } from "@/locales/routing";
 
@@ -21,6 +21,7 @@ export default async function Layout({
 	children: React.ReactNode;
 	params: Promise<{ locale: string }>;
 }) {
+
 	const { locale } = await params;
 	if (!hasLocale(routing.locales, locale)) notFound();
 
@@ -33,7 +34,9 @@ export default async function Layout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<NextIntlClientProvider>{children}</NextIntlClientProvider>
+					<LocaleProvider>
+						{children}
+					</LocaleProvider>
 				</ThemeProvider>
 			</body>
 		</html>

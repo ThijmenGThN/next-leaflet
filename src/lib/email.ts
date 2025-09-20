@@ -3,7 +3,7 @@
 import { render } from "@react-email/render";
 import type React from "react";
 
-import { getPayload } from "../connector";
+import { getPayload } from "@/lib/payload";
 
 export async function sendEmail(
 	to: string,
