@@ -6,9 +6,7 @@ export default async function DashLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	if (!(await isLoggedIn())) {
-		redirect("/login");
-	}
+	if (!await isLoggedIn()) redirect("/login");
 
 	return <>{children}</>;
 }

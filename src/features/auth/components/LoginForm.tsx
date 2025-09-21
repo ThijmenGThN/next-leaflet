@@ -1,7 +1,9 @@
 "use client";
 
+import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "@/locales/navigation";
@@ -18,67 +20,87 @@ export default function LoginForm() {
 	const { isLoading, errorMessage, login } = useAuth();
 
 	return (
-		<>
-			<h1 className="text-2xl mb-6">Login</h1>
+		<div className="space-y-4">
+			<Button asChild variant="ghost" size="sm" className="self-start">
+				<Link href="/">
+					<ArrowLeft className="h-4 w-4 mr-2" />
+					Back to home
+				</Link>
+			</Button>
 
-			<form onSubmit={handleSubmit(login)} className="space-y-4">
-				<div>
-					<Label htmlFor="email">Email</Label>
-					<Input
-						id="email"
-						type="email"
-						autoComplete="email"
-						placeholder="john.doe@example.com"
-						{...register("email", {
-							required: "Email is required",
-							pattern: {
-								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-								message: "Invalid email address",
-							},
-						})}
-						disabled={isLoading}
-					/>
-					{errors.email && (
-						<p className="text-sm text-destructive">
-							{errors.email.message}
+			<Card>
+				<CardContent className="pt-6">
+					<div className="space-y-6">
+						<div className="text-center space-y-2">
+							<h1 className="text-2xl font-bold text-foreground">Welcome back</h1>
+							<p className="text-muted-foreground">Sign in to your account</p>
+						</div>
+
+					<form onSubmit={handleSubmit(login)} className="space-y-4">
+						<div className="space-y-2">
+							<Label htmlFor="email">Email</Label>
+							<Input
+								id="email"
+								type="email"
+								autoComplete="email"
+								placeholder="john.doe@example.com"
+								{...register("email", {
+									required: "Email is required",
+									pattern: {
+										value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+										message: "Invalid email address",
+									},
+								})}
+								disabled={isLoading}
+							/>
+							{errors.email && (
+								<p className="text-sm text-destructive">
+									{errors.email.message}
+								</p>
+							)}
+						</div>
+
+						<div className="space-y-2">
+							<div className="flex items-center justify-between">
+								<Label htmlFor="password">Password</Label>
+								<Link href="/reset" className="text-sm text-primary hover:underline">
+									Forgot password?
+								</Link>
+							</div>
+							<Input
+								id="password"
+								type="password"
+								autoComplete="current-password"
+								{...register("password", { required: "Password is required" })}
+								disabled={isLoading}
+							/>
+							{errors.password && (
+								<p className="text-sm text-destructive">
+									{errors.password.message}
+								</p>
+							)}
+						</div>
+
+						<Button type="submit" className="w-full" disabled={isLoading}>
+							{isLoading ? "Signing in..." : "Sign in"}
+						</Button>
+
+						{errorMessage && (
+							<p className="text-sm text-destructive text-center">{errorMessage}</p>
+						)}
+					</form>
+
+					<div className="text-center pt-4 border-t border-border">
+						<p className="text-sm text-muted-foreground">
+							Don&apos;t have an account?{" "}
+							<Link href="/register" className="text-primary hover:underline font-medium">
+								Create account
+							</Link>
 						</p>
-					)}
-				</div>
-
-				<div>
-					<Label htmlFor="password">Password</Label>
-					<Input
-						id="password"
-						type="password"
-						autoComplete="current-password"
-						{...register("password", { required: "Password is required" })}
-						disabled={isLoading}
-					/>
-					{errors.password && (
-						<p className="text-sm text-destructive">
-							{errors.password.message}
-						</p>
-					)}
-					<Link href="/reset" className="text-sm text-primary underline">
-						Forgot password?
-					</Link>
-				</div>
-
-				<Button type="submit" className="w-full" disabled={isLoading}>
-					{isLoading ? "Signing in..." : "Sign in"}
-				</Button>
-
-				{errorMessage && (
-					<p className="text-sm text-destructive">{errorMessage}</p>
-				)}
-
-				<p className="text-center text-sm">
-					Don&apos;t have an account?{" "}
-					<Link href="/register" className="text-primary underline">
-						Register
-					</Link>
-				</p>
-			</form>
-		</>
+					</div>
+					</div>
+				</CardContent>
+			</Card>
+		</div>
 	);
 }

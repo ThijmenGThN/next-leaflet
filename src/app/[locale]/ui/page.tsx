@@ -196,20 +196,21 @@ export default function UIShowcase() {
 
 	return (
 		<div className="min-h-screen bg-background">
-			<div className="container mx-auto px-4 py-8">
-				<div className="flex items-center justify-between mb-8">
-					<div>
-						<h1 className="text-4xl font-bold mb-2">shadcn/ui Components</h1>
-						<p className="text-muted-foreground">
-							Complete showcase of all available components
-						</p>
-					</div>
-					<Button asChild variant="outline">
+			<div className="max-w-7xl mx-auto px-6 py-8">
+				<div className="space-y-4 mb-8">
+					<Button asChild variant="ghost" size="sm" className="self-start">
 						<NavLink href="/">
 							<ArrowLeft className="h-4 w-4 mr-2" />
-							Back to Home
+							Back to home
 						</NavLink>
 					</Button>
+
+					<div className="text-center space-y-2">
+						<h1 className="text-3xl font-bold text-foreground">UI Components</h1>
+						<p className="text-muted-foreground">
+							Complete showcase of all available shadcn/ui components
+						</p>
+					</div>
 				</div>
 
 				<div className="grid gap-8">

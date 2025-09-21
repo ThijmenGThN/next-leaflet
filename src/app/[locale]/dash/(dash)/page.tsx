@@ -1,64 +1,62 @@
 import { getUser } from "@/features/auth/actions/users";
-import { LogoutButton } from "@/features/auth/components/LogoutButton";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function DashboardPage() {
 	const user = await getUser();
 
-	if (!user) {
-		return <div>Error loading user data</div>;
-	}
+	if (!user) redirect("/login");
 
 	return (
-		<div className="min-h-screen p-6">
-			<div className="max-w-2xl mx-auto">
-				<div className="bg-white rounded-lg shadow-md p-6">
-					<div className="flex justify-between items-start mb-6">
-						<h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-						<LogoutButton />
-					</div>
+		<div className="min-h-screen bg-background flex items-center justify-center">
+			<div className="w-full max-w-md px-6">
+				<Card>
+					<CardContent className="pt-6">
+						<div className="space-y-6">
+							<div className="text-center space-y-2">
+								<p className="text-2xl font-bold text-foreground">Dashboard</p>
+								<p className="text-muted-foreground">Welcome back!</p>
+							</div>
 
-					<div className="space-y-4">
-						<div className="border-b pb-4">
-							<h2 className="text-xl font-semibold text-gray-800 mb-3">
-								User Information
-							</h2>
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<label className="text-sm font-medium text-gray-600">
-										First Name
+							<div className="space-y-4">
+								<div className="space-y-1">
+									<label className="text-sm font-medium text-muted-foreground">
+										Name
 									</label>
-									<p className="text-lg text-gray-900">
-										{user.firstname || "Not provided"}
+									<p className="text-foreground">
+										{[user.firstname, user.lastname].filter(Boolean).join(" ") || "Not provided"}
 									</p>
 								</div>
-								<div>
-									<label className="text-sm font-medium text-gray-600">
-										Last Name
-									</label>
-									<p className="text-lg text-gray-900">
-										{user.lastname || "Not provided"}
-									</p>
-								</div>
-								<div className="md:col-span-2">
-									<label className="text-sm font-medium text-gray-600">
+								<div className="space-y-1">
+									<label className="text-sm font-medium text-muted-foreground">
 										Email
 									</label>
-									<p className="text-lg text-gray-900">
+									<p className="text-foreground">
 										{user.email}
 									</p>
 								</div>
-								<div>
-									<label className="text-sm font-medium text-gray-600">
+								<div className="space-y-1">
+									<label className="text-sm font-medium text-muted-foreground">
 										Role
 									</label>
-									<p className="text-lg text-gray-900 capitalize">
+									<p className="text-foreground capitalize">
 										{user.role || "user"}
 									</p>
 								</div>
 							</div>
+
+							<div className="pt-4 border-t border-border">
+								<Button asChild variant="outline" className="w-full">
+									<Link href="/login">
+										Logout
+									</Link>
+								</Button>
+							</div>
 						</div>
-					</div>
-				</div>
+					</CardContent>
+				</Card>
 			</div>
 		</div>
 	);
