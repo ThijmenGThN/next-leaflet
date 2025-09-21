@@ -4,8 +4,8 @@ import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
-import { Users } from "@/backend/collections/Users";
-import { migrations } from "@/backend/migrations";
+import { Users } from "@/payload/collections/Users";
+import { migrations } from "@/payload/migrations";
 
 const collections = [Users];
 

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider as LocaleProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
+import { hasLocale, NextIntlClientProvider as LocaleProvider } from "next-intl";
+
 import { routing } from "@/locales/routing";
 
 import "@/styles/globals.css";

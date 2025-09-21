@@ -59,10 +59,10 @@ export async function createUser(
 		return await payload.create({
 			collection: "users",
 			data: {
-				...data,
-				role: "user",
-			},
-		});
+			...data,
+			email: data.email?.trim().toLowerCase(),
+			role: "user" as const,
+		}});
 	} catch (error) {
 		console.error("Error creating user:", error);
 		return null;
