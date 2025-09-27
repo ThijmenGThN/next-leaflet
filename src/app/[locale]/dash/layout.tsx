@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { isLoggedIn } from "@/features/auth/actions/users";
+import { isLoggedIn } from "@/features/auth/actions/user";
 
 export default async function DashLayout({
 	children,

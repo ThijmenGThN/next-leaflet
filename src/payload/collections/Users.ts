@@ -3,6 +3,7 @@ import type { CollectionConfig } from "payload";
 import React from "react";
 
 import Reset from "@/features/auth/emails/Reset";
+import { isOwnerOrAdmin } from "../access/common";
 
 export const Users: CollectionConfig = {
 	slug: "users",
@@ -11,9 +12,9 @@ export const Users: CollectionConfig = {
 	},
 	access: {
 		create: () => true,
-		read: () => true,
-		update: () => true,
-		delete: () => true,
+		read: isOwnerOrAdmin,
+		update: isOwnerOrAdmin,
+		delete: isOwnerOrAdmin,
 	},
 	fields: [
 		{

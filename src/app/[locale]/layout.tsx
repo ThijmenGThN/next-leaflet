@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { hasLocale, NextIntlClientProvider as LocaleProvider } from "next-intl";
 
 import { routing } from "@/locales/routing";
+import { Toaster } from "@/components/ui/sonner";
 
 import "@/styles/globals.css";
 
@@ -38,6 +39,7 @@ export default async function Layout({
 					<LocaleProvider>
 						{children}
 					</LocaleProvider>
+					<Toaster />
 				</ThemeProvider>
 			</body>
 		</html>

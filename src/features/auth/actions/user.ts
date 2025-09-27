@@ -43,11 +43,10 @@ export async function loginUser(data: { email: string; password: string }) {
 export async function forgotPassword(email: string) {
 	const payload = await getPayload();
 	try {
-		const res = await payload.forgotPassword({
+		await payload.forgotPassword({
 			collection: "users",
 			data: { email },
 		});
-		console.log(res);
 	} catch (error) {
 		console.error("Error during forgot password:", error);
 		return null;
@@ -59,14 +58,12 @@ export async function resetPassword(data: {
 	password: string;
 }): Promise<boolean> {
 	const payload = await getPayload();
-	console.log(data);
 	try {
 		const result = await payload.resetPassword({
 			collection: "users",
 			data,
 			overrideAccess: false,
 		});
-		console.log(result);
 		return Boolean(result);
 	} catch {
 		return false;
@@ -88,31 +85,5 @@ export async function createUser(
 	} catch (error) {
 		console.error("Error creating user:", error);
 		return null;
-	}
-}
-
-export async function updateUser(data: {
-	firstname: string;
-	lastname: string;
-}): Promise<boolean> {
-	const payload = await getPayload();
-	try {
-		const user = await getUser();
-		if (!user || user.id === undefined) return false;
-
-		await payload.update({
-			collection: "users",
-			id: user.id,
-			data: {
-				firstname: data.firstname,
-				lastname: data.lastname,
-			},
-			overrideAccess: false,
-		});
-
-		return true;
-	} catch (error) {
-		console.error("Error updating user:", error);
-		return false;
 	}
 }

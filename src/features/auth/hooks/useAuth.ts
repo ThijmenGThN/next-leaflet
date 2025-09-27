@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "@/locales/navigation";
-import { createUser, loginUser, forgotPassword, resetPassword } from "@/features/auth/actions/users";
+import { createUser, loginUser, forgotPassword, resetPassword } from "@/features/auth/actions/user";
 import type {
 	LoginFormData,
 	RegisterFormData,
