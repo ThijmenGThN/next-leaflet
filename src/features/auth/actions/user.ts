@@ -1,6 +1,6 @@
 "use server";
 
-import { headers as nextHeaders } from "next/headers";
+import { headers as nextHeaders, cookies } from "next/headers";
 
 import type { User } from "@/types/payload-types";
 
@@ -26,6 +26,19 @@ export async function loginUser(data: { email: string; password: string }) {
 			collection: "users",
 			data,
 		});
+
+		// Set the authentication cookie manually
+		const cookieStore = await cookies();
+		if (result.token) {
+			cookieStore.set({
+				name: `${payload.config.cookiePrefix || 'payload'}-token`,
+				value: result.token,
+				httpOnly: true,
+				secure: process.env.NODE_ENV === 'production',
+				sameSite: 'lax',
+				maxAge: 60 * 60 * 24 * 7, // 7 days
+			});
+		}
 
 		return {
 			success: true,
