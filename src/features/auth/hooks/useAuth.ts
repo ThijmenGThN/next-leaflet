@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "@/locales/navigation";
-import { AuthService } from "@/features/auth/services/authService";
-import { createUser } from "@/features/auth/actions/users";
+import { createUser, loginUser, forgotPassword, resetPassword } from "@/features/auth/actions/users";
 import type {
 	LoginFormData,
 	RegisterFormData,
@@ -26,7 +25,7 @@ export function useAuth() {
 		setIsLoading(true);
 		clearMessages();
 
-		const result = await AuthService.login(data);
+		const result = await loginUser(data);
 
 		if (result.success && result.user) {
 			router.push("/dash");
@@ -55,7 +54,7 @@ export function useAuth() {
 				return;
 			}
 
-			const loginResult = await AuthService.login({
+			const loginResult = await loginUser({
 				email: data.email,
 				password: data.password,
 			});
@@ -71,31 +70,30 @@ export function useAuth() {
 		}
 	};
 
-	const forgotPassword = async (data: ForgotPasswordFormData) => {
+	const forgotPasswordHandler = async (data: ForgotPasswordFormData) => {
 		setIsLoading(true);
 		clearMessages();
 
-		const result = await AuthService.forgotPassword(data);
-
-		if (result.success) {
+		try {
+			await forgotPassword(data.email);
 			setSuccessMessage("If an account with that email exists, we've sent you a reset link.");
-		} else {
-			setErrorMessage(result.message || "An error occurred. Please try again.");
+		} catch {
+			setErrorMessage("An error occurred. Please try again.");
 		}
 
 		setIsLoading(false);
 	};
 
-	const resetPassword = async (token: string, data: ResetPasswordFormData) => {
+	const resetPasswordHandler = async (token: string, data: ResetPasswordFormData) => {
 		setIsLoading(true);
 		clearMessages();
 
-		const result = await AuthService.resetPassword(token, data.password);
+		const result = await resetPassword({ token, password: data.password });
 
-		if (result.success) {
+		if (result) {
 			router.push("/login");
 		} else {
-			setErrorMessage(result.message || "An error occurred. Please try again.");
+			setErrorMessage("An error occurred. Please try again.");
 		}
 
 		setIsLoading(false);
@@ -108,7 +106,7 @@ export function useAuth() {
 		clearMessages,
 		login,
 		register,
-		forgotPassword,
-		resetPassword,
+		forgotPassword: forgotPasswordHandler,
+		resetPassword: resetPasswordHandler,
 	};
 }

@@ -10,6 +10,8 @@ export default function AuthLayout({
 
 	useEffect(() => {
 		try {
+			const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+			if (!token) return;
 			fetch("/api/users/logout", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },

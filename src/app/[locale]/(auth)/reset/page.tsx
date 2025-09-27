@@ -1,9 +1,10 @@
 import ResetPasswordFlow from "@/features/auth/components/ResetPasswordFlow";
 
 interface PageProps {
-	searchParams: { token?: string };
+	searchParams: Promise<{ token?: string }>;
 }
 
-export default function Page({ searchParams }: PageProps) {
-	return <ResetPasswordFlow token={searchParams.token} />;
+export default async function Page({ searchParams }: PageProps) {
+	const params = await searchParams;
+	return <ResetPasswordFlow token={params.token} />;
 }
