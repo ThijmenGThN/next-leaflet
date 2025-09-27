@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "@/locales/navigation";
+import { Link } from "@/shared/locales/navigation";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import type { LoginFormData } from "@/features/auth/types/auth";
 

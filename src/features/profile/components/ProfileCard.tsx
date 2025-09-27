@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { toast } from "sonner";
 import { updateProfile } from "@/features/profile/actions/profile";
-import type { User } from "@/types/payload-types";
+import type { User } from "@/shared/types/payload-types";
 import type { UpdateProfileFormData } from "@/features/profile/types/profile";
 
 interface ProfileCardProps {

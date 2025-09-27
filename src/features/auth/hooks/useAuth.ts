@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "@/locales/navigation";
+import { useRouter } from "@/shared/locales/navigation";
 import { toast } from "sonner";
 import { createUser, loginUser, forgotPassword, resetPassword } from "@/features/auth/actions/user";
 import type {

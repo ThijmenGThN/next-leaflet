@@ -44,7 +44,7 @@ export default buildConfig({
 	cors: [process.env.NEXT_PUBLIC_DOMAIN as string],
 	db: postgresAdapter({
 		prodMigrations: migrations,
-		migrationDir: path.resolve(dirname, "./src/backend/migrations"),
+		migrationDir: path.resolve(dirname, "./src/payload/migrations"),
 		pool: {
 			connectionString: `postgres://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${databaseHost}:${process.env.COMPOSE_PROFILES === "prod" ? "5432" : process.env.DATABASE_PORT}/${process.env.DATABASE_TABLE}`,
 		},
@@ -56,6 +56,6 @@ export default buildConfig({
 		},
 	},
 	typescript: {
-		outputFile: path.resolve(dirname, "./src/types/payload-types.ts"),
+		outputFile: path.resolve(dirname, "./src/shared/types/payload-types.ts"),
 	},
 });

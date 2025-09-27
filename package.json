@@ -13,7 +13,7 @@
 		"lint": "biome check --fix; next lint; tsc",
 		"payload": "payload",
 		"start": "node .next/standalone/server.js",
-		"email": "email dev --dir ./src/emails",
+		"email": "email dev --dir ./src/shared/emails",
 		"deploy": "npm ci && npm run build && npm start",
 		"sync-template": "node .sync-template.js"
 	},

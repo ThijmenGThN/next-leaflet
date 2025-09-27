@@ -2,7 +2,7 @@ import { render } from "@react-email/render";
 import type { CollectionConfig } from "payload";
 import React from "react";
 
-import Reset from "@/features/auth/emails/Reset";
+import Reset from "@/shared/emails/Reset";
 import { isOwnerOrAdmin } from "../access/common";
 
 export const Users: CollectionConfig = {

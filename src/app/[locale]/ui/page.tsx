@@ -186,7 +186,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Link as NavLink } from "@/locales/navigation";
+import { Link as NavLink } from "@/shared/locales/navigation";
 
 export default function UIShowcase() {
 	const [progress, setProgress] = useState(50);

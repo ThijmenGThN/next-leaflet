@@ -1,7 +1,7 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin("./src/locales/request.ts");
+const withNextIntl = createNextIntlPlugin("./src/shared/locales/request.ts");
 
 export default withNextIntl(
 	withPayload({

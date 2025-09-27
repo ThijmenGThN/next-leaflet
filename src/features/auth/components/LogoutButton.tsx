@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "@/locales/navigation";
+import { Link } from "@/shared/locales/navigation";
 
 export function LogoutButton() {
 	return (

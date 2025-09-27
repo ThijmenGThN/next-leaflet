@@ -2,7 +2,7 @@
 
 import { headers as nextHeaders, cookies } from "next/headers";
 
-import type { User } from "@/types/payload-types";
+import type { User } from "@/shared/types/payload-types";
 
 import { getPayload } from "@/lib/payload";
 
@@ -92,10 +92,11 @@ export async function createUser(
 		return await payload.create({
 			collection: "users",
 			data: {
-			...data,
-			email: data.email?.trim().toLowerCase(),
-			role: "user" as const,
-		}});
+				...data,
+				email: data.email?.trim().toLowerCase(),
+				role: "user" as const,
+			}
+		});
 	} catch (error) {
 		console.error("Error creating user:", error);
 		return null;
