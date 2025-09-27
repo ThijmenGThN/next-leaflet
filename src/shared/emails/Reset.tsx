@@ -143,92 +143,12 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 												overflow: "hidden",
 											}}
 										>
-											{/* Top accent bar */}
-											<tr>
-												<td
-													style={{
-														height: "6px",
-														backgroundColor: colors.brand,
-													}}
-												></td>
-											</tr>
-
 											{/* Content area */}
 											<tr>
 												<td
 													style={{ padding: "40px" }}
 													className="mobile-padding"
 												>
-													{/* Illustration dots - abstract modern element */}
-													<table
-														width="100%"
-														cellPadding="0"
-														cellSpacing="0"
-														border={0}
-														style={{ marginBottom: "30px" }}
-													>
-														<tr>
-															<td align="center">
-																<table
-																	cellPadding="0"
-																	cellSpacing="0"
-																	border={0}
-																>
-																	<tr>
-																		<td
-																			style={{
-																				width: "8px",
-																				height: "8px",
-																				borderRadius: "4px",
-																				backgroundColor: colors.brand,
-																				opacity: "0.2",
-																			}}
-																		></td>
-																		<td style={{ width: "8px" }}></td>
-																		<td
-																			style={{
-																				width: "8px",
-																				height: "8px",
-																				borderRadius: "4px",
-																				backgroundColor: colors.brand,
-																				opacity: "0.4",
-																			}}
-																		></td>
-																		<td style={{ width: "8px" }}></td>
-																		<td
-																			style={{
-																				width: "8px",
-																				height: "8px",
-																				borderRadius: "4px",
-																				backgroundColor: colors.brand,
-																				opacity: "0.6",
-																			}}
-																		></td>
-																		<td style={{ width: "8px" }}></td>
-																		<td
-																			style={{
-																				width: "8px",
-																				height: "8px",
-																				borderRadius: "4px",
-																				backgroundColor: colors.brand,
-																				opacity: "0.8",
-																			}}
-																		></td>
-																		<td style={{ width: "8px" }}></td>
-																		<td
-																			style={{
-																				width: "8px",
-																				height: "8px",
-																				borderRadius: "4px",
-																				backgroundColor: colors.brand,
-																			}}
-																		></td>
-																	</tr>
-																</table>
-															</td>
-														</tr>
-													</table>
-
 													{/* Main heading */}
 													<table
 														width="100%"
@@ -299,7 +219,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 																		<td
 																			style={{
 																				backgroundColor: colors.brand,
-																				borderRadius: "10px",
+																				borderRadius: "7.5px",
 																				overflow: "hidden",
 																			}}
 																		>
@@ -311,51 +231,12 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 																					fontSize: "15px",
 																					fontWeight: "600",
 																					textDecoration: "none",
-																					padding: "14px 32px",
+																					padding: "10px 32px",
 																					letterSpacing: "0.3px",
 																				}}
 																			>
 																				Reset Password
 																			</Link>
-																		</td>
-																	</tr>
-																</table>
-															</td>
-														</tr>
-													</table>
-
-													{/* Time indicator */}
-													<table
-														width="100%"
-														cellPadding="0"
-														cellSpacing="0"
-														border={0}
-														style={{ marginBottom: "30px" }}
-													>
-														<tr>
-															<td align="center">
-																<table
-																	cellPadding="0"
-																	cellSpacing="0"
-																	border={0}
-																	style={{
-																		backgroundColor: colors.lightGray,
-																		borderRadius: "20px",
-																		padding: "6px 16px",
-																	}}
-																>
-																	<tr>
-																		<td>
-																			<Text
-																				style={{
-																					margin: "0",
-																					fontSize: "12px",
-																					color: colors.secondaryText,
-																					fontWeight: "500",
-																				}}
-																			>
-																				Expires in 24 hours
-																			</Text>
 																		</td>
 																	</tr>
 																</table>
@@ -416,7 +297,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 
 								{/* Footer */}
 								<tr>
-									<td style={{ padding: "30px 20px" }}>
+									<td style={{ padding: "20px 20px" }}>
 										<table
 											width="100%"
 											cellPadding="0"
@@ -424,7 +305,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 											border={0}
 										>
 											<tr>
-												<td align="center">
+												<td align="left" style={{ width: "50%" }}>
 													<Text
 														style={{
 															fontSize: "13px",
@@ -434,8 +315,18 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 														}}
 													>
 														© 2025 next-leaflet, all rights reserved.
-														<br />
-														next@leaflet.app • 010 123 4567
+													</Text>
+												</td>
+												<td align="right" style={{ width: "50%" }}>
+													<Text
+														style={{
+															fontSize: "13px",
+															color: colors.secondaryText,
+															margin: "0",
+															lineHeight: "1.5",
+														}}
+													>
+														next@leaflet.app  010 123 4567
 													</Text>
 												</td>
 											</tr>
