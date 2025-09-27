@@ -4,7 +4,7 @@ import { headers as nextHeaders, cookies } from "next/headers";
 
 import type { User } from "@/shared/types/payload-types";
 
-import { getPayload } from "@/lib/payload";
+import { getPayload } from "@/shared/lib/payload";
 
 export async function getUser(): Promise<Partial<User> | null> {
 	const payload = await getPayload();

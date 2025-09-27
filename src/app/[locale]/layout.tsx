@@ -7,7 +7,7 @@ import { hasLocale, NextIntlClientProvider as LocaleProvider } from "next-intl";
 import { routing } from "@/shared/locales/routing";
 import { Toaster } from "@/components/ui/sonner";
 
-import "@/styles/globals.css";
+import "@/shared/styles/globals.css";
 
 export const metadata: Metadata = {
 	title: "Next-Leaflet",

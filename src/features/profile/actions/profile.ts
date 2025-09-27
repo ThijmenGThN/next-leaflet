@@ -1,6 +1,6 @@
 "use server";
 
-import { getPayload } from "@/lib/payload";
+import { getPayload } from "@/shared/lib/payload";
 import type { UpdateProfileData } from "@/features/profile/types/profile";
 
 export async function updateProfile(data: UpdateProfileData): Promise<boolean> {
