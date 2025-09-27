@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { toast } from "sonner";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import { updateProfile } from "@/features/profile/actions/profile";
 import type { User } from "@/shared/types/payload-types";
 import type { UpdateProfileFormData } from "@/features/profile/types/profile";
@@ -18,6 +20,12 @@ interface ProfileCardProps {
 
 export default function ProfileCard({ user }: ProfileCardProps) {
 	const [isLoading, setIsLoading] = useState(false);
+	const [mounted, setMounted] = useState(false);
+	const { theme, setTheme } = useTheme();
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const {
 		register,
@@ -134,6 +142,19 @@ export default function ProfileCard({ user }: ProfileCardProps) {
 								>
 									{isLoading ? "Updating..." : "Update Profile"}
 								</Button>
+								{mounted && (
+									<Button
+										type="button"
+										variant="outline"
+										size="icon"
+										onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+										className="h-9 w-9 shrink-0"
+									>
+										<Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+										<Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+										<span className="sr-only">Toggle theme</span>
+									</Button>
+								)}
 								<Button asChild variant="outline" className="flex-1">
 									<Link href="/login">
 										Logout
