@@ -18,7 +18,7 @@ export default function RegisterForm() {
 		formState: { errors },
 	} = useForm<RegisterFormData>();
 
-	const { isLoading, errorMessage, register: registerUser } = useAuth();
+	const { isLoading, register: registerUser } = useAuth();
 
 	const password = watch("password");
 
@@ -38,10 +38,6 @@ export default function RegisterForm() {
 							<h1 className="text-2xl font-bold text-foreground">Create account</h1>
 							<p className="text-muted-foreground">Sign up for a new account</p>
 						</div>
-
-					{errorMessage && (
-						<p className="text-sm text-destructive text-center">{errorMessage}</p>
-					)}
 
 					<form onSubmit={handleSubmit(registerUser)} className="space-y-4">
 						<div className="grid grid-cols-2 gap-4">

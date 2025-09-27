@@ -17,7 +17,7 @@ export default function LoginForm() {
 		formState: { errors },
 	} = useForm<LoginFormData>();
 
-	const { isLoading, errorMessage, login } = useAuth();
+	const { isLoading, login } = useAuth();
 
 	return (
 		<div className="space-y-4">
@@ -83,10 +83,6 @@ export default function LoginForm() {
 							<Button type="submit" className="w-full" disabled={isLoading}>
 								{isLoading ? "Signing in..." : "Sign in"}
 							</Button>
-
-							{errorMessage && (
-								<p className="text-sm text-destructive text-center">{errorMessage}</p>
-							)}
 						</form>
 
 						<div className="text-center pt-4 border-t border-border">

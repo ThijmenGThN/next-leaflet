@@ -18,21 +18,16 @@ export default function ResetPasswordFlow({ token }: ResetPasswordFlowProps) {
 	const forgotPasswordForm = useForm<ForgotPasswordFormData>();
 	const resetPasswordForm = useForm<ResetPasswordFormData>();
 
-	const { isLoading, errorMessage, successMessage, forgotPassword, resetPassword } = useAuth();
+	const { isLoading, forgotPassword, resetPassword } = useAuth();
 
 	const onForgotPasswordSubmit = async (data: ForgotPasswordFormData) => {
 		await forgotPassword(data);
-		if (!errorMessage) {
-			forgotPasswordForm.reset();
-		}
+		forgotPasswordForm.reset();
 	};
 
 	const onResetPasswordSubmit = async (data: ResetPasswordFormData) => {
 		if (token) {
 			await resetPassword(token, data);
-			if (!errorMessage) {
-				resetPasswordForm.reset();
-			}
 		}
 	};
 
@@ -58,14 +53,6 @@ export default function ResetPasswordFlow({ token }: ResetPasswordFlowProps) {
 								{token ? "Enter your new password" : "Enter your email to reset your password"}
 							</p>
 						</div>
-
-					{errorMessage && (
-						<p className="text-sm text-destructive text-center">{errorMessage}</p>
-					)}
-
-					{successMessage && (
-						<p className="text-sm text-green-600 dark:text-green-400 text-center">{successMessage}</p>
-					)}
 
 					{!token ? (
 						<form

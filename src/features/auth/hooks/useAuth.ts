@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "@/locales/navigation";
+import { toast } from "sonner";
 import { createUser, loginUser, forgotPassword, resetPassword } from "@/features/auth/actions/user";
 import type {
 	LoginFormData,
@@ -13,24 +14,16 @@ import type {
 export function useAuth() {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
-	const [errorMessage, setErrorMessage] = useState<string | null>(null);
-	const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-	const clearMessages = () => {
-		setErrorMessage(null);
-		setSuccessMessage(null);
-	};
 
 	const login = async (data: LoginFormData) => {
 		setIsLoading(true);
-		clearMessages();
 
 		const result = await loginUser(data);
 
 		if (result.success && result.user) {
 			router.push("/dash");
 		} else {
-			setErrorMessage(result.message || "Invalid email or password");
+			toast.error(result.message || "Invalid email or password");
 		}
 
 		setIsLoading(false);
@@ -38,7 +31,6 @@ export function useAuth() {
 
 	const register = async (data: RegisterFormData) => {
 		setIsLoading(true);
-		clearMessages();
 
 		try {
 			const user = await createUser({
@@ -49,7 +41,7 @@ export function useAuth() {
 			});
 
 			if (!user) {
-				setErrorMessage("Failed to create account. Email may already be in use.");
+				toast.error("Failed to create account. Email may already be in use.");
 				setIsLoading(false);
 				return;
 			}
@@ -62,23 +54,23 @@ export function useAuth() {
 			if (loginResult.success) {
 				router.push("/dash");
 			} else {
+				toast.error("Account created but login failed. Please try signing in.");
 				router.push("/login");
 			}
 		} catch {
-			setErrorMessage("An unexpected error occurred. Please try again.");
+			toast.error("An unexpected error occurred. Please try again.");
 			setIsLoading(false);
 		}
 	};
 
 	const forgotPasswordHandler = async (data: ForgotPasswordFormData) => {
 		setIsLoading(true);
-		clearMessages();
 
 		try {
 			await forgotPassword(data.email);
-			setSuccessMessage("If an account with that email exists, we've sent you a reset link.");
+			toast.success("If an account with that email exists, we've sent you a reset link.");
 		} catch {
-			setErrorMessage("An error occurred. Please try again.");
+			toast.error("An error occurred. Please try again.");
 		}
 
 		setIsLoading(false);
@@ -86,14 +78,14 @@ export function useAuth() {
 
 	const resetPasswordHandler = async (token: string, data: ResetPasswordFormData) => {
 		setIsLoading(true);
-		clearMessages();
 
 		const result = await resetPassword({ token, password: data.password });
 
 		if (result) {
+			toast.success("Password reset successfully! Please sign in with your new password.");
 			router.push("/login");
 		} else {
-			setErrorMessage("An error occurred. Please try again.");
+			toast.error("Password reset failed. The link may be expired or invalid.");
 		}
 
 		setIsLoading(false);
@@ -101,9 +93,6 @@ export function useAuth() {
 
 	return {
 		isLoading,
-		errorMessage,
-		successMessage,
-		clearMessages,
 		login,
 		register,
 		forgotPassword: forgotPasswordHandler,
