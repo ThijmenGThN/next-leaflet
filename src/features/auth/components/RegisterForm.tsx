@@ -52,7 +52,6 @@ export default function RegisterForm() {
 									{...register("firstname", {
 										required: "First name is required",
 									})}
-									placeholder="John"
 									disabled={isLoading}
 								/>
 								{errors.firstname && (
@@ -69,7 +68,6 @@ export default function RegisterForm() {
 									{...register("lastname", {
 										required: "Last name is required",
 									})}
-									placeholder="Doe"
 									disabled={isLoading}
 								/>
 								{errors.lastname && (
@@ -92,7 +90,6 @@ export default function RegisterForm() {
 									},
 								})}
 								type="email"
-								placeholder="john.doe@example.com"
 								disabled={isLoading}
 							/>
 							{errors.email && (

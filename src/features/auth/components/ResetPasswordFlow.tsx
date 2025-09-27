@@ -78,7 +78,6 @@ export default function ResetPasswordFlow({ token }: ResetPasswordFlowProps) {
 									id="email"
 									type="email"
 									autoComplete="email"
-									placeholder="john.doe@example.com"
 									{...forgotPasswordForm.register("email", {
 										required: "Email is required",
 										pattern: {

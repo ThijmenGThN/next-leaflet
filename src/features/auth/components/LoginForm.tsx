@@ -36,68 +36,67 @@ export default function LoginForm() {
 							<p className="text-muted-foreground">Sign in to your account</p>
 						</div>
 
-					<form onSubmit={handleSubmit(login)} className="space-y-4">
-						<div className="space-y-2">
-							<Label htmlFor="email">Email</Label>
-							<Input
-								id="email"
-								type="email"
-								autoComplete="email"
-								placeholder="john.doe@example.com"
-								{...register("email", {
-									required: "Email is required",
-									pattern: {
-										value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-										message: "Invalid email address",
-									},
-								})}
-								disabled={isLoading}
-							/>
-							{errors.email && (
-								<p className="text-sm text-destructive">
-									{errors.email.message}
-								</p>
-							)}
-						</div>
-
-						<div className="space-y-2">
-							<div className="flex items-center justify-between">
-								<Label htmlFor="password">Password</Label>
-								<Link href="/reset" className="text-sm text-primary hover:underline">
-									Forgot password?
-								</Link>
+						<form onSubmit={handleSubmit(login)} className="space-y-4">
+							<div className="space-y-2">
+								<Label htmlFor="email">Email</Label>
+								<Input
+									id="email"
+									type="email"
+									autoComplete="email"
+									{...register("email", {
+										required: "Email is required",
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+											message: "Invalid email address",
+										},
+									})}
+									disabled={isLoading}
+								/>
+								{errors.email && (
+									<p className="text-sm text-destructive">
+										{errors.email.message}
+									</p>
+								)}
 							</div>
-							<Input
-								id="password"
-								type="password"
-								autoComplete="current-password"
-								{...register("password", { required: "Password is required" })}
-								disabled={isLoading}
-							/>
-							{errors.password && (
-								<p className="text-sm text-destructive">
-									{errors.password.message}
-								</p>
+
+							<div className="space-y-2">
+								<div className="flex items-center justify-between">
+									<Label htmlFor="password">Password</Label>
+									<Link href="/reset" className="text-sm text-primary hover:underline">
+										Forgot password?
+									</Link>
+								</div>
+								<Input
+									id="password"
+									type="password"
+									autoComplete="current-password"
+									{...register("password", { required: "Password is required" })}
+									disabled={isLoading}
+								/>
+								{errors.password && (
+									<p className="text-sm text-destructive">
+										{errors.password.message}
+									</p>
+								)}
+							</div>
+
+							<Button type="submit" className="w-full" disabled={isLoading}>
+								{isLoading ? "Signing in..." : "Sign in"}
+							</Button>
+
+							{errorMessage && (
+								<p className="text-sm text-destructive text-center">{errorMessage}</p>
 							)}
+						</form>
+
+						<div className="text-center pt-4 border-t border-border">
+							<p className="text-sm text-muted-foreground">
+								Don&apos;t have an account?{" "}
+								<Link href="/register" className="text-primary hover:underline font-medium">
+									Create account
+								</Link>
+							</p>
 						</div>
-
-						<Button type="submit" className="w-full" disabled={isLoading}>
-							{isLoading ? "Signing in..." : "Sign in"}
-						</Button>
-
-						{errorMessage && (
-							<p className="text-sm text-destructive text-center">{errorMessage}</p>
-						)}
-					</form>
-
-					<div className="text-center pt-4 border-t border-border">
-						<p className="text-sm text-muted-foreground">
-							Don&apos;t have an account?{" "}
-							<Link href="/register" className="text-primary hover:underline font-medium">
-								Create account
-							</Link>
-						</p>
-					</div>
 					</div>
 				</CardContent>
 			</Card>
