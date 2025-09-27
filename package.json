@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.1",
-		"@hookform/resolvers": "^5.1.1",
+    "@hookform/resolvers": "^5.1.1",
     "@payloadcms/db-postgres": "^3.57.0",
     "@payloadcms/email-nodemailer": "^3.57.0",
     "@payloadcms/next": "^3.57.0",
