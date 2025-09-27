@@ -62,10 +62,11 @@ export async function resetPassword(data: {
 		const result = await payload.resetPassword({
 			collection: "users",
 			data,
-			overrideAccess: false,
+			overrideAccess: true,
 		});
 		return Boolean(result);
-	} catch {
+	} catch (error) {
+		console.error("Password reset error:", error);
 		return false;
 	}
 }
