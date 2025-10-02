@@ -18,8 +18,8 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+} from "@/shared/components/ui/accordion";
+import { Alert, AlertDescription, AlertTitle } from "@/shared/components/ui/alert";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -30,10 +30,10 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+} from "@/shared/components/ui/alert-dialog";
+import { AspectRatio } from "@/shared/components/ui/aspect-ratio";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
+import { Badge } from "@/shared/components/ui/badge";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -41,28 +41,28 @@ import {
 	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
+} from "@/shared/components/ui/breadcrumb";
+import { Button } from "@/shared/components/ui/button";
 import {
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
+} from "@/shared/components/ui/card";
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/shared/components/ui/carousel";
+import { Checkbox } from "@/shared/components/ui/checkbox";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/shared/components/ui/collapsible";
 import {
 	Command,
 	CommandEmpty,
@@ -70,13 +70,13 @@ import {
 	CommandInput,
 	CommandItem,
 	CommandList,
-} from "@/components/ui/command";
+} from "@/shared/components/ui/command";
 import {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuItem,
 	ContextMenuTrigger,
-} from "@/components/ui/context-menu";
+} from "@/shared/components/ui/context-menu";
 import {
 	Dialog,
 	DialogContent,
@@ -84,7 +84,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/shared/components/ui/dialog";
 import {
 	Drawer,
 	DrawerContent,
@@ -92,7 +92,7 @@ import {
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "@/shared/components/ui/drawer";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -100,26 +100,26 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/shared/components/ui/dropdown-menu";
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Input } from "@/components/ui/input";
+} from "@/shared/components/ui/hover-card";
+import { Input } from "@/shared/components/ui/input";
 import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { Label } from "@/components/ui/label";
+} from "@/shared/components/ui/input-otp";
+import { Label } from "@/shared/components/ui/label";
 import {
 	Menubar,
 	MenubarContent,
 	MenubarItem,
 	MenubarMenu,
 	MenubarTrigger,
-} from "@/components/ui/menubar";
+} from "@/shared/components/ui/menubar";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -127,7 +127,7 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/shared/components/ui/navigation-menu";
 import {
 	Pagination,
 	PaginationContent,
@@ -135,28 +135,28 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "@/shared/components/ui/pagination";
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from "@/components/ui/popover";
-import { Progress } from "@/components/ui/progress";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+} from "@/shared/components/ui/popover";
+import { Progress } from "@/shared/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
 import {
 	ResizableHandle,
 	ResizablePanel,
 	ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "@/shared/components/ui/resizable";
+import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
+} from "@/shared/components/ui/select";
+import { Separator } from "@/shared/components/ui/separator";
 import {
 	Sheet,
 	SheetContent,
@@ -164,10 +164,10 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
+} from "@/shared/components/ui/sheet";
+import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Slider } from "@/shared/components/ui/slider";
+import { Switch } from "@/shared/components/ui/switch";
 import {
 	Table,
 	TableBody,
@@ -175,18 +175,18 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { Toggle } from "@/components/ui/toggle";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+} from "@/shared/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
+import { Textarea } from "@/shared/components/ui/textarea";
+import { Toggle } from "@/shared/components/ui/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@/shared/components/ui/toggle-group";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Link as NavLink } from "@/shared/locales/navigation";
+} from "@/shared/components/ui/tooltip";
+import Link from "next/link";
 
 export default function UIShowcase() {
 	const [progress, setProgress] = useState(50);
@@ -199,10 +199,10 @@ export default function UIShowcase() {
 			<div className="max-w-7xl mx-auto px-6 py-8">
 				<div className="space-y-4 mb-8">
 					<Button asChild variant="ghost" size="sm" className="self-start">
-						<NavLink href="/">
+						<Link href="/">
 							<ArrowLeft className="h-4 w-4 mr-2" />
 							Back to home
-						</NavLink>
+						</Link>
 					</Button>
 
 					<div className="text-center space-y-2">

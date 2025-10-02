@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "@/shared/locales/navigation";
 
 export function LogoutButton() {

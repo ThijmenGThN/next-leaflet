@@ -5,7 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { hasLocale, NextIntlClientProvider as LocaleProvider } from "next-intl";
 
 import { routing } from "@/shared/locales/routing";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/shared/components/ui/sonner";
 
 import "@/shared/styles/globals.css";
 

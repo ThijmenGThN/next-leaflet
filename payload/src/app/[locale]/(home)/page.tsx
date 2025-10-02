@@ -1,6 +1,6 @@
 import { LogIn, Palette, UserPlus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import { Link } from "@/shared/locales/navigation";
 
 export default function Page() {
