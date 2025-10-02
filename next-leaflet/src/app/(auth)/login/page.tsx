@@ -37,7 +37,7 @@ export default function LoginForm() {
       formData.set("flow", "signIn");
 
       await signIn("password", formData);
-      router.push("/");
+      router.push("/dash");
     } catch (error: any) {
       setError("root", { message: error.message });
     } finally {

@@ -1,24 +1,100 @@
-import Home from "./inner";
-import { preloadQuery, preloadedQueryResult } from "convex/nextjs";
-import { api } from "@/convex/_generated/api";
+"use client";
 
-export default async function ServerPage() {
-  const preloaded = await preloadQuery(api.myFunctions.listNumbers, {
-    count: 3,
-  });
+import { Card, CardContent } from "@/components/ui/card"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { useAuthActions } from "@convex-dev/auth/react"
+import { useQuery, useMutation } from "convex/react"
+import { api } from "@/../convex/_generated/api"
+import { LogOut } from "lucide-react"
+import { useState, useEffect } from "react"
+import { toast } from "sonner"
 
-  const data = preloadedQueryResult(preloaded);
+export default function Page() {
+  const { signOut } = useAuthActions()
+  const user = useQuery(api.users.current)
+  const updateName = useMutation(api.users.updateName)
+  const [name, setName] = useState("")
+  const [isUpdating, setIsUpdating] = useState(false)
 
+  useEffect(() => {
+    if (user) {
+      setName(user.name || "")
+    }
+  }, [user])
+
+  const handleSave = async () => {
+    setIsUpdating(true)
+    try {
+      await updateName({ name })
+      toast.success("Profile updated successfully")
+    } catch (error) {
+      toast.error("Failed to update profile")
+    } finally {
+      setIsUpdating(false)
+    }
+  }
+
+  const hasChanges = name !== (user?.name || "")
   return (
-    <main className="p-8 flex flex-col gap-4 mx-auto max-w-2xl">
-      <h1 className="text-4xl font-bold text-center">Convex + Next.js</h1>
-      <div className="flex flex-col gap-4 bg-slate-200 dark:bg-slate-800 p-4 rounded-md">
-        <h2 className="text-xl font-bold">Non-reactive server-loaded data</h2>
-        <code>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </code>
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="w-full max-w-md px-6">
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-6">
+              <div className="text-center space-y-2">
+                <p className="text-2xl font-bold text-foreground">Welcome to the Dashboard</p>
+                <p className="text-muted-foreground">Your profile information is displayed below.</p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={user?.email || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border">
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => signOut()}
+                    className="flex-1"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </Button>
+                  <ThemeToggle />
+                  <Button
+                    className="flex-1"
+                    onClick={handleSave}
+                    disabled={!hasChanges || isUpdating}
+                  >
+                    {isUpdating ? "Saving..." : "Save"}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-      <Home preloaded={preloaded} />
-    </main>
-  );
+    </div>
+  )
 }

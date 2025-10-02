@@ -22,11 +22,20 @@ export default function RegisterForm() {
     setError(null);
 
     const formData = new FormData(e.target as HTMLFormElement);
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirmPassword");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
     formData.set("flow", "signUp");
 
     try {
       await signIn("password", formData);
-      router.push("/");
+      router.push("/dash");
     } catch (error: any) {
       setError(error.message);
     } finally {
@@ -53,6 +62,17 @@ export default function RegisterForm() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  disabled={isLoading}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -68,6 +88,17 @@ export default function RegisterForm() {
                 <Input
                   id="password"
                   name="password"
+                  type="password"
+                  disabled={isLoading}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type="password"
                   disabled={isLoading}
                   required
