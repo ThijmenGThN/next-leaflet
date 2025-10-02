@@ -32,7 +32,12 @@ An optimized tech stack for efficiency, an all-in-one solution to quickly build 
 	npm install
 	```
 
-2. Start the development server:
+2. Copy the environment variables file:
+	```bash
+	cp .env.sample .env.local
+	```
+
+3. Start the development server:
 	```bash
 	npm run dev
 	```
@@ -42,7 +47,7 @@ This will:
 - Automatically configure Convex Auth
 - Open the Convex dashboard
 
-3. The app will be available at `http://localhost:3000`
+4. The app will be available at `http://localhost:3000`
 
 ## Available Scripts
 
