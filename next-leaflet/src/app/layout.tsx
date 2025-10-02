@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server"
 
-import ConvexClientProvider from "@/shared/components/ConvexClientProvider"
+import ConvexClientProvider from "@/components/ConvexClientProvider"
 
-import "@/shared/styles/globals.css"
+import "@/styles/globals.css"
 
 export const metadata: Metadata = {
   title: "next-leaflet",

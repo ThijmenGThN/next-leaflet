@@ -1,5 +1,135 @@
-import AuthForm from "@/features/auth/components/AuthForm";
+"use client";
 
-export default function Login() {
-    return <AuthForm />
+import { useAuthActions } from "@convex-dev/auth/react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export default function LoginForm() {
+  const { signIn } = useAuthActions();
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError
+  } = useForm<LoginFormData>();
+
+  const login = async (data: LoginFormData) => {
+    setIsLoading(true);
+    try {
+      const formData = new FormData();
+      formData.set("email", data.email);
+      formData.set("password", data.password);
+      formData.set("flow", "signIn");
+
+      await signIn("password", formData);
+      router.push("/");
+    } catch (error: any) {
+      setError("root", { message: error.message });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <Button asChild variant="ghost" size="sm" className="self-start">
+        <Link href="/">
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to home
+        </Link>
+      </Button>
+
+      <Card>
+        <CardContent className="pt-6">
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold text-foreground">Welcome back</h1>
+              <p className="text-muted-foreground">Sign in to your account</p>
+            </div>
+
+            <form onSubmit={handleSubmit(login)} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  disabled={isLoading}
+                />
+                {errors.email && (
+                  <p className="text-sm text-destructive">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  <Link href="/reset" className="text-sm text-primary hover:underline">
+                    Forgot password?
+                  </Link>
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  autoComplete="current-password"
+                  {...register("password", { required: "Password is required" })}
+                  disabled={isLoading}
+                />
+                {errors.password && (
+                  <p className="text-sm text-destructive">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
+
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Signing in..." : "Sign in"}
+              </Button>
+
+              {errors.root && (
+                <div className="bg-red-500/20 border-2 border-red-500/50 rounded-md p-2">
+                  <p className="text-foreground font-mono text-xs">
+                    Error signing in: {errors.root.message}
+                  </p>
+                </div>
+              )}
+            </form>
+
+            <div className="text-center pt-4 border-t border-border">
+              <p className="text-sm text-muted-foreground">
+                Don&apos;t have an account?{" "}
+                <Link href="/register" className="text-primary hover:underline font-medium">
+                  Create account
+                </Link>
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
 }

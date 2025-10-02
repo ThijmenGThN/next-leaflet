@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { LogIn, Palette, UserPlus } from "lucide-react";
 
-import { Button } from "@/shared/components/ui/button";
-import { Card, CardContent } from "@/shared/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function Page() {
 	return (
