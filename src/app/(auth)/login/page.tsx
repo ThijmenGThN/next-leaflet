@@ -6,10 +6,12 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { toast } from "sonner"
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 interface LoginFormData {
   email: string;
@@ -24,8 +26,7 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setError
+    formState: { errors }
   } = useForm<LoginFormData>();
 
   const login = async (data: LoginFormData) => {
@@ -38,8 +39,8 @@ export default function LoginForm() {
 
       await signIn("password", formData);
       router.push("/dash");
-    } catch (error: any) {
-      setError("root", { message: error.message });
+    } catch (error: unknown) {
+      toast.error(getAuthErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
@@ -109,14 +110,6 @@ export default function LoginForm() {
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Signing in..." : "Sign in"}
               </Button>
-
-              {errors.root && (
-                <div className="bg-red-500/20 border-2 border-red-500/50 rounded-md p-2">
-                  <p className="text-foreground font-mono text-xs">
-                    Error signing in: {errors.root.message}
-                  </p>
-                </div>
-              )}
             </form>
 
             <div className="text-center pt-4 border-t border-border">

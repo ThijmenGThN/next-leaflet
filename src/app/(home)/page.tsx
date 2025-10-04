@@ -3,6 +3,7 @@ import { LogIn, Palette, UserPlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Page() {
 	return (
@@ -25,17 +26,22 @@ export default function Page() {
 										Login
 									</Link>
 								</Button>
-								<Button
-									asChild
-									variant="outline"
-									size="lg"
-									className="w-full"
-								>
-									<Link href="/register">
-										<UserPlus className="h-4 w-4 mr-2" />
-										Register
-									</Link>
-								</Button>
+								<div className="flex gap-2">
+									<Button
+										asChild
+										variant="outline"
+										size="lg"
+										className="flex-1"
+									>
+										<Link href="/register">
+											<UserPlus className="h-4 w-4 mr-2" />
+											Register
+										</Link>
+									</Button>
+									<div className="shrink-0">
+										<ThemeToggle size="lg" />
+									</div>
+								</div>
 							</div>
 
 							<div className="pt-2 border-t border-border">

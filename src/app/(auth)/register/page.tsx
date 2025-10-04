@@ -5,28 +5,28 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { getAuthErrorMessage } from "@/lib/auth-errors";
 
 export default function RegisterForm() {
   const { signIn } = useAuthActions();
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null);
 
     const formData = new FormData(e.target as HTMLFormElement);
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      toast.error("Passwords do not match");
       setIsLoading(false);
       return;
     }
@@ -36,8 +36,8 @@ export default function RegisterForm() {
     try {
       await signIn("password", formData);
       router.push("/dash");
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      toast.error(getAuthErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
@@ -104,14 +104,6 @@ export default function RegisterForm() {
                   required
                 />
               </div>
-
-              {error && (
-                <div className="bg-destructive/20 border-2 border-destructive/50 rounded-md p-2">
-                  <p className="text-sm text-destructive">
-                    Error signing up: {error}
-                  </p>
-                </div>
-              )}
 
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Creating account..." : "Create account"}
