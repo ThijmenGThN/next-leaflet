@@ -6,8 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": false,
-		"ignore": ["node_modules", ".next", "dist", "build", ".convex"]
+		"ignoreUnknown": false
 	},
 	"formatter": {
 		"enabled": true,
