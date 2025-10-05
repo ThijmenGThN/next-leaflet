@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
 	AlertCircle,
@@ -11,15 +11,16 @@ import {
 	Star,
 	User,
 	XCircle,
-} from "lucide-react";
-import { useState } from "react";
+} from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+} from "@/components/ui/accordion"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -30,10 +31,10 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/alert-dialog"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -41,28 +42,18 @@ import {
 	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/breadcrumb"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/components/ui/carousel"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import {
 	Command,
 	CommandEmpty,
@@ -70,13 +61,13 @@ import {
 	CommandInput,
 	CommandItem,
 	CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 import {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuItem,
 	ContextMenuTrigger,
-} from "@/components/ui/context-menu";
+} from "@/components/ui/context-menu"
 import {
 	Dialog,
 	DialogContent,
@@ -84,7 +75,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"
 import {
 	Drawer,
 	DrawerContent,
@@ -92,7 +83,7 @@ import {
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "@/components/ui/drawer"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -100,26 +91,18 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Input } from "@/components/ui/input";
-import {
-	InputOTP,
-	InputOTPGroup,
-	InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/dropdown-menu"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { Input } from "@/components/ui/input"
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
+import { Label } from "@/components/ui/label"
 import {
 	Menubar,
 	MenubarContent,
 	MenubarItem,
 	MenubarMenu,
 	MenubarTrigger,
-} from "@/components/ui/menubar";
+} from "@/components/ui/menubar"
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -127,7 +110,7 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu"
 import {
 	Pagination,
 	PaginationContent,
@@ -135,28 +118,20 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/components/ui/pagination";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import { Progress } from "@/components/ui/progress";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-	ResizableHandle,
-	ResizablePanel,
-	ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "@/components/ui/pagination"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Progress } from "@/components/ui/progress"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
 import {
 	Sheet,
 	SheetContent,
@@ -164,10 +139,10 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
+} from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Slider } from "@/components/ui/slider"
+import { Switch } from "@/components/ui/switch"
 import {
 	Table,
 	TableBody,
@@ -175,24 +150,18 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { Toggle } from "@/components/ui/toggle";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
-import Link from "next/link";
+} from "@/components/ui/table"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Textarea } from "@/components/ui/textarea"
+import { Toggle } from "@/components/ui/toggle"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function UIShowcase() {
-	const [progress, setProgress] = useState(50);
-	const [switchValue, setSwitchValue] = useState(false);
-	const [sliderValue, setSliderValue] = useState([33]);
-	const [isCollapsibleOpen, setIsCollapsibleOpen] = useState(false);
+	const [progress, setProgress] = useState(50)
+	const [switchValue, setSwitchValue] = useState(false)
+	const [sliderValue, setSliderValue] = useState([33])
+	const [isCollapsibleOpen, setIsCollapsibleOpen] = useState(false)
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -265,10 +234,7 @@ export default function UIShowcase() {
 								<CardContent>
 									<div className="flex gap-2">
 										<Avatar>
-											<AvatarImage
-												src="https://github.com/shadcn.png"
-												alt="@shadcn"
-											/>
+											<AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
 											<AvatarFallback>CN</AvatarFallback>
 										</Avatar>
 										<Avatar>
@@ -300,18 +266,11 @@ export default function UIShowcase() {
 									</div>
 									<div className="space-y-2">
 										<Label htmlFor="password">Password</Label>
-										<Input
-											id="password"
-											type="password"
-											placeholder="Password"
-										/>
+										<Input id="password" type="password" placeholder="Password" />
 									</div>
 									<div className="space-y-2">
 										<Label htmlFor="message">Message</Label>
-										<Textarea
-											id="message"
-											placeholder="Type your message here."
-										/>
+										<Textarea id="message" placeholder="Type your message here." />
 									</div>
 									<div className="space-y-2">
 										<Label htmlFor="otp">OTP Input</Label>
@@ -371,10 +330,7 @@ export default function UIShowcase() {
 									<div className="space-y-2">
 										<Label>Switch</Label>
 										<div className="flex items-center space-x-2">
-											<Switch
-												checked={switchValue}
-												onCheckedChange={setSwitchValue}
-											/>
+											<Switch checked={switchValue} onCheckedChange={setSwitchValue} />
 											<Label>{switchValue ? "On" : "Off"}</Label>
 										</div>
 									</div>
@@ -384,43 +340,26 @@ export default function UIShowcase() {
 					</section>
 
 					<section>
-						<h2 className="text-2xl font-semibold mb-4">
-							Interactive Components
-						</h2>
+						<h2 className="text-2xl font-semibold mb-4">Interactive Components</h2>
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 							<Card>
 								<CardHeader>
 									<CardTitle>Slider & Progress</CardTitle>
-									<CardDescription>
-										Value controls and indicators
-									</CardDescription>
+									<CardDescription>Value controls and indicators</CardDescription>
 								</CardHeader>
 								<CardContent className="space-y-4">
 									<div className="space-y-2">
 										<Label>Slider: {sliderValue[0]}</Label>
-										<Slider
-											value={sliderValue}
-											onValueChange={setSliderValue}
-											max={100}
-											step={1}
-										/>
+										<Slider value={sliderValue} onValueChange={setSliderValue} max={100} step={1} />
 									</div>
 									<div className="space-y-2">
 										<Label>Progress: {progress}%</Label>
 										<Progress value={progress} />
 										<div className="flex gap-2">
-											<Button
-												size="sm"
-												onClick={() => setProgress(Math.max(0, progress - 10))}
-											>
+											<Button size="sm" onClick={() => setProgress(Math.max(0, progress - 10))}>
 												<Minus className="h-4 w-4" />
 											</Button>
-											<Button
-												size="sm"
-												onClick={() =>
-													setProgress(Math.min(100, progress + 10))
-												}
-											>
+											<Button size="sm" onClick={() => setProgress(Math.min(100, progress + 10))}>
 												<Plus className="h-4 w-4" />
 											</Button>
 										</div>
@@ -529,9 +468,7 @@ export default function UIShowcase() {
 							<Card>
 								<CardHeader>
 									<CardTitle>Accordion</CardTitle>
-									<CardDescription>
-										Collapsible content sections
-									</CardDescription>
+									<CardDescription>Collapsible content sections</CardDescription>
 								</CardHeader>
 								<CardContent>
 									<Accordion type="single" collapsible>
@@ -544,15 +481,14 @@ export default function UIShowcase() {
 										<AccordionItem value="item-2">
 											<AccordionTrigger>Is it styled?</AccordionTrigger>
 											<AccordionContent>
-												Yes. It comes with default styles that matches the other
-												components aesthetic.
+												Yes. It comes with default styles that matches the other components
+												aesthetic.
 											</AccordionContent>
 										</AccordionItem>
 										<AccordionItem value="item-3">
 											<AccordionTrigger>Is it animated?</AccordionTrigger>
 											<AccordionContent>
-												Yes. It&apos;s animated by default, but you can disable
-												it if you prefer.
+												Yes. It&apos;s animated by default, but you can disable it if you prefer.
 											</AccordionContent>
 										</AccordionItem>
 									</Accordion>
@@ -578,9 +514,8 @@ export default function UIShowcase() {
 											<DialogHeader>
 												<DialogTitle>Are you absolutely sure?</DialogTitle>
 												<DialogDescription>
-													This action cannot be undone. This will permanently
-													delete your account and remove your data from our
-													servers.
+													This action cannot be undone. This will permanently delete your account
+													and remove your data from our servers.
 												</DialogDescription>
 											</DialogHeader>
 										</DialogContent>
@@ -600,13 +535,10 @@ export default function UIShowcase() {
 										</AlertDialogTrigger>
 										<AlertDialogContent>
 											<AlertDialogHeader>
-												<AlertDialogTitle>
-													Are you absolutely sure?
-												</AlertDialogTitle>
+												<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
 												<AlertDialogDescription>
-													This action cannot be undone. This will permanently
-													delete your account and remove your data from our
-													servers.
+													This action cannot be undone. This will permanently delete your account
+													and remove your data from our servers.
 												</AlertDialogDescription>
 											</AlertDialogHeader>
 											<AlertDialogFooter>
@@ -637,19 +569,11 @@ export default function UIShowcase() {
 												<div className="grid gap-2">
 													<div className="grid grid-cols-3 items-center gap-4">
 														<Label htmlFor="width">Width</Label>
-														<Input
-															id="width"
-															defaultValue="100%"
-															className="col-span-2 h-8"
-														/>
+														<Input id="width" defaultValue="100%" className="col-span-2 h-8" />
 													</div>
 													<div className="grid grid-cols-3 items-center gap-4">
 														<Label htmlFor="height">Height</Label>
-														<Input
-															id="height"
-															defaultValue="25px"
-															className="col-span-2 h-8"
-														/>
+														<Input id="height" defaultValue="25px" className="col-span-2 h-8" />
 													</div>
 												</div>
 											</div>
@@ -691,8 +615,7 @@ export default function UIShowcase() {
 											<SheetHeader>
 												<SheetTitle>Edit profile</SheetTitle>
 												<SheetDescription>
-													Make changes to your profile here. Click save when
-													you&apos;re done.
+													Make changes to your profile here. Click save when you&apos;re done.
 												</SheetDescription>
 											</SheetHeader>
 											<div className="grid gap-4 py-4">
@@ -700,21 +623,13 @@ export default function UIShowcase() {
 													<Label htmlFor="name" className="text-right">
 														Name
 													</Label>
-													<Input
-														id="name"
-														value="Pedro Duarte"
-														className="col-span-3"
-													/>
+													<Input id="name" value="Pedro Duarte" className="col-span-3" />
 												</div>
 												<div className="grid grid-cols-4 items-center gap-4">
 													<Label htmlFor="username" className="text-right">
 														Username
 													</Label>
-													<Input
-														id="username"
-														value="@peduarte"
-														className="col-span-3"
-													/>
+													<Input id="username" value="@peduarte" className="col-span-3" />
 												</div>
 											</div>
 										</SheetContent>
@@ -735,9 +650,7 @@ export default function UIShowcase() {
 										<DrawerContent>
 											<DrawerHeader>
 												<DrawerTitle>Are you absolutely sure?</DrawerTitle>
-												<DrawerDescription>
-													This action cannot be undone.
-												</DrawerDescription>
+												<DrawerDescription>This action cannot be undone.</DrawerDescription>
 											</DrawerHeader>
 											<div className="p-4 pb-0">
 												<div className="flex items-center justify-center space-x-2">
@@ -826,9 +739,7 @@ export default function UIShowcase() {
 					</section>
 
 					<section>
-						<h2 className="text-2xl font-semibold mb-4">
-							Navigation Components
-						</h2>
+						<h2 className="text-2xl font-semibold mb-4">Navigation Components</h2>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<Card>
 								<CardHeader>
@@ -839,19 +750,15 @@ export default function UIShowcase() {
 									<NavigationMenu>
 										<NavigationMenuList>
 											<NavigationMenuItem>
-												<NavigationMenuTrigger>
-													Getting started
-												</NavigationMenuTrigger>
+												<NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
 												<NavigationMenuContent>
 													<div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
 														<div className="row-span-3">
 															<NavigationMenuLink className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
-																<div className="mb-2 mt-4 text-lg font-medium">
-																	shadcn/ui
-																</div>
+																<div className="mb-2 mt-4 text-lg font-medium">shadcn/ui</div>
 																<p className="text-sm leading-tight text-muted-foreground">
-																	Beautifully designed components built with
-																	Radix UI and Tailwind CSS.
+																	Beautifully designed components built with Radix UI and Tailwind
+																	CSS.
 																</p>
 															</NavigationMenuLink>
 														</div>
@@ -879,9 +786,7 @@ export default function UIShowcase() {
 											</BreadcrumbItem>
 											<BreadcrumbSeparator />
 											<BreadcrumbItem>
-												<BreadcrumbLink href="/components">
-													Components
-												</BreadcrumbLink>
+												<BreadcrumbLink href="/components">Components</BreadcrumbLink>
 											</BreadcrumbItem>
 											<BreadcrumbSeparator />
 											<BreadcrumbItem>
@@ -969,9 +874,7 @@ export default function UIShowcase() {
 							<Card>
 								<CardHeader>
 									<CardTitle>Alert</CardTitle>
-									<CardDescription>
-										Status and notification alerts
-									</CardDescription>
+									<CardDescription>Status and notification alerts</CardDescription>
 								</CardHeader>
 								<CardContent className="space-y-4">
 									<Alert>
@@ -994,9 +897,7 @@ export default function UIShowcase() {
 							<Card>
 								<CardHeader>
 									<CardTitle>Loading States</CardTitle>
-									<CardDescription>
-										Skeleton and loading indicators
-									</CardDescription>
+									<CardDescription>Skeleton and loading indicators</CardDescription>
 								</CardHeader>
 								<CardContent className="space-y-4">
 									<div className="space-y-2">
@@ -1038,8 +939,7 @@ export default function UIShowcase() {
 												<div className="space-y-1">
 													<h4 className="text-sm font-semibold">@nextjs</h4>
 													<p className="text-sm">
-														The React Framework – created and maintained by
-														@vercel.
+														The React Framework – created and maintained by @vercel.
 													</p>
 													<div className="flex items-center pt-2">
 														<Calendar className="mr-2 h-4 w-4 opacity-70" />
@@ -1067,9 +967,7 @@ export default function UIShowcase() {
 													<div className="p-1">
 														<Card>
 															<CardContent className="flex aspect-square items-center justify-center p-6">
-																<span className="text-4xl font-semibold">
-																	{index + 1}
-																</span>
+																<span className="text-4xl font-semibold">{index + 1}</span>
 															</CardContent>
 														</Card>
 													</div>
@@ -1113,9 +1011,7 @@ export default function UIShowcase() {
 								<CardContent>
 									<AspectRatio ratio={16 / 9}>
 										<div className="rounded-md bg-muted flex items-center justify-center">
-											<span className="text-sm text-muted-foreground">
-												16:9 Aspect Ratio
-											</span>
+											<span className="text-sm text-muted-foreground">16:9 Aspect Ratio</span>
 										</div>
 									</AspectRatio>
 								</CardContent>
@@ -1130,9 +1026,7 @@ export default function UIShowcase() {
 									<div className="space-y-4">
 										<div>
 											<div className="space-y-1">
-												<h4 className="text-sm font-medium leading-none">
-													Radix Primitives
-												</h4>
+												<h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
 												<p className="text-sm text-muted-foreground">
 													An open-source UI component library.
 												</p>
@@ -1186,14 +1080,9 @@ export default function UIShowcase() {
 									<CardDescription>Expandable content sections</CardDescription>
 								</CardHeader>
 								<CardContent>
-									<Collapsible
-										open={isCollapsibleOpen}
-										onOpenChange={setIsCollapsibleOpen}
-									>
+									<Collapsible open={isCollapsibleOpen} onOpenChange={setIsCollapsibleOpen}>
 										<div className="flex items-center justify-between space-x-4">
-											<h4 className="text-sm font-semibold">
-												@peduarte starred 3 repositories
-											</h4>
+											<h4 className="text-sm font-semibold">@peduarte starred 3 repositories</h4>
 											<CollapsibleTrigger asChild>
 												<Button variant="ghost" size="sm">
 													<Menu className="h-4 w-4" />
@@ -1219,5 +1108,5 @@ export default function UIShowcase() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

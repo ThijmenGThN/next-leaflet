@@ -1,9 +1,8 @@
-import Link from "next/link";
-import { LogIn, Palette, UserPlus } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { LogIn, Palette, UserPlus } from "lucide-react"
+import Link from "next/link"
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 
 export default function Page() {
 	return (
@@ -27,12 +26,7 @@ export default function Page() {
 									</Link>
 								</Button>
 								<div className="flex gap-2">
-									<Button
-										asChild
-										variant="outline"
-										size="lg"
-										className="flex-1"
-									>
+									<Button asChild variant="outline" size="lg" className="flex-1">
 										<Link href="/register">
 											<UserPlus className="h-4 w-4 mr-2" />
 											Register
@@ -45,12 +39,7 @@ export default function Page() {
 							</div>
 
 							<div className="pt-2 border-t border-border">
-								<Button
-									asChild
-									variant="ghost"
-									size="sm"
-									className="w-full"
-								>
+								<Button asChild variant="ghost" size="sm" className="w-full">
 									<Link href="/ui">
 										<Palette className="h-4 w-4 mr-2" />
 										View UI Components
@@ -62,5 +51,5 @@ export default function Page() {
 				</Card>
 			</div>
 		</div>
-	);
+	)
 }
