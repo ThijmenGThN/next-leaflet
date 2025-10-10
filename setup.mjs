@@ -57,13 +57,9 @@ if (result.status !== 0) {
 
 // Set SITE_URL from NEXT_PUBLIC_DOMAIN in .env.local
 const siteUrl = config.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
-const siteUrlResult = spawnSync(
-	"npx",
-	["convex", "env", "set", `SITE_URL=${siteUrl}`],
-	{
-		stdio: "inherit",
-	},
-)
+const siteUrlResult = spawnSync("npx", ["convex", "env", "set", `SITE_URL=${siteUrl}`], {
+	stdio: "inherit",
+})
 
 if (siteUrlResult.status !== 0) {
 	console.error("Failed to set SITE_URL in Convex")

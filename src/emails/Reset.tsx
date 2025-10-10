@@ -1,4 +1,4 @@
-import { Body, Head, Html, Link, Text } from "@react-email/components";
+import { Body, Head, Html, Link, Text } from "@react-email/components"
 
 export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 	const colors = {
@@ -9,7 +9,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 		text: "#263238",
 		secondaryText: "#546E7A",
 		borderColor: "#E0E0E0",
-	};
+	}
 
 	return (
 		<Html>
@@ -59,30 +59,13 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 								{/* Minimalist header */}
 								<tr>
 									<td>
-										<table
-											width="100%"
-											cellPadding="0"
-											cellSpacing="0"
-											border={0}
-										>
+										<table width="100%" cellPadding="0" cellSpacing="0" border={0}>
 											<tr>
-												<td
-													style={{ padding: "30px 40px" }}
-													className="header-padding"
-												>
-													<table
-														width="100%"
-														cellPadding="0"
-														cellSpacing="0"
-														border={0}
-													>
+												<td style={{ padding: "30px 40px" }} className="header-padding">
+													<table width="100%" cellPadding="0" cellSpacing="0" border={0}>
 														<tr>
 															<td>
-																<table
-																	cellPadding="0"
-																	cellSpacing="0"
-																	border={0}
-																>
+																<table cellPadding="0" cellSpacing="0" border={0}>
 																	<tr>
 																		<td
 																			style={{
@@ -145,10 +128,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 										>
 											{/* Content area */}
 											<tr>
-												<td
-													style={{ padding: "40px" }}
-													className="mobile-padding"
-												>
+												<td style={{ padding: "40px" }} className="mobile-padding">
 													{/* Main heading */}
 													<table
 														width="100%"
@@ -193,8 +173,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 																		lineHeight: "1.5",
 																	}}
 																>
-																	Click the button below to securely reset your
-																	password
+																	Click the button below to securely reset your password
 																</Text>
 															</td>
 														</tr>
@@ -210,11 +189,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 													>
 														<tr>
 															<td align="center">
-																<table
-																	cellPadding="0"
-																	cellSpacing="0"
-																	border={0}
-																>
+																<table cellPadding="0" cellSpacing="0" border={0}>
 																	<tr>
 																		<td
 																			style={{
@@ -264,12 +239,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 													</table>
 
 													{/* Security note */}
-													<table
-														width="100%"
-														cellPadding="0"
-														cellSpacing="0"
-														border={0}
-													>
+													<table width="100%" cellPadding="0" cellSpacing="0" border={0}>
 														<tr>
 															<td align="center">
 																<Text
@@ -281,8 +251,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 																		textAlign: "center",
 																	}}
 																>
-																	If you did not request this email, you can
-																	ignore it.
+																	If you did not request this email, you can ignore it.
 																	<br />
 																	Your password will remain unchanged.
 																</Text>
@@ -298,12 +267,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 								{/* Footer */}
 								<tr>
 									<td style={{ padding: "20px 20px" }}>
-										<table
-											width="100%"
-											cellPadding="0"
-											cellSpacing="0"
-											border={0}
-										>
+										<table width="100%" cellPadding="0" cellSpacing="0" border={0}>
 											<tr>
 												<td align="left" style={{ width: "50%" }}>
 													<Text
@@ -326,7 +290,7 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 															lineHeight: "1.5",
 														}}
 													>
-														next@leaflet.app  010 123 4567
+														next@leaflet.app 010 123 4567
 													</Text>
 												</td>
 											</tr>
@@ -339,5 +303,5 @@ export default function Reset({ ACTION_URL }: { ACTION_URL: string }) {
 				</table>
 			</Body>
 		</Html>
-	);
+	)
 }

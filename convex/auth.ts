@@ -1,15 +1,11 @@
-import { Email } from "@convex-dev/auth/providers/Email"
 import { Password } from "@convex-dev/auth/providers/Password"
 import { convexAuth } from "@convex-dev/auth/server"
+import { EmailPasswordReset } from "./emailActions"
 
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 	providers: [
 		Password({
-			reset: Email({
-				sendVerificationRequest: async ({ expires, identifier, token }) => {
-					console.log({ expires, identifier, token })
-				}
-			}),
+			reset: EmailPasswordReset,
 			profile(params) {
 				return {
 					email: params.email as string,
