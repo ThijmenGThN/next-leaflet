@@ -1,5 +1,7 @@
 # next-leaflet
 
+![preview](https://i.imgur.com/oulW1VO.png)
+
 An optimized tech stack for efficiency, an all-in-one solution to quickly build modern web apps.
 
 ### Powered by
@@ -92,6 +94,120 @@ Routes:
 - `/login` and `/register` - Auth pages (redirect to `/dash` if authenticated)
 - `/dash` - Protected dashboard (requires authentication)
 
+## Common Workflows
+
+<details>
+<summary>Adding a New UI Component</summary>
+
+This project uses shadcn/ui components. To add a new component:
+
+```bash
+npx shadcn@latest add button
+npx shadcn@latest add card
+# etc.
+```
+
+Components will be added to `src/components/ui/` and are fully customizable.
+
+</details>
+
+<details>
+<summary>Creating Convex Functions</summary>
+
+1. Create a new file in the `convex/` directory (e.g., `convex/tasks.ts`)
+2. Define your queries, mutations, or actions:
+
+```typescript
+import { v } from "convex/values"
+import { query, mutation } from "./_generated/server"
+
+export const list = query({
+	args: {},
+	handler: async (ctx) => {
+		return await ctx.db.query("tasks").collect()
+	},
+})
+
+export const create = mutation({
+	args: { text: v.string() },
+	handler: async (ctx, args) => {
+		await ctx.db.insert("tasks", { text: args.text })
+	},
+})
+```
+
+3. Import and use in your components:
+
+```typescript
+import { useQuery, useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
+
+const tasks = useQuery(api.tasks.list)
+const createTask = useMutation(api.tasks.create)
+```
+
+</details>
+
+<details>
+<summary>Protecting Routes</summary>
+
+Routes are protected via middleware in `src/middleware.ts`. To add authentication to a new route:
+
+1. Add the route pattern to the middleware matcher
+2. Or place the route under the `/dash` directory for automatic protection
+
+</details>
+
+<details>
+<summary>Customizing Themes</summary>
+
+Themes are configured in `src/styles/globals.css`. Modify CSS variables to customize colors:
+
+```css
+@layer base {
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 222.2 84% 4.9%;
+		/* ... customize other colors */
+	}
+}
+```
+
+</details>
+
+## Production Deployment
+
+<details>
+<summary>Using Vercel (Recommended)</summary>
+
+1. Push your code to GitHub
+2. Import your repository on [Vercel](https://vercel.com)
+3. Add your `CONVEX_DEPLOYMENT` environment variable (from Convex dashboard)
+4. Deploy
+
+</details>
+
+<details>
+<summary>Convex Setup for Production</summary>
+
+1. Run `npx convex deploy` to create a production deployment
+2. Copy the production deployment URL to your hosting platform's environment variables
+3. Configure authentication secrets in the Convex dashboard
+
+</details>
+
+## Environment Variables
+
+<details>
+<summary>View environment variables</summary>
+
+Key environment variables:
+
+- `NEXT_PUBLIC_CONVEX_URL` - Convex deployment URL (auto-configured during dev)
+- `CONVEX_DEPLOYMENT` - Production Convex deployment name
+
+</details>
+
 ## Learn More
 
 To learn more about the technologies used:
@@ -101,3 +217,15 @@ To learn more about the technologies used:
 - [Convex Auth Documentation](https://labs.convex.dev/auth)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [shadcn/ui Documentation](https://ui.shadcn.com/)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details.
