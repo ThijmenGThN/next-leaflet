@@ -1,32 +1,11 @@
 "use node"
 
-import { internalAction } from "./_generated/server"
 import { render } from "@react-email/components"
 import { v } from "convex/values"
 import nodemailer from "nodemailer"
 import Reset from "../src/emails/Reset"
+import { internalAction } from "./_generated/server"
 
-// Email configuration from environment variables
-const SMTP_CONFIG = {
-	host: process.env.SMTP_HOST,
-	port: Number.parseInt(process.env.SMTP_PORT || "587", 10),
-	secure: false, // true for 465, false for other ports
-	auth: {
-		user: process.env.SMTP_USER,
-		pass: process.env.SMTP_PASS,
-	},
-}
-
-const DEFAULT_FROM = {
-	name: process.env.MAIL_DEFAULT_NAME || "Next Leaflet",
-	address: process.env.MAIL_DEFAULT_ADDRESS || "noreply@nantric.com",
-}
-
-/**
- * Internal action to send password reset emails
- * Uses Node.js runtime to support nodemailer
- * Called internally by the Email provider
- */
 export const sendPasswordResetEmail = internalAction({
 	args: {
 		email: v.string(),
@@ -44,11 +23,18 @@ export const sendPasswordResetEmail = internalAction({
 			const emailHtml = await render(Reset({ ACTION_URL: resetUrl }))
 
 			// Create transporter
-			const transporter = nodemailer.createTransport(SMTP_CONFIG)
+			const transporter = nodemailer.createTransport({
+				host: process.env.SMTP_HOST,
+				port: Number.parseInt(process.env.SMTP_PORT || "587", 10),
+				auth: {
+					user: process.env.SMTP_USER,
+					pass: process.env.SMTP_PASS,
+				},
+			})
 
 			// Send email
 			const info = await transporter.sendMail({
-				from: `"${DEFAULT_FROM.name}" <${DEFAULT_FROM.address}>`,
+				from: `"${process.env.MAIL_DEFAULT_NAME}" <${process.env.MAIL_DEFAULT_ADDRESS}>`,
 				to: email,
 				subject: "Reset your password",
 				html: emailHtml,

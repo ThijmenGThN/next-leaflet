@@ -26,6 +26,29 @@ loadEnvFile({ path: ".env.local", processEnv: config })
 
 const runOnceWorkflow = process.argv.includes("--once")
 
+// Always set SMTP environment variables from .env.local (before early exit check)
+console.log("Setting SMTP environment variables...")
+const smtpVars = {
+	SMTP_HOST: config.SMTP_HOST || "mail.nantric.com",
+	SMTP_PORT: config.SMTP_PORT || "587",
+	SMTP_USER: config.SMTP_USER || "noreply@nantric.com",
+	SMTP_PASS: config.SMTP_PASS || "",
+	MAIL_DEFAULT_NAME: config.MAIL_DEFAULT_NAME || "Next Leaflet",
+	MAIL_DEFAULT_ADDRESS: config.MAIL_DEFAULT_ADDRESS || "noreply@nantric.com",
+}
+
+for (const [key, value] of Object.entries(smtpVars)) {
+	if (value) {
+		const result = spawnSync("npx", ["convex", "env", "set", key, value], {
+			stdio: "inherit",
+		})
+		if (result.status !== 0) {
+			console.error(`Failed to set ${key} in Convex`)
+			process.exit(result.status)
+		}
+	}
+}
+
 // Check if all required Convex environment variables are already set
 const checkEnvResult = spawnSync("npx", ["convex", "env", "list"], {
 	encoding: "utf-8",
@@ -42,7 +65,7 @@ if (
 	hasJwks &&
 	hasSiteUrl
 ) {
-	// All environment variables are already set, skip setup
+	// All environment variables are already set, skip JWT key regeneration
 	process.exit(0)
 }
 

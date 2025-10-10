@@ -1,7 +1,12 @@
 "use client"
 
-import { signOut } from "@/convex/auth"
+import { useAuthActions } from "@convex-dev/auth/react"
 
 export default function LogoutButton() {
-	return <button onClick={signOut}>Logout</button>
+	const { signOut } = useAuthActions()
+	return (
+		<button type="button" onClick={() => void signOut()}>
+			Logout
+		</button>
+	)
 }
