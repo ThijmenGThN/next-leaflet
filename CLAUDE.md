@@ -4,89 +4,137 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js 15 application with Convex backend and Convex Auth for authentication. The stack includes:
-- **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS 4, shadcn/ui components
-- **Backend**: Convex (database + serverless functions)
-- **Auth**: @convex-dev/auth with Password provider
-- **Styling**: Tailwind CSS with next-themes for dark mode
-- **Linting/Formatting**: Biome (not ESLint/Prettier)
+next-leaflet is a modern full-stack web application template built with Next.js 15, React 19, and Convex as the backend. It provides authentication, database, and a comprehensive UI component library out of the box.
 
 ## Development Commands
 
-### Running the app
+### Starting Development
 ```bash
-npm run dev              # Run both frontend and backend in parallel
-npm run dev:frontend     # Run only Next.js dev server (port 3000)
-npm run dev:backend      # Run only Convex dev server
+npm run dev              # Runs both frontend and backend in parallel
+npm run dev:frontend     # Next.js dev server only (port 3000)
+npm run dev:backend      # Convex dev server only
 ```
 
-The `predev` script runs automatically before `npm run dev` to:
-1. Wait for Convex to be ready
-2. Run setup.mjs to configure Convex Auth
-3. Open Convex dashboard
+The `npm run dev` command has a `predev` hook that:
+1. Waits for Convex to be ready (`convex dev --until-success`)
+2. Runs the `setup.mjs` script once to configure JWT keys and SMTP
+3. Opens the Convex dashboard
 
-### Code quality
+### Code Quality
 ```bash
 npm run lint             # Check code with Biome
-npm run lint:fix         # Fix issues automatically
-npm run format           # Format code
+npm run lint:fix         # Auto-fix issues with Biome
+npm run format           # Format code with Biome
 ```
 
-### Build
+### Building
 ```bash
-npm run build            # Build Next.js app
+npm run build            # Build Next.js for production
 npm start                # Start production server
+```
+
+### Email Development
+```bash
+npm run email            # Start react-email dev server
 ```
 
 ## Architecture
 
+### Frontend Structure (Next.js App Router)
+- `src/app/(home)/` - Public landing pages
+- `src/app/(auth)/` - Auth pages (login, register, reset) - redirects to /dash if authenticated
+- `src/app/dash/` - Protected dashboard routes - requires authentication
+- `src/components/` - Reusable components
+- `src/components/ui/` - shadcn/ui components
+- `src/middleware.ts` - Route protection using Convex Auth middleware
+
+### Backend Structure (Convex)
+- `convex/schema.ts` - Database schema with Convex Auth tables
+- `convex/auth.ts` - Convex Auth configuration with Password provider and email reset
+- `convex/auth.config.ts` - Additional auth configuration
+- `convex/http.ts` - HTTP routes (currently just auth routes)
+- `convex/users.ts` - User queries and mutations (current, updateName, updateTheme)
+- `convex/email.ts` - Email sending logic using nodemailer (Node.js runtime)
+- `convex/_generated/` - Auto-generated types and API
+
 ### Authentication Flow
-- `convex/auth.ts`: Configures Convex Auth with Password provider
-- `convex/http.ts`: HTTP router that exposes auth endpoints
-- `src/middleware.ts`: Next.js middleware for route protection
-  - `/login` and `/register` redirect to `/dash` if authenticated
-  - `/dash` requires authentication, redirects to `/login` if not
-- `src/components/ConvexClientProvider.tsx`: Client-side Convex setup with auth
-- Root layout wraps app with ConvexAuthNextjsServerProvider for server-side auth
+1. Authentication uses `@convex-dev/auth` with Password provider
+2. Middleware in `src/middleware.ts` protects routes:
+   - Unauthenticated users trying to access `/dash` → redirected to `/login`
+   - Authenticated users trying to access `/login` or `/register` → redirected to `/dash`
+3. Password reset flow:
+   - User requests reset on `/reset` page
+   - Email sent via `convex/email.ts` using nodemailer
+   - Reset link contains token and email
+   - `src/emails/Reset.tsx` is the email template (react-email)
+4. Auth state available via `useAuthActions()` (client) and `auth.getUserId(ctx)` (server)
+5. Error handling in `src/lib/auth-errors.ts` provides user-friendly messages
 
-### Route Structure
-- `src/app/(home)/*`: Public home routes
-- `src/app/(auth)/*`: Auth pages (login, register) with shared layout
-- `src/app/dash/*`: Protected dashboard routes
-- Route groups use parentheses for organization without affecting URL structure
+### Key Patterns
 
-### Convex Backend
-- `convex/schema.ts`: Database schema with auth tables and users table
-  - Users table extends auth with optional name, email, phone, image fields
-  - Email is indexed for lookups
-- `convex/_generated/`: Auto-generated types (do not edit manually)
-- All Convex functions must use Convex's type system (v.string(), v.number(), etc.)
+**Convex Queries/Mutations Pattern:**
+```typescript
+// Define in convex/*.ts
+export const myQuery = query({
+  args: { id: v.id("tableName") },
+  handler: async (ctx, args) => {
+    const userId = await auth.getUserId(ctx)
+    if (!userId) throw new Error("Not authenticated")
+    return await ctx.db.get(args.id)
+  }
+})
 
-### Styling & Components
-- `src/components/ui/*`: shadcn/ui components (pre-configured, can be modified)
-- `src/styles/globals.css`: Global styles with Tailwind base
-- Theme managed via next-themes (ThemeProvider in root layout)
-- Biome enforces tabs for indentation, double quotes, and 100-char line width
+// Use in components
+import { useQuery, useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
 
-### Path Aliases
-- `@/*` → `src/*`
-- `@/convex/*` → `convex/*`
+const data = useQuery(api.fileName.myQuery, { id })
+const doMutation = useMutation(api.fileName.myMutation)
+```
 
-## Key Development Notes
+**Protected Routes:**
+- Place new protected pages in `src/app/dash/` for automatic protection
+- Or update `isProtectedRoute` matcher in `src/middleware.ts`
 
-### Working with Convex
-- Functions in `convex/` directory are automatically deployed
-- Use `ctx.auth.getUserIdentity()` to get current user in mutations/queries
-- Schema changes are applied automatically but may require migration for production
-- Generated API types are in `convex/_generated/api.d.ts`
+**Convex Actions (Node.js runtime):**
+- Use `"use node"` directive at top of file for Node.js-only APIs (like nodemailer)
+- Define with `internalAction` for internal-only access
+- Call from mutations/queries: `await ctx.runAction(internal.module.action, args)`
 
-### Code Style (Biome)
-- Uses tabs (not spaces)
-- Semicolons only when needed
-- Double quotes for strings
-- 100 character line width
-- Run `npm run lint:fix` before committing
+### Configuration
 
-### Environment Variables
-- `NEXT_PUBLIC_CONVEX_URL`: Required for client-side Convex connection
-- Set up via `.env.local` (created during initial setup)
+**Environment Setup:**
+1. Copy `.env.sample` to `.env.local`
+2. Set `NEXT_PUBLIC_DOMAIN` (defaults to http://localhost:3000)
+3. Configure SMTP for password reset emails (optional):
+   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`
+   - `MAIL_DEFAULT_NAME`, `MAIL_DEFAULT_ADDRESS`
+4. The `setup.mjs` script runs on first dev and configures:
+   - JWT keys for Convex Auth
+   - SITE_URL in Convex environment
+   - SMTP variables in Convex environment
+
+**Schema Changes:**
+- Modify `convex/schema.ts`
+- Convex dev server auto-syncs changes
+- Types regenerate in `convex/_generated/`
+
+**Adding shadcn/ui Components:**
+```bash
+npx shadcn@latest add [component-name]
+```
+Components are added to `src/components/ui/` and fully customizable.
+
+### Theme System
+- Uses `next-themes` for theme switching
+- Theme preference stored in Convex database (users.theme)
+- `ThemeSync` component syncs browser theme with database
+- Theme values: "light", "dark", "system"
+- Customize colors in `src/styles/globals.css` CSS variables
+
+### Important Notes
+- Convex functions use TypeScript with Zod-like validators (`v` from "convex/values")
+- All Convex types are auto-generated - never modify `_generated/` directly
+- Use `ConvexClientProvider` wrapper in app layout for client-side Convex access
+- Error messages from Convex Auth are parsed in `src/lib/auth-errors.ts`
+- Database schema includes auth tables from `authTables` (required for Convex Auth)
