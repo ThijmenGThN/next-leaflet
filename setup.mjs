@@ -1,15 +1,3 @@
-/**
- * Convex Auth Setup Script
- *
- * This script automatically configures environment variables for Convex Auth:
- * - Runs @convex-dev/auth setup for OAuth providers
- * - Sets SITE_URL from NEXT_PUBLIC_DOMAIN in .env.local
- * - Generates RSA key pair and sets JWT_PRIVATE_KEY and JWKS
- *
- * Called automatically by the predev script in package.json.
- * You can safely delete it and remove it from package.json scripts.
- */
-
 import { spawnSync } from "child_process"
 import { config as loadEnvFile } from "dotenv"
 import fs from "fs"
@@ -26,27 +14,31 @@ loadEnvFile({ path: ".env.local", processEnv: config })
 
 const runOnceWorkflow = process.argv.includes("--once")
 
-// Always set SMTP environment variables from .env.local (before early exit check)
-console.log("Setting SMTP environment variables...")
-const smtpVars = {
-	SMTP_HOST: config.SMTP_HOST || "mail.nantric.com",
-	SMTP_PORT: config.SMTP_PORT || "587",
-	SMTP_USER: config.SMTP_USER || "noreply@nantric.com",
-	SMTP_PASS: config.SMTP_PASS || "",
-	MAIL_DEFAULT_NAME: config.MAIL_DEFAULT_NAME || "Next Leaflet",
-	MAIL_DEFAULT_ADDRESS: config.MAIL_DEFAULT_ADDRESS || "noreply@nantric.com",
-}
+// Set SMTP environment variables from .env.local if they exist (before early exit check)
+if (config.SMTP_HOST || config.SMTP_USER || config.SMTP_PASS) {
+	console.log("Setting SMTP environment variables...")
+	const smtpVars = {
+		SMTP_HOST: config.SMTP_HOST,
+		SMTP_PORT: config.SMTP_PORT || "587",
+		SMTP_USER: config.SMTP_USER,
+		SMTP_PASS: config.SMTP_PASS,
+		MAIL_DEFAULT_NAME: config.MAIL_DEFAULT_NAME || "next-leaflet",
+		MAIL_DEFAULT_ADDRESS: config.MAIL_DEFAULT_ADDRESS || config.SMTP_USER,
+	}
 
-for (const [key, value] of Object.entries(smtpVars)) {
-	if (value) {
-		const result = spawnSync("npx", ["convex", "env", "set", key, value], {
-			stdio: "inherit",
-		})
-		if (result.status !== 0) {
-			console.error(`Failed to set ${key} in Convex`)
-			process.exit(result.status)
+	for (const [key, value] of Object.entries(smtpVars)) {
+		if (value) {
+			const result = spawnSync("npx", ["convex", "env", "set", key, value], {
+				stdio: "inherit",
+			})
+			if (result.status !== 0) {
+				console.error(`Failed to set ${key} in Convex`)
+				process.exit(result.status)
+			}
 		}
 	}
+} else {
+	console.log("No SMTP configuration found in .env.local, skipping SMTP setup...")
 }
 
 // Check if all required Convex environment variables are already set
