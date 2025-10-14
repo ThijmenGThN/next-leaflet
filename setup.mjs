@@ -1,22 +1,46 @@
+/**
+ * Setup Script for Convex Authentication
+ *
+ * This script configures your Convex backend with the necessary environment variables
+ * for authentication to work. It runs automatically before `npm run dev`.
+ *
+ * What it does:
+ * 1. Transfers SMTP email settings from .env to Convex
+ * 2. Generates JWT signing keys and stores them in .env (also syncs to Convex)
+ * 3. Sets the site URL for auth redirects
+ *
+ * Note: JWT keys in .env act as the "setup completed" marker - if they exist,
+ * key regeneration is skipped on subsequent runs.
+ */
+
 import { spawnSync } from "child_process"
 import { config as loadEnvFile } from "dotenv"
 import fs from "fs"
 import { exportJWK, exportPKCS8, generateKeyPair } from "jose"
 
-// Exit early if .env.local doesn't exist
-if (!fs.existsSync(".env.local")) {
+// ============================================================================
+// STEP 1: Load local environment variables
+// ============================================================================
+
+// Exit early if .env doesn't exist yet
+if (!fs.existsSync(".env")) {
 	process.exit(0)
 }
 
-// Load environment variables from .env.local
+// Load .env variables into a config object
 const config = {}
-loadEnvFile({ path: ".env.local", processEnv: config })
+loadEnvFile({ path: ".env", processEnv: config })
 
+// Check if we should only run once (--once flag from package.json predev hook)
 const runOnceWorkflow = process.argv.includes("--once")
 
-// Set SMTP environment variables from .env.local if they exist (before early exit check)
+// ============================================================================
+// STEP 2: Configure SMTP for emails
+// ============================================================================
+
 if (config.SMTP_HOST || config.SMTP_USER || config.SMTP_PASS) {
 	console.log("Setting SMTP environment variables...")
+
 	const smtpVars = {
 		SMTP_HOST: config.SMTP_HOST,
 		SMTP_PORT: config.SMTP_PORT || "587",
@@ -26,100 +50,96 @@ if (config.SMTP_HOST || config.SMTP_USER || config.SMTP_PASS) {
 		MAIL_DEFAULT_ADDRESS: config.MAIL_DEFAULT_ADDRESS || config.SMTP_USER,
 	}
 
+	// Transfer each SMTP variable to Convex environment
 	for (const [key, value] of Object.entries(smtpVars)) {
 		if (value) {
-			const result = spawnSync("npx", ["convex", "env", "set", key, value], {
-				stdio: "inherit",
-			})
-			if (result.status !== 0) {
-				console.error(`Failed to set ${key} in Convex`)
-				process.exit(result.status)
-			}
+			setConvexEnvVar(key, value)
 		}
 	}
 } else {
-	console.log("No SMTP configuration found in .env.local, skipping SMTP setup...")
+	console.log("No SMTP configuration found in .env, skipping SMTP setup...")
 }
 
-// Check if all required Convex environment variables are already set
-const checkEnvResult = spawnSync("npx", ["convex", "env", "list"], {
-	encoding: "utf-8",
-})
-const envOutput = checkEnvResult.stdout || ""
-const hasJwtPrivateKey = envOutput.includes("JWT_PRIVATE_KEY=")
-const hasJwks = envOutput.includes("JWKS=")
-const hasSiteUrl = envOutput.includes("SITE_URL=")
+// ============================================================================
+// STEP 3: Check if setup already completed (avoid regenerating JWT keys)
+// ============================================================================
 
-if (
-	runOnceWorkflow &&
-	config.SETUP_SCRIPT_RAN !== undefined &&
-	hasJwtPrivateKey &&
-	hasJwks &&
-	hasSiteUrl
-) {
-	// All environment variables are already set, skip JWT key regeneration
+// If JWT keys already exist in .env, skip regeneration
+if (runOnceWorkflow && config.JWT_PRIVATE_KEY && config.JWKS) {
+	// Still sync them to Convex in case they're missing there
+	setConvexEnvVar("JWT_PRIVATE_KEY", config.JWT_PRIVATE_KEY, true)
+	setConvexEnvVar("JWKS", config.JWKS, true)
+
+	const siteUrl = config.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+	setConvexEnvVar("SITE_URL", siteUrl, true)
+
 	process.exit(0)
 }
 
-// Run Convex Auth setup for OAuth providers (non-blocking if it fails)
+// ============================================================================
+// STEP 4: Run Convex Auth CLI (for OAuth providers like Google/GitHub)
+// ============================================================================
+// Note: This template uses password auth by default, not OAuth
+
 const result = spawnSync("npx", ["@convex-dev/auth", "--skip-git-check"], {
-	stdio: "inherit",
+	stdio: "pipe", // Suppress output unless there's an error
 })
 
 if (result.status !== 0) {
-	console.log("Warning: @convex-dev/auth setup had issues, continuing anyway...")
+	// Silent failure - OAuth setup is optional
 }
 
-// Set SITE_URL from NEXT_PUBLIC_DOMAIN in .env.local
+// ============================================================================
+// STEP 5: Set site URL for authentication redirects
+// ============================================================================
+
 const siteUrl = config.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
-const siteUrlResult = spawnSync("npx", ["convex", "env", "set", `SITE_URL=${siteUrl}`], {
-	stdio: "inherit",
-})
+setConvexEnvVar("SITE_URL", siteUrl)
 
-if (siteUrlResult.status !== 0) {
-	console.error("Failed to set SITE_URL in Convex")
-	process.exit(siteUrlResult.status)
-}
+// ============================================================================
+// STEP 6: Generate JWT keys for authentication tokens
+// ============================================================================
 
-// Generate RSA key pair for JWT signing
-console.log("Generating JWT keys...")
-const keys = await generateKeyPair("RS256", {
-	extractable: true,
-})
+// Generate RSA-256 key pair (industry standard for JWT signing)
+const keys = await generateKeyPair("RS256", { extractable: true })
+
+// Private key: Used by Convex to SIGN auth tokens (kept secret server-side)
 const privateKey = await exportPKCS8(keys.privateKey)
-const publicKey = await exportJWK(keys.publicKey)
-const jwks = JSON.stringify({ keys: [{ use: "sig", ...publicKey }] })
 const jwtPrivateKey = privateKey.trimEnd().replace(/\n/g, " ")
 
-// Set JWT_PRIVATE_KEY in Convex
-const jwtPrivateKeyResult = spawnSync(
-	"npx",
-	["convex", "env", "set", `JWT_PRIVATE_KEY=${jwtPrivateKey}`],
-	{
-		stdio: "inherit",
-	},
-)
+// Public key: Used to VERIFY auth tokens (can be shared)
+const publicKey = await exportJWK(keys.publicKey)
+const jwks = JSON.stringify({ keys: [{ use: "sig", ...publicKey }] })
 
-if (jwtPrivateKeyResult.status !== 0) {
-	console.error("Failed to set JWT_PRIVATE_KEY in Convex")
-	process.exit(jwtPrivateKeyResult.status)
-}
+// Store JWT keys in .env file (these act as the "setup completed" marker)
+fs.appendFileSync(".env", `\nJWT_PRIVATE_KEY="${jwtPrivateKey}"\n`)
+fs.appendFileSync(".env", `JWKS='${jwks}'\n`)
 
-// Set JWKS in Convex
-const jwksResult = spawnSync("npx", ["convex", "env", "set", `JWKS=${jwks}`], {
-	stdio: "inherit",
-})
+// Also sync them to Convex environment
+setConvexEnvVar("JWT_PRIVATE_KEY", jwtPrivateKey)
+setConvexEnvVar("JWKS", jwks)
 
-if (jwksResult.status !== 0) {
-	console.error("Failed to set JWKS in Convex")
-	process.exit(jwksResult.status)
-}
-
-console.log("✓ All Convex environment variables set successfully!")
-
-// Mark setup as completed in .env.local
-if (runOnceWorkflow) {
-	fs.writeFileSync(".env.local", `\nSETUP_SCRIPT_RAN=1\n`, { flag: "a" })
-}
+console.log("✓ Setup complete! Authentication is ready.")
 
 process.exit(0)
+
+// ============================================================================
+// Helper Functions
+// ============================================================================
+
+/**
+ * Sets an environment variable in Convex
+ * @param {string} key - Environment variable name
+ * @param {string} value - Environment variable value
+ * @param {boolean} silent - Suppress output (default: false)
+ */
+function setConvexEnvVar(key, value, silent = false) {
+	const result = spawnSync("npx", ["convex", "env", "set", `${key}=${value}`], {
+		stdio: silent ? "pipe" : "inherit",
+	})
+
+	if (result.status !== 0) {
+		console.error(`Failed to set ${key} in Convex`)
+		process.exit(result.status)
+	}
+}
