@@ -38,6 +38,6 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 		}),
 	],
 	callbacks: {
-		redirect: async () => "/dash"
+		redirect: async ({ redirectTo }) => redirectTo || process.env.NEXT_PUBLIC_DOMAIN + "/dash"
 	},
 })

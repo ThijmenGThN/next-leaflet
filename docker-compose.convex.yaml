@@ -7,7 +7,9 @@ services:
     ports: [ "3210:3210", "3211:3211" ]
     volumes: [ "convex:/convex/data" ]
     environment:
-      CONVEX_SITE_ORIGIN: "http://localhost:3210"
+      CONVEX_SITE_ORIGIN: "http://localhost:3000" # HTTP actions
+      CONVEX_CLOUD_ORIGIN: "http://localhost:3120" # Convex API
+      NEXT_PUBLIC_DEPLOYMENT_URL: "http://localhost:3120" # Convex API
     stop_grace_period: 10s
     stop_signal: SIGINT
     healthcheck:
