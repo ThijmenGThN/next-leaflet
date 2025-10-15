@@ -1,7 +1,7 @@
 export default {
 	providers: [
 		{
-			domain: process.env.CONVEX_SITE_URL || "next-leaflet.app",
+			domain: process.env.CONVEX_SITE_URL,
 			applicationID: "convex",
 		},
 	],

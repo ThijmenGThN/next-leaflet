@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     ports: [ "3210:3210", "3211:3211" ]
     volumes: [ "convex:/convex/data" ]
+    environment:
+      CONVEX_SITE_ORIGIN: "http://localhost:3210"
     stop_grace_period: 10s
     stop_signal: SIGINT
     healthcheck:
