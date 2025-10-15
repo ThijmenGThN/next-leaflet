@@ -6,12 +6,11 @@
  *
  * What it does:
  * 1. Transfers SMTP email settings from .env.local to Convex
- * 2. Transfers GitHub OAuth credentials from .env.local to Convex
- * 3. Generates JWT signing keys and stores them in .env.local (also syncs to Convex)
+ * 2. Generates JWT signing keys and stores them in .env.local (also syncs to Convex)
+ * 3. Sets the site URL for auth redirects
  *
  * Note: JWT keys in .env.local act as the "setup completed" marker - if they exist,
  * key regeneration is skipped on subsequent runs.
- * Note: SITE_URL must be set in convex.json or via Convex dashboard for OAuth to work.
  */
 
 import { spawnSync } from "child_process"
@@ -62,7 +61,7 @@ if (config.SMTP_HOST || config.SMTP_USER || config.SMTP_PASS) {
 }
 
 // ============================================================================
-// STEP 3: Configure GitHub OAuth
+// STEP 2.5: Configure GitHub OAuth
 // ============================================================================
 
 if (config.AUTH_GITHUB_ID || config.AUTH_GITHUB_SECRET) {
@@ -84,7 +83,7 @@ if (config.AUTH_GITHUB_ID || config.AUTH_GITHUB_SECRET) {
 }
 
 // ============================================================================
-// STEP 4: Check if setup already completed (avoid regenerating JWT keys)
+// STEP 3: Check if setup already completed (avoid regenerating JWT keys)
 // ============================================================================
 
 // If JWT keys already exist in .env.local, skip regeneration
@@ -93,13 +92,16 @@ if (runOnceWorkflow && config.JWT_PRIVATE_KEY && config.JWKS) {
 	setConvexEnvVar("JWT_PRIVATE_KEY", config.JWT_PRIVATE_KEY, true)
 	setConvexEnvVar("JWKS", config.JWKS, true)
 
+	const siteUrl = config.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+	setConvexEnvVar("SITE_URL", siteUrl, true)
+
 	process.exit(0)
 }
 
 // ============================================================================
-// STEP 5: Run Convex Auth CLI (for OAuth providers like Google/GitHub)
+// STEP 4: Run Convex Auth CLI (for OAuth providers like Google/GitHub)
 // ============================================================================
-// Note: This runs the Convex Auth setup wizard (optional for OAuth)
+// Note: This template uses password auth by default, not OAuth
 
 const result = spawnSync("npx", ["@convex-dev/auth", "--skip-git-check"], {
 	stdio: "pipe", // Suppress output unless there's an error
@@ -108,6 +110,13 @@ const result = spawnSync("npx", ["@convex-dev/auth", "--skip-git-check"], {
 if (result.status !== 0) {
 	// Silent failure - OAuth setup is optional
 }
+
+// ============================================================================
+// STEP 5: Set site URL for authentication redirects
+// ============================================================================
+
+const siteUrl = config.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+setConvexEnvVar("SITE_URL", siteUrl)
 
 // ============================================================================
 // STEP 6: Generate JWT keys for authentication tokens
