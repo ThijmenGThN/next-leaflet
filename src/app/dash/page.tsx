@@ -85,15 +85,10 @@ export default function Page() {
 											<div className="flex items-center gap-2">
 												{isEmailVerified ? (
 													<Badge variant="outline" className="gap-1.5 border-green-600 text-green-600">
-														<CheckCircle2 className="h-3 w-3" />
 														Verified
 													</Badge>
 												) : (
 													<>
-														<Badge variant="outline" className="gap-1.5 border-destructive text-destructive">
-															<XCircle className="h-3 w-3" />
-															Not verified
-														</Badge>
 														<Button
 															size="sm"
 															variant="ghost"
@@ -102,7 +97,7 @@ export default function Page() {
 															className="h-7 text-xs px-2"
 														>
 															<Mail className="h-3 w-3 mr-1.5" />
-															{isResending ? "Sending..." : "Resend"}
+															{isResending ? "Sending..." : "Unverified, resend?"}
 														</Button>
 													</>
 												)}
