@@ -14,6 +14,7 @@ export default defineSchema({
 		phone: v.optional(v.string()),
 		phoneVerificationTime: v.optional(v.number()),
 		image: v.optional(v.string()),
+		profilePictureStorageId: v.optional(v.id("_storage")),
 		isAnonymous: v.optional(v.boolean()),
 		theme: v.optional(v.union(v.literal("light"), v.literal("dark"), v.literal("system"))),
 	}).index("email", ["email"]),

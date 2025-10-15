@@ -129,3 +129,78 @@ export const sendVerificationEmailAfterSignup = internalMutation({
 		})
 	},
 })
+
+export const generateUploadUrl = mutation({
+	args: {},
+	handler: async (ctx) => {
+		const userId = await auth.getUserId(ctx)
+		if (userId === null) {
+			throw new Error("Not authenticated")
+		}
+		return await ctx.storage.generateUploadUrl()
+	},
+})
+
+export const updateProfilePicture = mutation({
+	args: {
+		storageId: v.id("_storage"),
+	},
+	handler: async (ctx, args) => {
+		const userId = await auth.getUserId(ctx)
+		if (userId === null) {
+			throw new Error("Not authenticated")
+		}
+
+		const user = await ctx.db.get(userId)
+		if (!user) {
+			throw new Error("User not found")
+		}
+
+		// Delete old profile picture if exists
+		if (user.profilePictureStorageId) {
+			await ctx.storage.delete(user.profilePictureStorageId)
+		}
+
+		// Update user with new profile picture
+		await ctx.db.patch(userId, {
+			profilePictureStorageId: args.storageId,
+		})
+	},
+})
+
+export const removeProfilePicture = mutation({
+	args: {},
+	handler: async (ctx) => {
+		const userId = await auth.getUserId(ctx)
+		if (userId === null) {
+			throw new Error("Not authenticated")
+		}
+
+		const user = await ctx.db.get(userId)
+		if (!user) {
+			throw new Error("User not found")
+		}
+
+		// Delete profile picture from storage
+		if (user.profilePictureStorageId) {
+			await ctx.storage.delete(user.profilePictureStorageId)
+		}
+
+		// Remove profile picture reference from user
+		await ctx.db.patch(userId, {
+			profilePictureStorageId: undefined,
+		})
+	},
+})
+
+export const getProfilePictureUrl = query({
+	args: {
+		storageId: v.optional(v.id("_storage")),
+	},
+	handler: async (ctx, args) => {
+		if (!args.storageId) {
+			return null
+		}
+		return await ctx.storage.getUrl(args.storageId)
+	},
+})

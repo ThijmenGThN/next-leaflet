@@ -71,6 +71,17 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 					})
 				}
 			}
+
+			// Save OAuth profile image (e.g., from GitHub)
+			if (args.profile.image && typeof args.profile.image === "string") {
+				const user = await ctx.db.get(args.userId)
+				// Only update if user doesn't have an image set yet
+				if (user && !user.image) {
+					await ctx.db.patch(args.userId, {
+						image: args.profile.image,
+					})
+				}
+			}
 		},
 	},
 })
