@@ -9,9 +9,8 @@ services:
     environment:
       # Points to convex actions port 3211.
       CONVEX_SITE_ORIGIN: "http://localhost:3000"
-      # Both should point to convex api port 3210.
+      # Points to convex api port 3210.
       CONVEX_CLOUD_ORIGIN: "http://localhost:3120" 
-      NEXT_PUBLIC_DEPLOYMENT_URL: "http://localhost:3120"
     stop_grace_period: 10s
     stop_signal: SIGINT
     healthcheck:
@@ -23,6 +22,9 @@ services:
     image: ghcr.io/get-convex/convex-dashboard:latest
     restart: unless-stopped
     ports: [ "6791:6791" ]
+    environment:
+      # Points to convex api port 3210.
+      NEXT_PUBLIC_DEPLOYMENT_URL: "http://localhost:3120"
     stop_grace_period: 10s
     stop_signal: SIGINT
     depends_on:
