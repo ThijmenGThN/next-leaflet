@@ -2,7 +2,7 @@
 
 import { useAuthActions } from "@convex-dev/auth/react"
 import { useMutation, useQuery } from "convex/react"
-import { LogOut } from "lucide-react"
+import { LogOut, Mail, CheckCircle2, XCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { api } from "@/../convex/_generated/api"
@@ -11,13 +11,16 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Badge } from "@/components/ui/badge"
 
 export default function Page() {
 	const { signOut } = useAuthActions()
 	const user = useQuery(api.users.current)
 	const updateName = useMutation(api.users.updateName)
+	const resendVerificationEmail = useMutation(api.users.resendVerificationEmail)
 	const [name, setName] = useState("")
 	const [isUpdating, setIsUpdating] = useState(false)
+	const [isResending, setIsResending] = useState(false)
 
 	useEffect(() => {
 		if (user) {
@@ -37,7 +40,20 @@ export default function Page() {
 		}
 	}
 
+	const handleResendVerification = async () => {
+		setIsResending(true)
+		try {
+			await resendVerificationEmail()
+			toast.success("Verification email sent! Please check your inbox.")
+		} catch (error) {
+			toast.error(error instanceof Error ? error.message : "Failed to send verification email")
+		} finally {
+			setIsResending(false)
+		}
+	}
+
 	const hasChanges = name !== (user?.name || "")
+	const isEmailVerified = user?.emailVerificationTime !== undefined
 	return (
 		<div className="min-h-screen bg-background flex items-center justify-center">
 			<div className="w-full max-w-md px-6">
@@ -63,7 +79,36 @@ export default function Page() {
 								</div>
 
 								<div className="space-y-2">
-									<Label htmlFor="email">Email</Label>
+									<div className="flex items-center justify-between">
+										<Label htmlFor="email">Email</Label>
+										{user?.email && (
+											<div className="flex items-center gap-2">
+												{isEmailVerified ? (
+													<Badge variant="outline" className="gap-1.5 border-green-600 text-green-600">
+														<CheckCircle2 className="h-3 w-3" />
+														Verified
+													</Badge>
+												) : (
+													<>
+														<Badge variant="outline" className="gap-1.5 border-destructive text-destructive">
+															<XCircle className="h-3 w-3" />
+															Not verified
+														</Badge>
+														<Button
+															size="sm"
+															variant="ghost"
+															onClick={handleResendVerification}
+															disabled={isResending}
+															className="h-7 text-xs px-2"
+														>
+															<Mail className="h-3 w-3 mr-1.5" />
+															{isResending ? "Sending..." : "Resend"}
+														</Button>
+													</>
+												)}
+											</div>
+										)}
+									</div>
 									<Input id="email" type="email" value={user?.email || ""} disabled />
 								</div>
 							</div>

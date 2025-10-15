@@ -20,6 +20,8 @@ loadEnvFile({ path: ".env.local", processEnv: config })
 // Check if we should only run once (--once flag from package.json predev hook)
 const runOnceWorkflow = process.argv.includes("--once")
 
+setConvexEnvVar("SITE_URL", config.NEXT_PUBLIC_DOMAIN)
+
 // ============================================================================
 // STEP 2: Configure SMTP for emails
 // ============================================================================

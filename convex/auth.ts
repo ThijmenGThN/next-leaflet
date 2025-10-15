@@ -24,6 +24,26 @@ const EmailPasswordReset = Email({
 	},
 })
 
+const EmailVerification = Email({
+	// @ts-expect-error - Convex Auth passes ctx as second parameter even though it's not in Auth.js types
+	async sendVerificationRequest(params, ctx) {
+		const { identifier: email, token } = params
+
+		try {
+			await ctx.runAction(internal.email.sendVerificationEmail, {
+				email,
+				token,
+			})
+			console.log("Verification email request sent for:", email)
+		} catch (error) {
+			console.error("Error sending verification email:", error)
+			throw new Error(
+				`Failed to send verification email: ${error instanceof Error ? error.message : "Unknown error"}`,
+			)
+		}
+	},
+})
+
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 	providers: [
 		GitHub,
@@ -38,6 +58,19 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 		}),
 	],
 	callbacks: {
-		redirect: async ({ redirectTo }) => redirectTo || process.env.NEXT_PUBLIC_DOMAIN + "/dash"
+		redirect: async ({ redirectTo }) => redirectTo || process.env.NEXT_PUBLIC_DOMAIN + "/dash",
+		async afterUserCreatedOrUpdated(ctx, args) {
+			// Send verification email only for password-based signups (not OAuth)
+			if (args.existingUserId === undefined && args.profile.email) {
+				// New user created with password provider
+				const user = await ctx.db.get(args.userId)
+				if (user && !user.emailVerificationTime && user.email) {
+					// Schedule verification email to be sent
+					await ctx.scheduler.runAfter(0, internal.users.sendVerificationEmailAfterSignup, {
+						userId: args.userId,
+					})
+				}
+			}
+		},
 	},
 })
