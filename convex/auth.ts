@@ -24,26 +24,6 @@ const EmailPasswordReset = Email({
 	},
 })
 
-const EmailVerification = Email({
-	// @ts-expect-error - Convex Auth passes ctx as second parameter even though it's not in Auth.js types
-	async sendVerificationRequest(params, ctx) {
-		const { identifier: email, token } = params
-
-		try {
-			await ctx.runAction(internal.email.sendVerificationEmail, {
-				email,
-				token,
-			})
-			console.log("Verification email request sent for:", email)
-		} catch (error) {
-			console.error("Error sending verification email:", error)
-			throw new Error(
-				`Failed to send verification email: ${error instanceof Error ? error.message : "Unknown error"}`,
-			)
-		}
-	},
-})
-
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 	providers: [
 		GitHub,
@@ -58,7 +38,16 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 		}),
 	],
 	callbacks: {
-		redirect: async ({ redirectTo }) => redirectTo || process.env.NEXT_PUBLIC_DOMAIN + "/dash",
+		redirect: async ({ redirectTo }) => {
+			const baseUrl = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+			const path = redirectTo || "/dash"
+			// If redirectTo is already a full URL, return it as-is
+			if (path.startsWith("http://") || path.startsWith("https://")) {
+				return path
+			}
+			// Otherwise, prepend the frontend domain
+			return `${baseUrl}${path}`
+		},
 		async afterUserCreatedOrUpdated(ctx, args) {
 			// Send verification email only for password-based signups (not OAuth)
 			if (args.existingUserId === undefined && args.profile.email) {
