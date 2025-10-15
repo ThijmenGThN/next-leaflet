@@ -5,11 +5,11 @@
  * for authentication to work. It runs automatically before `npm run dev`.
  *
  * What it does:
- * 1. Transfers SMTP email settings from .env to Convex
- * 2. Generates JWT signing keys and stores them in .env (also syncs to Convex)
+ * 1. Transfers SMTP email settings from .env.local to Convex
+ * 2. Generates JWT signing keys and stores them in .env.local (also syncs to Convex)
  * 3. Sets the site URL for auth redirects
  *
- * Note: JWT keys in .env act as the "setup completed" marker - if they exist,
+ * Note: JWT keys in .env.local act as the "setup completed" marker - if they exist,
  * key regeneration is skipped on subsequent runs.
  */
 
@@ -22,14 +22,14 @@ import { exportJWK, exportPKCS8, generateKeyPair } from "jose"
 // STEP 1: Load local environment variables
 // ============================================================================
 
-// Exit early if .env doesn't exist yet
-if (!fs.existsSync(".env")) {
+// Exit early if .env.local doesn't exist yet
+if (!fs.existsSync(".env.local")) {
 	process.exit(0)
 }
 
-// Load .env variables into a config object
+// Load .env.local variables into a config object
 const config = {}
-loadEnvFile({ path: ".env", processEnv: config })
+loadEnvFile({ path: ".env.local", processEnv: config })
 
 // Check if we should only run once (--once flag from package.json predev hook)
 const runOnceWorkflow = process.argv.includes("--once")
@@ -57,14 +57,36 @@ if (config.SMTP_HOST || config.SMTP_USER || config.SMTP_PASS) {
 		}
 	}
 } else {
-	console.log("No SMTP configuration found in .env, skipping SMTP setup...")
+	console.log("No SMTP configuration found in .env.local, skipping SMTP setup...")
+}
+
+// ============================================================================
+// STEP 2.5: Configure GitHub OAuth
+// ============================================================================
+
+if (config.AUTH_GITHUB_ID || config.AUTH_GITHUB_SECRET) {
+	console.log("Setting GitHub OAuth environment variables...")
+
+	const githubVars = {
+		AUTH_GITHUB_ID: config.AUTH_GITHUB_ID,
+		AUTH_GITHUB_SECRET: config.AUTH_GITHUB_SECRET,
+	}
+
+	// Transfer each GitHub OAuth variable to Convex environment
+	for (const [key, value] of Object.entries(githubVars)) {
+		if (value) {
+			setConvexEnvVar(key, value)
+		}
+	}
+} else {
+	console.log("No GitHub OAuth configuration found in .env.local, skipping GitHub OAuth setup...")
 }
 
 // ============================================================================
 // STEP 3: Check if setup already completed (avoid regenerating JWT keys)
 // ============================================================================
 
-// If JWT keys already exist in .env, skip regeneration
+// If JWT keys already exist in .env.local, skip regeneration
 if (runOnceWorkflow && config.JWT_PRIVATE_KEY && config.JWKS) {
 	// Still sync them to Convex in case they're missing there
 	setConvexEnvVar("JWT_PRIVATE_KEY", config.JWT_PRIVATE_KEY, true)
@@ -111,9 +133,9 @@ const jwtPrivateKey = privateKey.trimEnd().replace(/\n/g, " ")
 const publicKey = await exportJWK(keys.publicKey)
 const jwks = JSON.stringify({ keys: [{ use: "sig", ...publicKey }] })
 
-// Store JWT keys in .env file (these act as the "setup completed" marker)
-fs.appendFileSync(".env", `\nJWT_PRIVATE_KEY="${jwtPrivateKey}"\n`)
-fs.appendFileSync(".env", `JWKS='${jwks}'\n`)
+// Store JWT keys in .env.local file (these act as the "setup completed" marker)
+fs.appendFileSync(".env.local", `\nJWT_PRIVATE_KEY="${jwtPrivateKey}"\n`)
+fs.appendFileSync(".env.local", `JWKS='${jwks}'\n`)
 
 // Also sync them to Convex environment
 setConvexEnvVar("JWT_PRIVATE_KEY", jwtPrivateKey)
