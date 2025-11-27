@@ -1,3 +1,12 @@
+
+# - Using Dokploy?
+#
+# Backend & Dashboard: Use 172.17.0.1 in the DATABASE_URL, remove port mappings, 
+#       otherwise traefix won't route properly and you'd get Bad Gateway errors.
+# Database: Use Create Service > Database and get rid of the service in here, 
+#       when you create the postgres database ensure you set an external port
+#       to something that's available and update the port in the backend service.
+
 services:
 
   backend:
