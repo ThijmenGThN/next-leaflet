@@ -7,7 +7,7 @@ import {
 const isSignInPage = createRouteMatcher(["/login", "/register"])
 const isProtectedRoute = createRouteMatcher(["/dash"])
 
-export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
+export const proxy = convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
 	if (isSignInPage(request) && (await convexAuth.isAuthenticated())) {
 		return nextjsMiddlewareRedirect(request, "/dash")
 	}
