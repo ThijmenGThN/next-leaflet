@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { api } from "@/../convex/_generated/api"
+import { ROUTE_CONFIG } from "@/components/convex/RouteGuard"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -35,7 +36,7 @@ export default function VerifyPage() {
 				setStatus("success")
 				// Redirect to dashboard after 2 seconds
 				setTimeout(() => {
-					router.push("/dash")
+					router.push(ROUTE_CONFIG.DEFAULT_AUTHENTICATED_ROUTE)
 				}, 2000)
 			} catch (error) {
 				setStatus("error")
@@ -98,7 +99,7 @@ export default function VerifyPage() {
 									<p className="text-muted-foreground">{errorMessage}</p>
 									<div className="pt-4">
 										<Button asChild>
-											<Link href="/dash">Go to Dashboard</Link>
+											<Link href={ROUTE_CONFIG.DEFAULT_AUTHENTICATED_ROUTE}>Go to Dashboard</Link>
 										</Button>
 									</div>
 								</>

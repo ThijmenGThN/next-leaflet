@@ -1,6 +1,7 @@
 import { ThemeProvider } from "next-themes"
 
 import ConvexClientProvider from "@/components/ConvexClientProvider"
+import { RouteGuard } from "@/components/convex/RouteGuard"
 import { ThemeSync } from "@/components/ThemeSync"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 				<ConvexClientProvider>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						<ThemeSync />
-						{children}
+						<RouteGuard>
+							{children}
+						</RouteGuard>
 					</ThemeProvider>
 				</ConvexClientProvider>
 				<Toaster />

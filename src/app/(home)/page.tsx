@@ -3,6 +3,7 @@
 import { LogIn, Palette, UserPlus } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { ROUTE_CONFIG } from "@/components/convex/RouteGuard"
 import { ThemeToggle } from "@/components/ThemeToggle"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -66,14 +67,14 @@ export default function Page() {
 						<div className="text-center space-y-6">
 							<div className="space-y-3">
 								<Button asChild size="lg" className="w-full">
-									<Link href="/login">
+									<Link href={ROUTE_CONFIG.AUTH_ROUTES[0]}>
 										<LogIn className="h-4 w-4 mr-2" />
 										Login
 									</Link>
 								</Button>
 								<div className="flex gap-2">
 									<Button asChild variant="outline" size="lg" className="flex-1">
-										<Link href="/register">
+										<Link href={ROUTE_CONFIG.AUTH_ROUTES[1]}>
 											<UserPlus className="h-4 w-4 mr-2" />
 											Register
 										</Link>
