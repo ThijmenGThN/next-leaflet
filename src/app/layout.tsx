@@ -1,6 +1,6 @@
 import { ThemeProvider } from "next-themes"
 
-import ConvexClientProvider from "@/components/ConvexClientProvider"
+import ConvexClientProvider from "@/components/convex/ConvexClientProvider"
 import { RouteGuard } from "@/components/convex/RouteGuard"
 import { ThemeSync } from "@/components/ThemeSync"
 import { Toaster } from "@/components/ui/sonner"
