@@ -18,7 +18,7 @@ export const ROUTE_CONFIG = {
 	PROTECTED_ROUTES: ["/dash"],
 
 	// Routes that should redirect authenticated users away (login, register, etc.)
-	AUTH_ROUTES: ["/login", "/register", "/reset"],
+	AUTH_ROUTES: ["/login", "/register", "/reset", "/verify"],
 
 } as const
 
