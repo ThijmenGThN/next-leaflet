@@ -2,7 +2,7 @@
 
 import { useQuery } from "convex/react"
 import { usePathname, useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { api } from "@/../convex/_generated/api"
 
 // Centralized route configuration
@@ -31,6 +31,7 @@ export function RouteGuard({ children, loadingComponent }: RouteGuardProps) {
 	const user = useQuery(api.users.current)
 	const router = useRouter()
 	const pathname = usePathname()
+	const [isRedirecting, setIsRedirecting] = useState(false)
 
 	const isProtectedRoute = ROUTE_CONFIG.PROTECTED_ROUTES.some((route) =>
 		pathname.startsWith(route),
@@ -38,6 +39,9 @@ export function RouteGuard({ children, loadingComponent }: RouteGuardProps) {
 	const isAuthRoute = ROUTE_CONFIG.AUTH_ROUTES.some((route) => pathname.startsWith(route))
 
 	useEffect(() => {
+		// Reset redirecting state when pathname changes
+		setIsRedirecting(false)
+
 		// Wait for the query to resolve
 		if (user === undefined) {
 			return
@@ -47,39 +51,41 @@ export function RouteGuard({ children, loadingComponent }: RouteGuardProps) {
 
 		// Redirect authenticated users away from auth pages
 		if (isAuthenticated && isAuthRoute) {
+			setIsRedirecting(true)
 			router.push(ROUTE_CONFIG.DEFAULT_AUTHENTICATED_ROUTE)
 			return
 		}
 
 		// Redirect unauthenticated users away from protected pages
 		if (!isAuthenticated && isProtectedRoute) {
+			setIsRedirecting(true)
 			router.push(ROUTE_CONFIG.DEFAULT_UNAUTHENTICATED_ROUTE)
 			return
 		}
 	}, [user, router, pathname, isProtectedRoute, isAuthRoute])
 
-	// Show loading while checking authentication
+	// Show loading only while auth is being checked AND we're on a route that might need redirect
 	if (user === undefined) {
-		return (
-			loadingComponent || (
-				<div className="min-h-screen bg-background flex items-center justify-center">
-					<p className="text-muted-foreground">Loading...</p>
-				</div>
-			)
-		)
+		if (isProtectedRoute || isAuthRoute) {
+			return loadingComponent || null
+		}
+		// For public routes, show content immediately
+		return <>{children}</>
 	}
 
 	const isAuthenticated = user !== null
 
-	// Show loading during redirect
-	if ((isAuthenticated && isAuthRoute) || (!isAuthenticated && isProtectedRoute)) {
-		return (
-			loadingComponent || (
-				<div className="min-h-screen bg-background flex items-center justify-center">
-					<p className="text-muted-foreground">Redirecting...</p>
-				</div>
-			)
-		)
+	// Hide content only while actively redirecting
+	if (isRedirecting) {
+		return loadingComponent || null
+	}
+
+	// Check if we should be redirecting (but haven't started yet)
+	const shouldRedirect =
+		(isAuthenticated && isAuthRoute) || (!isAuthenticated && isProtectedRoute)
+
+	if (shouldRedirect) {
+		return loadingComponent || null
 	}
 
 	// Route is accessible, render children

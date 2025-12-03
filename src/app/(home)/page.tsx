@@ -12,12 +12,12 @@ export default function Page() {
 	const [step, setStep] = useState(0)
 
 	useEffect(() => {
-		// Show "Hello" for 1500ms
-		const timer1 = setTimeout(() => setStep(1), 1500)
-		// Show description after fade out (1500ms + 500ms transition)
-		const timer2 = setTimeout(() => setStep(2), 2500)
-		// Show card after description appears (2500ms + 2500ms)
-		const timer3 = setTimeout(() => setStep(3), 5000)
+		// Show "Hello" for 400ms
+		const timer1 = setTimeout(() => setStep(1), 400)
+		// Show description after fade out (400ms + 200ms transition)
+		const timer2 = setTimeout(() => setStep(2), 700)
+		// Show card after description appears (700ms + 600ms)
+		const timer3 = setTimeout(() => setStep(3), 1300)
 
 		return () => {
 			clearTimeout(timer1)
@@ -30,7 +30,7 @@ export default function Page() {
 		<div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
 			{/* "Hello" animation */}
 			<div
-				className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${step >= 1
+				className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${step >= 1
 						? "opacity-0 -translate-y-8 pointer-events-none"
 						: "opacity-100 translate-y-0"
 					}`}
@@ -40,7 +40,7 @@ export default function Page() {
 
 			{/* Description text */}
 			<div
-				className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${step >= 2 && step < 3
+				className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${step >= 2 && step < 3
 						? "opacity-100 translate-y-0"
 						: step < 2
 							? "opacity-0 translate-y-8 pointer-events-none"
@@ -57,7 +57,7 @@ export default function Page() {
 
 			{/* Main card */}
 			<div
-				className={`w-full max-w-md px-6 transition-all duration-500 ${step >= 3
+				className={`w-full max-w-md px-6 transition-all duration-300 ${step >= 3
 						? "opacity-100 translate-y-0"
 						: "opacity-0 translate-y-8 pointer-events-none"
 					}`}
