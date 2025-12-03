@@ -1,4 +1,3 @@
-import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server"
 import { ThemeProvider } from "next-themes"
 
 import ConvexClientProvider from "@/components/ConvexClientProvider"
@@ -16,18 +15,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<ConvexAuthNextjsServerProvider>
-			<html lang="en" suppressHydrationWarning>
-				<body>
-					<ConvexClientProvider>
-						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-							<ThemeSync />
-							{children}
-						</ThemeProvider>
-					</ConvexClientProvider>
-					<Toaster />
-				</body>
-			</html>
-		</ConvexAuthNextjsServerProvider>
+		<html lang="en" suppressHydrationWarning>
+			<body>
+				<ConvexClientProvider>
+					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+						<ThemeSync />
+						{children}
+					</ThemeProvider>
+				</ConvexClientProvider>
+				<Toaster />
+			</body>
+		</html>
 	)
 }
