@@ -1,5 +1,8 @@
 # next-leaflet
 
+[![Run in Smithery](https://smithery.ai/badge/skills/thijmengthn)](https://smithery.ai/skills?ns=thijmengthn&utm_source=github&utm_medium=badge)
+
+
 ![preview](https://i.imgur.com/oulW1VO.png)
 
 **A production-ready Next.js template with authentication, database, and email built-in.**
